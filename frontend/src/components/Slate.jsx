@@ -7,7 +7,10 @@ export default function Slate({ slate, meta, onOpen }) {
   return (
     <>
       <div className="header">
-        <h1>Trend Bet Workbench — Women's Tops, India</h1>
+        <h1>
+          Trend Bet Workbench
+          {meta?.segment && ` — ${meta.segment.category} / ${meta.segment.sub_category}`}
+        </h1>
         <div className="sub">
           Decision support under uncertainty: you commit inventory <em>before</em> demand is
           obvious. Each trend below is scored from the raw scrapes in <code>/data</code>, with
@@ -17,6 +20,13 @@ export default function Slate({ slate, meta, onOpen }) {
       </div>
 
       <Coverage meta={meta} />
+
+      {slate.length === 0 && (
+        <div className="loading">
+          No silhouette bucket in this segment reaches the qualification bar
+          ({meta?.qualification_rule}) — too little data here to call anything a trend.
+        </div>
+      )}
 
       <div className="grid">
         {slate.map((t, i) => (
@@ -60,6 +70,9 @@ function Coverage({ meta }) {
         <span className="warn">missing roles: {meta.missing_roles.join(', ')}</span>
       )}
       <span>{meta.products_unbucketed} of {meta.products_total} products matched no silhouette ("other")</span>
+      {meta.products_outside_segment > 0 && (
+        <span>{meta.products_outside_segment} products belong to other segments (use the dropdowns — nothing is discarded)</span>
+      )}
       <span>{meta.qualification_rule}</span>
     </div>
   )

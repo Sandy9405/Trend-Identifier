@@ -1,5 +1,143 @@
 {
   "_note": "FROZEN SAMPLE \u2014 cached at backend startup, regenerated from whatever is in /data each run. Not a source of truth.",
+  "segments_detected": [
+    {
+      "category": "women",
+      "sub_category": "tops",
+      "count": 1242,
+      "platforms": {
+        "myntra": 475,
+        "ajio": 391,
+        "asos": 376
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "trousers",
+      "count": 34,
+      "platforms": {
+        "asos": 34
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "unknown",
+      "count": 30,
+      "platforms": {
+        "asos": 30
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "skirts",
+      "count": 27,
+      "platforms": {
+        "ajio": 1,
+        "asos": 26
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "tshirts",
+      "count": 21,
+      "platforms": {
+        "myntra": 4,
+        "ajio": 3,
+        "asos": 14
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "sarees",
+      "count": 13,
+      "platforms": {
+        "ajio": 13
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "shorts",
+      "count": 13,
+      "platforms": {
+        "ajio": 1,
+        "asos": 12
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "kurtas",
+      "count": 8,
+      "platforms": {
+        "myntra": 2,
+        "ajio": 6
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "jeans",
+      "count": 4,
+      "platforms": {
+        "myntra": 1,
+        "ajio": 1,
+        "asos": 2
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "shirts",
+      "count": 3,
+      "platforms": {
+        "ajio": 1,
+        "asos": 2
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "nightwear",
+      "count": 3,
+      "platforms": {
+        "ajio": 1,
+        "asos": 2
+      }
+    },
+    {
+      "category": "women",
+      "sub_category": "dresses",
+      "count": 2,
+      "platforms": {
+        "myntra": 1,
+        "asos": 1
+      }
+    },
+    {
+      "category": "men",
+      "sub_category": "tshirts",
+      "count": 2,
+      "platforms": {
+        "ajio": 2
+      }
+    },
+    {
+      "category": "men",
+      "sub_category": "trousers",
+      "count": 1,
+      "platforms": {
+        "ajio": 1
+      }
+    },
+    {
+      "category": "kids",
+      "sub_category": "tops",
+      "count": 1,
+      "platforms": {
+        "asos": 1
+      }
+    }
+  ],
+  "default_segment": {
+    "category": "women",
+    "sub_category": "tops"
+  },
   "meta": {
     "platforms": [
       {
@@ -13,12 +151,12 @@
           "india_demand",
           "india_supply"
         ],
-        "products_used": 483,
+        "products_used": 475,
         "raw_rows": 483,
         "scraped_at": "2026-06-09T11:46:40.044Z",
         "newest_upload_proxy": "2026-06-05",
         "limitations": [
-          "date proxy (image-upload date) missing for 83/483 products"
+          "date proxy (image-upload date) missing for 79/475 products"
         ]
       },
       {
@@ -31,13 +169,12 @@
         "effective_roles": [
           "india_supply"
         ],
-        "products_used": 389,
+        "products_used": 391,
         "raw_rows": 421,
         "scraped_at": "2026-06-09T12:03:44.459Z",
         "newest_upload_proxy": "2026-06-02",
         "limitations": [
-          "32/421 rows dropped by sub-category filter (subCategory not in ['Tops'])",
-          "declared india_demand but rating_count is absent/all-zero in this scrape \u2014 contributes NO demand signal (auto-detected)"
+          "declared india_demand but rating_count is absent/all-zero in this slice of the data \u2014 contributes NO demand signal (auto-detected)"
         ]
       },
       {
@@ -49,7 +186,7 @@
         "effective_roles": [
           "west_supply"
         ],
-        "products_used": 500,
+        "products_used": 376,
         "raw_rows": 500,
         "scraped_at": "2026-06-09T18:01:59.279Z",
         "newest_upload_proxy": null,
@@ -61,11 +198,16 @@
     ],
     "missing_roles": [],
     "buckets_found": 16,
-    "products_total": 1372,
-    "products_unbucketed": 533,
+    "products_total": 1242,
+    "products_unbucketed": 501,
     "qualification_rule": "bucket needs \u2265 10 products to enter the slate",
     "computed_at": "2026-06-09",
-    "note": "Every number above is recomputed from the files in /data at startup. Nothing trend-specific is hardcoded."
+    "note": "Every number above is recomputed from the files in /data at startup. Nothing trend-specific is hardcoded.",
+    "segment": {
+      "category": "women",
+      "sub_category": "tops"
+    },
+    "products_outside_segment": 162
   },
   "slate": [
     {
@@ -84,11 +226,11 @@
       },
       "why": "Landed; demand 96.0, Indian supply 82.5",
       "counts": {
-        "total": 219,
+        "total": 193,
         "by_platform": {
           "myntra": 78,
           "ajio": 14,
-          "asos": 127
+          "asos": 101
         }
       },
       "demand": 96.0,
@@ -101,80 +243,26 @@
       "bet": {
         "label": "Deeper Buy",
         "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
-        "rule": "adjusted 68.2 \u2265 65"
+        "rule": "adjusted 67.9 \u2265 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 74.2,
-        "adjusted": 68.2,
-        "derivation": "base = demand 79.8\u00d70.45 + supply 80.8\u00d70.35 + agreement 50.0\u00d70.20 = 74.2; adjusted = base 74.2 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 68.2."
+        "base": 73.9,
+        "adjusted": 67.9,
+        "derivation": "base = demand 79.8\u00d70.45 + supply 80.0\u00d70.35 + agreement 50.0\u00d70.20 = 73.9; adjusted = base 73.9 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.9."
       },
-      "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.8; distortions cost 6.0 pts",
+      "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts",
       "counts": {
-        "total": 103,
+        "total": 100,
         "by_platform": {
           "myntra": 28,
           "ajio": 50,
-          "asos": 25
+          "asos": 22
         }
       },
       "demand": 79.8,
-      "supply": 80.8,
-      "west": 19.0
-    },
-    {
-      "bucket": "crop",
-      "display_name": "Crop",
-      "bet": {
-        "label": "Small Trial",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 63.0 < 65"
-      },
-      "lead_lag": "Late-cycle (West moved on)",
-      "confidence": {
-        "base": 63.0,
-        "adjusted": 63.0,
-        "derivation": "base = demand 100.0\u00d70.45 + supply 51.5\u00d70.35 + agreement 0.0\u00d70.20 = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
-      },
-      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 51.5",
-      "counts": {
-        "total": 88,
-        "by_platform": {
-          "myntra": 53,
-          "ajio": 8,
-          "asos": 27
-        }
-      },
-      "demand": 100.0,
-      "supply": 51.5,
-      "west": 20.6
-    },
-    {
-      "bucket": "peplum",
-      "display_name": "Peplum",
-      "bet": {
-        "label": "Small Trial",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 62.9 < 65"
-      },
-      "lead_lag": "Late-cycle (West moved on)",
-      "confidence": {
-        "base": 66.9,
-        "adjusted": 62.9,
-        "derivation": "base = demand 78.2\u00d70.45 + supply 62.1\u00d70.35 + agreement 50.0\u00d70.20 = 66.9; adjusted = base 66.9 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 62.9."
-      },
-      "why": "Late-cycle (West moved on); demand 78.2, Indian supply 62.1; distortions cost 4.0 pts",
-      "counts": {
-        "total": 76,
-        "by_platform": {
-          "myntra": 50,
-          "ajio": 15,
-          "asos": 11
-        }
-      },
-      "demand": 78.2,
-      "supply": 62.1,
-      "west": 7.9
+      "supply": 80.0,
+      "west": 21.8
     },
     {
       "bucket": "puff_balloon",
@@ -192,11 +280,10 @@
       },
       "why": "India-led; demand 82.8, Indian supply 43.0",
       "counts": {
-        "total": 40,
+        "total": 39,
         "by_platform": {
           "myntra": 32,
-          "ajio": 7,
-          "asos": 1
+          "ajio": 7
         }
       },
       "demand": 82.8,
@@ -204,31 +291,85 @@
       "west": 0.0
     },
     {
+      "bucket": "crop",
+      "display_name": "Crop",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 61.8 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 62.8,
+        "adjusted": 61.8,
+        "derivation": "base = demand 100.0\u00d70.45 + supply 50.9\u00d70.35 + agreement 0.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
+      },
+      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
+      "counts": {
+        "total": 75,
+        "by_platform": {
+          "myntra": 52,
+          "ajio": 8,
+          "asos": 15
+        }
+      },
+      "demand": 100.0,
+      "supply": 50.9,
+      "west": 14.9
+    },
+    {
       "bucket": "corset_fitted",
       "display_name": "Corset Fitted",
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.9 < 65"
+        "rule": "40 \u2264 adjusted 61.8 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 62.9,
-        "adjusted": 61.9,
-        "derivation": "base = demand 80.3\u00d70.45 + supply 47.8\u00d70.35 + agreement 50.0\u00d70.20 = 62.9; adjusted = base 62.9 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.9."
+        "base": 62.8,
+        "adjusted": 61.8,
+        "derivation": "base = demand 80.3\u00d70.45 + supply 47.5\u00d70.35 + agreement 50.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
       },
-      "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.8; distortions cost 1.0 pts",
+      "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts",
       "counts": {
-        "total": 69,
+        "total": 67,
         "by_platform": {
           "myntra": 25,
           "ajio": 23,
-          "asos": 21
+          "asos": 19
         }
       },
       "demand": 80.3,
-      "supply": 47.8,
-      "west": 15.9
+      "supply": 47.5,
+      "west": 18.8
+    },
+    {
+      "bucket": "peplum",
+      "display_name": "Peplum",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 61.6 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 66.6,
+        "adjusted": 61.6,
+        "derivation": "base = demand 78.1\u00d70.45 + supply 61.2\u00d70.35 + agreement 50.0\u00d70.20 = 66.6; adjusted = base 66.6 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.6."
+      },
+      "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts",
+      "counts": {
+        "total": 72,
+        "by_platform": {
+          "myntra": 49,
+          "ajio": 15,
+          "asos": 8
+        }
+      },
+      "demand": 78.1,
+      "supply": 61.2,
+      "west": 7.9
     },
     {
       "bucket": "shirt",
@@ -236,26 +377,25 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 56.4 < 65"
+        "rule": "40 \u2264 adjusted 54.4 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 60.4,
-        "adjusted": 56.4,
-        "derivation": "base = demand 92.0\u00d70.45 + supply 54.2\u00d70.35 + agreement 0.0\u00d70.20 = 60.4; adjusted = base 60.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 56.4."
+        "base": 58.4,
+        "adjusted": 54.4,
+        "derivation": "base = demand 89.9\u00d70.45 + supply 51.4\u00d70.35 + agreement 0.0\u00d70.20 = 58.4; adjusted = base 58.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 54.4."
       },
-      "why": "Late-cycle (West moved on); demand 92.0, Indian supply 54.2; distortions cost 4.0 pts",
+      "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts",
       "counts": {
-        "total": 62,
+        "total": 52,
         "by_platform": {
-          "myntra": 46,
-          "ajio": 10,
-          "asos": 6
+          "myntra": 42,
+          "ajio": 10
         }
       },
-      "demand": 92.0,
-      "supply": 54.2,
-      "west": 4.0
+      "demand": 89.9,
+      "supply": 51.4,
+      "west": 0.0
     },
     {
       "bucket": "mesh_sheer",
@@ -269,20 +409,20 @@
       "confidence": {
         "base": 44.8,
         "adjusted": 44.8,
-        "derivation": "base = demand 74.9\u00d70.45 + supply 31.7\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
+        "derivation": "base = demand 74.9\u00d70.45 + supply 31.6\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
       },
-      "why": "Landed; demand 74.9, Indian supply 31.7",
+      "why": "Landed; demand 74.9, Indian supply 31.6",
       "counts": {
-        "total": 124,
+        "total": 102,
         "by_platform": {
           "myntra": 27,
           "ajio": 8,
-          "asos": 89
+          "asos": 67
         }
       },
       "demand": 74.9,
-      "supply": 31.7,
-      "west": 69.8
+      "supply": 31.6,
+      "west": 66.3
     },
     {
       "bucket": "square_neck",
@@ -294,22 +434,22 @@
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 44.4,
+        "base": 43.4,
         "adjusted": 43.4,
-        "derivation": "base = demand 78.4\u00d70.45 + supply 26.1\u00d70.35 + agreement 0.0\u00d70.20 = 44.4; adjusted = base 44.4 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 43.4."
+        "derivation": "base = demand 77.4\u00d70.45 + supply 24.4\u00d70.35 + agreement 0.0\u00d70.20 = 43.4; adjusted = base 43.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.4."
       },
-      "why": "Late-cycle (West moved on); demand 78.4, Indian supply 26.1; distortions cost 1.0 pts",
+      "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4",
       "counts": {
-        "total": 36,
+        "total": 33,
         "by_platform": {
-          "myntra": 19,
+          "myntra": 18,
           "ajio": 9,
-          "asos": 8
+          "asos": 6
         }
       },
-      "demand": 78.4,
-      "supply": 26.1,
-      "west": 5.6
+      "demand": 77.4,
+      "supply": 24.4,
+      "west": 5.9
     },
     {
       "bucket": "tie_knot",
@@ -319,24 +459,24 @@
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
         "rule": "40 \u2264 adjusted 41.1 < 65"
       },
-      "lead_lag": "Unclear",
+      "lead_lag": "India-led",
       "confidence": {
         "base": 41.1,
         "adjusted": 41.1,
         "derivation": "base = demand 65.4\u00d70.45 + supply 33.4\u00d70.35 + agreement 0.0\u00d70.20 = 41.1; adjusted = base 41.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 41.1."
       },
-      "why": "Unclear; demand 65.4, Indian supply 33.4",
+      "why": "India-led; demand 65.4, Indian supply 33.4",
       "counts": {
-        "total": 64,
+        "total": 50,
         "by_platform": {
           "myntra": 19,
           "ajio": 7,
-          "asos": 38
+          "asos": 24
         }
       },
       "demand": 65.4,
       "supply": 33.4,
-      "west": 29.4
+      "west": 23.8
     },
     {
       "bucket": "ruffle",
@@ -354,16 +494,16 @@
       },
       "why": "Unclear; demand 40.4, Indian supply 27.7",
       "counts": {
-        "total": 42,
+        "total": 39,
         "by_platform": {
           "myntra": 20,
           "ajio": 6,
-          "asos": 16
+          "asos": 13
         }
       },
       "demand": 40.4,
       "supply": 27.7,
-      "west": 11.9
+      "west": 12.9
     },
     {
       "bucket": "wrap",
@@ -377,9 +517,9 @@
       "confidence": {
         "base": 27.9,
         "adjusted": 27.9,
-        "derivation": "base = demand 46.2\u00d70.45 + supply 20.2\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
+        "derivation": "base = demand 46.2\u00d70.45 + supply 20.3\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
       },
-      "why": "Unclear; demand 46.2, Indian supply 20.2",
+      "why": "Unclear; demand 46.2, Indian supply 20.3",
       "counts": {
         "total": 25,
         "by_platform": {
@@ -389,8 +529,8 @@
         }
       },
       "demand": 46.2,
-      "supply": 20.2,
-      "west": 1.6
+      "supply": 20.3,
+      "west": 3.0
     },
     {
       "bucket": "halter",
@@ -398,25 +538,25 @@
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 24.5 < 40"
+        "rule": "adjusted 24.6 < 40"
       },
       "lead_lag": "Early (West ahead)",
       "confidence": {
-        "base": 35.6,
-        "adjusted": 24.5,
-        "derivation": "base = demand 35.7\u00d70.45 + supply 27.3\u00d70.35 + agreement 50.0\u00d70.20 = 35.6; adjusted = base 35.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.5."
+        "base": 35.7,
+        "adjusted": 24.6,
+        "derivation": "base = demand 35.7\u00d70.45 + supply 27.4\u00d70.35 + agreement 50.0\u00d70.20 = 35.7; adjusted = base 35.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.6."
       },
-      "why": "Early (West ahead); demand 35.7, Indian supply 27.3; Early-gate \u00d7 68.8%",
+      "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%",
       "counts": {
-        "total": 118,
+        "total": 96,
         "by_platform": {
           "myntra": 13,
-          "asos": 105
+          "asos": 83
         }
       },
       "demand": 35.7,
-      "supply": 27.3,
-      "west": 82.5
+      "supply": 27.4,
+      "west": 82.2
     },
     {
       "bucket": "bandeau_tube",
@@ -434,16 +574,16 @@
       },
       "why": "Unclear; demand 10.4, Indian supply 15.8",
       "counts": {
-        "total": 47,
+        "total": 41,
         "by_platform": {
           "myntra": 5,
           "ajio": 2,
-          "asos": 40
+          "asos": 34
         }
       },
       "demand": 10.4,
       "supply": 15.8,
-      "west": 31.0
+      "west": 33.7
     },
     {
       "bucket": "smocked",
@@ -461,16 +601,16 @@
       },
       "why": "Unclear; demand 0.0, Indian supply 11.6",
       "counts": {
-        "total": 32,
+        "total": 29,
         "by_platform": {
           "myntra": 3,
           "ajio": 5,
-          "asos": 24
+          "asos": 21
         }
       },
       "demand": 0.0,
       "supply": 11.6,
-      "west": 18.3
+      "west": 20.8
     },
     {
       "bucket": "off_shoulder",
@@ -488,16 +628,16 @@
       },
       "why": "Unclear; demand 3.7, Indian supply 0.0",
       "counts": {
-        "total": 18,
+        "total": 15,
         "by_platform": {
           "myntra": 2,
           "ajio": 2,
-          "asos": 14
+          "asos": 11
         }
       },
       "demand": 3.7,
       "supply": 0.0,
-      "west": 10.3
+      "west": 10.9
     }
   ],
   "details": {
@@ -508,45 +648,45 @@
         "crop"
       ],
       "counts": {
-        "total": 88,
+        "total": 75,
         "by_platform": {
-          "myntra": 53,
+          "myntra": 52,
           "ajio": 8,
-          "asos": 27
+          "asos": 15
         }
       },
       "metrics": {
         "demand_strength": {
           "value": 100.0,
-          "raw_rating_count": 157254,
-          "derivation": "Sum of rating_count on demand platforms (myntra) = 157,254; log-scaled then min-max normalized across the 16 buckets present \u2192 100.0."
+          "raw_rating_count": 157221,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 157,221; log-scaled then min-max normalized across the 16 buckets present \u2192 100.0."
         },
         "supply_conviction": {
-          "value": 51.5,
-          "freshness_pct": 21.8,
-          "derivation": "Indian assortment share [myntra: 53/483 items (11.0% of assortment); ajio: 8/389 items (2.1% of assortment)], normalized across buckets \u2192 64.3; blended 0.7/0.3 with freshness 21.8% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 51.5."
+          "value": 50.9,
+          "freshness_pct": 22.1,
+          "derivation": "Indian assortment share [myntra: 52/475 items (10.9% of assortment); ajio: 8/391 items (2.0% of assortment)], normalized across buckets \u2192 63.2; blended 0.7/0.3 with freshness 22.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 50.9."
         },
         "west_signal": {
-          "value": 20.6,
-          "derivation": "27 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.6. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 14.9,
+          "derivation": "15 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 14.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 20.6 \u2264 WEST_LOW(25) and supply not fresh (21.8%)."
+          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 14.9 \u2264 WEST_LOW(25) and supply not fresh (22.1%)."
         },
         "discount_penalty": {
-          "value": 0,
-          "median_discount": 65,
+          "value": 1.0,
+          "median_discount": 65.5,
           "market_median_discount": 65.0,
-          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65% across 61 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65.5% across 60 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65.5\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22121.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 51.5, demand 100.0)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 50.9, demand 100.0)."
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 11.0% (\u22652%), freshness 31.1 \u2192 does not count; ajio: share 2.1% (\u22652%), freshness 12.5 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 10.9% (\u22652%), freshness 31.8 \u2192 does not count; ajio: share 2.0% (\u22652%), freshness 12.5 \u2192 does not count"
         },
         "replication": {
           "value": 80,
@@ -613,7 +753,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (100.0) outruns Indian supply (51.5) \u2014 possible under-assortment / stockout risk."
+          "Demand (100.0) outruns Indian supply (50.9) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -621,16 +761,16 @@
         }
       },
       "confidence": {
-        "base": 63.0,
-        "adjusted": 63.0,
-        "derivation": "base = demand 100.0\u00d70.45 + supply 51.5\u00d70.35 + agreement 0.0\u00d70.20 = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
+        "base": 62.8,
+        "adjusted": 61.8,
+        "derivation": "base = demand 100.0\u00d70.45 + supply 50.9\u00d70.35 + agreement 0.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 63.0 < 65"
+        "rule": "40 \u2264 adjusted 61.8 < 65"
       },
-      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 51.5"
+      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts"
     },
     "sleeveless_tank": {
       "bucket": "sleeveless_tank",
@@ -642,11 +782,11 @@
         "vest"
       ],
       "counts": {
-        "total": 219,
+        "total": 193,
         "by_platform": {
           "myntra": 78,
           "ajio": 14,
-          "asos": 127
+          "asos": 101
         }
       },
       "metrics": {
@@ -658,11 +798,11 @@
         "supply_conviction": {
           "value": 82.5,
           "freshness_pct": 41.7,
-          "derivation": "Indian assortment share [myntra: 78/483 items (16.1% of assortment); ajio: 14/389 items (3.6% of assortment)], normalized across buckets \u2192 100.0; blended 0.7/0.3 with freshness 41.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 82.5."
+          "derivation": "Indian assortment share [myntra: 78/475 items (16.4% of assortment); ajio: 14/391 items (3.6% of assortment)], normalized across buckets \u2192 100.0; blended 0.7/0.3 with freshness 41.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 82.5."
         },
         "west_signal": {
           "value": 100.0,
-          "derivation": "127 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "101 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Landed",
@@ -680,7 +820,7 @@
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 16.1% (\u22652%), freshness 47.7 \u2192 does not count; ajio: share 3.6% (\u22652%), freshness 35.7 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 16.4% (\u22652%), freshness 47.7 \u2192 does not count; ajio: share 3.6% (\u22652%), freshness 35.7 \u2192 does not count"
         },
         "replication": {
           "value": 80,
@@ -774,45 +914,45 @@
         "peplum"
       ],
       "counts": {
-        "total": 76,
+        "total": 72,
         "by_platform": {
-          "myntra": 50,
+          "myntra": 49,
           "ajio": 15,
-          "asos": 11
+          "asos": 8
         }
       },
       "metrics": {
         "demand_strength": {
-          "value": 78.2,
-          "raw_rating_count": 54883,
-          "derivation": "Sum of rating_count on demand platforms (myntra) = 54,883; log-scaled then min-max normalized across the 16 buckets present \u2192 78.2."
+          "value": 78.1,
+          "raw_rating_count": 54465,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 54,465; log-scaled then min-max normalized across the 16 buckets present \u2192 78.1."
         },
         "supply_conviction": {
-          "value": 62.1,
+          "value": 61.2,
           "freshness_pct": 42.2,
-          "derivation": "Indian assortment share [myntra: 50/483 items (10.4% of assortment); ajio: 15/389 items (3.9% of assortment)], normalized across buckets \u2192 70.6; blended 0.7/0.3 with freshness 42.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 62.1."
+          "derivation": "Indian assortment share [myntra: 49/475 items (10.3% of assortment); ajio: 15/391 items (3.8% of assortment)], normalized across buckets \u2192 69.3; blended 0.7/0.3 with freshness 42.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 61.2."
         },
         "west_signal": {
           "value": 7.9,
-          "derivation": "11 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "8 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "derivation": "Comparison: demand_strength 78.2 \u2265 DEMAND_HIGH(55) but west 7.9 \u2264 WEST_LOW(25) and supply not fresh (42.2%)."
+          "derivation": "Comparison: demand_strength 78.1 \u2265 DEMAND_HIGH(55) but west 7.9 \u2264 WEST_LOW(25) and supply not fresh (42.2%)."
         },
         "discount_penalty": {
-          "value": 4.0,
-          "median_discount": 67,
+          "value": 5.0,
+          "median_discount": 67.5,
           "market_median_discount": 65.0,
-          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 67% across 65 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (67\u221265.0 = +2pp), scaling 0\u219240 over 20pp \u2192 \u22124.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 67.5% across 64 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (67.5\u221265.0 = +2pp), scaling 0\u219240 over 20pp \u2192 \u22125.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 62.1, demand 78.2)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 61.2, demand 78.1)."
         },
         "cross_platform_agreement": {
           "value": 50.0,
-          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 10.4% (\u22652%), freshness 51.2 \u2192 counts; ajio: share 3.9% (\u22652%), freshness 33.3 \u2192 does not count"
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 10.3% (\u22652%), freshness 51.2 \u2192 counts; ajio: share 3.8% (\u22652%), freshness 33.3 \u2192 does not count"
         },
         "replication": {
           "value": 76.2,
@@ -878,7 +1018,7 @@
       "qualified": true,
       "disagreement": {
         "agree": [
-          "Indian supply (62.1) and demand (78.2) tell the same story."
+          "Indian supply (61.2) and demand (78.1) tell the same story."
         ],
         "conflict": [],
         "resolver": {
@@ -887,16 +1027,16 @@
         }
       },
       "confidence": {
-        "base": 66.9,
-        "adjusted": 62.9,
-        "derivation": "base = demand 78.2\u00d70.45 + supply 62.1\u00d70.35 + agreement 50.0\u00d70.20 = 66.9; adjusted = base 66.9 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 62.9."
+        "base": 66.6,
+        "adjusted": 61.6,
+        "derivation": "base = demand 78.1\u00d70.45 + supply 61.2\u00d70.35 + agreement 50.0\u00d70.20 = 66.6; adjusted = base 66.6 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.6."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 62.9 < 65"
+        "rule": "40 \u2264 adjusted 61.6 < 65"
       },
-      "why": "Late-cycle (West moved on); demand 78.2, Indian supply 62.1; distortions cost 4.0 pts"
+      "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts"
     },
     "embroidered": {
       "bucket": "embroidered",
@@ -908,11 +1048,11 @@
         "anglaise"
       ],
       "counts": {
-        "total": 103,
+        "total": 100,
         "by_platform": {
           "myntra": 28,
           "ajio": 50,
-          "asos": 25
+          "asos": 22
         }
       },
       "metrics": {
@@ -922,17 +1062,17 @@
           "derivation": "Sum of rating_count on demand platforms (myntra) = 59,064; log-scaled then min-max normalized across the 16 buckets present \u2192 79.8."
         },
         "supply_conviction": {
-          "value": 80.8,
+          "value": 80.0,
           "freshness_pct": 49.5,
-          "derivation": "Indian assortment share [myntra: 28/483 items (5.8% of assortment); ajio: 50/389 items (12.9% of assortment)], normalized across buckets \u2192 94.2; blended 0.7/0.3 with freshness 49.5% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 80.8."
+          "derivation": "Indian assortment share [myntra: 28/475 items (5.9% of assortment); ajio: 50/391 items (12.8% of assortment)], normalized across buckets \u2192 93.1; blended 0.7/0.3 with freshness 49.5% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 80.0."
         },
         "west_signal": {
-          "value": 19.0,
-          "derivation": "25 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 19.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 21.8,
+          "derivation": "22 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 21.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 19.0 \u2264 WEST_LOW(25) and supply not fresh (49.5%)."
+          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 21.8 \u2264 WEST_LOW(25) and supply not fresh (49.5%)."
         },
         "discount_penalty": {
           "value": 6.0,
@@ -942,11 +1082,11 @@
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 80.8, demand 79.8)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 80.0, demand 79.8)."
         },
         "cross_platform_agreement": {
           "value": 50.0,
-          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.8% (\u22652%), freshness 55.0 \u2192 counts; ajio: share 12.9% (\u22652%), freshness 44.0 \u2192 does not count"
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.9% (\u22652%), freshness 55.0 \u2192 counts; ajio: share 12.8% (\u22652%), freshness 44.0 \u2192 does not count"
         },
         "replication": {
           "value": 76.2,
@@ -1012,7 +1152,7 @@
       "qualified": true,
       "disagreement": {
         "agree": [
-          "Indian supply (80.8) and demand (79.8) tell the same story."
+          "Indian supply (80.0) and demand (79.8) tell the same story."
         ],
         "conflict": [],
         "resolver": {
@@ -1021,16 +1161,16 @@
         }
       },
       "confidence": {
-        "base": 74.2,
-        "adjusted": 68.2,
-        "derivation": "base = demand 79.8\u00d70.45 + supply 80.8\u00d70.35 + agreement 50.0\u00d70.20 = 74.2; adjusted = base 74.2 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 68.2."
+        "base": 73.9,
+        "adjusted": 67.9,
+        "derivation": "base = demand 79.8\u00d70.45 + supply 80.0\u00d70.35 + agreement 50.0\u00d70.20 = 73.9; adjusted = base 73.9 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.9."
       },
       "bet": {
         "label": "Deeper Buy",
         "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
-        "rule": "adjusted 68.2 \u2265 65"
+        "rule": "adjusted 67.9 \u2265 65"
       },
-      "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.8; distortions cost 6.0 pts"
+      "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts"
     },
     "shirt": {
       "bucket": "shirt",
@@ -1039,45 +1179,44 @@
         "shirt"
       ],
       "counts": {
-        "total": 62,
+        "total": 52,
         "by_platform": {
-          "myntra": 46,
-          "ajio": 10,
-          "asos": 6
+          "myntra": 42,
+          "ajio": 10
         }
       },
       "metrics": {
         "demand_strength": {
-          "value": 92.0,
-          "raw_rating_count": 106597,
-          "derivation": "Sum of rating_count on demand platforms (myntra) = 106,597; log-scaled then min-max normalized across the 16 buckets present \u2192 92.0."
+          "value": 89.9,
+          "raw_rating_count": 96366,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 96,366; log-scaled then min-max normalized across the 16 buckets present \u2192 89.9."
         },
         "supply_conviction": {
-          "value": 54.2,
-          "freshness_pct": 42.4,
-          "derivation": "Indian assortment share [myntra: 46/483 items (9.5% of assortment); ajio: 10/389 items (2.6% of assortment)], normalized across buckets \u2192 59.3; blended 0.7/0.3 with freshness 42.4% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 54.2."
+          "value": 51.4,
+          "freshness_pct": 43.2,
+          "derivation": "Indian assortment share [myntra: 42/475 items (8.8% of assortment); ajio: 10/391 items (2.6% of assortment)], normalized across buckets \u2192 54.9; blended 0.7/0.3 with freshness 43.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 51.4."
         },
         "west_signal": {
-          "value": 4.0,
-          "derivation": "6 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 4.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 0.0,
+          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "derivation": "Comparison: demand_strength 92.0 \u2265 DEMAND_HIGH(55) but west 4.0 \u2264 WEST_LOW(25) and supply not fresh (42.4%)."
+          "derivation": "Comparison: demand_strength 89.9 \u2265 DEMAND_HIGH(55) but west 0.0 \u2264 WEST_LOW(25) and supply not fresh (43.2%)."
         },
         "discount_penalty": {
           "value": 4.0,
           "median_discount": 67.0,
           "market_median_discount": 65.0,
-          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 67.0% across 56 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (67.0\u221265.0 = +2pp), scaling 0\u219240 over 20pp \u2192 \u22124.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 67.0% across 52 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (67.0\u221265.0 = +2pp), scaling 0\u219240 over 20pp \u2192 \u22124.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 54.2, demand 92.0)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 51.4, demand 89.9)."
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 9.5% (\u22652%), freshness 44.8 \u2192 does not count; ajio: share 2.6% (\u22652%), freshness 40.0 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 8.8% (\u22652%), freshness 46.4 \u2192 does not count; ajio: share 2.6% (\u22652%), freshness 40.0 \u2192 does not count"
         },
         "replication": {
           "value": 80,
@@ -1096,7 +1235,7 @@
             },
             "price_band_fit": {
               "default": 85,
-              "rationale": "median Indian price \u20b9630 sits inside the value band \u20b9299\u2013\u20b9799"
+              "rationale": "median Indian price \u20b9626 sits inside the value band \u20b9299\u2013\u20b9799"
             }
           },
           "applies": false,
@@ -1119,13 +1258,6 @@
           "url": "https://www.myntra.com/Tops/Anouk/Anouk-Ethnic-Printed-Cuban-Collar-Shirt-Style-Top/29958960/buy"
         },
         {
-          "name": "Tokyo Talkies Blue Floral Print Shirt Style Top",
-          "platform": "myntra",
-          "price": 242.0,
-          "currency": "INR",
-          "url": "https://www.myntra.com/Tops/Tokyo+Talkies/Tokyo-Talkies-Blue-Floral-Print-Shirt-Style-Top/16569532/buy"
-        },
-        {
           "name": "Berrylush Curve Floral Printed Puff Sleeves Shirt Style Top",
           "platform": "myntra",
           "price": 671.0,
@@ -1138,13 +1270,20 @@
           "price": 526.0,
           "currency": "INR",
           "url": "https://www.myntra.com/Tops/Roadster/The-Roadster-Lifestyle-Co-Striped-Shirt-Style-Longline-Top/33822510/buy"
+        },
+        {
+          "name": "The Roadster Lifestyle Co. Striped Pure Cotton Shirt Style Top",
+          "platform": "myntra",
+          "price": 560.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Roadster/The-Roadster-Lifestyle-Co-Striped-Pure-Cotton-Shirt-Style-Top/33822503/buy"
         }
       ],
       "qualified": true,
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (92.0) outruns Indian supply (54.2) \u2014 possible under-assortment / stockout risk."
+          "Demand (89.9) outruns Indian supply (51.4) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1152,16 +1291,16 @@
         }
       },
       "confidence": {
-        "base": 60.4,
-        "adjusted": 56.4,
-        "derivation": "base = demand 92.0\u00d70.45 + supply 54.2\u00d70.35 + agreement 0.0\u00d70.20 = 60.4; adjusted = base 60.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 56.4."
+        "base": 58.4,
+        "adjusted": 54.4,
+        "derivation": "base = demand 89.9\u00d70.45 + supply 51.4\u00d70.35 + agreement 0.0\u00d70.20 = 58.4; adjusted = base 58.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 54.4."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 56.4 < 65"
+        "rule": "40 \u2264 adjusted 54.4 < 65"
       },
-      "why": "Late-cycle (West moved on); demand 92.0, Indian supply 54.2; distortions cost 4.0 pts"
+      "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts"
     },
     "square_neck": {
       "bucket": "square_neck",
@@ -1171,45 +1310,45 @@
         "square-neck"
       ],
       "counts": {
-        "total": 36,
+        "total": 33,
         "by_platform": {
-          "myntra": 19,
+          "myntra": 18,
           "ajio": 9,
-          "asos": 8
+          "asos": 6
         }
       },
       "metrics": {
         "demand_strength": {
-          "value": 78.4,
-          "raw_rating_count": 55204,
-          "derivation": "Sum of rating_count on demand platforms (myntra) = 55,204; log-scaled then min-max normalized across the 16 buckets present \u2192 78.4."
+          "value": 77.4,
+          "raw_rating_count": 52691,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 52,691; log-scaled then min-max normalized across the 16 buckets present \u2192 77.4."
         },
         "supply_conviction": {
-          "value": 26.1,
-          "freshness_pct": 21.1,
-          "derivation": "Indian assortment share [myntra: 19/483 items (3.9% of assortment); ajio: 9/389 items (2.3% of assortment)], normalized across buckets \u2192 28.3; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 26.1."
+          "value": 24.4,
+          "freshness_pct": 18.2,
+          "derivation": "Indian assortment share [myntra: 18/475 items (3.8% of assortment); ajio: 9/391 items (2.3% of assortment)], normalized across buckets \u2192 27.1; blended 0.7/0.3 with freshness 18.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 24.4."
         },
         "west_signal": {
-          "value": 5.6,
-          "derivation": "8 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.6. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 5.9,
+          "derivation": "6 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "derivation": "Comparison: demand_strength 78.4 \u2265 DEMAND_HIGH(55) but west 5.6 \u2264 WEST_LOW(25) and supply not fresh (21.1%)."
+          "derivation": "Comparison: demand_strength 77.4 \u2265 DEMAND_HIGH(55) but west 5.9 \u2264 WEST_LOW(25) and supply not fresh (18.2%)."
         },
         "discount_penalty": {
-          "value": 1.0,
-          "median_discount": 65.5,
+          "value": 0,
+          "median_discount": 65,
           "market_median_discount": 65.0,
-          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65.5% across 28 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65.5\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22121.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65% across 27 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 26.1, demand 78.4)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 24.4, demand 77.4)."
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 3.9% (\u22652%), freshness 20.0 \u2192 does not count; ajio: share 2.3% (\u22652%), freshness 22.2 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 3.8% (\u22652%), freshness 14.3 \u2192 does not count; ajio: share 2.3% (\u22652%), freshness 22.2 \u2192 does not count"
         },
         "replication": {
           "value": 76.2,
@@ -1228,7 +1367,7 @@
             },
             "price_band_fit": {
               "default": 85,
-              "rationale": "median Indian price \u20b9430 sits inside the value band \u20b9299\u2013\u20b9799"
+              "rationale": "median Indian price \u20b9399 sits inside the value band \u20b9299\u2013\u20b9799"
             }
           },
           "applies": false,
@@ -1276,7 +1415,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (78.4) outruns Indian supply (26.1) \u2014 possible under-assortment / stockout risk."
+          "Demand (77.4) outruns Indian supply (24.4) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1284,16 +1423,16 @@
         }
       },
       "confidence": {
-        "base": 44.4,
+        "base": 43.4,
         "adjusted": 43.4,
-        "derivation": "base = demand 78.4\u00d70.45 + supply 26.1\u00d70.35 + agreement 0.0\u00d70.20 = 44.4; adjusted = base 44.4 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 43.4."
+        "derivation": "base = demand 77.4\u00d70.45 + supply 24.4\u00d70.35 + agreement 0.0\u00d70.20 = 43.4; adjusted = base 43.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.4."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
         "rule": "40 \u2264 adjusted 43.4 < 65"
       },
-      "why": "Late-cycle (West moved on); demand 78.4, Indian supply 26.1; distortions cost 1.0 pts"
+      "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4"
     },
     "mesh_sheer": {
       "bucket": "mesh_sheer",
@@ -1306,11 +1445,11 @@
         "net"
       ],
       "counts": {
-        "total": 124,
+        "total": 102,
         "by_platform": {
           "myntra": 27,
           "ajio": 8,
-          "asos": 89
+          "asos": 67
         }
       },
       "metrics": {
@@ -1320,17 +1459,17 @@
           "derivation": "Sum of rating_count on demand platforms (myntra) = 46,779; log-scaled then min-max normalized across the 16 buckets present \u2192 74.9."
         },
         "supply_conviction": {
-          "value": 31.7,
+          "value": 31.6,
           "freshness_pct": 22.2,
-          "derivation": "Indian assortment share [myntra: 27/483 items (5.6% of assortment); ajio: 8/389 items (2.1% of assortment)], normalized across buckets \u2192 35.7; blended 0.7/0.3 with freshness 22.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 31.7."
+          "derivation": "Indian assortment share [myntra: 27/475 items (5.7% of assortment); ajio: 8/391 items (2.0% of assortment)], normalized across buckets \u2192 35.6; blended 0.7/0.3 with freshness 22.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 31.6."
         },
         "west_signal": {
-          "value": 69.8,
-          "derivation": "89 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 69.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 66.3,
+          "derivation": "67 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 66.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Landed",
-          "derivation": "Comparison: west 69.8 \u2265 WEST_HIGH(55) and demand_strength 74.9 \u2265 DEMAND_HIGH(55)."
+          "derivation": "Comparison: west 66.3 \u2265 WEST_HIGH(55) and demand_strength 74.9 \u2265 DEMAND_HIGH(55)."
         },
         "discount_penalty": {
           "value": 0,
@@ -1340,11 +1479,11 @@
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 31.7, demand 74.9)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 31.6, demand 74.9)."
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.6% (\u22652%), freshness 32.0 \u2192 does not count; ajio: share 2.1% (\u22652%), freshness 12.5 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.7% (\u22652%), freshness 32.0 \u2192 does not count; ajio: share 2.0% (\u22652%), freshness 12.5 \u2192 does not count"
         },
         "replication": {
           "value": 63.8,
@@ -1410,10 +1549,10 @@
       "qualified": true,
       "disagreement": {
         "agree": [
-          "West drops (69.8) and Indian demand (74.9) both high \u2014 landed."
+          "West drops (66.3) and Indian demand (74.9) both high \u2014 landed."
         ],
         "conflict": [
-          "Demand (74.9) outruns Indian supply (31.7) \u2014 possible under-assortment / stockout risk."
+          "Demand (74.9) outruns Indian supply (31.6) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1423,14 +1562,14 @@
       "confidence": {
         "base": 44.8,
         "adjusted": 44.8,
-        "derivation": "base = demand 74.9\u00d70.45 + supply 31.7\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
+        "derivation": "base = demand 74.9\u00d70.45 + supply 31.6\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
         "rule": "40 \u2264 adjusted 44.8 < 65"
       },
-      "why": "Landed; demand 74.9, Indian supply 31.7"
+      "why": "Landed; demand 74.9, Indian supply 31.6"
     },
     "puff_balloon": {
       "bucket": "puff_balloon",
@@ -1440,11 +1579,10 @@
         "balloon"
       ],
       "counts": {
-        "total": 40,
+        "total": 39,
         "by_platform": {
           "myntra": 32,
-          "ajio": 7,
-          "asos": 1
+          "ajio": 7
         }
       },
       "metrics": {
@@ -1456,11 +1594,11 @@
         "supply_conviction": {
           "value": 43.0,
           "freshness_pct": 50.6,
-          "derivation": "Indian assortment share [myntra: 32/483 items (6.6% of assortment); ajio: 7/389 items (1.8% of assortment)], normalized across buckets \u2192 39.8; blended 0.7/0.3 with freshness 50.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 43.0."
+          "derivation": "Indian assortment share [myntra: 32/475 items (6.7% of assortment); ajio: 7/391 items (1.8% of assortment)], normalized across buckets \u2192 39.8; blended 0.7/0.3 with freshness 50.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 43.0."
         },
         "west_signal": {
           "value": 0.0,
-          "derivation": "1 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "India-led",
@@ -1478,7 +1616,7 @@
         },
         "cross_platform_agreement": {
           "value": 50.0,
-          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 6.6% (\u22652%), freshness 58.3 \u2192 counts; ajio: share 1.8% (<2%), freshness 42.9 \u2192 does not count"
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 6.7% (\u22652%), freshness 58.3 \u2192 counts; ajio: share 1.8% (<2%), freshness 42.9 \u2192 does not count"
         },
         "replication": {
           "value": 68.8,
@@ -1572,11 +1710,11 @@
         "knot"
       ],
       "counts": {
-        "total": 64,
+        "total": 50,
         "by_platform": {
           "myntra": 19,
           "ajio": 7,
-          "asos": 38
+          "asos": 24
         }
       },
       "metrics": {
@@ -1588,15 +1726,15 @@
         "supply_conviction": {
           "value": 33.4,
           "freshness_pct": 51.7,
-          "derivation": "Indian assortment share [myntra: 19/483 items (3.9% of assortment); ajio: 7/389 items (1.8% of assortment)], normalized across buckets \u2192 25.5; blended 0.7/0.3 with freshness 51.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 33.4."
+          "derivation": "Indian assortment share [myntra: 19/475 items (4.0% of assortment); ajio: 7/391 items (1.8% of assortment)], normalized across buckets \u2192 25.5; blended 0.7/0.3 with freshness 51.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 33.4."
         },
         "west_signal": {
-          "value": 29.4,
-          "derivation": "38 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 29.4. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 23.8,
+          "derivation": "24 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 23.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
-          "label": "Unclear",
-          "derivation": "Comparison: west 29.4 / demand_strength 65.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "label": "India-led",
+          "derivation": "Comparison: demand_strength 65.4 \u2265 DEMAND_HIGH(55), west 23.8 \u2264 WEST_LOW(25), and supply is fresh (51.7% \u2265 FRESH_HIGH(50))."
         },
         "discount_penalty": {
           "value": 0,
@@ -1610,7 +1748,7 @@
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 3.9% (\u22652%), freshness 46.2 \u2192 does not count; ajio: share 1.8% (<2%), freshness 57.1 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.0% (\u22652%), freshness 46.2 \u2192 does not count; ajio: share 1.8% (<2%), freshness 57.1 \u2192 does not count"
         },
         "replication": {
           "value": 76.2,
@@ -1680,8 +1818,8 @@
           "Demand (65.4) outruns Indian supply (33.4) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
-          "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "pattern": "india-led + strong demand",
+          "action": "Confirm size-curve & repeat-rate before scaling \u2014 demand is proven, the open risk is buying the wrong depth per size."
         }
       },
       "confidence": {
@@ -1694,7 +1832,7 @@
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
         "rule": "40 \u2264 adjusted 41.1 < 65"
       },
-      "why": "Unclear; demand 65.4, Indian supply 33.4"
+      "why": "India-led; demand 65.4, Indian supply 33.4"
     },
     "corset_fitted": {
       "bucket": "corset_fitted",
@@ -1706,11 +1844,11 @@
         "cinch"
       ],
       "counts": {
-        "total": 69,
+        "total": 67,
         "by_platform": {
           "myntra": 25,
           "ajio": 23,
-          "asos": 21
+          "asos": 19
         }
       },
       "metrics": {
@@ -1720,17 +1858,17 @@
           "derivation": "Sum of rating_count on demand platforms (myntra) = 60,667; log-scaled then min-max normalized across the 16 buckets present \u2192 80.3."
         },
         "supply_conviction": {
-          "value": 47.8,
+          "value": 47.5,
           "freshness_pct": 33.2,
-          "derivation": "Indian assortment share [myntra: 25/483 items (5.2% of assortment); ajio: 23/389 items (5.9% of assortment)], normalized across buckets \u2192 54.0; blended 0.7/0.3 with freshness 33.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 47.8."
+          "derivation": "Indian assortment share [myntra: 25/475 items (5.3% of assortment); ajio: 23/391 items (5.9% of assortment)], normalized across buckets \u2192 53.6; blended 0.7/0.3 with freshness 33.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 47.5."
         },
         "west_signal": {
-          "value": 15.9,
-          "derivation": "21 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 15.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 18.8,
+          "derivation": "19 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 15.9 \u2264 WEST_LOW(25) and supply not fresh (33.2%)."
+          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 18.8 \u2264 WEST_LOW(25) and supply not fresh (33.2%)."
         },
         "discount_penalty": {
           "value": 1.0,
@@ -1740,11 +1878,11 @@
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 47.8, demand 80.3)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 47.5, demand 80.3)."
         },
         "cross_platform_agreement": {
           "value": 50.0,
-          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.2% (\u22652%), freshness 5.6 \u2192 does not count; ajio: share 5.9% (\u22652%), freshness 60.9 \u2192 counts"
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.3% (\u22652%), freshness 5.6 \u2192 does not count; ajio: share 5.9% (\u22652%), freshness 60.9 \u2192 counts"
         },
         "replication": {
           "value": 63.8,
@@ -1811,7 +1949,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (80.3) outruns Indian supply (47.8) \u2014 possible under-assortment / stockout risk."
+          "Demand (80.3) outruns Indian supply (47.5) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1819,16 +1957,16 @@
         }
       },
       "confidence": {
-        "base": 62.9,
-        "adjusted": 61.9,
-        "derivation": "base = demand 80.3\u00d70.45 + supply 47.8\u00d70.35 + agreement 50.0\u00d70.20 = 62.9; adjusted = base 62.9 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.9."
+        "base": 62.8,
+        "adjusted": 61.8,
+        "derivation": "base = demand 80.3\u00d70.45 + supply 47.5\u00d70.35 + agreement 50.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.9 < 65"
+        "rule": "40 \u2264 adjusted 61.8 < 65"
       },
-      "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.8; distortions cost 1.0 pts"
+      "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts"
     },
     "wrap": {
       "bucket": "wrap",
@@ -1851,17 +1989,17 @@
           "derivation": "Sum of rating_count on demand platforms (myntra) = 11,652; log-scaled then min-max normalized across the 16 buckets present \u2192 46.2."
         },
         "supply_conviction": {
-          "value": 20.2,
+          "value": 20.3,
           "freshness_pct": 21.1,
-          "derivation": "Indian assortment share [myntra: 20/483 items (4.1% of assortment); ajio: 2/389 items (0.5% of assortment)], normalized across buckets \u2192 19.8; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 20.2."
+          "derivation": "Indian assortment share [myntra: 20/475 items (4.2% of assortment); ajio: 2/391 items (0.5% of assortment)], normalized across buckets \u2192 19.9; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 20.3."
         },
         "west_signal": {
-          "value": 1.6,
-          "derivation": "3 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 1.6. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 3.0,
+          "derivation": "3 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 3.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Unclear",
-          "derivation": "Comparison: west 1.6 / demand_strength 46.2 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 3.0 / demand_strength 46.2 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "discount_penalty": {
           "value": 0,
@@ -1871,11 +2009,11 @@
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 20.2, demand 46.2)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 20.3, demand 46.2)."
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.1% (\u22652%), freshness 42.1 \u2192 does not count; ajio: share 0.5% (<2%), freshness 0.0 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.2% (\u22652%), freshness 42.1 \u2192 does not count; ajio: share 0.5% (<2%), freshness 0.0 \u2192 does not count"
         },
         "replication": {
           "value": 76.2,
@@ -1942,7 +2080,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (46.2) outruns Indian supply (20.2) \u2014 possible under-assortment / stockout risk."
+          "Demand (46.2) outruns Indian supply (20.3) \u2014 possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1952,14 +2090,14 @@
       "confidence": {
         "base": 27.9,
         "adjusted": 27.9,
-        "derivation": "base = demand 46.2\u00d70.45 + supply 20.2\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
+        "derivation": "base = demand 46.2\u00d70.45 + supply 20.3\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
         "rule": "adjusted 27.9 < 40"
       },
-      "why": "Unclear; demand 46.2, Indian supply 20.2"
+      "why": "Unclear; demand 46.2, Indian supply 20.3"
     },
     "ruffle": {
       "bucket": "ruffle",
@@ -1970,11 +2108,11 @@
         "frill"
       ],
       "counts": {
-        "total": 42,
+        "total": 39,
         "by_platform": {
           "myntra": 20,
           "ajio": 6,
-          "asos": 16
+          "asos": 13
         }
       },
       "metrics": {
@@ -1986,15 +2124,15 @@
         "supply_conviction": {
           "value": 27.7,
           "freshness_pct": 33.4,
-          "derivation": "Indian assortment share [myntra: 20/483 items (4.1% of assortment); ajio: 6/389 items (1.5% of assortment)], normalized across buckets \u2192 25.3; blended 0.7/0.3 with freshness 33.4% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.7."
+          "derivation": "Indian assortment share [myntra: 20/475 items (4.2% of assortment); ajio: 6/391 items (1.5% of assortment)], normalized across buckets \u2192 25.2; blended 0.7/0.3 with freshness 33.4% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.7."
         },
         "west_signal": {
-          "value": 11.9,
-          "derivation": "16 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 11.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 12.9,
+          "derivation": "13 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 12.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Unclear",
-          "derivation": "Comparison: west 11.9 / demand_strength 40.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 12.9 / demand_strength 40.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "discount_penalty": {
           "value": 0,
@@ -2008,7 +2146,7 @@
         },
         "cross_platform_agreement": {
           "value": 50.0,
-          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.1% (\u22652%), freshness 50.0 \u2192 counts; ajio: share 1.5% (<2%), freshness 16.7 \u2192 does not count"
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.2% (\u22652%), freshness 50.0 \u2192 counts; ajio: share 1.5% (<2%), freshness 16.7 \u2192 does not count"
         },
         "replication": {
           "value": 76.2,
@@ -2103,11 +2241,11 @@
         "shirring"
       ],
       "counts": {
-        "total": 32,
+        "total": 29,
         "by_platform": {
           "myntra": 3,
           "ajio": 5,
-          "asos": 24
+          "asos": 21
         }
       },
       "metrics": {
@@ -2119,15 +2257,15 @@
         "supply_conviction": {
           "value": 11.6,
           "freshness_pct": 26.6,
-          "derivation": "Indian assortment share [myntra: 3/483 items (0.6% of assortment); ajio: 5/389 items (1.3% of assortment)], normalized across buckets \u2192 5.2; blended 0.7/0.3 with freshness 26.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 11.6."
+          "derivation": "Indian assortment share [myntra: 3/475 items (0.6% of assortment); ajio: 5/391 items (1.3% of assortment)], normalized across buckets \u2192 5.1; blended 0.7/0.3 with freshness 26.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 11.6."
         },
         "west_signal": {
-          "value": 18.3,
-          "derivation": "24 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 20.8,
+          "derivation": "21 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Unclear",
-          "derivation": "Comparison: west 18.3 / demand_strength 0.0 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 20.8 / demand_strength 0.0 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "discount_penalty": {
           "value": 0,
@@ -2235,10 +2373,10 @@
         "halterneck"
       ],
       "counts": {
-        "total": 118,
+        "total": 96,
         "by_platform": {
           "myntra": 13,
-          "asos": 105
+          "asos": 83
         }
       },
       "metrics": {
@@ -2248,17 +2386,17 @@
           "derivation": "Sum of rating_count on demand platforms (myntra) = 7,017; log-scaled then min-max normalized across the 16 buckets present \u2192 35.7."
         },
         "supply_conviction": {
-          "value": 27.3,
+          "value": 27.4,
           "freshness_pct": 69.2,
-          "derivation": "Indian assortment share [myntra: 13/483 items (2.7% of assortment); ajio: 0/389 items (0.0% of assortment)], normalized across buckets \u2192 9.4; blended 0.7/0.3 with freshness 69.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.3."
+          "derivation": "Indian assortment share [myntra: 13/475 items (2.7% of assortment); ajio: 0/391 items (0.0% of assortment)], normalized across buckets \u2192 9.5; blended 0.7/0.3 with freshness 69.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.4."
         },
         "west_signal": {
-          "value": 82.5,
-          "derivation": "105 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.5. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 82.2,
+          "derivation": "83 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.2. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Early (West ahead)",
-          "derivation": "Comparison: west 82.5 \u2265 WEST_HIGH(55) and demand_strength 35.7 < DEMAND_LOW(40)."
+          "derivation": "Comparison: west 82.2 \u2265 WEST_HIGH(55) and demand_strength 35.7 < DEMAND_LOW(40)."
         },
         "discount_penalty": {
           "value": 0,
@@ -2268,7 +2406,7 @@
         },
         "supply_without_demand_penalty": {
           "value": 0,
-          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 27.3, demand 35.7)."
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 27.4, demand 35.7)."
         },
         "cross_platform_agreement": {
           "value": 50.0,
@@ -2338,10 +2476,10 @@
       "qualified": true,
       "disagreement": {
         "agree": [
-          "Indian supply (27.3) and demand (35.7) tell the same story."
+          "Indian supply (27.4) and demand (35.7) tell the same story."
         ],
         "conflict": [
-          "The West is dropping this hard (west_signal 82.5) but Indian shoppers haven't moved (demand 35.7) \u2014 classic lead-or-trap."
+          "The West is dropping this hard (west_signal 82.2) but Indian shoppers haven't moved (demand 35.7) \u2014 classic lead-or-trap."
         ],
         "resolver": {
           "pattern": "lead-lag Early + low replication",
@@ -2349,16 +2487,16 @@
         }
       },
       "confidence": {
-        "base": 35.6,
-        "adjusted": 24.5,
-        "derivation": "base = demand 35.7\u00d70.45 + supply 27.3\u00d70.35 + agreement 50.0\u00d70.20 = 35.6; adjusted = base 35.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.5."
+        "base": 35.7,
+        "adjusted": 24.6,
+        "derivation": "base = demand 35.7\u00d70.45 + supply 27.4\u00d70.35 + agreement 50.0\u00d70.20 = 35.7; adjusted = base 35.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.6."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 24.5 < 40"
+        "rule": "adjusted 24.6 < 40"
       },
-      "why": "Early (West ahead); demand 35.7, Indian supply 27.3; Early-gate \u00d7 68.8%"
+      "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%"
     },
     "bandeau_tube": {
       "bucket": "bandeau_tube",
@@ -2368,11 +2506,11 @@
         "tube"
       ],
       "counts": {
-        "total": 47,
+        "total": 41,
         "by_platform": {
           "myntra": 5,
           "ajio": 2,
-          "asos": 40
+          "asos": 34
         }
       },
       "metrics": {
@@ -2384,15 +2522,15 @@
         "supply_conviction": {
           "value": 15.8,
           "freshness_pct": 45.0,
-          "derivation": "Indian assortment share [myntra: 5/483 items (1.0% of assortment); ajio: 2/389 items (0.5% of assortment)], normalized across buckets \u2192 3.3; blended 0.7/0.3 with freshness 45.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 15.8."
+          "derivation": "Indian assortment share [myntra: 5/475 items (1.1% of assortment); ajio: 2/391 items (0.5% of assortment)], normalized across buckets \u2192 3.3; blended 0.7/0.3 with freshness 45.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 15.8."
         },
         "west_signal": {
-          "value": 31.0,
-          "derivation": "40 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 31.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 33.7,
+          "derivation": "34 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 33.7. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Unclear",
-          "derivation": "Comparison: west 31.0 / demand_strength 10.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 33.7 / demand_strength 10.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "discount_penalty": {
           "value": 0,
@@ -2406,7 +2544,7 @@
         },
         "cross_platform_agreement": {
           "value": 0.0,
-          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 1.0% (<2%), freshness 40.0 \u2192 does not count; ajio: share 0.5% (<2%), freshness 50.0 \u2192 does not count"
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 1.1% (<2%), freshness 40.0 \u2192 does not count; ajio: share 0.5% (<2%), freshness 50.0 \u2192 does not count"
         },
         "replication": {
           "value": 63.8,
@@ -2501,11 +2639,11 @@
         "bardot"
       ],
       "counts": {
-        "total": 18,
+        "total": 15,
         "by_platform": {
           "myntra": 2,
           "ajio": 2,
-          "asos": 14
+          "asos": 11
         }
       },
       "metrics": {
@@ -2517,15 +2655,15 @@
         "supply_conviction": {
           "value": 0.0,
           "freshness_pct": 0.0,
-          "derivation": "Indian assortment share [myntra: 2/483 items (0.4% of assortment); ajio: 2/389 items (0.5% of assortment)], normalized across buckets \u2192 0.0; blended 0.7/0.3 with freshness 0.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 0.0."
+          "derivation": "Indian assortment share [myntra: 2/475 items (0.4% of assortment); ajio: 2/391 items (0.5% of assortment)], normalized across buckets \u2192 0.0; blended 0.7/0.3 with freshness 0.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 0.0."
         },
         "west_signal": {
-          "value": 10.3,
-          "derivation": "14 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "value": 10.9,
+          "derivation": "11 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
         },
         "lead_lag": {
           "label": "Unclear",
-          "derivation": "Comparison: west 10.3 / demand_strength 3.7 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 10.9 / demand_strength 3.7 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "discount_penalty": {
           "value": 0,

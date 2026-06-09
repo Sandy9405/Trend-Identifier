@@ -25,9 +25,18 @@ Each entry declares:
                     (a freshness proxy, labelled as a proxy). Must use named groups
                     (?P<y>) (?P<m>) (?P<d>); month may be a number or an English name.
                     No regex / no match -> freshness "unknown" for that product.
-  sub_category_filter : optional {"field": raw_key, "keep": [values]} — rows whose raw
-                    field is not in `keep` are dropped (e.g. AJIO mixes sarees & jeans
-                    into a tops search; we keep only subCategory == "Tops").
+  sub_category_filter : optional {"field": raw_key, "keep": [values]} — hard-drops rows
+                    at ingest. Usually NOT needed: category/sub-category scoping is
+                    handled by the segment dropdowns instead, so mixed scrapes
+                    (sarees + jeans + tops) stay browsable rather than discarded.
+  category / sub_category (inside field_map): raw keys carrying the segment, if the
+                    platform provides them (e.g. AJIO's `segment` / `subCategory`).
+                    Missing or unmapped → generic keyword inference from the raw
+                    value, product URL, then name (rule tables in ingest.py).
+  default_category / default_sub_category : optional fallback describing how the
+                    SCRAPE was taken (e.g. ASOS feed is the women's new-in page even
+                    though product names don't say "women"). Inference still wins
+                    when a row carries its own signal.
   currency        : informational; cross-currency prices are never mixed in one metric.
                     price_band_fit only uses INR platforms.
 """
@@ -46,7 +55,10 @@ PLATFORM_ADAPTERS = {
             "in_stock": "inStock",
             "image_url": "imageUrl",
             "product_url": "productUrl",
+            # no explicit segment fields — inferred from productUrl/name,
+            # with the scrape-level default below as fallback
         },
+        "default_category": "women",   # scrape was the women's tops search
         "discount_mode": "recompute_from_price_mrp",
         # http://assets.myntassets.com/assets/images/2025/NOVEMBER/22/xxxx.jpg
         "date_proxy_regex": r"/images/(?P<y>\d{4})/(?P<m>[A-Za-z]+)/(?P<d>\d{1,2})/",
@@ -70,11 +82,14 @@ PLATFORM_ADAPTERS = {
             "in_stock": "inStock",
             "image_url": "mainImage",
             "product_url": "productUrl",
+            "category": "segment",          # "Women" / "Men" / ...
+            "sub_category": "subCategory",  # "Tops", "Sarees", "Jeans & Jeggings", ...
         },
+        # NOTE: no hard sub_category_filter — AJIO's mixed scrape (sarees, jeans,
+        # kurtas...) now feeds the segment dropdowns instead of being discarded.
         "discount_mode": "recompute_from_price_mrp",
         # https://assets.ajio.com/medias/sys_master/root1/20250918/...
         "date_proxy_regex": r"/(?P<y>20\d{2})(?P<m>\d{2})(?P<d>\d{2})/",
-        "sub_category_filter": {"field": "subCategory", "keep": ["Tops"]},
         "currency": "INR",
     },
 
@@ -92,6 +107,7 @@ PLATFORM_ADAPTERS = {
             "image_url": "imageUrl",
             "product_url": "productUrl",
         },
+        "default_category": "women",   # feed scraped is the women's new-in page
         "discount_mode": "recompute_from_price_mrp",
         # ASOS image URLs carry no upload date -> freshness "unknown" (disclosed in /api/meta)
         "date_proxy_regex": None,

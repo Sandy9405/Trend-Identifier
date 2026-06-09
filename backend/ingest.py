@@ -8,7 +8,14 @@ Nothing here knows about trends or scoring. It only:
   4. extracts a date proxy from image URLs (freshness approximation, labelled as such),
   5. AUTO-DETECTS dead demand signals: a platform declared "india_demand" whose
      rating_count is absent or all-zero is demoted — it contributes no demand —
-     and the demotion is recorded as a disclosed limitation.
+     and the demotion is recorded as a disclosed limitation,
+  6. derives a canonical CATEGORY (women/men/kids) and SUB_CATEGORY (tops/shirts/
+     jeans/...) for every product so the UI can scope the analysis to any segment
+     actually present in the data. Resolution order, per field:
+        raw field from the adapter's field_map
+        → adapter default (a property of how the scrape was taken)
+        → generic keyword inference from sub-category text, URL, then name
+        → "unknown" (never silently discarded; counted and disclosed).
 """
 
 import fnmatch
@@ -27,6 +34,55 @@ _MONTHS = {m.lower(): i + 1 for i, m in enumerate(
     ["january", "february", "march", "april", "may", "june", "july",
      "august", "september", "october", "november", "december"])}
 
+# ---------------------------------------------------------------------------
+# Generic segment inference — keyword tables, never per-dataset hardcoding.
+# Order matters: first match wins. "women" is checked before "men" and the
+# men-pattern uses a word boundary so it cannot match inside "women".
+# ---------------------------------------------------------------------------
+CATEGORY_RULES = [
+    ("women", [r"women", r"woman", r"ladies", r"female"]),
+    ("kids",  [r"\bkids?\b", r"\bgirls?\b", r"\bboys?\b", r"junior", r"infant"]),
+    ("men",   [r"\bmen\b", r"\bman\b", r"\bmale\b", r"\bmens\b"]),
+]
+
+SUB_CATEGORY_RULES = [
+    ("jeans",     [r"jeans?", r"jegging"]),
+    ("trousers",  [r"trouser", r"\bpants?\b", r"palazzo", r"chino", r"cargo"]),
+    ("shorts",    [r"shorts"]),
+    ("skirts",    [r"skirt"]),
+    ("dresses",   [r"dress\b", r"\bgown"]),
+    ("sarees",    [r"saree", r"\bsari\b"]),
+    ("kurtas",    [r"kurt[ai]"]),
+    ("nightwear", [r"night", r"pyjama", r"pajama"]),
+    ("shoes",     [r"shoes?", r"sneaker", r"sandal", r"footwear", r"loafer"]),
+    # tshirts before shirts/tops: "t-shirt" contains "shirt"
+    ("tshirts",   [r"t-?shirts?\b", r"\btees?\b"]),
+    # tops before shirts: "Shirt Style Top" / "Shirts, Tops & Tunic" → tops
+    ("tops",      [r"\btops?\b", r"blouse", r"\bcami", r"\btank\b", r"bandeau",
+                   r"\btube\b", r"bodysuit", r"tunic", r"corset", r"bralette"]),
+    ("shirts",    [r"shirts?\b"]),
+]
+
+
+def _match_rules(rules, text):
+    if not text:
+        return None
+    t = text.lower()
+    for label, pats in rules:
+        if any(re.search(p, t) for p in pats):
+            return label
+    return None
+
+
+def _infer_segment(rules, default, *texts):
+    """Try each text in priority order (raw sub-category field, URL, name);
+    fall back to the adapter default, then 'unknown'."""
+    for txt in texts:
+        hit = _match_rules(rules, txt)
+        if hit:
+            return hit
+    return default or "unknown"
+
 
 @dataclass
 class Product:
@@ -43,6 +99,8 @@ class Product:
     true_discount: Optional[int]      # ALWAYS recomputed from price/mrp
     date_proxy: Optional[date]        # image-upload approximation of freshness
     currency: str
+    category: str = "unknown"         # women / men / kids / unknown
+    sub_category: str = "unknown"     # tops / shirts / jeans / ... / unknown
 
 
 @dataclass
@@ -56,6 +114,8 @@ class PlatformData:
     filtered_count: int = 0
     limitations: list = field(default_factory=list)
     scraped_at: Optional[str] = None
+    static_limitations: list = field(default_factory=list)  # survive re-scoping
+    has_date_regex: bool = False
 
 
 def _get(raw: dict, key):
@@ -136,6 +196,14 @@ def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
         price = _num(_get(raw, fmap.get("price")))
         mrp = _num(_get(raw, fmap.get("mrp")))
         rc = _get(raw, fmap.get("rating_count"))
+        url = _get(raw, fmap.get("product_url"))
+        # segment: raw field → keyword inference (raw text, URL, name) → adapter default
+        raw_cat = _get(raw, fmap.get("category"))
+        raw_sub = _get(raw, fmap.get("sub_category"))
+        category = _infer_segment(CATEGORY_RULES, cfg.get("default_category"),
+                                  raw_cat, url, str(name))
+        sub_category = _infer_segment(SUB_CATEGORY_RULES, cfg.get("default_sub_category"),
+                                      raw_sub, url, str(name))
         pd.products.append(Product(
             platform=key,
             name=str(name),
@@ -146,23 +214,36 @@ def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
             rating_count=int(rc) if rc is not None else None,
             in_stock=raw.get(fmap.get("in_stock")) if isinstance(fmap.get("in_stock"), str) else None,
             image_url=_get(raw, fmap.get("image_url")),
-            product_url=_get(raw, fmap.get("product_url")),
+            product_url=url,
             true_discount=_true_discount(price, mrp),
             date_proxy=_date_proxy(_get(raw, fmap.get("image_url")), regex),
             currency=cfg.get("currency", "INR"),
+            category=category,
+            sub_category=sub_category,
         ))
         if pd.scraped_at is None and raw.get("scrapedAt"):
             pd.scraped_at = raw["scrapedAt"]
 
     pd.filtered_count = len(pd.products)
+    pd.has_date_regex = bool(regex)
     if subf:
         dropped = pd.raw_count - pd.filtered_count
         if dropped:
-            pd.limitations.append(
+            pd.static_limitations.append(
                 f"{dropped}/{pd.raw_count} rows dropped by sub-category filter "
                 f"({subf['field']} not in {subf['keep']})")
 
-    # --- AUTO-DETECT a dead demand signal -------------------------------------
+    apply_signal_checks(pd)
+    return pd
+
+
+def apply_signal_checks(pd: PlatformData):
+    """(Re)derive effective roles and limitations from the CURRENT product set.
+    Called at load time AND again after segment scoping — a platform may have
+    live rating counts for tops but none for, say, shoes."""
+    pd.roles = list(pd.declared_roles)
+    pd.limitations = list(pd.static_limitations)
+
     # rating_count is the demand authority. If this platform claims india_demand
     # but every rating_count is missing or zero, it proves nothing about demand:
     # demote it and say so. (This is how AJIO is handled in the current dataset.)
@@ -171,12 +252,12 @@ def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
             pd.roles.remove("india_demand")
             pd.limitations.append(
                 "declared india_demand but rating_count is absent/all-zero in this "
-                "scrape — contributes NO demand signal (auto-detected)")
+                "slice of the data — contributes NO demand signal (auto-detected)")
 
-    if not regex:
+    if not pd.has_date_regex:
         pd.limitations.append(
             "no date_proxy_regex — freshness unknown for this platform")
-    else:
+    elif pd.products:
         missing = sum(1 for p in pd.products if p.date_proxy is None)
         if missing:
             pd.limitations.append(
@@ -185,4 +266,42 @@ def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
     if "west_supply" in pd.roles:
         pd.limitations.append(
             "Western platform: signals describe what was DROPPED (supply), never what sold (demand)")
-    return pd
+    if not pd.products:
+        pd.limitations.append("no products in the selected category/sub-category")
+
+
+# ---------------------------------------------------------------------------
+# Segment scoping — what powers the category / sub-category dropdowns
+# ---------------------------------------------------------------------------
+def list_segments(platforms: list) -> list:
+    """Every (category, sub_category) pair present in the data, with counts.
+    Computed, never predefined — new data with men's shoes grows the dropdown."""
+    seg = {}
+    for p in platforms:
+        for prod in p.products:
+            key = (prod.category, prod.sub_category)
+            entry = seg.setdefault(key, {"category": key[0], "sub_category": key[1],
+                                         "count": 0, "platforms": {}})
+            entry["count"] += 1
+            entry["platforms"][p.key] = entry["platforms"].get(p.key, 0) + 1
+    return sorted(seg.values(), key=lambda e: -e["count"])
+
+
+def scoped_platforms(platforms: list, category: str, sub_category: str) -> list:
+    """Copies of each platform holding only products in the selected segment,
+    with roles/limitations re-derived for that slice."""
+    out = []
+    for p in platforms:
+        sub = PlatformData(key=p.key, file=p.file,
+                           roles=list(p.declared_roles),
+                           declared_roles=list(p.declared_roles))
+        sub.products = [x for x in p.products
+                        if x.category == category and x.sub_category == sub_category]
+        sub.raw_count = p.raw_count
+        sub.filtered_count = len(sub.products)
+        sub.scraped_at = p.scraped_at
+        sub.static_limitations = list(p.static_limitations)
+        sub.has_date_regex = p.has_date_regex
+        apply_signal_checks(sub)
+        out.append(sub)
+    return out

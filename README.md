@@ -13,9 +13,9 @@ raw signal vs distortion-adjusted signal, side by side, with one decisive resolv
 ## Architecture in one paragraph
 
 A FastAPI backend ingests **whatever JSON files are in `/data`** at startup (via a platform
-adapter config), clusters every product into silhouette buckets by keyword, computes all
-signals normalized *across the buckets present in the current dataset*, and serves the results
-as JSON. A React (Vite) frontend renders the ranked slate and per-trend detail pages entirely
+adapter config), derives a category/sub-category segment for every product, clusters each
+segment's products into silhouette buckets by keyword, computes all signals normalized
+*across the buckets present in the current dataset*, and serves the results as JSON. A React (Vite) frontend renders the ranked slate and per-trend detail pages entirely
 from those APIs. **Nothing trend-specific is hardcoded anywhere** — no trend name, rank, share,
 label, or fit-default. Replace the files in `/data` tomorrow and the entire output recomputes
 with zero code changes. The reasoning *method* (formulas, thresholds, keyword rules) lives in
@@ -61,6 +61,30 @@ If a role disappears (e.g. you remove the only demand source), the engine degrad
 scores renormalize over the signals that exist, and every affected derivation plus `/api/meta`
 says so explicitly ("no demand signal available for this dataset").
 
+## Segment scoping — what happens when the data isn't (only) women's tops
+
+Scrapes are messy: AJIO's "tops" search returns sarees, jeans and kurtas; a future file might
+be men's shoes. Nothing is silently discarded. At ingest every product gets a canonical
+**category** (women / men / kids) and **sub-category** (tops / shirts / tshirts / jeans /
+sarees / shoes / …), resolved in priority order:
+
+1. a raw field the platform provides (mapped in the adapter, e.g. AJIO's `segment` /
+   `subCategory`),
+2. generic keyword inference over that raw value, the product URL, then the name
+   (ordered rule tables in `ingest.py` — e.g. `tshirts` is checked before `shirts` because
+   "t-shirt" contains "shirt"; "women" before "men" with a word boundary),
+3. an optional adapter default describing how the scrape was taken (e.g. the ASOS feed is the
+   women's new-in page even though product names never say "women"),
+4. `unknown` — kept, counted, and disclosed.
+
+`GET /api/segments` returns every (category, sub-category) pair actually present, with counts
+per platform — that's what populates the two dropdowns in the UI header. Selecting a segment
+re-scopes the **entire analysis**: bucket membership, normalization, lead-lag, penalties,
+defaults, and even the per-platform signal checks are recomputed for that slice (a platform's
+demand role is re-validated per segment — AJIO might have live review counts for jeans but
+none for tops). The default segment is women/tops when present, otherwise the largest segment
+found. Segments with too little data show an honest empty slate rather than fake trends.
+
 ## The source roles — what each CAN and CANNOT prove
 
 | Role | Current source | Can prove | Cannot prove |
@@ -80,8 +104,8 @@ Auto-detected and disclosed in this dataset (see `/api/meta`):
 - **Freshness is a proxy**: the upload date embedded in image URLs (Myntra:
   `/images/2025/NOVEMBER/22/`, AJIO: `/20250918/`). ASOS images carry no date → freshness
   "unknown" for ASOS, disclosed as such.
-- AJIO's "tops" search returns sarees, jeans, kurtas… → a declared sub-category filter keeps
-  only `subCategory == "Tops"` and reports how many rows were dropped.
+- AJIO's "tops" search returns sarees, jeans, kurtas… → these are routed into their own
+  segments (browsable via the dropdowns) instead of being discarded.
 
 ## Scoring method (full detail in `backend/scoring.py` — heavily commented)
 
@@ -197,7 +221,11 @@ frontend/                  # React (Vite): slate + 4-panel detail, all content f
 
 ## API
 
-- `GET /api/slate` — ranked computed slate + meta
+All endpoints below accept optional `?category=&sub_category=` query params (default:
+women/tops if present, else the largest segment detected).
+
+- `GET /api/segments` — every category/sub-category present in the data, with counts; powers the dropdowns
+- `GET /api/slate` — ranked computed slate + meta for the segment
 - `GET /api/trend/{bucket}` — full detail payload incl. derivations & India-fit defaults
 - `POST /api/recompute/{bucket}` — body `{climate_fit?, modesty_fit?, occasion_fit?, price_band_fit?}` → recomputed confidence/bet without mutating the baseline
-- `GET /api/meta` — detected platforms/roles, data dates, auto-detected limitations
+- `GET /api/meta` — detected platforms/roles, data dates, auto-detected limitations, segment coverage

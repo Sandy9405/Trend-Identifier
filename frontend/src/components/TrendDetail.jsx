@@ -12,7 +12,7 @@ const AXIS_LABELS = {
 /* DETAIL — four panels mirroring the buyer's reasoning path:
    1 what looks real · 2 what could mislead · 3 what should the buyer do ·
    4 what improves next time. All content from /api/trend + /api/recompute. */
-export default function TrendDetail({ trend, onBack }) {
+export default function TrendDetail({ trend, seg, onBack }) {
   // `live` holds the recomputed payload after slider overrides; null = baseline
   const [live, setLive] = useState(null)
   const [overrides, setOverrides] = useState({})
@@ -26,10 +26,10 @@ export default function TrendDetail({ trend, onBack }) {
     return (next) => {
       clearTimeout(t)
       t = setTimeout(async () => {
-        try { setLive(await recompute(trend.bucket, next)) } catch { /* keep baseline */ }
+        try { setLive(await recompute(trend.bucket, seg, next)) } catch { /* keep baseline */ }
       }, 200)
     }
-  }, [trend.bucket])
+  }, [trend.bucket, seg])
 
   const onSlide = (axis, value) => {
     const next = { ...overrides, [axis]: Number(value) }
