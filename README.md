@@ -43,10 +43,13 @@ Open **http://localhost:5173**. The Vite dev server proxies `/api/*` to the back
 
 ### Deploying to Vercel
 
-The repo is Vercel-ready: `vercel.json` builds the frontend as a static Vite site and exposes
-the FastAPI app as a Python serverless function (`api/index.py`), with `/data` and `/backend`
-bundled into the function. Import the repo in Vercel (or run `vercel`) — no extra config.
-The frontend calls `/api/*` on the same origin, so nothing points at localhost in production.
+The repo is Vercel-ready: `api/index.py` is auto-detected as a Python serverless function
+exposing the FastAPI app (dependencies from the root `requirements.txt`; `/backend` and
+`/data` are bundled with it), while `vercel.json` builds the frontend as a static Vite site
+(`installCommand`/`buildCommand`/`outputDirectory`) and rewrites `/api/*` to the function.
+Import the repo in Vercel — **leave the project's Root Directory as the repo root** (not
+`frontend/`), with framework preset "Other". The frontend calls `/api/*` on the same origin,
+so nothing points at localhost in production.
 
 One serverless caveat, handled and disclosed by the app itself: Vercel's filesystem is
 read-only, so files pushed through `POST /api/upload` land in a **temporary directory** —

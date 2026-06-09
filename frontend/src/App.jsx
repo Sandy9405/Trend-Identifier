@@ -55,7 +55,13 @@ export default function App() {
     setSlateData(null)
   }
 
-  if (error) return <div className="container error">Backend unreachable or segment empty: {error}. Is uvicorn running on :8000?</div>
+  if (error) return (
+    <div className="container error">
+      Backend API not responding ({error}). Locally: is uvicorn running on :8000?
+      On Vercel: check the function logs for /api/index and that the project's
+      Root Directory is the repo root.
+    </div>
+  )
   if (!segments || !seg) return <div className="container loading">Detecting segments in /data…</div>
 
   return (

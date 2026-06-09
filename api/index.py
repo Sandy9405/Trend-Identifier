@@ -1,8 +1,11 @@
 """Vercel serverless entrypoint — exposes the FastAPI app from /backend.
 
-Vercel's Python runtime detects the ASGI `app` object. The repo's /data JSONs
-are bundled with the function (see vercel.json includeFiles), so the engine
-computes from them on cold start, lazily, in memory.
+Vercel auto-detects this file as a Python function and looks for the ASGI
+`app` object; the rewrite in vercel.json sends every /api/* request here,
+and the app receives the ORIGINAL path (e.g. /api/segments), so the FastAPI
+routes match unchanged. The Python runtime bundles the whole repo, so
+/backend and /data are available at runtime; the engine computes from them
+on cold start, lazily, in memory.
 """
 
 import sys
