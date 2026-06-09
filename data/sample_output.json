@@ -1,5 +1,5 @@
 {
-  "_note": "FROZEN SAMPLE \u2014 cached at backend startup, regenerated from whatever is in /data each run. Not a source of truth.",
+  "_note": "FROZEN SAMPLE \u2014 cached output, regenerated from the current data on reload. Not a source of truth.",
   "segments_detected": [
     {
       "category": "women",

@@ -35,6 +35,11 @@ a { color: inherit; text-decoration: none; }
   background: var(--panel2); color: var(--text); border: 1px solid var(--border);
   border-radius: 6px; padding: 4px 8px; font-size: 13px; margin-left: 4px;
 }
+.upload-btn {
+  background: var(--panel2); color: var(--blue); border: 1px solid var(--blue);
+  border-radius: 6px; padding: 4px 12px; font-size: 12.5px; cursor: pointer;
+}
+.upload-btn:disabled { opacity: .5; cursor: wait; }
 
 /* header */
 .header h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: .2px; }

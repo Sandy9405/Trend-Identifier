@@ -20,7 +20,9 @@ Nothing here knows about trends or scoring. It only:
 
 import fnmatch
 import json
+import os
 import re
+import tempfile
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from pathlib import Path
@@ -28,7 +30,38 @@ from typing import Optional
 
 from adapter_config import PLATFORM_ADAPTERS
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+# Repo data dir (read-only on serverless hosts like Vercel — the JSONs are
+# bundled with the deployment). Override with TBW_DATA_DIR.
+DATA_DIR = Path(os.environ.get(
+    "TBW_DATA_DIR", Path(__file__).resolve().parent.parent / "data"))
+
+
+def _writable(p: Path) -> bool:
+    try:
+        p.mkdir(parents=True, exist_ok=True)
+        probe = p / ".write_probe"
+        probe.write_text("")
+        probe.unlink()
+        return True
+    except OSError:
+        return False
+
+
+def upload_dir() -> Path:
+    """Where POST /api/upload saves files. Locally this is /data itself; on a
+    read-only deployment (Vercel) it falls back to a tmp dir — which is
+    EPHEMERAL per serverless instance. The durable path on such hosts is to
+    commit the file to /data and redeploy (disclosed by /api/upload)."""
+    env = os.environ.get("TBW_UPLOAD_DIR")
+    if env:
+        p = Path(env)
+        p.mkdir(parents=True, exist_ok=True)
+        return p
+    if _writable(DATA_DIR):
+        return DATA_DIR
+    p = Path(tempfile.gettempdir()) / "tbw-data"
+    p.mkdir(parents=True, exist_ok=True)
+    return p
 
 _MONTHS = {m.lower(): i + 1 for i, m in enumerate(
     ["january", "february", "march", "april", "may", "june", "july",
@@ -166,15 +199,45 @@ def _date_proxy(image_url, regex) -> Optional[date]:
         return None
 
 
-def load_platforms(data_dir: Path = DATA_DIR) -> list:
-    """Read every file in /data that matches an adapter glob. Files matching no
-    adapter are ignored (and that's fine — listed in meta as 'unrecognised')."""
+def data_files() -> list:
+    """All candidate JSONs: the repo /data dir plus the upload dir (if it's a
+    different place). An uploaded file with the SAME NAME as a repo file
+    replaces it for this process."""
+    seen = {}
+    dirs = [DATA_DIR]
+    up = upload_dir()
+    if up != DATA_DIR:
+        dirs.append(up)          # later dirs win on name clash
+    for d in dirs:
+        if d.is_dir():
+            for f in d.glob("*.json"):
+                if f.name != "sample_output.json":
+                    seen[f.name] = f
+    return sorted(seen.values(), key=lambda f: f.name)
+
+
+def load_platforms() -> list:
+    """Read every data file that matches an adapter glob. Files matching no
+    adapter are ignored (listed by /api/upload as 'unrecognised'). If SEVERAL
+    files match the same adapter (e.g. you upload a fresh scrape without
+    deleting last week's), only the newest by modification time is used and
+    the superseded ones are disclosed as a limitation — silently double-
+    counting two snapshots of the same platform would corrupt every share."""
     platforms = []
-    files = sorted(p for p in data_dir.glob("*.json") if p.name != "sample_output.json")
+    files = data_files()
     for key, cfg in PLATFORM_ADAPTERS.items():
         matched = [f for f in files if fnmatch.fnmatch(f.name.lower(), cfg["glob"].lower())]
-        for f in matched:
-            platforms.append(_load_one(key, cfg, f))
+        if not matched:
+            continue
+        matched.sort(key=lambda f: f.stat().st_mtime, reverse=True)
+        newest, superseded = matched[0], matched[1:]
+        pd = _load_one(key, cfg, newest)
+        if superseded:
+            pd.static_limitations.append(
+                "newest file used; superseded older file(s) ignored: "
+                + ", ".join(f.name for f in superseded))
+            apply_signal_checks(pd)
+        platforms.append(pd)
     return platforms
 
 

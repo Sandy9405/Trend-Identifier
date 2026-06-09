@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { getSegments, getSlate, getTrend } from './api.js'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { getSegments, getSlate, getTrend, uploadDataFile } from './api.js'
 import Slate from './components/Slate.jsx'
 import TrendDetail from './components/TrendDetail.jsx'
 
@@ -46,12 +46,22 @@ export default function App() {
     setSeg(next)
   }
 
+  // After an upload the backend has re-ingested: adopt the fresh segment list
+  // and default, drop any open detail page, and let the slate refetch.
+  const onDataChanged = (resp) => {
+    window.location.hash = '#/'
+    setSegments(resp.segments)
+    setSeg(resp.default)
+    setSlateData(null)
+  }
+
   if (error) return <div className="container error">Backend unreachable or segment empty: {error}. Is uvicorn running on :8000?</div>
   if (!segments || !seg) return <div className="container loading">Detecting segments in /data…</div>
 
   return (
     <div className="container">
-      <SegmentPicker segments={segments} seg={seg} onChange={changeSegment} />
+      <SegmentPicker segments={segments} seg={seg} onChange={changeSegment}
+        onDataChanged={onDataChanged} />
       {bucket
         ? (trend
             ? <TrendDetail key={`${seg.category}/${seg.sub_category}/${bucket}`}
@@ -69,16 +79,38 @@ export default function App() {
 /* Category + sub-category dropdowns, populated from the data. Mixed scrapes
    (e.g. a "tops" search that returned sarees and jeans) are scoped, not
    silently discarded — every row is reachable through some segment. */
-function SegmentPicker({ segments, seg, onChange }) {
+function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
   const categories = useMemo(
     () => [...new Set(segments.map((s) => s.category))], [segments])
   const subs = segments.filter((s) => s.category === seg.category)
+  const fileRef = useRef(null)
+  const [uploading, setUploading] = useState(false)
+  const [notice, setNotice] = useState(null)
 
   const onCat = (category) => {
     // keep sub-category if it exists under the new category, else take the largest
     const under = segments.filter((s) => s.category === category)
     const keep = under.find((s) => s.sub_category === seg.sub_category) || under[0]
     onChange({ category, sub_category: keep.sub_category })
+  }
+
+  const onFile = async (e) => {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (!file) return
+    setUploading(true)
+    setNotice(null)
+    try {
+      const resp = await uploadDataFile(file)
+      setNotice(resp.warning
+        ? `⚠ ${resp.warning}`
+        : `✓ ${resp.saved_as}: ${resp.rows} rows → adapter "${resp.matched_adapter}". ${resp.persistence}`)
+      onDataChanged(resp)
+    } catch (err) {
+      setNotice(`✗ upload failed: ${err}`)
+    } finally {
+      setUploading(false)
+    }
   }
 
   return (
@@ -100,7 +132,15 @@ function SegmentPicker({ segments, seg, onChange }) {
           ))}
         </select>
       </label>
-      <span className="note">segments detected from the files in /data — not predefined</span>
+      <button className="upload-btn" disabled={uploading}
+        onClick={() => fileRef.current?.click()}>
+        {uploading ? 'recomputing…' : 'upload data file'}
+      </button>
+      <input ref={fileRef} type="file" accept=".json" style={{ display: 'none' }}
+        onChange={onFile} />
+      <span className="note">
+        {notice || 'segments detected from the data files — not predefined'}
+      </span>
     </div>
   )
 }

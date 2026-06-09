@@ -18,3 +18,12 @@ export const recompute = (bucket, seg, overrides) =>
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(overrides),
   }).then(j)
+
+// Data management: push a new/replacement scrape file → backend re-ingests
+// and returns the fresh segment list; the UI then re-renders from it.
+export const uploadDataFile = (file) => {
+  const form = new FormData()
+  form.append('file', file)
+  return fetch('/api/upload', { method: 'POST', body: form }).then(j)
+}
+export const reloadData = () => fetch('/api/reload', { method: 'POST' }).then(j)

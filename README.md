@@ -41,13 +41,46 @@ npm run dev
 
 Open **http://localhost:5173**. The Vite dev server proxies `/api/*` to the backend on :8000.
 
+### Deploying to Vercel
+
+The repo is Vercel-ready: `vercel.json` builds the frontend as a static Vite site and exposes
+the FastAPI app as a Python serverless function (`api/index.py`), with `/data` and `/backend`
+bundled into the function. Import the repo in Vercel (or run `vercel`) — no extra config.
+The frontend calls `/api/*` on the same origin, so nothing points at localhost in production.
+
+One serverless caveat, handled and disclosed by the app itself: Vercel's filesystem is
+read-only, so files pushed through `POST /api/upload` land in a **temporary directory** —
+active immediately, but lost on the next cold start and not shared across instances. The
+upload response (and the UI notice) tells you which mode you're in. **The durable way to
+update data on Vercel is to commit the file into `/data` and push — Vercel redeploys and
+every number recomputes.** Running locally, uploads are saved straight into `/data` and
+survive restarts.
+
 No live run needed to inspect results: on every backend startup a frozen sample of the full
 computed output is written to **`data/sample_output.json`** (slate + per-trend details + meta).
 It is a cache of the current `/data` contents and regenerates each run.
 
 ## How to add or replace data (no code change)
 
-1. Drop the new JSON file into `/data`.
+Three ways, all triggering a full recompute:
+
+- **UI**: the "upload data file" button in the header → `POST /api/upload`. The backend
+  re-ingests, returns the fresh segment list, and the frontend re-renders from it.
+- **API**: `curl -X POST -F "file=@new_scrape.json" <host>/api/upload`, or copy files into
+  `/data` and call `POST /api/reload`.
+- **Files** (durable on Vercel): commit the file into `/data` and redeploy.
+
+The **filename decides which platform adapter parses it** (matched against the adapter
+globs, e.g. anything containing `myntra`). Uploading a file with the same name replaces it.
+If several files match the same adapter (a fresh scrape uploaded without deleting last
+week's), only the **newest by modification time** is used and the superseded files are
+disclosed as a limitation — double-counting two snapshots of one platform would corrupt
+every share. A filename matching no adapter is stored but ignored, with an explicit warning
+listing the known globs.
+
+Step by step for a brand-new source:
+
+1. Drop the new JSON file into `/data` (or POST it to `/api/upload`).
 2. If it comes from a platform already configured, name it so it matches that platform's glob
    (e.g. anything containing `myntra`) — done, nothing else to touch.
 3. If it's a **new platform**, add **one entry** to `backend/adapter_config.py` declaring:
@@ -210,6 +243,8 @@ need fewer end-of-season cuts?); **stockout avoidance** on India-led/Landed tren
 ## Repository layout
 
 ```
+vercel.json                # Vercel: static frontend + Python serverless function
+api/index.py               # Vercel entrypoint re-exporting the FastAPI app
 data/                      # drop scrapes here (3 current files + frozen sample_output.json)
 backend/
   adapter_config.py        # THE config: one entry per platform, edit only this for new data
@@ -221,9 +256,11 @@ frontend/                  # React (Vite): slate + 4-panel detail, all content f
 
 ## API
 
-All endpoints below accept optional `?category=&sub_category=` query params (default:
+All analysis endpoints accept optional `?category=&sub_category=` query params (default:
 women/tops if present, else the largest segment detected).
 
+- `POST /api/upload` — multipart upload of a scrape JSON; re-ingests and returns the new segment list, the matched adapter, and a persistence notice
+- `POST /api/reload` — re-ingest from disk after manual file changes
 - `GET /api/segments` — every category/sub-category present in the data, with counts; powers the dropdowns
 - `GET /api/slate` — ranked computed slate + meta for the segment
 - `GET /api/trend/{bucket}` — full detail payload incl. derivations & India-fit defaults
