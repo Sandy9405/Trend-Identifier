@@ -1,0 +1,2629 @@
+{
+  "_note": "FROZEN SAMPLE \u2014 cached at backend startup, regenerated from whatever is in /data each run. Not a source of truth.",
+  "meta": {
+    "platforms": [
+      {
+        "key": "myntra",
+        "file": "dataset_MyntraProductScraper_20260609.json",
+        "declared_roles": [
+          "india_demand",
+          "india_supply"
+        ],
+        "effective_roles": [
+          "india_demand",
+          "india_supply"
+        ],
+        "products_used": 483,
+        "raw_rows": 483,
+        "scraped_at": "2026-06-09T11:46:40.044Z",
+        "newest_upload_proxy": "2026-06-05",
+        "limitations": [
+          "date proxy (image-upload date) missing for 83/483 products"
+        ]
+      },
+      {
+        "key": "ajio",
+        "file": "dataset_ajioproductssearchscraper_20260609.json",
+        "declared_roles": [
+          "india_demand",
+          "india_supply"
+        ],
+        "effective_roles": [
+          "india_supply"
+        ],
+        "products_used": 389,
+        "raw_rows": 421,
+        "scraped_at": "2026-06-09T12:03:44.459Z",
+        "newest_upload_proxy": "2026-06-02",
+        "limitations": [
+          "32/421 rows dropped by sub-category filter (subCategory not in ['Tops'])",
+          "declared india_demand but rating_count is absent/all-zero in this scrape \u2014 contributes NO demand signal (auto-detected)"
+        ]
+      },
+      {
+        "key": "asos",
+        "file": "dataset_asosproductssearchscraper_20260609.json",
+        "declared_roles": [
+          "west_supply"
+        ],
+        "effective_roles": [
+          "west_supply"
+        ],
+        "products_used": 500,
+        "raw_rows": 500,
+        "scraped_at": "2026-06-09T18:01:59.279Z",
+        "newest_upload_proxy": null,
+        "limitations": [
+          "no date_proxy_regex \u2014 freshness unknown for this platform",
+          "Western platform: signals describe what was DROPPED (supply), never what sold (demand)"
+        ]
+      }
+    ],
+    "missing_roles": [],
+    "buckets_found": 16,
+    "products_total": 1372,
+    "products_unbucketed": 533,
+    "qualification_rule": "bucket needs \u2265 10 products to enter the slate",
+    "computed_at": "2026-06-09",
+    "note": "Every number above is recomputed from the files in /data at startup. Nothing trend-specific is hardcoded."
+  },
+  "slate": [
+    {
+      "bucket": "sleeveless_tank",
+      "display_name": "Sleeveless Tank",
+      "bet": {
+        "label": "Deeper Buy",
+        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "rule": "adjusted 72.1 \u2265 65"
+      },
+      "lead_lag": "Landed",
+      "confidence": {
+        "base": 72.1,
+        "adjusted": 72.1,
+        "derivation": "base = demand 96.0\u00d70.45 + supply 82.5\u00d70.35 + agreement 0.0\u00d70.20 = 72.1; adjusted = base 72.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 72.1."
+      },
+      "why": "Landed; demand 96.0, Indian supply 82.5",
+      "counts": {
+        "total": 219,
+        "by_platform": {
+          "myntra": 78,
+          "ajio": 14,
+          "asos": 127
+        }
+      },
+      "demand": 96.0,
+      "supply": 82.5,
+      "west": 100.0
+    },
+    {
+      "bucket": "embroidered",
+      "display_name": "Embroidered",
+      "bet": {
+        "label": "Deeper Buy",
+        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "rule": "adjusted 68.2 \u2265 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 74.2,
+        "adjusted": 68.2,
+        "derivation": "base = demand 79.8\u00d70.45 + supply 80.8\u00d70.35 + agreement 50.0\u00d70.20 = 74.2; adjusted = base 74.2 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 68.2."
+      },
+      "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.8; distortions cost 6.0 pts",
+      "counts": {
+        "total": 103,
+        "by_platform": {
+          "myntra": 28,
+          "ajio": 50,
+          "asos": 25
+        }
+      },
+      "demand": 79.8,
+      "supply": 80.8,
+      "west": 19.0
+    },
+    {
+      "bucket": "crop",
+      "display_name": "Crop",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 63.0 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 63.0,
+        "adjusted": 63.0,
+        "derivation": "base = demand 100.0\u00d70.45 + supply 51.5\u00d70.35 + agreement 0.0\u00d70.20 = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
+      },
+      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 51.5",
+      "counts": {
+        "total": 88,
+        "by_platform": {
+          "myntra": 53,
+          "ajio": 8,
+          "asos": 27
+        }
+      },
+      "demand": 100.0,
+      "supply": 51.5,
+      "west": 20.6
+    },
+    {
+      "bucket": "peplum",
+      "display_name": "Peplum",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 62.9 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 66.9,
+        "adjusted": 62.9,
+        "derivation": "base = demand 78.2\u00d70.45 + supply 62.1\u00d70.35 + agreement 50.0\u00d70.20 = 66.9; adjusted = base 66.9 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 62.9."
+      },
+      "why": "Late-cycle (West moved on); demand 78.2, Indian supply 62.1; distortions cost 4.0 pts",
+      "counts": {
+        "total": 76,
+        "by_platform": {
+          "myntra": 50,
+          "ajio": 15,
+          "asos": 11
+        }
+      },
+      "demand": 78.2,
+      "supply": 62.1,
+      "west": 7.9
+    },
+    {
+      "bucket": "puff_balloon",
+      "display_name": "Puff Balloon",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 62.3 < 65"
+      },
+      "lead_lag": "India-led",
+      "confidence": {
+        "base": 62.3,
+        "adjusted": 62.3,
+        "derivation": "base = demand 82.8\u00d70.45 + supply 43.0\u00d70.35 + agreement 50.0\u00d70.20 = 62.3; adjusted = base 62.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 62.3."
+      },
+      "why": "India-led; demand 82.8, Indian supply 43.0",
+      "counts": {
+        "total": 40,
+        "by_platform": {
+          "myntra": 32,
+          "ajio": 7,
+          "asos": 1
+        }
+      },
+      "demand": 82.8,
+      "supply": 43.0,
+      "west": 0.0
+    },
+    {
+      "bucket": "corset_fitted",
+      "display_name": "Corset Fitted",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 61.9 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 62.9,
+        "adjusted": 61.9,
+        "derivation": "base = demand 80.3\u00d70.45 + supply 47.8\u00d70.35 + agreement 50.0\u00d70.20 = 62.9; adjusted = base 62.9 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.9."
+      },
+      "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.8; distortions cost 1.0 pts",
+      "counts": {
+        "total": 69,
+        "by_platform": {
+          "myntra": 25,
+          "ajio": 23,
+          "asos": 21
+        }
+      },
+      "demand": 80.3,
+      "supply": 47.8,
+      "west": 15.9
+    },
+    {
+      "bucket": "shirt",
+      "display_name": "Shirt",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 56.4 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 60.4,
+        "adjusted": 56.4,
+        "derivation": "base = demand 92.0\u00d70.45 + supply 54.2\u00d70.35 + agreement 0.0\u00d70.20 = 60.4; adjusted = base 60.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 56.4."
+      },
+      "why": "Late-cycle (West moved on); demand 92.0, Indian supply 54.2; distortions cost 4.0 pts",
+      "counts": {
+        "total": 62,
+        "by_platform": {
+          "myntra": 46,
+          "ajio": 10,
+          "asos": 6
+        }
+      },
+      "demand": 92.0,
+      "supply": 54.2,
+      "west": 4.0
+    },
+    {
+      "bucket": "mesh_sheer",
+      "display_name": "Mesh Sheer",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 44.8 < 65"
+      },
+      "lead_lag": "Landed",
+      "confidence": {
+        "base": 44.8,
+        "adjusted": 44.8,
+        "derivation": "base = demand 74.9\u00d70.45 + supply 31.7\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
+      },
+      "why": "Landed; demand 74.9, Indian supply 31.7",
+      "counts": {
+        "total": 124,
+        "by_platform": {
+          "myntra": 27,
+          "ajio": 8,
+          "asos": 89
+        }
+      },
+      "demand": 74.9,
+      "supply": 31.7,
+      "west": 69.8
+    },
+    {
+      "bucket": "square_neck",
+      "display_name": "Square Neck",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 43.4 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 44.4,
+        "adjusted": 43.4,
+        "derivation": "base = demand 78.4\u00d70.45 + supply 26.1\u00d70.35 + agreement 0.0\u00d70.20 = 44.4; adjusted = base 44.4 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 43.4."
+      },
+      "why": "Late-cycle (West moved on); demand 78.4, Indian supply 26.1; distortions cost 1.0 pts",
+      "counts": {
+        "total": 36,
+        "by_platform": {
+          "myntra": 19,
+          "ajio": 9,
+          "asos": 8
+        }
+      },
+      "demand": 78.4,
+      "supply": 26.1,
+      "west": 5.6
+    },
+    {
+      "bucket": "tie_knot",
+      "display_name": "Tie Knot",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 41.1 < 65"
+      },
+      "lead_lag": "Unclear",
+      "confidence": {
+        "base": 41.1,
+        "adjusted": 41.1,
+        "derivation": "base = demand 65.4\u00d70.45 + supply 33.4\u00d70.35 + agreement 0.0\u00d70.20 = 41.1; adjusted = base 41.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 41.1."
+      },
+      "why": "Unclear; demand 65.4, Indian supply 33.4",
+      "counts": {
+        "total": 64,
+        "by_platform": {
+          "myntra": 19,
+          "ajio": 7,
+          "asos": 38
+        }
+      },
+      "demand": 65.4,
+      "supply": 33.4,
+      "west": 29.4
+    },
+    {
+      "bucket": "ruffle",
+      "display_name": "Ruffle",
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 37.9 < 40"
+      },
+      "lead_lag": "Unclear",
+      "confidence": {
+        "base": 37.9,
+        "adjusted": 37.9,
+        "derivation": "base = demand 40.4\u00d70.45 + supply 27.7\u00d70.35 + agreement 50.0\u00d70.20 = 37.9; adjusted = base 37.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 37.9."
+      },
+      "why": "Unclear; demand 40.4, Indian supply 27.7",
+      "counts": {
+        "total": 42,
+        "by_platform": {
+          "myntra": 20,
+          "ajio": 6,
+          "asos": 16
+        }
+      },
+      "demand": 40.4,
+      "supply": 27.7,
+      "west": 11.9
+    },
+    {
+      "bucket": "wrap",
+      "display_name": "Wrap",
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 27.9 < 40"
+      },
+      "lead_lag": "Unclear",
+      "confidence": {
+        "base": 27.9,
+        "adjusted": 27.9,
+        "derivation": "base = demand 46.2\u00d70.45 + supply 20.2\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
+      },
+      "why": "Unclear; demand 46.2, Indian supply 20.2",
+      "counts": {
+        "total": 25,
+        "by_platform": {
+          "myntra": 20,
+          "ajio": 2,
+          "asos": 3
+        }
+      },
+      "demand": 46.2,
+      "supply": 20.2,
+      "west": 1.6
+    },
+    {
+      "bucket": "halter",
+      "display_name": "Halter",
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 24.5 < 40"
+      },
+      "lead_lag": "Early (West ahead)",
+      "confidence": {
+        "base": 35.6,
+        "adjusted": 24.5,
+        "derivation": "base = demand 35.7\u00d70.45 + supply 27.3\u00d70.35 + agreement 50.0\u00d70.20 = 35.6; adjusted = base 35.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.5."
+      },
+      "why": "Early (West ahead); demand 35.7, Indian supply 27.3; Early-gate \u00d7 68.8%",
+      "counts": {
+        "total": 118,
+        "by_platform": {
+          "myntra": 13,
+          "asos": 105
+        }
+      },
+      "demand": 35.7,
+      "supply": 27.3,
+      "west": 82.5
+    },
+    {
+      "bucket": "bandeau_tube",
+      "display_name": "Bandeau Tube",
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 10.2 < 40"
+      },
+      "lead_lag": "Unclear",
+      "confidence": {
+        "base": 10.2,
+        "adjusted": 10.2,
+        "derivation": "base = demand 10.4\u00d70.45 + supply 15.8\u00d70.35 + agreement 0.0\u00d70.20 = 10.2; adjusted = base 10.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 10.2."
+      },
+      "why": "Unclear; demand 10.4, Indian supply 15.8",
+      "counts": {
+        "total": 47,
+        "by_platform": {
+          "myntra": 5,
+          "ajio": 2,
+          "asos": 40
+        }
+      },
+      "demand": 10.4,
+      "supply": 15.8,
+      "west": 31.0
+    },
+    {
+      "bucket": "smocked",
+      "display_name": "Smocked",
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 4.1 < 40"
+      },
+      "lead_lag": "Unclear",
+      "confidence": {
+        "base": 4.1,
+        "adjusted": 4.1,
+        "derivation": "base = demand 0.0\u00d70.45 + supply 11.6\u00d70.35 + agreement 0.0\u00d70.20 = 4.1; adjusted = base 4.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 4.1."
+      },
+      "why": "Unclear; demand 0.0, Indian supply 11.6",
+      "counts": {
+        "total": 32,
+        "by_platform": {
+          "myntra": 3,
+          "ajio": 5,
+          "asos": 24
+        }
+      },
+      "demand": 0.0,
+      "supply": 11.6,
+      "west": 18.3
+    },
+    {
+      "bucket": "off_shoulder",
+      "display_name": "Off Shoulder",
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 1.7 < 40"
+      },
+      "lead_lag": "Unclear",
+      "confidence": {
+        "base": 1.7,
+        "adjusted": 1.7,
+        "derivation": "base = demand 3.7\u00d70.45 + supply 0.0\u00d70.35 + agreement 0.0\u00d70.20 = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
+      },
+      "why": "Unclear; demand 3.7, Indian supply 0.0",
+      "counts": {
+        "total": 18,
+        "by_platform": {
+          "myntra": 2,
+          "ajio": 2,
+          "asos": 14
+        }
+      },
+      "demand": 3.7,
+      "supply": 0.0,
+      "west": 10.3
+    }
+  ],
+  "details": {
+    "crop": {
+      "bucket": "crop",
+      "display_name": "Crop",
+      "keywords": [
+        "crop"
+      ],
+      "counts": {
+        "total": 88,
+        "by_platform": {
+          "myntra": 53,
+          "ajio": 8,
+          "asos": 27
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 100.0,
+          "raw_rating_count": 157254,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 157,254; log-scaled then min-max normalized across the 16 buckets present \u2192 100.0."
+        },
+        "supply_conviction": {
+          "value": 51.5,
+          "freshness_pct": 21.8,
+          "derivation": "Indian assortment share [myntra: 53/483 items (11.0% of assortment); ajio: 8/389 items (2.1% of assortment)], normalized across buckets \u2192 64.3; blended 0.7/0.3 with freshness 21.8% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 51.5."
+        },
+        "west_signal": {
+          "value": 20.6,
+          "derivation": "27 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.6. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Late-cycle (West moved on)",
+          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 20.6 \u2264 WEST_LOW(25) and supply not fresh (21.8%)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 65,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65% across 61 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 51.5, demand 100.0)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 11.0% (\u22652%), freshness 31.1 \u2192 does not count; ajio: share 2.1% (\u22652%), freshness 12.5 \u2192 does not count"
+        },
+        "replication": {
+          "value": 80,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 85,
+              "rationale": "keywords imply everyday wear \u2014 wide occasion coverage (matched keyword(s): crop)"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9349 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=85, price_band_fit=85 \u2192 80. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "SASSAFRAS Black High Neck Cropped Top",
+          "platform": "myntra",
+          "price": 349.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Black-High-Neck-Cropped-Top/12222036/buy"
+        },
+        {
+          "name": "Burgstudio9 Striped Sweetheart Neck Puff Sleeve Cotton Crop Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Burgstudio9/Burgstudio9-Striped-Sweetheart-Neck-Puff-Sleeve-Cotton-Crop-Top/36731312/buy"
+        },
+        {
+          "name": "Burgstudio9 Sweetheart Neck Cotton Crop Regular Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Burgstudio9/Burgstudio9-Sweetheart-Neck-Cotton-Crop-Regular-Top/36731315/buy"
+        },
+        {
+          "name": "Stylecast X Slyck White Self Design Scoop Neck Fitted Crop Top",
+          "platform": "myntra",
+          "price": 369.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Stylecast+X+Slyck/Stylecast-X-Slyck-White-Self-Design-Scoop-Neck-Fitted-Crop-Top/26028264/buy"
+        },
+        {
+          "name": "CORSICA Floral Embroidered Crop Top",
+          "platform": "myntra",
+          "price": 395.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Floral-Embroidered-Crop-Top/36076189/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (100.0) outruns Indian supply (51.5) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 63.0,
+        "adjusted": 63.0,
+        "derivation": "base = demand 100.0\u00d70.45 + supply 51.5\u00d70.35 + agreement 0.0\u00d70.20 = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 63.0 < 65"
+      },
+      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 51.5"
+    },
+    "sleeveless_tank": {
+      "bucket": "sleeveless_tank",
+      "display_name": "Sleeveless Tank",
+      "keywords": [
+        "sleeveless",
+        "tank",
+        "cami",
+        "vest"
+      ],
+      "counts": {
+        "total": 219,
+        "by_platform": {
+          "myntra": 78,
+          "ajio": 14,
+          "asos": 127
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 96.0,
+          "raw_rating_count": 129458,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 129,458; log-scaled then min-max normalized across the 16 buckets present \u2192 96.0."
+        },
+        "supply_conviction": {
+          "value": 82.5,
+          "freshness_pct": 41.7,
+          "derivation": "Indian assortment share [myntra: 78/483 items (16.1% of assortment); ajio: 14/389 items (3.6% of assortment)], normalized across buckets \u2192 100.0; blended 0.7/0.3 with freshness 41.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 82.5."
+        },
+        "west_signal": {
+          "value": 100.0,
+          "derivation": "127 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Landed",
+          "derivation": "Comparison: west 100.0 \u2265 WEST_HIGH(55) and demand_strength 96.0 \u2265 DEMAND_HIGH(55)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 64.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 64.0% across 92 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (64.0\u221265.0 = -1pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 82.5, demand 96.0)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 16.1% (\u22652%), freshness 47.7 \u2192 does not count; ajio: share 3.6% (\u22652%), freshness 35.7 \u2192 does not count"
+        },
+        "replication": {
+          "value": 80,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 85,
+              "rationale": "keywords imply everyday wear \u2014 wide occasion coverage (matched keyword(s): sleeveless, tank, cami, vest)"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9386 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=85, price_band_fit=85 \u2192 80. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "CORSICA Indie Floral Printed Vest",
+          "platform": "myntra",
+          "price": 335.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Indie-Floral-Printed-Vest/32043469/buy"
+        },
+        {
+          "name": "Jockey Super Combed Cotton Rib Fabric Slim Fit Solid Tank Top-A113",
+          "platform": "myntra",
+          "price": 329.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Jockey/Jockey-Super-Combed-Cotton-Rib-Fabric-Slim-Fit-Solid-Tank-Top-A113/18639270/buy"
+        },
+        {
+          "name": "SASSAFRAS BASICS Scoop Neck Tank Top",
+          "platform": "myntra",
+          "price": 359.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS+BASICS/SASSAFRAS-BASICS-Scoop-Neck-Tank-Top/23286050/buy"
+        },
+        {
+          "name": "SASSAFRAS BASICS Scoop Neck Tank Top",
+          "platform": "myntra",
+          "price": 349.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS+BASICS/SASSAFRAS-BASICS-Scoop-Neck-Tank-Top/23286048/buy"
+        },
+        {
+          "name": "CORSICA Indie Floral Print Vest Top",
+          "platform": "myntra",
+          "price": 293.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Indie-Floral-Print-Vest-Top/32043467/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (82.5) and demand (96.0) tell the same story.",
+          "West drops (100.0) and Indian demand (96.0) both high \u2014 landed."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 72.1,
+        "adjusted": 72.1,
+        "derivation": "base = demand 96.0\u00d70.45 + supply 82.5\u00d70.35 + agreement 0.0\u00d70.20 = 72.1; adjusted = base 72.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 72.1."
+      },
+      "bet": {
+        "label": "Deeper Buy",
+        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "rule": "adjusted 72.1 \u2265 65"
+      },
+      "why": "Landed; demand 96.0, Indian supply 82.5"
+    },
+    "peplum": {
+      "bucket": "peplum",
+      "display_name": "Peplum",
+      "keywords": [
+        "peplum"
+      ],
+      "counts": {
+        "total": 76,
+        "by_platform": {
+          "myntra": 50,
+          "ajio": 15,
+          "asos": 11
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 78.2,
+          "raw_rating_count": 54883,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 54,883; log-scaled then min-max normalized across the 16 buckets present \u2192 78.2."
+        },
+        "supply_conviction": {
+          "value": 62.1,
+          "freshness_pct": 42.2,
+          "derivation": "Indian assortment share [myntra: 50/483 items (10.4% of assortment); ajio: 15/389 items (3.9% of assortment)], normalized across buckets \u2192 70.6; blended 0.7/0.3 with freshness 42.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 62.1."
+        },
+        "west_signal": {
+          "value": 7.9,
+          "derivation": "11 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Late-cycle (West moved on)",
+          "derivation": "Comparison: demand_strength 78.2 \u2265 DEMAND_HIGH(55) but west 7.9 \u2264 WEST_LOW(25) and supply not fresh (42.2%)."
+        },
+        "discount_penalty": {
+          "value": 4.0,
+          "median_discount": 67,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 67% across 65 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (67\u221265.0 = +2pp), scaling 0\u219240 over 20pp \u2192 \u22124.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 62.1, demand 78.2)."
+        },
+        "cross_platform_agreement": {
+          "value": 50.0,
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 10.4% (\u22652%), freshness 51.2 \u2192 counts; ajio: share 3.9% (\u22652%), freshness 33.3 \u2192 does not count"
+        },
+        "replication": {
+          "value": 76.2,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9498 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 76.2. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "Azira Floral Print Mandarin Collar Puff Sleeve Cotton Peplum Top",
+          "platform": "myntra",
+          "price": 593.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Azira/Azira-Floral-Print-Mandarin-Collar-Puff-Sleeve-Cotton-Peplum-Top/27444018/buy"
+        },
+        {
+          "name": "Slenor Floral Print Georgette Peplum Top",
+          "platform": "myntra",
+          "price": 441.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Slenor/Slenor-Floral-Print-Georgette-Peplum-Top/28090622/buy"
+        },
+        {
+          "name": "Anouk Ethnic Printed Sleeveless Cotton Peplum Crop Top",
+          "platform": "myntra",
+          "price": 678.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Anouk/Anouk-Ethnic-Printed-Sleeveless-Cotton-Peplum-Crop-Top/29958952/buy"
+        },
+        {
+          "name": "DressBerry Pink Floral Printed Square Neck Puff Sleeve Peplum Top",
+          "platform": "myntra",
+          "price": 524.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-Pink-Floral-Printed-Square-Neck-Puff-Sleeve-Peplum-Top/25014188/buy"
+        },
+        {
+          "name": "DressBerry White & Pink Floral Printed Square Neck Puff Sleeve Peplum Top",
+          "platform": "myntra",
+          "price": 524.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-White--Pink-Floral-Printed-Square-Neck-Puff-Sleeve-Peplum-Top/25014178/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (62.1) and demand (78.2) tell the same story."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 66.9,
+        "adjusted": 62.9,
+        "derivation": "base = demand 78.2\u00d70.45 + supply 62.1\u00d70.35 + agreement 50.0\u00d70.20 = 66.9; adjusted = base 66.9 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 62.9."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 62.9 < 65"
+      },
+      "why": "Late-cycle (West moved on); demand 78.2, Indian supply 62.1; distortions cost 4.0 pts"
+    },
+    "embroidered": {
+      "bucket": "embroidered",
+      "display_name": "Embroidered",
+      "keywords": [
+        "schiffli",
+        "embroider",
+        "broderie",
+        "anglaise"
+      ],
+      "counts": {
+        "total": 103,
+        "by_platform": {
+          "myntra": 28,
+          "ajio": 50,
+          "asos": 25
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 79.8,
+          "raw_rating_count": 59064,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 59,064; log-scaled then min-max normalized across the 16 buckets present \u2192 79.8."
+        },
+        "supply_conviction": {
+          "value": 80.8,
+          "freshness_pct": 49.5,
+          "derivation": "Indian assortment share [myntra: 28/483 items (5.8% of assortment); ajio: 50/389 items (12.9% of assortment)], normalized across buckets \u2192 94.2; blended 0.7/0.3 with freshness 49.5% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 80.8."
+        },
+        "west_signal": {
+          "value": 19.0,
+          "derivation": "25 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 19.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Late-cycle (West moved on)",
+          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 19.0 \u2264 WEST_LOW(25) and supply not fresh (49.5%)."
+        },
+        "discount_penalty": {
+          "value": 6.0,
+          "median_discount": 68.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 68.0% across 78 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (68.0\u221265.0 = +3pp), scaling 0\u219240 over 20pp \u2192 \u22126.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 80.8, demand 79.8)."
+        },
+        "cross_platform_agreement": {
+          "value": 50.0,
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.8% (\u22652%), freshness 55.0 \u2192 counts; ajio: share 12.9% (\u22652%), freshness 44.0 \u2192 does not count"
+        },
+        "replication": {
+          "value": 76.2,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9557 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 76.2. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "Tokyo Talkies Off-White Embroidered Top",
+          "platform": "myntra",
+          "price": 314.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Tokyo+Talkies/Tokyo-Talkies-Off-White-Embroidered-Top/12289190/buy"
+        },
+        {
+          "name": "CORSICA Floral Embroidered Crop Top",
+          "platform": "myntra",
+          "price": 395.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Floral-Embroidered-Crop-Top/36076189/buy"
+        },
+        {
+          "name": "CORSICA Embroidered Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Embroidered-Top/40597362/buy"
+        },
+        {
+          "name": "CORSICA Floral Embroidered Tie-Up Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Floral-Embroidered-Tie-Up-Top/33672324/buy"
+        },
+        {
+          "name": "ZHOF Embellished Embroidered Bohemian Cotton Top",
+          "platform": "myntra",
+          "price": 499.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/ZHOF/ZHOF-Embellished-Embroidered-Bohemian-Cotton-Top/37723292/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (80.8) and demand (79.8) tell the same story."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 74.2,
+        "adjusted": 68.2,
+        "derivation": "base = demand 79.8\u00d70.45 + supply 80.8\u00d70.35 + agreement 50.0\u00d70.20 = 74.2; adjusted = base 74.2 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 68.2."
+      },
+      "bet": {
+        "label": "Deeper Buy",
+        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "rule": "adjusted 68.2 \u2265 65"
+      },
+      "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.8; distortions cost 6.0 pts"
+    },
+    "shirt": {
+      "bucket": "shirt",
+      "display_name": "Shirt",
+      "keywords": [
+        "shirt"
+      ],
+      "counts": {
+        "total": 62,
+        "by_platform": {
+          "myntra": 46,
+          "ajio": 10,
+          "asos": 6
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 92.0,
+          "raw_rating_count": 106597,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 106,597; log-scaled then min-max normalized across the 16 buckets present \u2192 92.0."
+        },
+        "supply_conviction": {
+          "value": 54.2,
+          "freshness_pct": 42.4,
+          "derivation": "Indian assortment share [myntra: 46/483 items (9.5% of assortment); ajio: 10/389 items (2.6% of assortment)], normalized across buckets \u2192 59.3; blended 0.7/0.3 with freshness 42.4% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 54.2."
+        },
+        "west_signal": {
+          "value": 4.0,
+          "derivation": "6 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 4.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Late-cycle (West moved on)",
+          "derivation": "Comparison: demand_strength 92.0 \u2265 DEMAND_HIGH(55) but west 4.0 \u2264 WEST_LOW(25) and supply not fresh (42.4%)."
+        },
+        "discount_penalty": {
+          "value": 4.0,
+          "median_discount": 67.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 67.0% across 56 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (67.0\u221265.0 = +2pp), scaling 0\u219240 over 20pp \u2192 \u22124.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 54.2, demand 92.0)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 9.5% (\u22652%), freshness 44.8 \u2192 does not count; ajio: share 2.6% (\u22652%), freshness 40.0 \u2192 does not count"
+        },
+        "replication": {
+          "value": 80,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 85,
+              "rationale": "keywords imply everyday wear \u2014 wide occasion coverage (matched keyword(s): shirt)"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9630 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=85, price_band_fit=85 \u2192 80. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "all about you Floral Print Mandarin Collar Puff Sleeves  Cotton Shirt Style Top",
+          "platform": "myntra",
+          "price": 612.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/all+about+you/all-about-you-Floral-Print-Mandarin-Collar-Puff-Sleeves--Cotton-Shirt-Style-Top/27129722/buy"
+        },
+        {
+          "name": "Anouk Ethnic Printed Cuban Collar Shirt Style Top",
+          "platform": "myntra",
+          "price": 678.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Anouk/Anouk-Ethnic-Printed-Cuban-Collar-Shirt-Style-Top/29958960/buy"
+        },
+        {
+          "name": "Tokyo Talkies Blue Floral Print Shirt Style Top",
+          "platform": "myntra",
+          "price": 242.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Tokyo+Talkies/Tokyo-Talkies-Blue-Floral-Print-Shirt-Style-Top/16569532/buy"
+        },
+        {
+          "name": "Berrylush Curve Floral Printed Puff Sleeves Shirt Style Top",
+          "platform": "myntra",
+          "price": 671.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Berrylush+Curve/Berrylush-Curve-Floral-Printed-Puff-Sleeves-Shirt-Style-Top/24679182/buy"
+        },
+        {
+          "name": "The Roadster Lifestyle Co. Striped Shirt Style Longline Top",
+          "platform": "myntra",
+          "price": 526.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Roadster/The-Roadster-Lifestyle-Co-Striped-Shirt-Style-Longline-Top/33822510/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (92.0) outruns Indian supply (54.2) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 60.4,
+        "adjusted": 56.4,
+        "derivation": "base = demand 92.0\u00d70.45 + supply 54.2\u00d70.35 + agreement 0.0\u00d70.20 = 60.4; adjusted = base 60.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 56.4."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 56.4 < 65"
+      },
+      "why": "Late-cycle (West moved on); demand 92.0, Indian supply 54.2; distortions cost 4.0 pts"
+    },
+    "square_neck": {
+      "bucket": "square_neck",
+      "display_name": "Square Neck",
+      "keywords": [
+        "square neck",
+        "square-neck"
+      ],
+      "counts": {
+        "total": 36,
+        "by_platform": {
+          "myntra": 19,
+          "ajio": 9,
+          "asos": 8
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 78.4,
+          "raw_rating_count": 55204,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 55,204; log-scaled then min-max normalized across the 16 buckets present \u2192 78.4."
+        },
+        "supply_conviction": {
+          "value": 26.1,
+          "freshness_pct": 21.1,
+          "derivation": "Indian assortment share [myntra: 19/483 items (3.9% of assortment); ajio: 9/389 items (2.3% of assortment)], normalized across buckets \u2192 28.3; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 26.1."
+        },
+        "west_signal": {
+          "value": 5.6,
+          "derivation": "8 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.6. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Late-cycle (West moved on)",
+          "derivation": "Comparison: demand_strength 78.4 \u2265 DEMAND_HIGH(55) but west 5.6 \u2264 WEST_LOW(25) and supply not fresh (21.1%)."
+        },
+        "discount_penalty": {
+          "value": 1.0,
+          "median_discount": 65.5,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65.5% across 28 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65.5\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22121.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 26.1, demand 78.4)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 3.9% (\u22652%), freshness 20.0 \u2192 does not count; ajio: share 2.3% (\u22652%), freshness 22.2 \u2192 does not count"
+        },
+        "replication": {
+          "value": 76.2,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9430 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 76.2. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "SASSAFRAS Women Square Neck Full Sleeves Top",
+          "platform": "myntra",
+          "price": 461.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Women-Square-Neck-Full-Sleeves-Top/31304142/buy"
+        },
+        {
+          "name": "SASSAFRAS Black Ribbed Square Neck Fitted Top",
+          "platform": "myntra",
+          "price": 493.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Black-Ribbed-Square-Neck-Fitted-Top/24956614/buy"
+        },
+        {
+          "name": "SASSAFRAS Women Square Neck Full Sleeves Top",
+          "platform": "myntra",
+          "price": 489.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Women-Square-Neck-Full-Sleeves-Top/31304149/buy"
+        },
+        {
+          "name": "DressBerry Pink Floral Printed Square Neck Puff Sleeve Peplum Top",
+          "platform": "myntra",
+          "price": 524.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-Pink-Floral-Printed-Square-Neck-Puff-Sleeve-Peplum-Top/25014188/buy"
+        },
+        {
+          "name": "DressBerry White & Pink Floral Printed Square Neck Puff Sleeve Peplum Top",
+          "platform": "myntra",
+          "price": 524.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-White--Pink-Floral-Printed-Square-Neck-Puff-Sleeve-Peplum-Top/25014178/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (78.4) outruns Indian supply (26.1) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 44.4,
+        "adjusted": 43.4,
+        "derivation": "base = demand 78.4\u00d70.45 + supply 26.1\u00d70.35 + agreement 0.0\u00d70.20 = 44.4; adjusted = base 44.4 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 43.4."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 43.4 < 65"
+      },
+      "why": "Late-cycle (West moved on); demand 78.4, Indian supply 26.1; distortions cost 1.0 pts"
+    },
+    "mesh_sheer": {
+      "bucket": "mesh_sheer",
+      "display_name": "Mesh Sheer",
+      "keywords": [
+        "mesh",
+        "sheer",
+        "lace",
+        "organza",
+        "net"
+      ],
+      "counts": {
+        "total": 124,
+        "by_platform": {
+          "myntra": 27,
+          "ajio": 8,
+          "asos": 89
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 74.9,
+          "raw_rating_count": 46779,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 46,779; log-scaled then min-max normalized across the 16 buckets present \u2192 74.9."
+        },
+        "supply_conviction": {
+          "value": 31.7,
+          "freshness_pct": 22.2,
+          "derivation": "Indian assortment share [myntra: 27/483 items (5.6% of assortment); ajio: 8/389 items (2.1% of assortment)], normalized across buckets \u2192 35.7; blended 0.7/0.3 with freshness 22.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 31.7."
+        },
+        "west_signal": {
+          "value": 69.8,
+          "derivation": "89 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 69.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Landed",
+          "derivation": "Comparison: west 69.8 \u2265 WEST_HIGH(55) and demand_strength 74.9 \u2265 DEMAND_HIGH(55)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 65,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65% across 35 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 31.7, demand 74.9)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.6% (\u22652%), freshness 32.0 \u2192 does not count; ajio: share 2.1% (\u22652%), freshness 12.5 \u2192 does not count"
+        },
+        "replication": {
+          "value": 63.8,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 45,
+              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): mesh, sheer, lace, organza, net)"
+            },
+            "occasion_fit": {
+              "default": 50,
+              "rationale": "keywords imply party/occasion-only wear \u2014 fewer wear occasions, slower turns (matched keyword(s): mesh, sheer, organza)"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9431 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=45, occasion_fit=50, price_band_fit=85 \u2192 63.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "clobug Women Cowl Neck Net Top",
+          "platform": "myntra",
+          "price": 431.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/clobug/clobug-Women-Cowl-Neck-Net-Top/35813877/buy"
+        },
+        {
+          "name": "clobug Women Solid Cowl Neck Net Fitted Top",
+          "platform": "myntra",
+          "price": 431.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/clobug/clobug-Women-Solid-Cowl-Neck-Net-Fitted-Top/35813814/buy"
+        },
+        {
+          "name": "H&M Lace-Trimmed Top",
+          "platform": "myntra",
+          "price": 349.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Lace-Trimmed-Top/34836141/buy"
+        },
+        {
+          "name": "H&M Lace-Trimmed Top",
+          "platform": "myntra",
+          "price": 349.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Lace-Trimmed-Top/35840995/buy"
+        },
+        {
+          "name": "H&M Lace-Trimmed Top",
+          "platform": "myntra",
+          "price": 349.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Lace-Trimmed-Top/35840974/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "West drops (69.8) and Indian demand (74.9) both high \u2014 landed."
+        ],
+        "conflict": [
+          "Demand (74.9) outruns Indian supply (31.7) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 44.8,
+        "adjusted": 44.8,
+        "derivation": "base = demand 74.9\u00d70.45 + supply 31.7\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 44.8 < 65"
+      },
+      "why": "Landed; demand 74.9, Indian supply 31.7"
+    },
+    "puff_balloon": {
+      "bucket": "puff_balloon",
+      "display_name": "Puff Balloon",
+      "keywords": [
+        "puff",
+        "balloon"
+      ],
+      "counts": {
+        "total": 40,
+        "by_platform": {
+          "myntra": 32,
+          "ajio": 7,
+          "asos": 1
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 82.8,
+          "raw_rating_count": 68374,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 68,374; log-scaled then min-max normalized across the 16 buckets present \u2192 82.8."
+        },
+        "supply_conviction": {
+          "value": 43.0,
+          "freshness_pct": 50.6,
+          "derivation": "Indian assortment share [myntra: 32/483 items (6.6% of assortment); ajio: 7/389 items (1.8% of assortment)], normalized across buckets \u2192 39.8; blended 0.7/0.3 with freshness 50.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 43.0."
+        },
+        "west_signal": {
+          "value": 0.0,
+          "derivation": "1 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "India-led",
+          "derivation": "Comparison: demand_strength 82.8 \u2265 DEMAND_HIGH(55), west 0.0 \u2264 WEST_LOW(25), and supply is fresh (50.6% \u2265 FRESH_HIGH(50))."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 62,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 62% across 39 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (62\u221265.0 = -3pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 43.0, demand 82.8)."
+        },
+        "cross_platform_agreement": {
+          "value": 50.0,
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 6.6% (\u22652%), freshness 58.3 \u2192 counts; ajio: share 1.8% (<2%), freshness 42.9 \u2192 does not count"
+        },
+        "replication": {
+          "value": 68.8,
+          "axes": {
+            "climate_fit": {
+              "default": 45,
+              "rationale": "keywords imply volume/structure/layering \u2014 heat risk in Indian climate (matched keyword(s): puff, balloon)"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9599 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=45, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 68.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "all about you Floral Print Mandarin Collar Puff Sleeves  Cotton Shirt Style Top",
+          "platform": "myntra",
+          "price": 612.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/all+about+you/all-about-you-Floral-Print-Mandarin-Collar-Puff-Sleeves--Cotton-Shirt-Style-Top/27129722/buy"
+        },
+        {
+          "name": "Burgstudio9 Striped Sweetheart Neck Puff Sleeve Cotton Crop Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Burgstudio9/Burgstudio9-Striped-Sweetheart-Neck-Puff-Sleeve-Cotton-Crop-Top/36731312/buy"
+        },
+        {
+          "name": "Azira Floral Print Mandarin Collar Puff Sleeve Cotton Peplum Top",
+          "platform": "myntra",
+          "price": 593.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Azira/Azira-Floral-Print-Mandarin-Collar-Puff-Sleeve-Cotton-Peplum-Top/27444018/buy"
+        },
+        {
+          "name": "Stylecast X Slyck Polka Dot Print Puff Sleeve Blouson Top",
+          "platform": "myntra",
+          "price": 455.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Stylecast+X+Slyck/Stylecast-X-Slyck-Polka-Dot-Print-Puff-Sleeve-Blouson-Top/30463891/buy"
+        },
+        {
+          "name": "Berrylush Curve Floral Printed Puff Sleeves Shirt Style Top",
+          "platform": "myntra",
+          "price": 671.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Berrylush+Curve/Berrylush-Curve-Floral-Printed-Puff-Sleeves-Shirt-Style-Top/24679182/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (82.8) outruns Indian supply (43.0) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "india-led + strong demand",
+          "action": "Confirm size-curve & repeat-rate before scaling \u2014 demand is proven, the open risk is buying the wrong depth per size."
+        }
+      },
+      "confidence": {
+        "base": 62.3,
+        "adjusted": 62.3,
+        "derivation": "base = demand 82.8\u00d70.45 + supply 43.0\u00d70.35 + agreement 50.0\u00d70.20 = 62.3; adjusted = base 62.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 62.3."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 62.3 < 65"
+      },
+      "why": "India-led; demand 82.8, Indian supply 43.0"
+    },
+    "tie_knot": {
+      "bucket": "tie_knot",
+      "display_name": "Tie Knot",
+      "keywords": [
+        "tie",
+        "knot"
+      ],
+      "counts": {
+        "total": 64,
+        "by_platform": {
+          "myntra": 19,
+          "ajio": 7,
+          "asos": 38
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 65.4,
+          "raw_rating_count": 29445,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 29,445; log-scaled then min-max normalized across the 16 buckets present \u2192 65.4."
+        },
+        "supply_conviction": {
+          "value": 33.4,
+          "freshness_pct": 51.7,
+          "derivation": "Indian assortment share [myntra: 19/483 items (3.9% of assortment); ajio: 7/389 items (1.8% of assortment)], normalized across buckets \u2192 25.5; blended 0.7/0.3 with freshness 51.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 33.4."
+        },
+        "west_signal": {
+          "value": 29.4,
+          "derivation": "38 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 29.4. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Unclear",
+          "derivation": "Comparison: west 29.4 / demand_strength 65.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 62.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 62.0% across 26 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (62.0\u221265.0 = -3pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 33.4, demand 65.4)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 3.9% (\u22652%), freshness 46.2 \u2192 does not count; ajio: share 1.8% (<2%), freshness 57.1 \u2192 does not count"
+        },
+        "replication": {
+          "value": 76.2,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9520 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 76.2. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "CORSICA Floral Embroidered Tie-Up Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Floral-Embroidered-Tie-Up-Top/33672324/buy"
+        },
+        {
+          "name": "glitchez Sleeveless Tie-Up & Gathers Detail Fitted Crop Top",
+          "platform": "myntra",
+          "price": 279.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/glitchez/glitchez-Sleeveless-Tie-Up--Gathers-Detail-Fitted-Crop-Top/32548904/buy"
+        },
+        {
+          "name": "glitchez Sleeveless Tie-Up & Gathers Detail Fitted Crop Top",
+          "platform": "myntra",
+          "price": 265.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/glitchez/glitchez-Sleeveless-Tie-Up--Gathers-Detail-Fitted-Crop-Top/32548866/buy"
+        },
+        {
+          "name": "glitchez Sleeveless Tie-Up & Gathers Detail Fitted Crop Top",
+          "platform": "myntra",
+          "price": 272.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/glitchez/glitchez-Sleeveless-Tie-Up--Gathers-Detail-Fitted-Crop-Top/32548379/buy"
+        },
+        {
+          "name": "DressBerry Green Floral Tie-Up Neck Extended Sleeves Schiffli Cotton Regular Top",
+          "platform": "myntra",
+          "price": 545.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-Green-Floral-Tie-Up-Neck-Extended-Sleeves-Schiffli-Cotton-Regular-Top/14066152/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (65.4) outruns Indian supply (33.4) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 41.1,
+        "adjusted": 41.1,
+        "derivation": "base = demand 65.4\u00d70.45 + supply 33.4\u00d70.35 + agreement 0.0\u00d70.20 = 41.1; adjusted = base 41.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 41.1."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 41.1 < 65"
+      },
+      "why": "Unclear; demand 65.4, Indian supply 33.4"
+    },
+    "corset_fitted": {
+      "bucket": "corset_fitted",
+      "display_name": "Corset Fitted",
+      "keywords": [
+        "corset",
+        "fitted",
+        "bodycon",
+        "cinch"
+      ],
+      "counts": {
+        "total": 69,
+        "by_platform": {
+          "myntra": 25,
+          "ajio": 23,
+          "asos": 21
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 80.3,
+          "raw_rating_count": 60667,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 60,667; log-scaled then min-max normalized across the 16 buckets present \u2192 80.3."
+        },
+        "supply_conviction": {
+          "value": 47.8,
+          "freshness_pct": 33.2,
+          "derivation": "Indian assortment share [myntra: 25/483 items (5.2% of assortment); ajio: 23/389 items (5.9% of assortment)], normalized across buckets \u2192 54.0; blended 0.7/0.3 with freshness 33.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 47.8."
+        },
+        "west_signal": {
+          "value": 15.9,
+          "derivation": "21 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 15.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Late-cycle (West moved on)",
+          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 15.9 \u2264 WEST_LOW(25) and supply not fresh (33.2%)."
+        },
+        "discount_penalty": {
+          "value": 1.0,
+          "median_discount": 65.5,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 65.5% across 48 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (65.5\u221265.0 = +0pp), scaling 0\u219240 over 20pp \u2192 \u22121.0. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 47.8, demand 80.3)."
+        },
+        "cross_platform_agreement": {
+          "value": 50.0,
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 5.2% (\u22652%), freshness 5.6 \u2192 does not count; ajio: share 5.9% (\u22652%), freshness 60.9 \u2192 counts"
+        },
+        "replication": {
+          "value": 63.8,
+          "axes": {
+            "climate_fit": {
+              "default": 45,
+              "rationale": "keywords imply volume/structure/layering \u2014 heat risk in Indian climate (matched keyword(s): corset, cinch)"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 50,
+              "rationale": "keywords imply party/occasion-only wear \u2014 fewer wear occasions, slower turns (matched keyword(s): corset)"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9308 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=45, modesty_fit=75, occasion_fit=50, price_band_fit=85 \u2192 63.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "clobug Women Solid Cowl Neck Net Fitted Top",
+          "platform": "myntra",
+          "price": 431.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/clobug/clobug-Women-Solid-Cowl-Neck-Net-Fitted-Top/35813814/buy"
+        },
+        {
+          "name": "SASSAFRAS Black Ribbed Square Neck Fitted Top",
+          "platform": "myntra",
+          "price": 493.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Black-Ribbed-Square-Neck-Fitted-Top/24956614/buy"
+        },
+        {
+          "name": "Stylecast X Slyck White Self Design Scoop Neck Fitted Crop Top",
+          "platform": "myntra",
+          "price": 369.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Stylecast+X+Slyck/Stylecast-X-Slyck-White-Self-Design-Scoop-Neck-Fitted-Crop-Top/26028264/buy"
+        },
+        {
+          "name": "Stylecast X Slyck Self Design V-Neck Long Sleeves Fitted Top",
+          "platform": "myntra",
+          "price": 506.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Stylecast+X+Slyck/Stylecast-X-Slyck-Self-Design-V-Neck-Long-Sleeves-Fitted-Top/26028270/buy"
+        },
+        {
+          "name": "glitchez Sleeveless Tie-Up & Gathers Detail Fitted Crop Top",
+          "platform": "myntra",
+          "price": 279.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/glitchez/glitchez-Sleeveless-Tie-Up--Gathers-Detail-Fitted-Crop-Top/32548904/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (80.3) outruns Indian supply (47.8) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 62.9,
+        "adjusted": 61.9,
+        "derivation": "base = demand 80.3\u00d70.45 + supply 47.8\u00d70.35 + agreement 50.0\u00d70.20 = 62.9; adjusted = base 62.9 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.9."
+      },
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 61.9 < 65"
+      },
+      "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.8; distortions cost 1.0 pts"
+    },
+    "wrap": {
+      "bucket": "wrap",
+      "display_name": "Wrap",
+      "keywords": [
+        "wrap"
+      ],
+      "counts": {
+        "total": 25,
+        "by_platform": {
+          "myntra": 20,
+          "ajio": 2,
+          "asos": 3
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 46.2,
+          "raw_rating_count": 11652,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 11,652; log-scaled then min-max normalized across the 16 buckets present \u2192 46.2."
+        },
+        "supply_conviction": {
+          "value": 20.2,
+          "freshness_pct": 21.1,
+          "derivation": "Indian assortment share [myntra: 20/483 items (4.1% of assortment); ajio: 2/389 items (0.5% of assortment)], normalized across buckets \u2192 19.8; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 20.2."
+        },
+        "west_signal": {
+          "value": 1.6,
+          "derivation": "3 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 1.6. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Unclear",
+          "derivation": "Comparison: west 1.6 / demand_strength 46.2 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 64.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 64.0% across 22 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (64.0\u221265.0 = -1pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 20.2, demand 46.2)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.1% (\u22652%), freshness 42.1 \u2192 does not count; ajio: share 0.5% (<2%), freshness 0.0 \u2192 does not count"
+        },
+        "replication": {
+          "value": 76.2,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9546 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 76.2. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "SZN Women V-Neck Solid Sleeveless Wrap Draped Top",
+          "platform": "myntra",
+          "price": 373.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SZN/SZN-Women-V-Neck-Solid-Sleeveless-Wrap-Draped-Top/36147207/buy"
+        },
+        {
+          "name": "KATLINE Striped V Neck Puff Sleeves Waist Tie- Ups Wrap Regular Top",
+          "platform": "myntra",
+          "price": 378.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/KATLINE/KATLINE-Striped-V-Neck-Puff-Sleeves-Waist-Tie--Ups-Wrap-Regular-Top/37009619/buy"
+        },
+        {
+          "name": "glitchez Checked Waistcoat Style Wrap Top",
+          "platform": "myntra",
+          "price": 415.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/glitchez/glitchez-Checked-Waistcoat-Style-Wrap-Top/31568274/buy"
+        },
+        {
+          "name": "SANSKRUTIHOMES Polka Dots Printed Cotton Wrap Top",
+          "platform": "myntra",
+          "price": 466.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SANSKRUTIHOMES/SANSKRUTIHOMES-Polka-Dots-Printed-Cotton-Wrap-Top/32719340/buy"
+        },
+        {
+          "name": "DressBerry Women Puff Sleeves Ruffles Wrap Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-Women-Puff-Sleeves-Ruffles-Wrap-Top/32582583/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [],
+        "conflict": [
+          "Demand (46.2) outruns Indian supply (20.2) \u2014 possible under-assortment / stockout risk."
+        ],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 27.9,
+        "adjusted": 27.9,
+        "derivation": "base = demand 46.2\u00d70.45 + supply 20.2\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
+      },
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 27.9 < 40"
+      },
+      "why": "Unclear; demand 46.2, Indian supply 20.2"
+    },
+    "ruffle": {
+      "bucket": "ruffle",
+      "display_name": "Ruffle",
+      "keywords": [
+        "ruffle",
+        "flutter",
+        "frill"
+      ],
+      "counts": {
+        "total": 42,
+        "by_platform": {
+          "myntra": 20,
+          "ajio": 6,
+          "asos": 16
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 40.4,
+          "raw_rating_count": 8812,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 8,812; log-scaled then min-max normalized across the 16 buckets present \u2192 40.4."
+        },
+        "supply_conviction": {
+          "value": 27.7,
+          "freshness_pct": 33.4,
+          "derivation": "Indian assortment share [myntra: 20/483 items (4.1% of assortment); ajio: 6/389 items (1.5% of assortment)], normalized across buckets \u2192 25.3; blended 0.7/0.3 with freshness 33.4% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.7."
+        },
+        "west_signal": {
+          "value": 11.9,
+          "derivation": "16 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 11.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Unclear",
+          "derivation": "Comparison: west 11.9 / demand_strength 40.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 60.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 60.0% across 26 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (60.0\u221265.0 = -5pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 27.7, demand 40.4)."
+        },
+        "cross_platform_agreement": {
+          "value": 50.0,
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 4.1% (\u22652%), freshness 50.0 \u2192 counts; ajio: share 1.5% (<2%), freshness 16.7 \u2192 does not count"
+        },
+        "replication": {
+          "value": 76.2,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9622 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 76.2. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "StyleCast Flutter Sleeve Top",
+          "platform": "myntra",
+          "price": 314.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/StyleCast/StyleCast-Flutter-Sleeve-Top/30427284/buy"
+        },
+        {
+          "name": "StyleCast Flutter Sleeve Top",
+          "platform": "myntra",
+          "price": 335.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/StyleCast/StyleCast-Flutter-Sleeve-Top/30427045/buy"
+        },
+        {
+          "name": "DressBerry Women Puff Sleeves Ruffles Wrap Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/DressBerry/DressBerry-Women-Puff-Sleeves-Ruffles-Wrap-Top/32582583/buy"
+        },
+        {
+          "name": "CORSICA Print Mandarin Collar Flutter Sleeve Ruffles Georgette Top",
+          "platform": "myntra",
+          "price": 399.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Print-Mandarin-Collar-Flutter-Sleeve-Ruffles-Georgette-Top/38990298/buy"
+        },
+        {
+          "name": "CORSICA Check Puff Sleeves Ruffle Detail Peplum Top",
+          "platform": "myntra",
+          "price": 594.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/CORSICA/CORSICA-Check-Puff-Sleeves-Ruffle-Detail-Peplum-Top-/37107799/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (27.7) and demand (40.4) tell the same story."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 37.9,
+        "adjusted": 37.9,
+        "derivation": "base = demand 40.4\u00d70.45 + supply 27.7\u00d70.35 + agreement 50.0\u00d70.20 = 37.9; adjusted = base 37.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 37.9."
+      },
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 37.9 < 40"
+      },
+      "why": "Unclear; demand 40.4, Indian supply 27.7"
+    },
+    "smocked": {
+      "bucket": "smocked",
+      "display_name": "Smocked",
+      "keywords": [
+        "smock",
+        "shirred",
+        "shirring"
+      ],
+      "counts": {
+        "total": 32,
+        "by_platform": {
+          "myntra": 3,
+          "ajio": 5,
+          "asos": 24
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 0.0,
+          "raw_rating_count": 1244,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 1,244; log-scaled then min-max normalized across the 16 buckets present \u2192 0.0."
+        },
+        "supply_conviction": {
+          "value": 11.6,
+          "freshness_pct": 26.6,
+          "derivation": "Indian assortment share [myntra: 3/483 items (0.6% of assortment); ajio: 5/389 items (1.3% of assortment)], normalized across buckets \u2192 5.2; blended 0.7/0.3 with freshness 26.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 11.6."
+        },
+        "west_signal": {
+          "value": 18.3,
+          "derivation": "24 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Unclear",
+          "derivation": "Comparison: west 18.3 / demand_strength 0.0 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 49.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 49.0% across 8 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (49.0\u221265.0 = -16pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 11.6, demand 0.0)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 0.6% (<2%), freshness 33.3 \u2192 does not count; ajio: share 1.3% (<2%), freshness 20.0 \u2192 does not count"
+        },
+        "replication": {
+          "value": 68.8,
+          "axes": {
+            "climate_fit": {
+              "default": 45,
+              "rationale": "keywords imply volume/structure/layering \u2014 heat risk in Indian climate (matched keyword(s): smock, shirred, shirring)"
+            },
+            "modesty_fit": {
+              "default": 75,
+              "rationale": "no sheer/bare cue in bucket keywords"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9549 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=45, modesty_fit=75, occasion_fit=70, price_band_fit=85 \u2192 68.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "H&M Smocked Top",
+          "platform": "myntra",
+          "price": 549.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Smocked-Top/39450234/buy"
+        },
+        {
+          "name": "H&M Smocked Top",
+          "platform": "myntra",
+          "price": 549.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Smocked-Top/39450277/buy"
+        },
+        {
+          "name": "H&M Smocked Bandeau Top",
+          "platform": "myntra",
+          "price": 699.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Smocked-Bandeau-Top/41419233/buy"
+        },
+        {
+          "name": "Women Animal Print Smocked Regular Fit Top",
+          "platform": "ajio",
+          "price": 458.0,
+          "currency": "INR",
+          "url": "https://www.ajio.com/fig-women-animal-print-smocked-regular-fit-top/p/443106097_beige"
+        },
+        {
+          "name": "Women Round-Neck Smocked Top",
+          "platform": "ajio",
+          "price": 509.0,
+          "currency": "INR",
+          "url": "https://www.ajio.com/dnmx-women-round-neck-smocked-top/p/443098574_brown"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (11.6) and demand (0.0) tell the same story."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 4.1,
+        "adjusted": 4.1,
+        "derivation": "base = demand 0.0\u00d70.45 + supply 11.6\u00d70.35 + agreement 0.0\u00d70.20 = 4.1; adjusted = base 4.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 4.1."
+      },
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 4.1 < 40"
+      },
+      "why": "Unclear; demand 0.0, Indian supply 11.6"
+    },
+    "halter": {
+      "bucket": "halter",
+      "display_name": "Halter",
+      "keywords": [
+        "halter",
+        "halterneck"
+      ],
+      "counts": {
+        "total": 118,
+        "by_platform": {
+          "myntra": 13,
+          "asos": 105
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 35.7,
+          "raw_rating_count": 7017,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 7,017; log-scaled then min-max normalized across the 16 buckets present \u2192 35.7."
+        },
+        "supply_conviction": {
+          "value": 27.3,
+          "freshness_pct": 69.2,
+          "derivation": "Indian assortment share [myntra: 13/483 items (2.7% of assortment); ajio: 0/389 items (0.0% of assortment)], normalized across buckets \u2192 9.4; blended 0.7/0.3 with freshness 69.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.3."
+        },
+        "west_signal": {
+          "value": 82.5,
+          "derivation": "105 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.5. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Early (West ahead)",
+          "derivation": "Comparison: west 82.5 \u2265 WEST_HIGH(55) and demand_strength 35.7 < DEMAND_LOW(40)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 64,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 64% across 13 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (64\u221265.0 = -1pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 27.3, demand 35.7)."
+        },
+        "cross_platform_agreement": {
+          "value": 50.0,
+          "derivation": "1/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 2.7% (\u22652%), freshness 69.2 \u2192 counts; ajio: share 0.0% (<2%), freshness unknown \u2192 does not count"
+        },
+        "replication": {
+          "value": 68.8,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 45,
+              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): halter, halterneck)"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9462 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": true,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=45, occasion_fit=70, price_band_fit=85 \u2192 68.8. Applied as a multiplier ONLY when lead-lag is Early (it is)."
+        }
+      },
+      "examples": [
+        {
+          "name": "ZYNG Halter Neck Top",
+          "platform": "myntra",
+          "price": 551.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/ZYNG/ZYNG-Halter-Neck-Top/37992674/buy"
+        },
+        {
+          "name": "Stylecast X Slyck Ribbed Halter Neck Top",
+          "platform": "myntra",
+          "price": 319.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Stylecast+X+Slyck/Stylecast-X-Slyck-Ribbed-Halter-Neck-Top/41557662/buy"
+        },
+        {
+          "name": "Stylecast X Slyck Halter Neck Crop Top",
+          "platform": "myntra",
+          "price": 359.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Stylecast+X+Slyck/Stylecast-X-Slyck-Halter-Neck-Crop-Top/41557691/buy"
+        },
+        {
+          "name": "Istyle Can Women Halter Neck Long Sleeve Crop Fitted Top",
+          "platform": "myntra",
+          "price": 297.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Istyle+Can/Istyle-Can-Women-Halter-Neck-Long-Sleeve-Crop-Fitted-Top/36837665/buy"
+        },
+        {
+          "name": "Femibazaar Checked Halter Neck Cotton Peplum Top",
+          "platform": "myntra",
+          "price": 498.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Femibazaar/Femibazaar-Checked-Halter-Neck-Cotton-Peplum-Top/40679485/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (27.3) and demand (35.7) tell the same story."
+        ],
+        "conflict": [
+          "The West is dropping this hard (west_signal 82.5) but Indian shoppers haven't moved (demand 35.7) \u2014 classic lead-or-trap."
+        ],
+        "resolver": {
+          "pattern": "lead-lag Early + low replication",
+          "action": "Small live trial in 2\u20133 target stores/regions \u2014 the India-fit doubts (climate/modesty/occasion/price) can only be answered by real shoppers."
+        }
+      },
+      "confidence": {
+        "base": 35.6,
+        "adjusted": 24.5,
+        "derivation": "base = demand 35.7\u00d70.45 + supply 27.3\u00d70.35 + agreement 50.0\u00d70.20 = 35.6; adjusted = base 35.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.5."
+      },
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 24.5 < 40"
+      },
+      "why": "Early (West ahead); demand 35.7, Indian supply 27.3; Early-gate \u00d7 68.8%"
+    },
+    "bandeau_tube": {
+      "bucket": "bandeau_tube",
+      "display_name": "Bandeau Tube",
+      "keywords": [
+        "bandeau",
+        "tube"
+      ],
+      "counts": {
+        "total": 47,
+        "by_platform": {
+          "myntra": 5,
+          "ajio": 2,
+          "asos": 40
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 10.4,
+          "raw_rating_count": 2058,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 2,058; log-scaled then min-max normalized across the 16 buckets present \u2192 10.4."
+        },
+        "supply_conviction": {
+          "value": 15.8,
+          "freshness_pct": 45.0,
+          "derivation": "Indian assortment share [myntra: 5/483 items (1.0% of assortment); ajio: 2/389 items (0.5% of assortment)], normalized across buckets \u2192 3.3; blended 0.7/0.3 with freshness 45.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 15.8."
+        },
+        "west_signal": {
+          "value": 31.0,
+          "derivation": "40 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 31.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Unclear",
+          "derivation": "Comparison: west 31.0 / demand_strength 10.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 55,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 55% across 7 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (55\u221265.0 = -10pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 15.8, demand 10.4)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 1.0% (<2%), freshness 40.0 \u2192 does not count; ajio: share 0.5% (<2%), freshness 50.0 \u2192 does not count"
+        },
+        "replication": {
+          "value": 63.8,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 45,
+              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): bandeau, tube)"
+            },
+            "occasion_fit": {
+              "default": 50,
+              "rationale": "keywords imply party/occasion-only wear \u2014 fewer wear occasions, slower turns (matched keyword(s): bandeau, tube)"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9499 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=45, occasion_fit=50, price_band_fit=85 \u2192 63.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "R.Code by The Roadster Life Co. Women Floral Printed Strapless Sleeveless Tube Top",
+          "platform": "myntra",
+          "price": 350.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/R.Code+by+The+Roadster+Life+Co./RCode-by-The-Roadster-Life-Co-Women-Floral-Printed-Strapless-Sleeveless-Tube-Top/36659591/buy"
+        },
+        {
+          "name": "SASSAFRAS Checked Off-Shoulder Cotton Tube Top",
+          "platform": "myntra",
+          "price": 725.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Checked-Off-Shoulder-Cotton-Tube-Top/33882386/buy"
+        },
+        {
+          "name": "ZYNG Black and White Colourblocked Strapless Tube Top",
+          "platform": "myntra",
+          "price": 354.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/ZYNG/ZYNG-Black-and-White-Colourblocked-Strapless-Tube-Top/33670089/buy"
+        },
+        {
+          "name": "H&M Smocked Bandeau Top",
+          "platform": "myntra",
+          "price": 699.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/H%26M/HM-Smocked-Bandeau-Top/41419233/buy"
+        },
+        {
+          "name": "Athena Ruffles Georgette Tube Top",
+          "platform": "myntra",
+          "price": 849.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Athena/Athena-Ruffles-Georgette-Tube-Top/41725427/buy"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (15.8) and demand (10.4) tell the same story."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 10.2,
+        "adjusted": 10.2,
+        "derivation": "base = demand 10.4\u00d70.45 + supply 15.8\u00d70.35 + agreement 0.0\u00d70.20 = 10.2; adjusted = base 10.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 10.2."
+      },
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 10.2 < 40"
+      },
+      "why": "Unclear; demand 10.4, Indian supply 15.8"
+    },
+    "off_shoulder": {
+      "bucket": "off_shoulder",
+      "display_name": "Off Shoulder",
+      "keywords": [
+        "off shoulder",
+        "off-shoulder",
+        "bardot"
+      ],
+      "counts": {
+        "total": 18,
+        "by_platform": {
+          "myntra": 2,
+          "ajio": 2,
+          "asos": 14
+        }
+      },
+      "metrics": {
+        "demand_strength": {
+          "value": 3.7,
+          "raw_rating_count": 1490,
+          "derivation": "Sum of rating_count on demand platforms (myntra) = 1,490; log-scaled then min-max normalized across the 16 buckets present \u2192 3.7."
+        },
+        "supply_conviction": {
+          "value": 0.0,
+          "freshness_pct": 0.0,
+          "derivation": "Indian assortment share [myntra: 2/483 items (0.4% of assortment); ajio: 2/389 items (0.5% of assortment)], normalized across buckets \u2192 0.0; blended 0.7/0.3 with freshness 0.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 0.0."
+        },
+        "west_signal": {
+          "value": 10.3,
+          "derivation": "14 of 500 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "lead_lag": {
+          "label": "Unclear",
+          "derivation": "Comparison: west 10.3 / demand_strength 3.7 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+        },
+        "discount_penalty": {
+          "value": 0,
+          "median_discount": 60.0,
+          "market_median_discount": 65.0,
+          "derivation": "Median TRUE discount (recomputed as round((1\u2212price/mrp)\u00d7100), scraper discount fields never trusted) = 60.0% across 4 Indian listings, vs a market-wide norm of 65.0% in this dataset. Penalty fires on the EXCESS (60.0\u221265.0 = -5pp), scaling 0\u219240 over 20pp \u2192 \u22120. Being pushed harder on price than the surrounding market means observed traction may be bought, not organic."
+        },
+        "supply_without_demand_penalty": {
+          "value": 0,
+          "derivation": "Not fired: needs supply_conviction \u2265 60 AND demand_strength \u2264 40 (actual: supply 0.0, demand 3.7)."
+        },
+        "cross_platform_agreement": {
+          "value": 0.0,
+          "derivation": "0/2 Indian platforms carry this bucket fresh and at meaningful share. myntra: share 0.4% (<2%), freshness 0.0 \u2192 does not count; ajio: share 0.5% (<2%), freshness 0.0 \u2192 does not count"
+        },
+        "replication": {
+          "value": 68.8,
+          "axes": {
+            "climate_fit": {
+              "default": 75,
+              "rationale": "no heavy-volume/layering cue in bucket keywords"
+            },
+            "modesty_fit": {
+              "default": 45,
+              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): off shoulder, off-shoulder, bardot)"
+            },
+            "occasion_fit": {
+              "default": 70,
+              "rationale": "no strong occasion cue in bucket keywords"
+            },
+            "price_band_fit": {
+              "default": 85,
+              "rationale": "median Indian price \u20b9480 sits inside the value band \u20b9299\u2013\u20b9799"
+            }
+          },
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=45, occasion_fit=70, price_band_fit=85 \u2192 68.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
+        }
+      },
+      "examples": [
+        {
+          "name": "Athena Ample Off-Shoulder Extended Sleeves Draped Top",
+          "platform": "myntra",
+          "price": 719.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/Athena+Ample/Athena-Ample-Off-Shoulder-Extended-Sleeves-Draped-Top/30975114/buy"
+        },
+        {
+          "name": "SASSAFRAS Checked Off-Shoulder Cotton Tube Top",
+          "platform": "myntra",
+          "price": 725.0,
+          "currency": "INR",
+          "url": "https://www.myntra.com/Tops/SASSAFRAS/SASSAFRAS-Checked-Off-Shoulder-Cotton-Tube-Top/33882386/buy"
+        },
+        {
+          "name": "Women Off-Shoulder Knit Top",
+          "platform": "ajio",
+          "price": 175.0,
+          "currency": "INR",
+          "url": "https://www.ajio.com/fig-women-off-shoulder-knit-top/p/443101594_brown"
+        },
+        {
+          "name": "Women Polka-Dot Print Off-Shoulder Top",
+          "platform": "ajio",
+          "price": 240.0,
+          "currency": "INR",
+          "url": "https://www.ajio.com/fig-women-polka-dot-print-off-shoulder-top/p/443082481_offwhite"
+        },
+        {
+          "name": "NA-KD Twist off shoulder top in black/white dots",
+          "platform": "asos",
+          "price": 24.95,
+          "currency": "GBP",
+          "url": "https://www.asos.com/na-kd/na-kd-twist-off-shoulder-top-in-black-white-dots/prd/211327815#colourWayId-211327818"
+        }
+      ],
+      "qualified": true,
+      "disagreement": {
+        "agree": [
+          "Indian supply (0.0) and demand (3.7) tell the same story."
+        ],
+        "conflict": [],
+        "resolver": {
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+        }
+      },
+      "confidence": {
+        "base": 1.7,
+        "adjusted": 1.7,
+        "derivation": "base = demand 3.7\u00d70.45 + supply 0.0\u00d70.35 + agreement 0.0\u00d70.20 = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
+      },
+      "bet": {
+        "label": "Monitor",
+        "band": "no buy \u2014 watch list, recheck next data drop",
+        "rule": "adjusted 1.7 < 40"
+      },
+      "why": "Unclear; demand 3.7, Indian supply 0.0"
+    }
+  }
+}
