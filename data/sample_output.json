@@ -4,8 +4,9 @@
     {
       "category": "women",
       "sub_category": "tops",
-      "count": 1242,
+      "count": 1810,
       "platforms": {
+        "hm": 568,
         "asos": 376,
         "ajio": 391,
         "myntra": 475
@@ -21,6 +22,16 @@
     },
     {
       "category": "women",
+      "sub_category": "skirts",
+      "count": 30,
+      "platforms": {
+        "hm": 3,
+        "asos": 26,
+        "ajio": 1
+      }
+    },
+    {
+      "category": "women",
       "sub_category": "unknown",
       "count": 30,
       "platforms": {
@@ -29,18 +40,10 @@
     },
     {
       "category": "women",
-      "sub_category": "skirts",
+      "sub_category": "tshirts",
       "count": 27,
       "platforms": {
-        "asos": 26,
-        "ajio": 1
-      }
-    },
-    {
-      "category": "women",
-      "sub_category": "tshirts",
-      "count": 21,
-      "platforms": {
+        "hm": 6,
         "asos": 14,
         "ajio": 3,
         "myntra": 4
@@ -74,21 +77,22 @@
     },
     {
       "category": "women",
+      "sub_category": "shirts",
+      "count": 7,
+      "platforms": {
+        "hm": 4,
+        "asos": 2,
+        "ajio": 1
+      }
+    },
+    {
+      "category": "women",
       "sub_category": "jeans",
       "count": 4,
       "platforms": {
         "asos": 2,
         "ajio": 1,
         "myntra": 1
-      }
-    },
-    {
-      "category": "women",
-      "sub_category": "shirts",
-      "count": 3,
-      "platforms": {
-        "asos": 2,
-        "ajio": 1
       }
     },
     {
@@ -177,6 +181,24 @@
         ]
       },
       {
+        "key": "hm",
+        "file": "dataset_HM-Product-Scraper_2026-06-10_10-36-16-045.json",
+        "declared_roles": [
+          "west_supply"
+        ],
+        "effective_roles": [
+          "west_supply"
+        ],
+        "products_used": 568,
+        "raw_rows": 600,
+        "scraped_at": null,
+        "newest_upload_proxy": null,
+        "limitations": [
+          "no date_proxy_regex, freshness unknown for this platform",
+          "Western platform: signals describe what was DROPPED (supply), never what sold (demand)"
+        ]
+      },
+      {
         "key": "myntra",
         "file": "dataset_MyntraProductScraper_20260609.json",
         "declared_roles": [
@@ -201,15 +223,16 @@
     ],
     "silhouette_dictionary": "apparel",
     "west_sources": {
-      "count": 1,
+      "count": 2,
       "names": [
-        "asos"
+        "asos",
+        "hm"
       ],
-      "note": "single Western source, every West-based direction is flagged low-confidence"
+      "note": "multiple Western sources, cross-source agreement raises lead-lag confidence"
     },
     "buckets_found": 16,
-    "products_total": 1242,
-    "products_unbucketed": 501,
+    "products_total": 1810,
+    "products_unbucketed": 735,
     "qualification_rule": "bucket needs \u2265 10 products to enter the slate",
     "computed_at": "2026-06-10",
     "note": "Every number above is recomputed from the files in /data at startup. Nothing trend-specific is hardcoded.",
@@ -217,7 +240,7 @@
       "category": "women",
       "sub_category": "tops"
     },
-    "products_outside_segment": 162
+    "products_outside_segment": 194
   },
   "slate": [
     {
@@ -229,8 +252,8 @@
         "glyph": "=",
         "short": "Landed",
         "phrase": "West and India aligned, buy on India merits",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, ~\u20b98\u201315L open-to-buy.",
       "buy_instruction": "strongest in knit/cotton, in brown and red",
@@ -241,7 +264,7 @@
         "rule": "adjusted 69.7 \u2265 65"
       },
       "lead_lag": "Landed",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 69.7,
         "adjusted": 69.7,
@@ -249,10 +272,11 @@
       },
       "why": "Landed; demand 96.0, Indian supply 82.5",
       "counts": {
-        "total": 193,
+        "total": 355,
         "by_platform": {
           "ajio": 14,
           "asos": 101,
+          "hm": 162,
           "myntra": 78
         }
       },
@@ -270,8 +294,8 @@
         "glyph": "\u2193",
         "short": "Late",
         "phrase": "West cooling while India is hot, ride it, don't over-commit",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "merchant_line": "Embroidered is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 68.0% mean some demand is bought.",
       "buy_instruction": "strongest in cotton/denim, in red and purple",
@@ -282,7 +306,7 @@
         "rule": "adjusted 67.0 \u2265 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 73.0,
         "adjusted": 67.0,
@@ -290,16 +314,17 @@
       },
       "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts",
       "counts": {
-        "total": 100,
+        "total": 113,
         "by_platform": {
           "ajio": 50,
           "asos": 22,
+          "hm": 13,
           "myntra": 28
         }
       },
       "demand": 79.8,
       "supply": 80.0,
-      "west": 21.8,
+      "west": 14.7,
       "own_sales": null
     },
     {
@@ -314,7 +339,7 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Puff Balloon is locally validated, 39 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
+      "merchant_line": "Puff Balloon is locally validated, 40 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
       "buy_instruction": "strongest in cotton/chiffon, in purple and red",
       "bet": {
         "label": "Small Trial",
@@ -331,15 +356,16 @@
       },
       "why": "India-led; demand 82.8, Indian supply 43.0",
       "counts": {
-        "total": 39,
+        "total": 40,
         "by_platform": {
           "ajio": 7,
+          "hm": 1,
           "myntra": 32
         }
       },
       "demand": 82.8,
       "supply": 43.0,
-      "west": 0.0,
+      "west": 0.3,
       "own_sales": null
     },
     {
@@ -371,16 +397,17 @@
       },
       "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts",
       "counts": {
-        "total": 67,
+        "total": 69,
         "by_platform": {
           "ajio": 23,
           "asos": 19,
+          "hm": 2,
           "myntra": 25
         }
       },
       "demand": 80.3,
       "supply": 47.5,
-      "west": 18.8,
+      "west": 9.8,
       "own_sales": null
     },
     {
@@ -392,11 +419,11 @@
         "glyph": "\u2193",
         "short": "Late",
         "phrase": "West cooling while India is hot, ride it, don't over-commit",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "merchant_line": "Peplum is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.5% mean some demand is bought.",
-      "buy_instruction": "strongest in cotton/denim, in purple and red",
+      "buy_instruction": "strongest in cotton/knit, in purple and red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -404,7 +431,7 @@
         "rule": "40 \u2264 adjusted 61.4 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 66.4,
         "adjusted": 61.4,
@@ -412,16 +439,17 @@
       },
       "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts",
       "counts": {
-        "total": 72,
+        "total": 93,
         "by_platform": {
           "ajio": 15,
           "asos": 8,
+          "hm": 21,
           "myntra": 49
         }
       },
       "demand": 78.1,
       "supply": 61.2,
-      "west": 7.9,
+      "west": 10.5,
       "own_sales": null
     },
     {
@@ -433,8 +461,8 @@
         "glyph": "\u2193",
         "short": "Late",
         "phrase": "West cooling while India is hot, ride it, don't over-commit",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "merchant_line": "Crop is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought.",
       "buy_instruction": "strongest in cotton/knit, in brown and red",
@@ -445,7 +473,7 @@
         "rule": "40 \u2264 adjusted 60.8 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 61.8,
         "adjusted": 60.8,
@@ -453,16 +481,17 @@
       },
       "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
       "counts": {
-        "total": 75,
+        "total": 87,
         "by_platform": {
           "ajio": 8,
           "asos": 15,
+          "hm": 12,
           "myntra": 52
         }
       },
       "demand": 100.0,
       "supply": 50.9,
-      "west": 14.9,
+      "west": 11.0,
       "own_sales": null
     },
     {
@@ -511,39 +540,40 @@
       "verdict": "TRIAL",
       "face_confidence": 44,
       "direction": {
-        "glyph": "=",
-        "short": "Landed",
-        "phrase": "West and India aligned, buy on India merits",
-        "single_source": true,
-        "caution": "(1 source)"
+        "glyph": "\u2022",
+        "short": "Unclear",
+        "phrase": "Limited or mixed Western signal",
+        "single_source": false,
+        "caution": null
       },
-      "merchant_line": "Mesh Sheer has landed, West and India aligned. Buy on India merits: 3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through.",
-      "buy_instruction": "strongest in lace/mesh, in black and red",
+      "merchant_line": "Mesh Sheer shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in lace/mesh, in brown and black",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
         "rule": "40 \u2264 adjusted 44.3 < 65"
       },
-      "lead_lag": "Landed",
-      "west_agreement": "single-source",
+      "lead_lag": "Unclear",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 44.3,
         "adjusted": 44.3,
         "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
       },
-      "why": "Landed; demand 74.9, Indian supply 31.6",
+      "why": "Unclear; demand 74.9, Indian supply 31.6",
       "counts": {
-        "total": 102,
+        "total": 152,
         "by_platform": {
           "ajio": 8,
           "asos": 67,
+          "hm": 50,
           "myntra": 27
         }
       },
       "demand": 74.9,
       "supply": 31.6,
-      "west": 66.3,
+      "west": 48.1,
       "own_sales": null
     },
     {
@@ -559,7 +589,7 @@
         "caution": "(1 source)"
       },
       "merchant_line": "Square Neck is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: no major distortion detected.",
-      "buy_instruction": "strongest in knit/lace, in purple and brown",
+      "buy_instruction": "strongest in knit/lace, in brown and purple",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -575,16 +605,17 @@
       },
       "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4",
       "counts": {
-        "total": 33,
+        "total": 40,
         "by_platform": {
           "ajio": 9,
           "asos": 6,
+          "hm": 7,
           "myntra": 18
         }
       },
       "demand": 77.4,
       "supply": 24.4,
-      "west": 5.9,
+      "west": 5.1,
       "own_sales": null
     },
     {
@@ -599,8 +630,8 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Tie Knot is locally validated, 50 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
-      "buy_instruction": "strongest in lace/linen, in brown and purple",
+      "merchant_line": "Tie Knot is locally validated, 71 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
+      "buy_instruction": "strongest in linen/knit, in brown and red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -608,7 +639,7 @@
         "rule": "40 \u2264 adjusted 40.5 < 65"
       },
       "lead_lag": "India-led",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 40.5,
         "adjusted": 40.5,
@@ -616,16 +647,17 @@
       },
       "why": "India-led; demand 65.4, Indian supply 33.4",
       "counts": {
-        "total": 50,
+        "total": 71,
         "by_platform": {
           "ajio": 7,
           "asos": 24,
+          "hm": 21,
           "myntra": 19
         }
       },
       "demand": 65.4,
       "supply": 33.4,
-      "west": 23.8,
+      "west": 18.2,
       "own_sales": null
     },
     {
@@ -641,7 +673,7 @@
         "caution": null
       },
       "merchant_line": "Ruffle shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
-      "buy_instruction": "strongest in cotton/lace, in red and purple",
+      "buy_instruction": "strongest in cotton/lace, in brown and red",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
@@ -657,16 +689,58 @@
       },
       "why": "Unclear; demand 40.4, Indian supply 27.7",
       "counts": {
-        "total": 39,
+        "total": 49,
         "by_platform": {
           "ajio": 6,
           "asos": 13,
+          "hm": 10,
           "myntra": 20
         }
       },
       "demand": 40.4,
       "supply": 27.7,
-      "west": 12.9,
+      "west": 9.4,
+      "own_sales": null
+    },
+    {
+      "bucket": "halter",
+      "display_name": "Halter",
+      "verdict": "WATCH",
+      "face_confidence": 36,
+      "direction": {
+        "glyph": "\u2022",
+        "short": "Unclear",
+        "phrase": "Limited or mixed Western signal",
+        "single_source": false,
+        "caution": null
+      },
+      "merchant_line": "Halter shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in cotton/mesh, in red and brown",
+      "bet": {
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "no buy, watch list, recheck next data drop",
+        "rule": "adjusted 36.4 < 40"
+      },
+      "lead_lag": "Unclear",
+      "west_agreement": "multi-source",
+      "confidence": {
+        "base": 36.4,
+        "adjusted": 36.4,
+        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 36.4."
+      },
+      "why": "Unclear; demand 35.7, Indian supply 27.4",
+      "counts": {
+        "total": 134,
+        "by_platform": {
+          "asos": 83,
+          "hm": 38,
+          "myntra": 13
+        }
+      },
+      "demand": 35.7,
+      "supply": 27.4,
+      "west": 51.9,
       "own_sales": null
     },
     {
@@ -682,7 +756,7 @@
         "caution": null
       },
       "merchant_line": "Wrap shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
-      "buy_instruction": "strongest in cotton/chiffon, in brown and grey",
+      "buy_instruction": "strongest in viscose/cotton, in brown and grey",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
@@ -690,7 +764,7 @@
         "rule": "adjusted 27.6 < 40"
       },
       "lead_lag": "Unclear",
-      "west_agreement": "absent",
+      "west_agreement": "single-source",
       "confidence": {
         "base": 27.6,
         "adjusted": 27.6,
@@ -698,56 +772,17 @@
       },
       "why": "Unclear; demand 46.2, Indian supply 20.3",
       "counts": {
-        "total": 25,
+        "total": 39,
         "by_platform": {
           "ajio": 2,
           "asos": 3,
+          "hm": 14,
           "myntra": 20
         }
       },
       "demand": 46.2,
       "supply": 20.3,
-      "west": 3.0,
-      "own_sales": null
-    },
-    {
-      "bucket": "halter",
-      "display_name": "Halter",
-      "verdict": "WATCH",
-      "face_confidence": 25,
-      "direction": {
-        "glyph": "\u2191",
-        "short": "Early",
-        "phrase": "West moving, India hasn't caught up",
-        "single_source": true,
-        "caution": "(1 source)"
-      },
-      "merchant_line": "Halter is rising in the West but unproven in India; modesty fit is the biggest fit risk. Test small before committing.",
-      "buy_instruction": "strongest in cotton/mesh, in red and black",
-      "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 25.0 < 40"
-      },
-      "lead_lag": "Early (West ahead)",
-      "west_agreement": "single-source",
-      "confidence": {
-        "base": 36.4,
-        "adjusted": 25.0,
-        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
-      },
-      "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%",
-      "counts": {
-        "total": 96,
-        "by_platform": {
-          "asos": 83,
-          "myntra": 13
-        }
-      },
-      "demand": 35.7,
-      "supply": 27.4,
-      "west": 82.2,
+      "west": 5.9,
       "own_sales": null
     },
     {
@@ -763,7 +798,7 @@
         "caution": null
       },
       "merchant_line": "Bandeau Tube shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
-      "buy_instruction": "strongest in cotton/knit, in white and black",
+      "buy_instruction": "strongest in cotton/knit, in white and red",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
@@ -771,7 +806,7 @@
         "rule": "adjusted 9.7 < 40"
       },
       "lead_lag": "Unclear",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 9.7,
         "adjusted": 9.7,
@@ -779,16 +814,17 @@
       },
       "why": "Unclear; demand 10.4, Indian supply 15.8",
       "counts": {
-        "total": 41,
+        "total": 61,
         "by_platform": {
           "ajio": 2,
           "asos": 34,
+          "hm": 20,
           "myntra": 5
         }
       },
       "demand": 10.4,
       "supply": 15.8,
-      "west": 33.7,
+      "west": 22.7,
       "own_sales": null
     },
     {
@@ -812,7 +848,7 @@
         "rule": "adjusted 3.6 < 40"
       },
       "lead_lag": "Unclear",
-      "west_agreement": "single-source",
+      "west_agreement": "multi-source",
       "confidence": {
         "base": 3.6,
         "adjusted": 3.6,
@@ -820,16 +856,17 @@
       },
       "why": "Unclear; demand 0.0, Indian supply 11.6",
       "counts": {
-        "total": 29,
+        "total": 48,
         "by_platform": {
           "ajio": 5,
           "asos": 21,
+          "hm": 19,
           "myntra": 3
         }
       },
       "demand": 0.0,
       "supply": 11.6,
-      "west": 20.8,
+      "west": 16.1,
       "own_sales": null
     },
     {
@@ -870,7 +907,7 @@
       },
       "demand": 3.7,
       "supply": 0.0,
-      "west": 10.9,
+      "west": 5.3,
       "own_sales": null
     }
   ],
@@ -882,10 +919,11 @@
         "peplum"
       ],
       "counts": {
-        "total": 72,
+        "total": 93,
         "by_platform": {
           "ajio": 15,
           "asos": 8,
+          "hm": 21,
           "myntra": 49
         }
       },
@@ -901,8 +939,8 @@
           "derivation": "Indian assortment share [ajio: 15/391 items (3.8% of assortment); myntra: 49/475 items (10.3% of assortment)], normalized across buckets \u2192 69.3; blended 0.7/0.3 with freshness 42.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 61.2."
         },
         "west_signal": {
-          "value": 7.9,
-          "derivation": "8 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 10.5,
+          "derivation": "29 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 10.5. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -911,17 +949,18 @@
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 78.1 \u2265 DEMAND_HIGH(55) but west 7.9 \u2264 WEST_LOW(25) and supply not fresh (42.2%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: demand_strength 78.1 \u2265 DEMAND_HIGH(55) but west 10.5 \u2264 WEST_LOW(25) and supply not fresh (42.2%)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 5.0,
@@ -1013,8 +1052,8 @@
         "glyph": "\u2193",
         "short": "Late",
         "phrase": "West cooling while India is hot, ride it, don't over-commit",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
@@ -1027,58 +1066,58 @@
         "colors": [
           {
             "name": "purple",
-            "count": 72,
-            "share": 70.6
+            "count": 93,
+            "share": 75.0
           },
           {
             "name": "red",
-            "count": 15,
-            "share": 14.7
+            "count": 16,
+            "share": 12.9
           },
           {
             "name": "orange",
             "count": 5,
-            "share": 4.9
+            "share": 4.0
           },
           {
             "name": "pink",
             "count": 3,
-            "share": 2.9
+            "share": 2.4
           },
           {
             "name": "cream",
             "count": 2,
-            "share": 2.0
+            "share": 1.6
           }
         ],
         "fabrics": [
           {
             "name": "cotton",
             "count": 17,
-            "share": 65.4
+            "share": 48.6
+          },
+          {
+            "name": "knit",
+            "count": 6,
+            "share": 17.1
+          },
+          {
+            "name": "lace",
+            "count": 4,
+            "share": 11.4
           },
           {
             "name": "denim",
-            "count": 2,
-            "share": 7.7
+            "count": 3,
+            "share": 8.6
           },
           {
             "name": "chiffon",
             "count": 2,
-            "share": 7.7
-          },
-          {
-            "name": "georgette",
-            "count": 2,
-            "share": 7.7
-          },
-          {
-            "name": "lace",
-            "count": 1,
-            "share": 3.8
+            "share": 5.7
           }
         ],
-        "buy_instruction": "strongest in cotton/denim, in purple and red",
+        "buy_instruction": "strongest in cotton/knit, in purple and red",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -1106,10 +1145,11 @@
         "anglaise"
       ],
       "counts": {
-        "total": 100,
+        "total": 113,
         "by_platform": {
           "ajio": 50,
           "asos": 22,
+          "hm": 13,
           "myntra": 28
         }
       },
@@ -1125,8 +1165,8 @@
           "derivation": "Indian assortment share [ajio: 50/391 items (12.8% of assortment); myntra: 28/475 items (5.9% of assortment)], normalized across buckets \u2192 93.1; blended 0.7/0.3 with freshness 49.5% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 80.0."
         },
         "west_signal": {
-          "value": 21.8,
-          "derivation": "22 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 21.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 14.7,
+          "derivation": "35 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 14.7. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -1135,17 +1175,18 @@
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 21.8 \u2264 WEST_LOW(25) and supply not fresh (49.5%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 14.7 \u2264 WEST_LOW(25) and supply not fresh (49.5%)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 6.0,
@@ -1237,8 +1278,8 @@
         "glyph": "\u2193",
         "short": "Late",
         "phrase": "West cooling while India is hot, ride it, don't over-commit",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
@@ -1251,50 +1292,55 @@
         "colors": [
           {
             "name": "red",
-            "count": 86,
-            "share": 68.8
+            "count": 93,
+            "share": 70.5
           },
           {
             "name": "purple",
             "count": 8,
-            "share": 6.4
+            "share": 6.1
           },
           {
             "name": "brown",
             "count": 7,
-            "share": 5.6
+            "share": 5.3
           },
           {
             "name": "cream",
             "count": 6,
-            "share": 4.8
+            "share": 4.5
           },
           {
             "name": "white",
             "count": 6,
-            "share": 4.8
+            "share": 4.5
           }
         ],
         "fabrics": [
           {
             "name": "cotton",
-            "count": 15,
-            "share": 71.4
+            "count": 18,
+            "share": 62.1
           },
           {
             "name": "denim",
             "count": 3,
-            "share": 14.3
+            "share": 10.3
+          },
+          {
+            "name": "linen",
+            "count": 3,
+            "share": 10.3
           },
           {
             "name": "lace",
             "count": 2,
-            "share": 9.5
+            "share": 6.9
           },
           {
-            "name": "linen",
-            "count": 1,
-            "share": 4.8
+            "name": "viscose",
+            "count": 2,
+            "share": 6.9
           }
         ],
         "buy_instruction": "strongest in cotton/denim, in red and purple",
@@ -1325,10 +1371,11 @@
         "cinch"
       ],
       "counts": {
-        "total": 67,
+        "total": 69,
         "by_platform": {
           "ajio": 23,
           "asos": 19,
+          "hm": 2,
           "myntra": 25
         }
       },
@@ -1344,8 +1391,8 @@
           "derivation": "Indian assortment share [ajio: 23/391 items (5.9% of assortment); myntra: 25/475 items (5.3% of assortment)], normalized across buckets \u2192 53.6; blended 0.7/0.3 with freshness 33.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 47.5."
         },
         "west_signal": {
-          "value": 18.8,
-          "derivation": "19 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 9.8,
+          "derivation": "21 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 9.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -1355,16 +1402,16 @@
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
           "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 18.8 \u2264 WEST_LOW(25) and supply not fresh (33.2%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 9.8 \u2264 WEST_LOW(25) and supply not fresh (33.2%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
-          "sources_total": 1,
+          "sources_total": 2,
           "present_on": [
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 2 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 1.0,
@@ -1470,28 +1517,28 @@
         "colors": [
           {
             "name": "red",
-            "count": 7,
-            "share": 26.9
+            "count": 8,
+            "share": 29.6
           },
           {
             "name": "black",
             "count": 6,
-            "share": 23.1
+            "share": 22.2
           },
           {
             "name": "brown",
             "count": 4,
-            "share": 15.4
+            "share": 14.8
           },
           {
             "name": "white",
             "count": 3,
-            "share": 11.5
+            "share": 11.1
           },
           {
             "name": "cream",
             "count": 2,
-            "share": 7.7
+            "share": 7.4
           }
         ],
         "fabrics": [
@@ -1547,10 +1594,11 @@
         "square-neck"
       ],
       "counts": {
-        "total": 33,
+        "total": 40,
         "by_platform": {
           "ajio": 9,
           "asos": 6,
+          "hm": 7,
           "myntra": 18
         }
       },
@@ -1566,8 +1614,8 @@
           "derivation": "Indian assortment share [ajio: 9/391 items (2.3% of assortment); myntra: 18/475 items (3.8% of assortment)], normalized across buckets \u2192 27.1; blended 0.7/0.3 with freshness 18.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 24.4."
         },
         "west_signal": {
-          "value": 5.9,
-          "derivation": "6 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 5.1,
+          "derivation": "13 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 5.1. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -1577,14 +1625,14 @@
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
           "west_agreement": "absent",
-          "derivation": "Comparison: demand_strength 77.4 \u2265 DEMAND_HIGH(55) but west 5.9 \u2264 WEST_LOW(25) and supply not fresh (18.2%)."
+          "derivation": "Comparison: demand_strength 77.4 \u2265 DEMAND_HIGH(55) but west 5.1 \u2264 WEST_LOW(25) and supply not fresh (18.2%)."
         },
         "west_agreement": {
           "sources_present": 0,
-          "sources_total": 1,
+          "sources_total": 2,
           "present_on": [],
           "level": "absent",
-          "derivation": "Present at \u22652% assortment share on 0 of 1 Western sources (none). Not meaningfully present on any Western source."
+          "derivation": "Present at \u22652% assortment share on 0 of 2 Western sources (none). Not meaningfully present on any Western source."
         },
         "discount_penalty": {
           "value": 0,
@@ -1689,59 +1737,59 @@
       "subtrends": {
         "colors": [
           {
-            "name": "purple",
-            "count": 4,
-            "share": 21.1
+            "name": "brown",
+            "count": 7,
+            "share": 30.4
           },
           {
-            "name": "brown",
-            "count": 3,
-            "share": 15.8
+            "name": "purple",
+            "count": 4,
+            "share": 17.4
           },
           {
             "name": "white",
             "count": 3,
-            "share": 15.8
+            "share": 13.0
           },
           {
             "name": "green",
             "count": 2,
-            "share": 10.5
+            "share": 8.7
           },
           {
             "name": "black",
             "count": 2,
-            "share": 10.5
+            "share": 8.7
           }
         ],
         "fabrics": [
           {
             "name": "knit",
-            "count": 7,
-            "share": 58.3
+            "count": 10,
+            "share": 66.7
           },
           {
             "name": "lace",
             "count": 2,
-            "share": 16.7
+            "share": 13.3
           },
           {
             "name": "linen",
             "count": 1,
-            "share": 8.3
+            "share": 6.7
           },
           {
             "name": "denim",
             "count": 1,
-            "share": 8.3
+            "share": 6.7
           },
           {
             "name": "cotton",
             "count": 1,
-            "share": 8.3
+            "share": 6.7
           }
         ],
-        "buy_instruction": "strongest in knit/lace, in purple and brown",
+        "buy_instruction": "strongest in knit/lace, in brown and purple",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -1767,10 +1815,11 @@
         "knot"
       ],
       "counts": {
-        "total": 50,
+        "total": 71,
         "by_platform": {
           "ajio": 7,
           "asos": 24,
+          "hm": 21,
           "myntra": 19
         }
       },
@@ -1786,8 +1835,8 @@
           "derivation": "Indian assortment share [ajio: 7/391 items (1.8% of assortment); myntra: 19/475 items (4.0% of assortment)], normalized across buckets \u2192 25.5; blended 0.7/0.3 with freshness 51.7% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 33.4."
         },
         "west_signal": {
-          "value": 23.8,
-          "derivation": "24 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 23.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 18.2,
+          "derivation": "45 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 18.2. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -1796,17 +1845,18 @@
         },
         "lead_lag": {
           "label": "India-led",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 65.4 \u2265 DEMAND_HIGH(55), west 23.8 \u2264 WEST_LOW(25), and supply is fresh (51.7% \u2265 FRESH_HIGH(50)). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: demand_strength 65.4 \u2265 DEMAND_HIGH(55), west 18.2 \u2264 WEST_LOW(25), and supply is fresh (51.7% \u2265 FRESH_HIGH(50))."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 0,
@@ -1913,57 +1963,57 @@
           {
             "name": "brown",
             "count": 10,
-            "share": 29.4
+            "share": 28.6
+          },
+          {
+            "name": "red",
+            "count": 5,
+            "share": 14.3
           },
           {
             "name": "purple",
             "count": 5,
-            "share": 14.7
-          },
-          {
-            "name": "red",
-            "count": 4,
-            "share": 11.8
+            "share": 14.3
           },
           {
             "name": "black",
             "count": 3,
-            "share": 8.8
+            "share": 8.6
           },
           {
             "name": "blue",
             "count": 3,
-            "share": 8.8
+            "share": 8.6
           }
         ],
         "fabrics": [
           {
-            "name": "lace",
-            "count": 3,
-            "share": 21.4
+            "name": "linen",
+            "count": 4,
+            "share": 18.2
           },
           {
-            "name": "linen",
-            "count": 2,
-            "share": 14.3
+            "name": "knit",
+            "count": 4,
+            "share": 18.2
+          },
+          {
+            "name": "lace",
+            "count": 3,
+            "share": 13.6
+          },
+          {
+            "name": "cotton",
+            "count": 3,
+            "share": 13.6
           },
           {
             "name": "denim",
             "count": 2,
-            "share": 14.3
-          },
-          {
-            "name": "cotton",
-            "count": 2,
-            "share": 14.3
-          },
-          {
-            "name": "mesh",
-            "count": 1,
-            "share": 7.1
+            "share": 9.1
           }
         ],
-        "buy_instruction": "strongest in lace/linen, in brown and purple",
+        "buy_instruction": "strongest in linen/knit, in brown and red",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -1979,7 +2029,7 @@
       },
       "verdict": "TRIAL",
       "why": "India-led; demand 65.4, Indian supply 33.4",
-      "merchant_line": "Tie Knot is locally validated, 50 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
+      "merchant_line": "Tie Knot is locally validated, 71 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
     },
     "shirt": {
       "bucket": "shirt",
@@ -2007,7 +2057,7 @@
         },
         "west_signal": {
           "value": 0.0,
-          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "derivation": "0 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -2021,10 +2071,10 @@
         },
         "west_agreement": {
           "sources_present": 0,
-          "sources_total": 1,
+          "sources_total": 2,
           "present_on": [],
           "level": "absent",
-          "derivation": "Present at \u22652% assortment share on 0 of 1 Western sources (none). Not meaningfully present on any Western source."
+          "derivation": "Present at \u22652% assortment share on 0 of 2 Western sources (none). Not meaningfully present on any Western source."
         },
         "discount_penalty": {
           "value": 4.0,
@@ -2179,10 +2229,11 @@
         "vest"
       ],
       "counts": {
-        "total": 193,
+        "total": 355,
         "by_platform": {
           "ajio": 14,
           "asos": 101,
+          "hm": 162,
           "myntra": 78
         }
       },
@@ -2199,7 +2250,7 @@
         },
         "west_signal": {
           "value": 100.0,
-          "derivation": "101 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "derivation": "263 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -2208,17 +2259,18 @@
         },
         "lead_lag": {
           "label": "Landed",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: west 100.0 \u2265 WEST_HIGH(55) and demand_strength 96.0 \u2265 DEMAND_HIGH(55). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: west 100.0 \u2265 WEST_HIGH(55) and demand_strength 96.0 \u2265 DEMAND_HIGH(55)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 0,
@@ -2311,8 +2363,8 @@
         "glyph": "=",
         "short": "Landed",
         "phrase": "West and India aligned, buy on India merits",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
@@ -2325,55 +2377,55 @@
         "colors": [
           {
             "name": "brown",
-            "count": 105,
-            "share": 49.5
+            "count": 221,
+            "share": 66.4
           },
           {
             "name": "red",
-            "count": 25,
-            "share": 11.8
+            "count": 27,
+            "share": 8.1
           },
           {
             "name": "black",
             "count": 12,
-            "share": 5.7
+            "share": 3.6
           },
           {
             "name": "white",
             "count": 12,
-            "share": 5.7
+            "share": 3.6
           },
           {
             "name": "yellow",
             "count": 9,
-            "share": 4.2
+            "share": 2.7
           }
         ],
         "fabrics": [
           {
             "name": "knit",
-            "count": 32,
-            "share": 34.8
+            "count": 96,
+            "share": 46.8
           },
           {
             "name": "cotton",
-            "count": 29,
-            "share": 31.5
+            "count": 49,
+            "share": 23.9
           },
           {
             "name": "lace",
-            "count": 13,
-            "share": 14.1
+            "count": 30,
+            "share": 14.6
+          },
+          {
+            "name": "viscose",
+            "count": 9,
+            "share": 4.4
           },
           {
             "name": "denim",
             "count": 5,
-            "share": 5.4
-          },
-          {
-            "name": "linen",
-            "count": 4,
-            "share": 4.3
+            "share": 2.4
           }
         ],
         "buy_instruction": "strongest in knit/cotton, in brown and red",
@@ -2401,10 +2453,11 @@
         "crop"
       ],
       "counts": {
-        "total": 75,
+        "total": 87,
         "by_platform": {
           "ajio": 8,
           "asos": 15,
+          "hm": 12,
           "myntra": 52
         }
       },
@@ -2420,8 +2473,8 @@
           "derivation": "Indian assortment share [ajio: 8/391 items (2.0% of assortment); myntra: 52/475 items (10.9% of assortment)], normalized across buckets \u2192 63.2; blended 0.7/0.3 with freshness 22.1% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 50.9."
         },
         "west_signal": {
-          "value": 14.9,
-          "derivation": "15 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 14.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 11.0,
+          "derivation": "27 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 11.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -2430,17 +2483,18 @@
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 14.9 \u2264 WEST_LOW(25) and supply not fresh (22.1%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 11.0 \u2264 WEST_LOW(25) and supply not fresh (22.1%)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 1.0,
@@ -2532,8 +2586,8 @@
         "glyph": "\u2193",
         "short": "Late",
         "phrase": "West cooling while India is hot, ride it, don't over-commit",
-        "single_source": true,
-        "caution": "(1 source)"
+        "single_source": false,
+        "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
@@ -2546,55 +2600,55 @@
         "colors": [
           {
             "name": "brown",
-            "count": 12,
-            "share": 26.7
+            "count": 13,
+            "share": 27.7
           },
           {
             "name": "red",
-            "count": 11,
-            "share": 24.4
+            "count": 12,
+            "share": 25.5
           },
           {
             "name": "purple",
             "count": 5,
-            "share": 11.1
+            "share": 10.6
           },
           {
             "name": "white",
             "count": 4,
-            "share": 8.9
+            "share": 8.5
           },
           {
             "name": "blue",
             "count": 3,
-            "share": 6.7
+            "share": 6.4
           }
         ],
         "fabrics": [
           {
             "name": "cotton",
             "count": 11,
-            "share": 28.2
+            "share": 25.6
           },
           {
             "name": "knit",
-            "count": 9,
-            "share": 23.1
+            "count": 10,
+            "share": 23.3
           },
           {
             "name": "net",
             "count": 7,
-            "share": 17.9
+            "share": 16.3
           },
           {
             "name": "denim",
             "count": 4,
-            "share": 10.3
+            "share": 9.3
           },
           {
             "name": "lace",
-            "count": 3,
-            "share": 7.7
+            "count": 4,
+            "share": 9.3
           }
         ],
         "buy_instruction": "strongest in cotton/knit, in brown and red",
@@ -2626,10 +2680,11 @@
         "net"
       ],
       "counts": {
-        "total": 102,
+        "total": 152,
         "by_platform": {
           "ajio": 8,
           "asos": 67,
+          "hm": 50,
           "myntra": 27
         }
       },
@@ -2645,8 +2700,8 @@
           "derivation": "Indian assortment share [ajio: 8/391 items (2.0% of assortment); myntra: 27/475 items (5.7% of assortment)], normalized across buckets \u2192 35.6; blended 0.7/0.3 with freshness 22.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 31.6."
         },
         "west_signal": {
-          "value": 66.3,
-          "derivation": "67 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 66.3. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 48.1,
+          "derivation": "117 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 48.1. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -2654,18 +2709,19 @@
           "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
-          "label": "Landed",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: west 66.3 \u2265 WEST_HIGH(55) and demand_strength 74.9 \u2265 DEMAND_HIGH(55). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "label": "Unclear",
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: west 48.1 / demand_strength 74.9 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 0,
@@ -2744,9 +2800,7 @@
       ],
       "qualified": true,
       "disagreement": {
-        "agree": [
-          "West drops (66.3) and Indian demand (74.9) both high, landed."
-        ],
+        "agree": [],
         "conflict": [
           "Demand (74.9) outruns Indian supply (31.6), possible under-assortment / stockout risk."
         ],
@@ -2756,11 +2810,11 @@
         }
       },
       "direction": {
-        "glyph": "=",
-        "short": "Landed",
-        "phrase": "West and India aligned, buy on India merits",
-        "single_source": true,
-        "caution": "(1 source)"
+        "glyph": "\u2022",
+        "short": "Unclear",
+        "phrase": "Limited or mixed Western signal",
+        "single_source": false,
+        "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
@@ -2772,59 +2826,59 @@
       "subtrends": {
         "colors": [
           {
+            "name": "brown",
+            "count": 18,
+            "share": 20.2
+          },
+          {
             "name": "black",
             "count": 18,
-            "share": 24.7
+            "share": 20.2
           },
           {
             "name": "red",
-            "count": 15,
-            "share": 20.5
-          },
-          {
-            "name": "brown",
-            "count": 6,
-            "share": 8.2
+            "count": 16,
+            "share": 18.0
           },
           {
             "name": "pink",
             "count": 6,
-            "share": 8.2
+            "share": 6.7
           },
           {
             "name": "white",
             "count": 6,
-            "share": 8.2
+            "share": 6.7
           }
         ],
         "fabrics": [
           {
             "name": "lace",
-            "count": 53,
-            "share": 49.1
+            "count": 98,
+            "share": 56.6
           },
           {
             "name": "mesh",
-            "count": 29,
-            "share": 26.9
+            "count": 34,
+            "share": 19.7
           },
           {
             "name": "net",
             "count": 13,
-            "share": 12.0
+            "share": 7.5
           },
           {
             "name": "knit",
-            "count": 5,
-            "share": 4.6
+            "count": 12,
+            "share": 6.9
           },
           {
-            "name": "satin",
-            "count": 2,
-            "share": 1.9
+            "name": "viscose",
+            "count": 8,
+            "share": 4.6
           }
         ],
-        "buy_instruction": "strongest in lace/mesh, in black and red",
+        "buy_instruction": "strongest in lace/mesh, in brown and black",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -2839,8 +2893,8 @@
         "rule": "40 \u2264 adjusted 44.3 < 65"
       },
       "verdict": "TRIAL",
-      "why": "Landed; demand 74.9, Indian supply 31.6",
-      "merchant_line": "Mesh Sheer has landed, West and India aligned. Buy on India merits: 3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through."
+      "why": "Unclear; demand 74.9, Indian supply 31.6",
+      "merchant_line": "Mesh Sheer shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "off_shoulder": {
       "bucket": "off_shoulder",
@@ -2870,8 +2924,8 @@
           "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 2/475 items (0.4% of assortment)], normalized across buckets \u2192 0.0; blended 0.7/0.3 with freshness 0.0% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 0.0."
         },
         "west_signal": {
-          "value": 10.9,
-          "derivation": "11 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 5.3,
+          "derivation": "11 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 5.3. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -2881,16 +2935,16 @@
         "lead_lag": {
           "label": "Unclear",
           "west_agreement": "single-source",
-          "derivation": "Comparison: west 10.9 / demand_strength 3.7 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 5.3 / demand_strength 3.7 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
           "sources_present": 1,
-          "sources_total": 1,
+          "sources_total": 2,
           "present_on": [
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 2 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -3073,10 +3127,11 @@
         "frill"
       ],
       "counts": {
-        "total": 39,
+        "total": 49,
         "by_platform": {
           "ajio": 6,
           "asos": 13,
+          "hm": 10,
           "myntra": 20
         }
       },
@@ -3092,8 +3147,8 @@
           "derivation": "Indian assortment share [ajio: 6/391 items (1.5% of assortment); myntra: 20/475 items (4.2% of assortment)], normalized across buckets \u2192 25.2; blended 0.7/0.3 with freshness 33.4% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 27.7."
         },
         "west_signal": {
-          "value": 12.9,
-          "derivation": "13 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 12.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 9.4,
+          "derivation": "23 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 9.4. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -3103,16 +3158,16 @@
         "lead_lag": {
           "label": "Unclear",
           "west_agreement": "single-source",
-          "derivation": "Comparison: west 12.9 / demand_strength 40.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "derivation": "Comparison: west 9.4 / demand_strength 40.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
           "sources_present": 1,
-          "sources_total": 1,
+          "sources_total": 2,
           "present_on": [
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 2 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -3217,59 +3272,59 @@
       "subtrends": {
         "colors": [
           {
+            "name": "brown",
+            "count": 6,
+            "share": 28.6
+          },
+          {
             "name": "red",
             "count": 4,
-            "share": 22.2
+            "share": 19.0
           },
           {
             "name": "purple",
             "count": 4,
-            "share": 22.2
+            "share": 19.0
           },
           {
             "name": "white",
             "count": 3,
-            "share": 16.7
-          },
-          {
-            "name": "brown",
-            "count": 3,
-            "share": 16.7
+            "share": 14.3
           },
           {
             "name": "pink",
             "count": 2,
-            "share": 11.1
+            "share": 9.5
           }
         ],
         "fabrics": [
           {
             "name": "cotton",
-            "count": 6,
-            "share": 42.9
+            "count": 8,
+            "share": 50.0
           },
           {
             "name": "lace",
             "count": 3,
-            "share": 21.4
+            "share": 18.8
           },
           {
             "name": "georgette",
             "count": 3,
-            "share": 21.4
+            "share": 18.8
           },
           {
             "name": "knit",
             "count": 1,
-            "share": 7.1
+            "share": 6.2
           },
           {
             "name": "net",
             "count": 1,
-            "share": 7.1
+            "share": 6.2
           }
         ],
-        "buy_instruction": "strongest in cotton/lace, in red and purple",
+        "buy_instruction": "strongest in cotton/lace, in brown and red",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -3294,10 +3349,11 @@
         "wrap"
       ],
       "counts": {
-        "total": 25,
+        "total": 39,
         "by_platform": {
           "ajio": 2,
           "asos": 3,
+          "hm": 14,
           "myntra": 20
         }
       },
@@ -3313,8 +3369,8 @@
           "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 20/475 items (4.2% of assortment)], normalized across buckets \u2192 19.9; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 20.3."
         },
         "west_signal": {
-          "value": 3.0,
-          "derivation": "3 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 3.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 5.9,
+          "derivation": "17 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 5.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -3323,15 +3379,17 @@
         },
         "lead_lag": {
           "label": "Unclear",
-          "west_agreement": "absent",
-          "derivation": "Comparison: west 3.0 / demand_strength 46.2 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "west_agreement": "single-source",
+          "derivation": "Comparison: west 5.9 / demand_strength 46.2 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
-          "sources_present": 0,
-          "sources_total": 1,
-          "present_on": [],
-          "level": "absent",
-          "derivation": "Present at \u22652% assortment share on 0 of 1 Western sources (none). Not meaningfully present on any Western source."
+          "sources_present": 1,
+          "sources_total": 2,
+          "present_on": [
+            "hm"
+          ],
+          "level": "single-source",
+          "derivation": "Present at \u22652% assortment share on 1 of 2 Western sources (hm). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -3453,27 +3511,32 @@
         ],
         "fabrics": [
           {
+            "name": "viscose",
+            "count": 7,
+            "share": 38.9
+          },
+          {
             "name": "cotton",
             "count": 4,
-            "share": 50.0
+            "share": 22.2
+          },
+          {
+            "name": "linen",
+            "count": 3,
+            "share": 16.7
           },
           {
             "name": "chiffon",
             "count": 2,
-            "share": 25.0
+            "share": 11.1
           },
           {
             "name": "crepe",
             "count": 1,
-            "share": 12.5
-          },
-          {
-            "name": "georgette",
-            "count": 1,
-            "share": 12.5
+            "share": 5.6
           }
         ],
-        "buy_instruction": "strongest in cotton/chiffon, in brown and grey",
+        "buy_instruction": "strongest in viscose/cotton, in brown and grey",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -3500,10 +3563,11 @@
         "shirring"
       ],
       "counts": {
-        "total": 29,
+        "total": 48,
         "by_platform": {
           "ajio": 5,
           "asos": 21,
+          "hm": 19,
           "myntra": 3
         }
       },
@@ -3519,8 +3583,8 @@
           "derivation": "Indian assortment share [ajio: 5/391 items (1.3% of assortment); myntra: 3/475 items (0.6% of assortment)], normalized across buckets \u2192 5.1; blended 0.7/0.3 with freshness 26.6% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 11.6."
         },
         "west_signal": {
-          "value": 20.8,
-          "derivation": "21 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 16.1,
+          "derivation": "40 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 16.1. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -3529,17 +3593,18 @@
         },
         "lead_lag": {
           "label": "Unclear",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: west 20.8 / demand_strength 0.0 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: west 16.1 / demand_strength 0.0 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 0,
@@ -3646,44 +3711,54 @@
           {
             "name": "red",
             "count": 19,
-            "share": 42.2
+            "share": 41.3
           },
           {
             "name": "brown",
             "count": 5,
-            "share": 11.1
+            "share": 10.9
+          },
+          {
+            "name": "purple",
+            "count": 5,
+            "share": 10.9
           },
           {
             "name": "white",
             "count": 4,
-            "share": 8.9
-          },
-          {
-            "name": "purple",
-            "count": 4,
-            "share": 8.9
+            "share": 8.7
           },
           {
             "name": "black",
             "count": 3,
-            "share": 6.7
+            "share": 6.5
           }
         ],
         "fabrics": [
           {
             "name": "mesh",
             "count": 3,
-            "share": 50.0
+            "share": 33.3
           },
           {
             "name": "denim",
-            "count": 2,
+            "count": 3,
             "share": 33.3
           },
           {
             "name": "linen",
             "count": 1,
-            "share": 16.7
+            "share": 11.1
+          },
+          {
+            "name": "lace",
+            "count": 1,
+            "share": 11.1
+          },
+          {
+            "name": "knit",
+            "count": 1,
+            "share": 11.1
           }
         ],
         "buy_instruction": "strongest in mesh/denim, in red and brown",
@@ -3712,9 +3787,10 @@
         "balloon"
       ],
       "counts": {
-        "total": 39,
+        "total": 40,
         "by_platform": {
           "ajio": 7,
+          "hm": 1,
           "myntra": 32
         }
       },
@@ -3730,8 +3806,8 @@
           "derivation": "Indian assortment share [ajio: 7/391 items (1.8% of assortment); myntra: 32/475 items (6.7% of assortment)], normalized across buckets \u2192 39.8; blended 0.7/0.3 with freshness 50.6% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 43.0."
         },
         "west_signal": {
-          "value": 0.0,
-          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 0.3,
+          "derivation": "1 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 0.3. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -3741,14 +3817,14 @@
         "lead_lag": {
           "label": "India-led",
           "west_agreement": "absent",
-          "derivation": "Comparison: demand_strength 82.8 \u2265 DEMAND_HIGH(55), west 0.0 \u2264 WEST_LOW(25), and supply is fresh (50.6% \u2265 FRESH_HIGH(50))."
+          "derivation": "Comparison: demand_strength 82.8 \u2265 DEMAND_HIGH(55), west 0.3 \u2264 WEST_LOW(25), and supply is fresh (50.6% \u2265 FRESH_HIGH(50))."
         },
         "west_agreement": {
           "sources_present": 0,
-          "sources_total": 1,
+          "sources_total": 2,
           "present_on": [],
           "level": "absent",
-          "derivation": "Present at \u22652% assortment share on 0 of 1 Western sources (none). Not meaningfully present on any Western source."
+          "derivation": "Present at \u22652% assortment share on 0 of 2 Western sources (none). Not meaningfully present on any Western source."
         },
         "discount_penalty": {
           "value": 0,
@@ -3921,7 +3997,7 @@
       },
       "verdict": "TRIAL",
       "why": "India-led; demand 82.8, Indian supply 43.0",
-      "merchant_line": "Puff Balloon is locally validated, 39 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
+      "merchant_line": "Puff Balloon is locally validated, 40 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
     },
     "bandeau_tube": {
       "bucket": "bandeau_tube",
@@ -3931,10 +4007,11 @@
         "tube"
       ],
       "counts": {
-        "total": 41,
+        "total": 61,
         "by_platform": {
           "ajio": 2,
           "asos": 34,
+          "hm": 20,
           "myntra": 5
         }
       },
@@ -3950,8 +4027,8 @@
           "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 5/475 items (1.1% of assortment)], normalized across buckets \u2192 3.3; blended 0.7/0.3 with freshness 45.0% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 15.8."
         },
         "west_signal": {
-          "value": 33.7,
-          "derivation": "34 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 33.7. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 22.7,
+          "derivation": "54 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 22.7. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -3960,17 +4037,18 @@
         },
         "lead_lag": {
           "label": "Unclear",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: west 33.7 / demand_strength 10.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: west 22.7 / demand_strength 10.4 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 0,
@@ -4077,57 +4155,57 @@
           {
             "name": "white",
             "count": 11,
-            "share": 21.6
-          },
-          {
-            "name": "black",
-            "count": 10,
             "share": 19.6
           },
           {
             "name": "red",
-            "count": 9,
-            "share": 17.6
+            "count": 11,
+            "share": 19.6
+          },
+          {
+            "name": "black",
+            "count": 10,
+            "share": 17.9
+          },
+          {
+            "name": "purple",
+            "count": 6,
+            "share": 10.7
           },
           {
             "name": "brown",
             "count": 4,
-            "share": 7.8
-          },
-          {
-            "name": "blue",
-            "count": 3,
-            "share": 5.9
+            "share": 7.1
           }
         ],
         "fabrics": [
           {
             "name": "cotton",
-            "count": 3,
-            "share": 21.4
+            "count": 8,
+            "share": 42.1
           },
           {
             "name": "knit",
             "count": 3,
-            "share": 21.4
+            "share": 15.8
           },
           {
             "name": "lace",
             "count": 2,
-            "share": 14.3
+            "share": 10.5
           },
           {
             "name": "denim",
             "count": 2,
-            "share": 14.3
+            "share": 10.5
           },
           {
             "name": "mesh",
             "count": 1,
-            "share": 7.1
+            "share": 5.3
           }
         ],
-        "buy_instruction": "strongest in cotton/knit, in white and black",
+        "buy_instruction": "strongest in cotton/knit, in white and red",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
@@ -4153,9 +4231,10 @@
         "halterneck"
       ],
       "counts": {
-        "total": 96,
+        "total": 134,
         "by_platform": {
           "asos": 83,
+          "hm": 38,
           "myntra": 13
         }
       },
@@ -4171,8 +4250,8 @@
           "derivation": "Indian assortment share [ajio: 0/391 items (0.0% of assortment); myntra: 13/475 items (2.7% of assortment)], normalized across buckets \u2192 9.5; blended 0.7/0.3 with freshness 69.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 27.4."
         },
         "west_signal": {
-          "value": 82.2,
-          "derivation": "83 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.2. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
+          "value": 51.9,
+          "derivation": "121 of 944 items in the Western new-drop feed (asos, hm), share normalized across buckets \u2192 51.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
@@ -4180,18 +4259,19 @@
           "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
-          "label": "Early (West ahead)",
-          "west_agreement": "single-source",
-          "derivation": "Comparison: west 82.2 \u2265 WEST_HIGH(55) and demand_strength 35.7 < DEMAND_LOW(40). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
+          "label": "Unclear",
+          "west_agreement": "multi-source",
+          "derivation": "Comparison: west 51.9 / demand_strength 35.7 sit between thresholds (WEST 25\u201355, DEMAND 40\u201355)."
         },
         "west_agreement": {
-          "sources_present": 1,
-          "sources_total": 1,
+          "sources_present": 2,
+          "sources_total": 2,
           "present_on": [
-            "asos"
+            "asos",
+            "hm"
           ],
-          "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
+          "level": "multi-source",
+          "derivation": "Present at \u22652% assortment share on 2 of 2 Western sources (asos, hm). Two+ independent Western sources agree, high-confidence direction."
         },
         "discount_penalty": {
           "value": 0,
@@ -4227,8 +4307,8 @@
               "rationale": "median Indian price \u20b9462 sits inside the value band \u20b9299\u2013\u20b9799"
             }
           },
-          "applies": true,
-          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=45, occasion_fit=70, price_band_fit=85 \u2192 68.8. Applied as a multiplier ONLY when lead-lag is Early (it is)."
+          "applies": false,
+          "derivation": "Mean of 4 India-fit axes (engine defaults from the keyword rule table; buyer can override each): climate_fit=75, modesty_fit=45, occasion_fit=70, price_band_fit=85 \u2192 68.8. Applied as a multiplier ONLY when lead-lag is Early (it is not, so shown for context only)."
         }
       },
       "examples": [
@@ -4273,25 +4353,20 @@
         "agree": [
           "Indian supply (27.4) and demand (35.7) tell the same story."
         ],
-        "conflict": [
-          "The West is dropping this hard (west_signal 82.2) but Indian shoppers haven't moved (demand 35.7), classic lead-or-trap."
-        ],
+        "conflict": [],
         "resolver": {
-          "pattern": "lead-lag Early + low replication",
-          "action": "Small live trial in 2\u20133 target stores/regions, the India-fit doubts (climate/modesty/occasion/price) can only be answered by real shoppers."
+          "pattern": "no decisive conflict",
+          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
-        "glyph": "\u2191",
-        "short": "Early",
-        "phrase": "West moving, India hasn't caught up",
-        "single_source": true,
-        "caution": "(1 source)"
+        "glyph": "\u2022",
+        "short": "Unclear",
+        "phrase": "Limited or mixed Western signal",
+        "single_source": false,
+        "caution": null
       },
-      "lag_estimate": {
-        "window": "~1\u20132 quarters",
-        "derivation": "ESTIMATE from the signal gap: west 82.2 \u2212 India 35.7 = 46 (\u226560 \u2192 ~2 qtrs, \u226530 \u2192 ~1\u20132 qtrs, else ~1 qtr). Western fast-fashion typically leads Indian value retail by this order for silhouette trends, a rough buying calendar, not a forecast."
-      },
+      "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2191",
         "label": "Assortment accelerating with demand, window open",
@@ -4302,74 +4377,74 @@
         "colors": [
           {
             "name": "red",
-            "count": 18,
-            "share": 20.2
+            "count": 20,
+            "share": 21.3
+          },
+          {
+            "name": "brown",
+            "count": 16,
+            "share": 17.0
           },
           {
             "name": "black",
             "count": 14,
-            "share": 15.7
-          },
-          {
-            "name": "brown",
-            "count": 14,
-            "share": 15.7
+            "share": 14.9
           },
           {
             "name": "yellow",
             "count": 9,
-            "share": 10.1
+            "share": 9.6
           },
           {
             "name": "blue",
             "count": 8,
-            "share": 9.0
+            "share": 8.5
           }
         ],
         "fabrics": [
           {
             "name": "cotton",
-            "count": 10,
-            "share": 28.6
+            "count": 16,
+            "share": 34.0
           },
           {
             "name": "mesh",
             "count": 9,
-            "share": 25.7
+            "share": 19.1
+          },
+          {
+            "name": "knit",
+            "count": 5,
+            "share": 10.6
           },
           {
             "name": "linen",
             "count": 5,
-            "share": 14.3
+            "share": 10.6
           },
           {
             "name": "lace",
             "count": 5,
-            "share": 14.3
-          },
-          {
-            "name": "denim",
-            "count": 3,
-            "share": 8.6
+            "share": 10.6
           }
         ],
-        "buy_instruction": "strongest in cotton/mesh, in red and black",
+        "buy_instruction": "strongest in cotton/mesh, in red and brown",
         "note": "second-axis keyword clustering on product names; unmatched words ignored"
       },
       "confidence": {
         "base": 36.4,
-        "adjusted": 25.0,
-        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
+        "adjusted": 36.4,
+        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 36.4."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
         "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 25.0 < 40"
+        "rule": "adjusted 36.4 < 40"
       },
       "verdict": "WATCH",
-      "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%",
-      "merchant_line": "Halter is rising in the West but unproven in India; modesty fit is the biggest fit risk. Test small before committing."
+      "why": "Unclear; demand 35.7, Indian supply 27.4",
+      "merchant_line": "Halter shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     }
   }
 }

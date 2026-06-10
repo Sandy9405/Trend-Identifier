@@ -181,7 +181,7 @@ PLATFORM_ADAPTERS = {
             "rating": None,
             "rating_count": None,
             "in_stock": None,
-            "image_url": ["imageUrl", "image", "mainImage", "imageSrc"],
+            "image_url": ["model_image", "imageUrl", "image", "mainImage"],
             "product_url": ["productUrl", "url", "link", "pdpUrl"],
             "category": ["gender", "category"],
             "sub_category": ["productType", "subCategory", "categoryName"],
@@ -189,8 +189,8 @@ PLATFORM_ADAPTERS = {
         "default_category": "women",   # women's tops / new-in feed
         "default_sub_category": "tops",
         "discount_mode": "recompute_from_price_mrp",
-        "date_proxy_regex": None,      # add if H&M image URLs carry a date
-        "currency": "GBP",
+        "date_proxy_regex": None,      # H&M image URLs carry no date
+        "currency": "USD",             # the scrape is the US storefront
     },
 
     "asos": {
