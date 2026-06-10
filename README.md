@@ -232,8 +232,9 @@ if lead_lag Early: adjusted ×= replication/100
 clamp 0–100
 ```
 
-Bet sizing (named constants): **≥ 65 Deeper Buy** (anchor SKUs, ~₹8–15L) ·
-**40–64 Small Trial** (3–5 SKUs, ~₹2–5L, read 4-week sell-through) · **< 40 Monitor**.
+Bet sizing (named constants): **≥ 65 Deeper Buy** (anchor SKUs) ·
+**40–64 Small Trial** (3–5 test SKUs, read 4-week sell-through) · **< 40 Monitor**.
+Rupee amounts come from the budget allocator, never from fixed bands.
 Slate qualification: a bucket needs ≥ 10 products, otherwise it's noise, not a trend.
 
 ### Multiple Western sources & west_agreement

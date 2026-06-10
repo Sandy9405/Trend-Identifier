@@ -1056,11 +1056,11 @@ def _finalize(d: dict, overrides: dict = None):
     # verdict = the buyer-facing word on the tile face (BUY / TRIAL / WATCH)
     if adj >= BET_DEEPER:
         bet = {"label": "Deeper Buy", "verdict": "BUY",
-               "band": "anchor SKUs, ~₹8–15L open-to-buy",
+               "band": "anchor SKUs, size the spend with the budget allocator",
                "rule": f"adjusted {adj} ≥ {BET_DEEPER}"}
     elif adj >= BET_TRIAL:
         bet = {"label": "Small Trial", "verdict": "TRIAL",
-               "band": "3–5 SKUs, ~₹2–5L, read 4-week sell-through",
+               "band": "3–5 test SKUs, read 4-week sell-through before scaling",
                "rule": f"{BET_TRIAL} ≤ adjusted {adj} < {BET_DEEPER}"}
     else:
         bet = {"label": "Monitor", "verdict": "WATCH",

@@ -255,12 +255,12 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, ~\u20b98\u201315L open-to-buy.",
+      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, size the spend with the budget allocator.",
       "buy_instruction": "strongest in knit/cotton, in brown and red",
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "band": "anchor SKUs, size the spend with the budget allocator",
         "rule": "adjusted 69.7 \u2265 65"
       },
       "lead_lag": "Landed",
@@ -302,7 +302,7 @@
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "band": "anchor SKUs, size the spend with the budget allocator",
         "rule": "adjusted 67.0 \u2265 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -344,7 +344,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 63.0 < 65"
       },
       "lead_lag": "India-led",
@@ -385,7 +385,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 62.2 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -427,7 +427,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 61.4 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -469,7 +469,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 60.8 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -511,7 +511,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 53.3 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -551,7 +551,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 44.3 < 65"
       },
       "lead_lag": "Unclear",
@@ -593,7 +593,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 43.2 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -635,7 +635,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 40.5 < 65"
       },
       "lead_lag": "India-led",
@@ -1128,7 +1128,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 61.4 < 65"
       },
       "verdict": "TRIAL",
@@ -1354,7 +1354,7 @@
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "band": "anchor SKUs, size the spend with the budget allocator",
         "rule": "adjusted 67.0 \u2265 65"
       },
       "verdict": "BUY",
@@ -1579,7 +1579,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 62.2 < 65"
       },
       "verdict": "TRIAL",
@@ -1800,7 +1800,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 43.2 < 65"
       },
       "verdict": "TRIAL",
@@ -2024,7 +2024,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 40.5 < 65"
       },
       "verdict": "TRIAL",
@@ -2212,7 +2212,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 53.3 < 65"
       },
       "verdict": "TRIAL",
@@ -2439,12 +2439,12 @@
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
+        "band": "anchor SKUs, size the spend with the budget allocator",
         "rule": "adjusted 69.7 \u2265 65"
       },
       "verdict": "BUY",
       "why": "Landed; demand 96.0, Indian supply 82.5",
-      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, ~\u20b98\u201315L open-to-buy."
+      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, size the spend with the budget allocator."
     },
     "crop": {
       "bucket": "crop",
@@ -2662,7 +2662,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 60.8 < 65"
       },
       "verdict": "TRIAL",
@@ -2889,7 +2889,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 44.3 < 65"
       },
       "verdict": "TRIAL",
@@ -3992,7 +3992,7 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
         "rule": "40 \u2264 adjusted 63.0 < 65"
       },
       "verdict": "TRIAL",
