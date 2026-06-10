@@ -43,6 +43,13 @@ class FitOverrides(BaseModel):
     price_band_fit: float | None = None
 
 
+class AllocateBody(BaseModel):
+    budget: float
+    # optional: live-adjusted confidences from India-fit overrides in the UI,
+    # so an override that flips a verdict reshapes the allocation immediately
+    adjustments: dict[str, float] | None = None
+
+
 def _reload_state():
     """(Re)ingest everything and reset the per-segment score cache."""
     platforms = ingest.load_platforms()
@@ -271,6 +278,30 @@ def recompute(bucket: str, overrides: FitOverrides,
         raise HTTPException(404, f"bucket '{bucket}' not present in segment {cat}/{sub}")
     fresh = copy.deepcopy(d)
     return scoring._finalize(fresh, overrides.model_dump(exclude_none=True))
+
+
+@app.post("/api/allocate")
+def allocate(body: AllocateBody, category: str | None = Query(None),
+             sub_category: str | None = Query(None)):
+    """Open-to-buy allocation across the current slate: WATCH gets ₹0, TRIAL
+    gets small capped tests, BUY splits the rest proportional to adjusted
+    confidence. Optional `adjustments` lets the UI feed live India-fit override
+    results so a changed verdict reshapes the plan."""
+    if body.budget <= 0:
+        raise HTTPException(400, "budget must be > 0")
+    _ensure_loaded()
+    cat, sub = _segment_or_default(category, sub_category)
+    slate = copy.deepcopy(_compute_segment(cat, sub)["slate"])
+    if body.adjustments:
+        for row in slate:
+            adj = body.adjustments.get(row["bucket"])
+            if adj is None:
+                continue
+            row["confidence"]["adjusted"] = adj
+            row["verdict"] = ("BUY" if adj >= scoring.BET_DEEPER else
+                              "TRIAL" if adj >= scoring.BET_TRIAL else "WATCH")
+        slate.sort(key=lambda r: -r["confidence"]["adjusted"])
+    return scoring.allocate_budget(slate, body.budget)
 
 
 @app.get("/api/meta")

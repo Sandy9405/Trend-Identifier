@@ -166,6 +166,33 @@ PLATFORM_ADAPTERS = {
         "currency": "USD",
     },
 
+    # Second Western source — SAME generic west_supply role as ASOS; the engine
+    # aggregates all west_supply platforms and computes cross-source agreement.
+    # Nothing anywhere special-cases H&M (or ASOS). Fallback key lists cover
+    # the common H&M scraper field variants; tune here if the export differs.
+    "hm": {
+        "glob": ["*h&m*", "*hm_*", "*_hm*", "*hm-*", "*handm*", "*h_m*", "*hmproducts*"],
+        "roles": ["west_supply"],
+        "field_map": {
+            "name": ["productName", "name", "title", "product_name"],
+            "brand": ["brand", "brandName"],
+            "price": ["currentPrice", "salePrice", "price", "price.value"],
+            "mrp": ["originalPrice", "regularPrice", "whitePrice", "mrp"],
+            "rating": None,
+            "rating_count": None,
+            "in_stock": None,
+            "image_url": ["imageUrl", "image", "mainImage", "imageSrc"],
+            "product_url": ["productUrl", "url", "link", "pdpUrl"],
+            "category": ["gender", "category"],
+            "sub_category": ["productType", "subCategory", "categoryName"],
+        },
+        "default_category": "women",   # women's tops / new-in feed
+        "default_sub_category": "tops",
+        "discount_mode": "recompute_from_price_mrp",
+        "date_proxy_regex": None,      # add if H&M image URLs carry a date
+        "currency": "GBP",
+    },
+
     "asos": {
         "glob": "*asos*.json",
         "roles": ["west_supply"],

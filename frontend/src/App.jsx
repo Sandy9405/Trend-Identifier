@@ -75,7 +75,7 @@ export default function App() {
                 onBack={() => { window.location.hash = '#/' }} />
             : <div className="loading">Loading {bucket}…</div>)
         : (slateData
-            ? <Slate slate={slateData.slate} meta={slateData.meta}
+            ? <Slate slate={slateData.slate} meta={slateData.meta} seg={seg}
                 onOpen={(b) => { window.location.hash = `#/trend/${b}` }} />
             : <div className="loading">Computing slate for {seg.category} / {seg.sub_category}…</div>)}
     </div>

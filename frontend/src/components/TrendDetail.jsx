@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { recompute } from '../api.js'
-import { BetBadge, LeadLagTag, RawVsAdjusted, Derivation } from './shared.jsx'
+import { LeadLagTag, RawVsAdjusted, Derivation } from './shared.jsx'
 
 const AXIS_LABELS = {
   climate_fit: 'Climate fit',
@@ -50,10 +50,19 @@ export default function TrendDetail({ trend, seg, onBack }) {
       <span className="back" onClick={onBack}>← back to slate</span>
       <div className="detail-head">
         <h2>{trend.display_name}</h2>
-        <BetBadge label={d.bet.label} />
+        <span className={`badge ${d.verdict?.toLowerCase() || ''}`}>{d.verdict || d.bet.label}</span>
         <LeadLagTag label={m.lead_lag.label} />
         <span className="note">{trend.counts.total} products · keywords: {trend.keywords.join(', ')}</span>
       </div>
+      {trend.direction && (
+        <div className="dir-line">
+          <span className="glyph">{trend.direction.glyph}</span> {trend.direction.phrase}
+          {trend.direction.single_source && (
+            <span className="src-caution"> — single Western source, low confidence</span>
+          )}
+        </div>
+      )}
+      {d.merchant_line && <div className="merchant">“{d.merchant_line}”</div>}
       <div className="why">{d.why}</div>
       <div className="bigbar">
         <RawVsAdjusted base={d.confidence.base} adjusted={d.confidence.adjusted} />
@@ -81,6 +90,26 @@ export default function TrendDetail({ trend, seg, onBack }) {
             </div>
             <Derivation text={m.lead_lag.derivation} />
           </div>
+          {m.west_agreement && m.west_agreement.level !== 'none' && (
+            <div className="sig">
+              <div className="sig-row">
+                <span className="name">Western source agreement</span>
+                <span className="val">{m.west_agreement.sources_present}/{m.west_agreement.sources_total}</span>
+              </div>
+              <div className="note">{m.west_agreement.level}</div>
+              <Derivation text={m.west_agreement.derivation} />
+            </div>
+          )}
+          {trend.trajectory && (
+            <div className="sig">
+              <div className="sig-row">
+                <span className="name">Trajectory (listing-date proxy)</span>
+                <span className="val">{trend.trajectory.arrow}</span>
+              </div>
+              <div className="note">{trend.trajectory.label}</div>
+              <Derivation text={trend.trajectory.derivation} />
+            </div>
+          )}
           <ul className="examples">
             {trend.examples.map((e) => (
               <li key={e.url || e.name}>
@@ -142,11 +171,32 @@ export default function TrendDetail({ trend, seg, onBack }) {
             bucket's keywords — drag to override, the bet recomputes live.
           </div>
           <div className="bet-line">
-            <BetBadge label={d.bet.label} />
+            <span className={`badge ${d.verdict?.toLowerCase() || ''}`}>{d.verdict || d.bet.label}</span>
             <span className="band">{d.bet.band}</span>
             {live && <span className="live">● recomputed with your overrides</span>}
           </div>
           <div className="note">{d.bet.rule}</div>
+          {trend.lag_estimate && (
+            <div className="lagbox">
+              <b>Buying calendar:</b> Western lead of {trend.lag_estimate.window} for this
+              silhouette (estimate).
+              <Derivation text={trend.lag_estimate.derivation} />
+            </div>
+          )}
+          {trend.subtrends?.buy_instruction && (
+            <div className="subtrends">
+              <b>Buy instruction:</b> {trend.display_name.toLowerCase()} — {trend.subtrends.buy_instruction}.
+              <div className="chips">
+                {trend.subtrends.fabrics.map((f) => (
+                  <span key={`f-${f.name}`} className="chip fabric">{f.name} {f.share}%</span>
+                ))}
+                {trend.subtrends.colors.map((c) => (
+                  <span key={`c-${c.name}`} className="chip color">{c.name} {c.share}%</span>
+                ))}
+              </div>
+              <div className="note">{trend.subtrends.note}</div>
+            </div>
+          )}
           {!m.replication.applies && (
             <div className="note" style={{ marginTop: 8 }}>
               India-fit gate applies only to “Early” trends — shown here for context;

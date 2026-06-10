@@ -32,6 +32,14 @@ export const recompute = (bucket, seg, overrides) =>
     body: JSON.stringify(overrides),
   }).then(j)
 
+// Budget allocation: open-to-buy ₹ → per-trend money plan for the segment
+export const allocateBudget = (seg, budget, adjustments) =>
+  fetch(`/api/allocate${qs(seg)}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ budget, adjustments }),
+  }).then(j)
+
 // Data management: push a new/replacement scrape file → backend re-ingests
 // and returns the fresh segment list; the UI then re-renders from it.
 export const uploadDataFile = (file) => {

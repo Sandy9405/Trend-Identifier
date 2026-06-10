@@ -236,6 +236,59 @@ Bet sizing (named constants): **≥ 65 Deeper Buy** (anchor SKUs, ~₹8–15L) �
 **40–64 Small Trial** (3–5 SKUs, ~₹2–5L, read 4-week sell-through) · **< 40 Monitor**.
 Slate qualification: a bucket needs ≥ 10 products, otherwise it's noise, not a trend.
 
+### Multiple Western sources & west_agreement
+
+`west_supply` is handled **generically over N sources** — the engine aggregates assortment
+share across every platform with that role and never special-cases ASOS, H&M or any future
+feed. Adding H&M was literally one adapter entry (`hm` in `adapter_config.py`), no logic
+change — proof the architecture generalizes. Per bucket the engine also computes
+**west_agreement**: present at meaningful share on ≥2 Western sources = a high-confidence
+direction; on 1 source = the direction is explicitly flagged "(1 source) — single-source,
+low confidence" on the tile, in the lead-lag derivation, and in `/api/meta.west_sources`.
+
+### Tile face vs depth
+
+The slate is a traffic-light board, scannable in 3 seconds. Each tile FACE shows only the
+decision: the trend name, ONE verdict (**BUY** / **TRIAL** / **WATCH**, mapping to Deeper
+Buy / Small Trial / Monitor), ONE number — the **adjusted, distortion-honest confidence,
+never the raw signal** — and ONE West→India direction glyph (↑ Early, = Landed, ↓ Late,
+◆ India-led, • Unclear). Everything else — raw-vs-adjusted bars, distortion derivations,
+India-fit sliders, disagreement + resolver, merchant line, trajectory, sub-trends, counts —
+lives behind the click.
+
+### Trajectory (listing-date proxy)
+
+Each bucket's Indian products are split into earlier- vs recently-listed cohorts by their
+platform's median image-upload date. Recent share ≥60% = assortment accelerating (brands
+betting more); ≤40% = fading. Where demand data exists, the bucket's recent/earlier
+rating-count ratio is compared against the segment-wide norm (ratings accumulate with age,
+so only the relative comparison means anything) to read whether demand keeps pace —
+"assortment accelerating, demand flat = supply getting ahead of demand, caution". **Stated
+limits**: image-upload dates approximate listing dates; re-shot images and platform image
+pipelines distort it. It's labelled a proxy everywhere it appears.
+
+### Color & fabric sub-trends
+
+Second-axis keyword clustering over product names (same pattern as silhouettes; dictionaries
+at the top of `scoring.py`, extend-friendly; unmatched words ignored). Each trend reports its
+top colors and fabrics with shares, collapsed into a buy instruction — e.g. "puff balloon —
+strongest in cotton, in white and pink" — so the output is an order spec, not just a flag.
+
+### Budget allocation
+
+Enter an open-to-buy amount on the slate → `POST /api/allocate` turns the slate into a money
+plan (`allocate_budget` in `scoring.py`, fully commented): **WATCH** gets ₹0 (monitoring is
+free), **TRIAL** bets get equal test allocations capped at 8% each / 25% combined, **BUY**
+bets split the remainder proportional to adjusted (never raw) confidence. With no BUY-grade
+trend the remainder is explicitly held back, not force-spent. The endpoint accepts live
+India-fit-override adjustments so a changed verdict reshapes the plan immediately.
+
+### West→India lag estimate
+
+Early trends additionally show a coarse buying calendar — "Western lead of ~1–2 quarters" —
+derived from the gap between the Western signal and Indian presence (named thresholds, not
+per-trend constants), labelled clearly as an estimate.
+
 ### The West→India lead-lag concept
 
 Western fast-fashion drops (ASOS "new in") often lead the Indian value market by one or more
@@ -313,6 +366,7 @@ women/tops if present, else the largest segment detected).
 
 - `POST /api/upload` — multipart upload of a scrape JSON; re-ingests and returns the new segment list, the matched adapter, and a persistence notice
 - `POST /api/reload` — re-ingest from disk after manual file changes
+- `POST /api/allocate` — body `{budget, adjustments?}` → per-trend ₹ allocation with rationale
 - `GET /api/segments` — every category/sub-category present in the data, with counts; powers the dropdowns
 - `GET /api/slate` — ranked computed slate + meta for the segment
 - `GET /api/trend/{bucket}` — full detail payload incl. derivations & India-fit defaults
