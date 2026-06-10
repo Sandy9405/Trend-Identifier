@@ -75,11 +75,19 @@ Three ways, all triggering a full recompute:
 
 The **filename decides which platform adapter parses it** (matched against the adapter
 globs, e.g. anything containing `myntra`). Uploading a file with the same name replaces it.
-If several files match the same adapter (a fresh scrape uploaded without deleting last
-week's), only the **newest by modification time** is used and the superseded files are
-disclosed as a limitation — double-counting two snapshots of one platform would corrupt
-every share. A filename matching no adapter is stored but ignored, with an explicit warning
-listing the known globs.
+**Multiple files per platform coexist** — a women's-tops scrape and a men's-footwear scrape
+from Myntra cover different segments and never touch each other. Where two files of one
+platform DO overlap inside a segment (a fresh scrape re-covering the same products), the
+duplicates are deduplicated by product URL with the **newest file winning row-by-row**, and
+the merge is disclosed as a limitation — so re-uploads supersede exactly what they re-cover,
+nothing more. A filename matching no adapter is stored but ignored, with an explicit
+warning listing the known globs.
+
+Silhouette vocabularies are also **chosen per sub-category**: footwear segments cluster on
+a footwear dictionary (sneakers, loafers, boots, mesh-knit…) instead of the apparel one —
+otherwise mesh running shoes would land in "mesh_sheer" and lace-ups in "tie_knot". Adding
+a vocabulary for a new sub-category is one dict in `scoring.py`
+(`DICTIONARY_FOR_SUBCATEGORY`); unmapped sub-categories fall back to the apparel dictionary.
 
 ### Different schemas from different sources
 

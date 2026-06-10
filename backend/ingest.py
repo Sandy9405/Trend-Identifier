@@ -152,6 +152,7 @@ class PlatformData:
     scraped_at: Optional[str] = None
     static_limitations: list = field(default_factory=list)  # survive re-scoping
     has_date_regex: bool = False
+    mtime: float = 0.0                # file modification time (newest wins on overlap)
 
 
 def _dig(raw: dict, path: str):
@@ -250,27 +251,22 @@ def read_rows(path: Path, cfg: dict) -> list:
 
 
 def load_platforms() -> list:
-    """Read every data file that matches an adapter glob. Files matching no
-    adapter are ignored (listed by /api/upload as 'unrecognised'). If SEVERAL
-    files match the same adapter (e.g. you upload a fresh scrape without
-    deleting last week's), only the newest by modification time is used and
-    the superseded ones are disclosed as a limitation — silently double-
-    counting two snapshots of the same platform would corrupt every share."""
+    """Read EVERY data file that matches an adapter glob — one PlatformData per
+    file. Multiple files per platform are expected and fine (e.g. a women's-tops
+    scrape AND a men's-footwear scrape from Myntra): they usually cover different
+    segments, so they COEXIST. Overlap protection happens at segment-scoping
+    time, where duplicate products (same platform + product URL) are
+    deduplicated newest-file-first — so a re-uploaded fresh scrape supersedes
+    only the rows it actually re-covers, never a whole unrelated dataset.
+    Files matching no adapter are ignored (the upload API warns about them)."""
     platforms = []
     files = data_files()
     for key, cfg in PLATFORM_ADAPTERS.items():
-        matched = [f for f in files if fnmatch.fnmatch(f.name.lower(), cfg["glob"].lower())]
-        if not matched:
-            continue
-        matched.sort(key=lambda f: f.stat().st_mtime, reverse=True)
-        newest, superseded = matched[0], matched[1:]
-        pd = _load_one(key, cfg, newest)
-        if superseded:
-            pd.static_limitations.append(
-                "newest file used; superseded older file(s) ignored: "
-                + ", ".join(f.name for f in superseded))
-            apply_signal_checks(pd)
-        platforms.append(pd)
+        for f in files:
+            if fnmatch.fnmatch(f.name.lower(), cfg["glob"].lower()):
+                pd = _load_one(key, cfg, f)
+                pd.mtime = f.stat().st_mtime
+                platforms.append(pd)
     return platforms
 
 
@@ -375,12 +371,22 @@ def apply_signal_checks(pd: PlatformData):
 # ---------------------------------------------------------------------------
 # Segment scoping — what powers the category / sub-category dropdowns
 # ---------------------------------------------------------------------------
+def _identity(prod: Product):
+    """What makes two rows 'the same product' for dedupe purposes."""
+    return prod.product_url or (prod.name, prod.brand)
+
+
 def list_segments(platforms: list) -> list:
     """Every (category, sub_category) pair present in the data, with counts.
-    Computed, never predefined — new data with men's shoes grows the dropdown."""
-    seg = {}
-    for p in platforms:
+    Computed, never predefined — new data with men's shoes grows the dropdown.
+    Duplicate products across multiple files of one platform count once."""
+    seg, seen = {}, set()
+    for p in sorted(platforms, key=lambda p: -p.mtime):   # newest file first
         for prod in p.products:
+            ident = (p.key, _identity(prod))
+            if ident in seen:
+                continue
+            seen.add(ident)
             key = (prod.category, prod.sub_category)
             entry = seg.setdefault(key, {"category": key[0], "sub_category": key[1],
                                          "count": 0, "platforms": {}})
@@ -390,20 +396,46 @@ def list_segments(platforms: list) -> list:
 
 
 def scoped_platforms(platforms: list, category: str, sub_category: str) -> list:
-    """Copies of each platform holding only products in the selected segment,
-    with roles/limitations re-derived for that slice."""
-    out = []
+    """ONE merged platform per adapter key, holding only products in the
+    selected segment. Multiple files of the same platform are merged here:
+    newest file first, duplicate products (same URL) deduplicated — so a
+    re-uploaded scrape supersedes the rows it re-covers, while files covering
+    OTHER segments (men's footwear vs women's tops) never touch each other.
+    Roles/limitations are re-derived per slice."""
+    by_key = {}
     for p in platforms:
-        sub = PlatformData(key=p.key, file=p.file,
-                           roles=list(p.declared_roles),
-                           declared_roles=list(p.declared_roles))
-        sub.products = [x for x in p.products
-                        if x.category == category and x.sub_category == sub_category]
-        sub.raw_count = p.raw_count
-        sub.filtered_count = len(sub.products)
-        sub.scraped_at = p.scraped_at
-        sub.static_limitations = list(p.static_limitations)
-        sub.has_date_regex = p.has_date_regex
-        apply_signal_checks(sub)
-        out.append(sub)
+        by_key.setdefault(p.key, []).append(p)
+
+    out = []
+    for key, group in sorted(by_key.items()):
+        group.sort(key=lambda p: -p.mtime)                # newest first
+        merged = PlatformData(key=key,
+                              file=" + ".join(g.file for g in group),
+                              roles=list(group[0].declared_roles),
+                              declared_roles=list(group[0].declared_roles))
+        merged.scraped_at = group[0].scraped_at
+        merged.has_date_regex = group[0].has_date_regex
+        merged.mtime = group[0].mtime
+        seen, dup = set(), 0
+        for g in group:
+            for note in g.static_limitations:
+                if note not in merged.static_limitations:
+                    merged.static_limitations.append(note)
+            for x in g.products:
+                if not (x.category == category and x.sub_category == sub_category):
+                    continue
+                ident = _identity(x)
+                if ident in seen:
+                    dup += 1
+                    continue
+                seen.add(ident)
+                merged.products.append(x)
+        merged.raw_count = sum(g.raw_count for g in group)
+        merged.filtered_count = len(merged.products)
+        if len(group) > 1:
+            merged.static_limitations.append(
+                f"{len(group)} {key} files merged for this segment"
+                + (f"; {dup} duplicate product(s) deduplicated, newest file wins" if dup else ""))
+        apply_signal_checks(merged)
+        out.append(merged)
     return out

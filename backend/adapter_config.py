@@ -141,6 +141,31 @@ PLATFORM_ADAPTERS = {
         "currency": "INR",
     },
 
+    # US department-store feed → west_supply, same as ASOS: what the West
+    # DROPPED, never demand. Fallback key lists cover the common scraper
+    # field-name variants; if your export uses different keys, edit only the
+    # lists below. NOTE the glob also catches the common misspellings.
+    "nordstrom": {
+        "glob": "*no*str*m*",   # nordstrom / norstrom / norstrodam ...
+        "roles": ["west_supply"],
+        "field_map": {
+            "name": ["productName", "name", "title", "product_name", "displayName"],
+            "brand": ["brand", "brandName", "brand_name"],
+            "price": ["currentPrice", "salePrice", "price", "current_price"],
+            "mrp": ["originalPrice", "regularPrice", "listPrice", "original_price", "mrp"],
+            "rating": ["rating", "reviewStarRating"],
+            "rating_count": ["reviewCount", "ratingCount", "review_count"],
+            "in_stock": None,
+            "image_url": ["imageUrl", "image", "mainImage", "image_url"],
+            "product_url": ["productUrl", "url", "link", "product_url"],
+            "category": ["gender", "division", "category"],
+            "sub_category": ["productType", "subCategory", "sub_category"],
+        },
+        "discount_mode": "recompute_from_price_mrp",
+        "date_proxy_regex": None,
+        "currency": "USD",
+    },
+
     "asos": {
         "glob": "*asos*.json",
         "roles": ["west_supply"],

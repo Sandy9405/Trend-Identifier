@@ -22,10 +22,14 @@ import statistics
 from datetime import date
 
 # ════════════════════════════════════════════════════════════════════════════
-# 1. SILHOUETTE KEYWORD DICTIONARY  (extend-friendly — add a line, get a bucket)
+# 1. SILHOUETTE KEYWORD DICTIONARIES  (extend-friendly — add a line, get a bucket)
 #    A product may match multiple buckets. Matching is case-insensitive on name.
+#    The dictionary is CHOSEN PER SUB-CATEGORY: clustering running shoes with a
+#    tops vocabulary would file mesh sneakers under "mesh_sheer" and lace-ups
+#    under "tie_knot" — nonsense. New sub-category vocabularies are one dict
+#    away; anything unmapped falls back to the apparel dictionary.
 # ════════════════════════════════════════════════════════════════════════════
-SILHOUETTE_KEYWORDS = {
+APPAREL_SILHOUETTES = {
     "puff_balloon":   ["puff", "balloon"],
     "peplum":         ["peplum"],
     "halter":         ["halter", "halterneck"],
@@ -43,6 +47,38 @@ SILHOUETTE_KEYWORDS = {
     "smocked":        ["smock", "shirred", "shirring"],
     "tie_knot":       ["tie", "knot"],
 }
+
+FOOTWEAR_SILHOUETTES = {
+    "sneakers":        ["sneaker", "trainer"],
+    "running_sports":  ["running", "sports shoe", "training", "gym", "walking"],
+    "casual_shoes":    ["casual"],
+    "loafers_slipons": ["loafer", "slip-on", "slip on", "moccasin", "espadrille"],
+    "sandals_slides":  ["sandal", "slider", "slide", "flip-flop", "flip flop", "floater"],
+    "boots":           ["boot", "chelsea"],
+    "formal_shoes":    ["formal", "oxford", "derby", "brogue", "monk"],
+    "ethnic_footwear": ["kolhapuri", "jutti", "mojari"],
+    "canvas_shoes":    ["canvas"],
+    "chunky_platform": ["chunky", "platform"],
+    "mesh_knit":       ["mesh", "knit", "flyknit"],
+    "leather_suede":   ["leather", "suede"],
+    "clogs_mules":     ["clog", "mule"],
+    "high_top":        ["high top", "high-top", "hi-top"],
+}
+
+DICTIONARY_FOR_SUBCATEGORY = {
+    "shoes": ("footwear", FOOTWEAR_SILHOUETTES),
+    # everything else (tops, tshirts, shirts, dresses, ...) → apparel vocabulary
+}
+
+
+def keywords_for(sub_category):
+    """Pick the silhouette vocabulary for the segment being scored."""
+    return DICTIONARY_FOR_SUBCATEGORY.get(sub_category, ("apparel", APPAREL_SILHOUETTES))
+
+
+# Backwards-compatible alias (README references): the apparel dictionary is
+# the default vocabulary.
+SILHOUETTE_KEYWORDS = APPAREL_SILHOUETTES
 # Products matching no bucket fall into "other": excluded from the slate but
 # counted in totals so shares stay honest.
 
@@ -204,18 +240,21 @@ def _clamp(x, lo=0.0, hi=100.0):
     return max(lo, min(hi, x))
 
 
-def assign_buckets(name: str) -> list:
+def assign_buckets(name: str, vocab: dict) -> list:
     """Case-insensitive keyword match; a product may land in several buckets."""
     n = name.lower()
-    return [b for b, kws in SILHOUETTE_KEYWORDS.items() if any(k in n for k in kws)]
+    return [b for b, kws in vocab.items() if any(k in n for k in kws)]
 
 
 # ════════════════════════════════════════════════════════════════════════════
 # THE ENGINE
 # ════════════════════════════════════════════════════════════════════════════
-def compute(platforms: list) -> dict:
-    """platforms: list[ingest.PlatformData]. Returns the full computed payload:
-    slate + per-bucket details + meta. Pure function of the data on disk."""
+def compute(platforms: list, sub_category: str = None) -> dict:
+    """platforms: list[ingest.PlatformData], already scoped to one segment.
+    `sub_category` selects the silhouette vocabulary (footwear vs apparel).
+    Returns the full computed payload: slate + per-bucket details + meta.
+    Pure function of the data on disk."""
+    vocab_name, vocab = keywords_for(sub_category)
 
     demand_platforms = [p for p in platforms if "india_demand" in p.roles]
     india_supply = [p for p in platforms if "india_supply" in p.roles]
@@ -229,7 +268,7 @@ def compute(platforms: list) -> dict:
     for plat in platforms:
         for prod in plat.products:
             total_count += 1
-            bs = assign_buckets(prod.name)
+            bs = assign_buckets(prod.name, vocab)
             if not bs:
                 other_count += 1
                 continue
@@ -516,7 +555,7 @@ def compute(platforms: list) -> dict:
             agrees.append("Signals sit mid-range with no sharp divergence.")
 
         # --- G. replication probability (India-fit axes; defaults from keywords) ---
-        kws = SILHOUETTE_KEYWORDS[b]
+        kws = vocab[b]
         axes = {}
         for axis, spec in AXIS_RULES.items():
             score, why = spec["base"]
@@ -584,6 +623,7 @@ def compute(platforms: list) -> dict:
         } for p in platforms],
         "missing_roles": [r for r in ("india_demand", "india_supply", "west_supply", "pos_sales")
                           if not any(r in p.roles for p in platforms)],
+        "silhouette_dictionary": vocab_name,
         "buckets_found": len(buckets),
         "products_total": total_count,
         "products_unbucketed": other_count,

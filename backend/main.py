@@ -95,7 +95,7 @@ def _compute_segment(category: str, sub_category: str) -> dict:
     key = (category, sub_category)
     if key not in STATE["cache"]:
         scoped = ingest.scoped_platforms(STATE["platforms"], category, sub_category)
-        computed = scoring.compute(scoped)
+        computed = scoring.compute(scoped, sub_category=sub_category)
         computed["meta"]["segment"] = {"category": category, "sub_category": sub_category}
         # disclose scoping: rows outside the segment are filtered, not lost
         grand_total = sum(len(p.products) for p in STATE["platforms"])
