@@ -228,7 +228,8 @@ def data_files() -> list:
         if d.is_dir():
             for pattern in ("*.json", "*.csv"):
                 for f in d.glob(pattern):
-                    if f.name != "sample_output.json":
+                    # skip the frozen sample and in-flight upload validations
+                    if f.name != "sample_output.json" and not f.name.startswith("."):
                         seen[f.name] = f
     return sorted(seen.values(), key=lambda f: f.name)
 
@@ -250,6 +251,12 @@ def read_rows(path: Path, cfg: dict) -> list:
     return raw if isinstance(raw, list) else []
 
 
+def glob_match(filename: str, cfg: dict) -> bool:
+    """cfg['glob'] may be one pattern or a list of patterns (case-insensitive)."""
+    globs = cfg["glob"] if isinstance(cfg["glob"], list) else [cfg["glob"]]
+    return any(fnmatch.fnmatch(filename.lower(), g.lower()) for g in globs)
+
+
 def load_platforms() -> list:
     """Read EVERY data file that matches an adapter glob — one PlatformData per
     file. Multiple files per platform are expected and fine (e.g. a women's-tops
@@ -263,7 +270,7 @@ def load_platforms() -> list:
     files = data_files()
     for key, cfg in PLATFORM_ADAPTERS.items():
         for f in files:
-            if fnmatch.fnmatch(f.name.lower(), cfg["glob"].lower()):
+            if glob_match(f.name, cfg):
                 pd = _load_one(key, cfg, f)
                 pd.mtime = f.stat().st_mtime
                 platforms.append(pd)

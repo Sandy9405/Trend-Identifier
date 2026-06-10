@@ -115,7 +115,7 @@ PLATFORM_ADAPTERS = {
     # dumps work without touching this entry. Template with the expected
     # columns: data/buyer_sales_template.csv.example
     "buyer_pos": {
-        "glob": "*sales*",
+        "glob": ["*sales*", "*sell*", "*pos*"],   # sales / sell-through / POS exports
         "roles": ["pos_sales"],
         "field_map": {
             "name": ["style_name", "product_name", "item_name", "description", "name"],

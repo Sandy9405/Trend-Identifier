@@ -108,12 +108,19 @@ function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
     setNotice(null)
     try {
       const resp = await uploadDataFile(file)
-      setNotice(resp.warning
-        ? `⚠ ${resp.warning}`
-        : `✓ ${resp.saved_as}: ${resp.rows} rows → adapter "${resp.matched_adapter}". ${resp.persistence}`)
+      const deltas = (resp.segment_changes || [])
+        .map((c) => `${c.category}/${c.sub_category} ${c.products_delta > 0 ? '+' : ''}${c.products_delta}`)
+        .join(', ')
+      setNotice({
+        kind: 'ok',
+        text: `Accepted ${resp.saved_as} → ${resp.matched_adapter} (${resp.roles.join(', ')}): `
+          + `${resp.products_parsed}/${resp.rows_in_file} rows usable. `
+          + (deltas ? `Segments changed: ${deltas}. ` : 'No segment counts changed — duplicates of existing products. ')
+          + resp.persistence,
+      })
       onDataChanged(resp)
     } catch (err) {
-      setNotice(`✗ upload failed: ${err}`)
+      setNotice({ kind: 'err', text: `Upload rejected — nothing was changed. ${err.message || err}` })
     } finally {
       setUploading(false)
     }
@@ -140,13 +147,17 @@ function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
       </label>
       <button className="upload-btn" disabled={uploading}
         onClick={() => fileRef.current?.click()}>
-        {uploading ? 'recomputing…' : 'upload data file'}
+        {uploading ? 'validating…' : 'upload data file'}
       </button>
-      <input ref={fileRef} type="file" accept=".json" style={{ display: 'none' }}
+      <input ref={fileRef} type="file" accept=".json,.csv" style={{ display: 'none' }}
         onChange={onFile} />
-      <span className="note">
-        {notice || 'segments detected from the data files — not predefined'}
-      </span>
+      {!notice && <span className="note">segments detected from the data files — not predefined</span>}
+      {notice && (
+        <div className={`upload-notice ${notice.kind}`}>
+          {notice.text}
+          <button className="dismiss" onClick={() => setNotice(null)}>✕</button>
+        </div>
+      )}
     </div>
   )
 }

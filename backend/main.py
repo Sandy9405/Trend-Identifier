@@ -18,7 +18,6 @@ slate, score, label and default recomputes. Nothing trend-specific is hardcoded.
 """
 
 import copy
-import fnmatch
 import json
 from pathlib import Path
 
@@ -118,40 +117,100 @@ def _segment_or_default(category, sub_category):
 
 @app.post("/api/upload")
 async def upload(file: UploadFile):
-    """Add or replace a data file, then re-ingest. The filename decides which
-    platform adapter it feeds (matched against the adapter globs); an uploaded
-    file with the same name as an existing one replaces it."""
+    """Add or replace a data file — VALIDATE BEFORE ACCEPT. An upload either
+    changes the computation (and the response says exactly what changed) or it
+    is rejected with the reason and the fix. A stored-but-ignored file is not
+    an acceptable outcome: that is how data silently goes missing."""
+    if "platforms" not in STATE:
+        _reload_state()   # so the before/after diff reflects this upload only
     fname = (file.filename or "").lower()
     if not (fname.endswith(".json") or fname.endswith(".csv")):
         raise HTTPException(400, "expected a .json or .csv file")
     body = await file.read()
     if fname.endswith(".json"):
         try:
-            parsed = json.loads(body)
+            json.loads(body)
         except json.JSONDecodeError as e:
             raise HTTPException(400, f"not valid JSON: {e}")
-        rows = len(parsed) if isinstance(parsed, list) else None
-    else:
-        rows = max(body.count(b"\n") - 1, 0)  # approx: header + data lines
 
-    matched_adapter = next(
-        (key for key, cfg in PLATFORM_ADAPTERS.items()
-         if fnmatch.fnmatch(file.filename.lower(), cfg["glob"].lower())), None)
+    # 1. The filename must route to an adapter, otherwise nothing can parse it.
+    matched = [(key, cfg) for key, cfg in PLATFORM_ADAPTERS.items()
+               if ingest.glob_match(fname, cfg)]
+    if not matched:
+        raise HTTPException(422, detail={
+            "accepted": False,
+            "reason": f"filename '{file.filename}' matches no adapter pattern, so no "
+                      "parser knows how to read it — rejected rather than stored-and-ignored.",
+            "how_to_fix": "Rename the file so it matches a pattern below (e.g. a POS "
+                          "export → 'buyer_sales.csv'), or add a new adapter entry in "
+                          "backend/adapter_config.py.",
+            "known_patterns": {k: c["glob"] for k, c in PLATFORM_ADAPTERS.items()},
+        })
+    adapter_key, cfg = matched[0]
 
+    # 2. Dry-run parse: does the adapter actually extract products from it?
     dest_dir = ingest.upload_dir()
+    pending = dest_dir / (".pending-" + Path(file.filename).name)
+    pending.write_bytes(body)
+    try:
+        trial = ingest._load_one(adapter_key, cfg, pending)
+        if trial.filtered_count == 0:
+            raise HTTPException(422, detail={
+                "accepted": False,
+                "reason": f"matched adapter '{adapter_key}' but 0 of {trial.raw_count} rows "
+                          "yielded a usable product — the column names don't line up with "
+                          "the adapter's field_map.",
+                "how_to_fix": "At minimum a product/style NAME column is required. Either "
+                              "rename your columns, or extend the fallback key lists for "
+                              f"'{adapter_key}' in backend/adapter_config.py.",
+                "expected_name_keys": cfg["field_map"].get("name"),
+            })
+        # POS files must carry an actual sales signal, not just style names.
+        if "pos_sales" in cfg["roles"]:
+            usable = sum(1 for p in trial.products if (p.units_sold or 0) > 0)
+            if usable == 0:
+                raise HTTPException(422, detail={
+                    "accepted": False,
+                    "reason": f"matched the POS adapter and parsed {trial.filtered_count} "
+                              "rows, but none carries units sold > 0 — the file would "
+                              "contribute no sales signal.",
+                    "how_to_fix": "Make sure a units column exists and is named one of the "
+                                  "accepted keys (or extend the list in adapter_config.py).",
+                    "expected_units_keys": cfg["field_map"].get("units_sold"),
+                })
+    except HTTPException:
+        pending.unlink(missing_ok=True)
+        raise
+    except Exception as e:
+        pending.unlink(missing_ok=True)
+        raise HTTPException(422, detail={
+            "accepted": False,
+            "reason": f"adapter '{adapter_key}' failed to parse the file: {e}",
+            "how_to_fix": "Check the file structure (array of rows, or set root_path in "
+                          "the adapter for nested wrappers).",
+        })
+
+    # 3. Commit: replace atomically, re-ingest, and report what actually changed.
+    before = {(s["category"], s["sub_category"]): s["count"]
+              for s in STATE.get("segments", [])}
     dest = dest_dir / Path(file.filename).name
-    dest.write_bytes(body)
+    pending.replace(dest)
     _reload_state()
+    after = {(s["category"], s["sub_category"]): s["count"] for s in STATE["segments"]}
+    changes = [{"category": c, "sub_category": s,
+                "products_delta": after.get((c, s), 0) - before.get((c, s), 0)}
+               for c, s in sorted(set(before) | set(after))
+               if after.get((c, s), 0) != before.get((c, s), 0)]
 
     persistent = dest_dir == ingest.DATA_DIR
     return {
+        "accepted": True,
         "saved_as": dest.name,
-        "rows": rows,
-        "matched_adapter": matched_adapter,
-        "warning": None if matched_adapter else (
-            "no adapter glob matches this filename — the file is stored but "
-            "IGNORED until you add an entry to backend/adapter_config.py "
-            f"(known globs: {[c['glob'] for c in PLATFORM_ADAPTERS.values()]})"),
+        "matched_adapter": adapter_key,
+        "roles": cfg["roles"],
+        "products_parsed": trial.filtered_count,
+        "rows_in_file": trial.raw_count,
+        "segment_changes": changes,
         "persistence": (
             "saved into /data — survives restarts" if persistent else
             "host filesystem is read-only: saved to a TEMPORARY dir, active now "

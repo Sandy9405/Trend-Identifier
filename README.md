@@ -67,8 +67,12 @@ It is a cache of the current `/data` contents and regenerates each run.
 
 Three ways, all triggering a full recompute:
 
-- **UI**: the "upload data file" button in the header → `POST /api/upload`. The backend
-  re-ingests, returns the fresh segment list, and the frontend re-renders from it.
+- **UI**: the "upload data file" button in the header → `POST /api/upload`. Uploads are
+  **validated before they are accepted** — an upload either changes the computation (the
+  response and the UI banner say exactly which segments changed and by how much) or it is
+  **rejected with the reason and the fix** (HTTP 422): filename matching no adapter pattern,
+  columns that don't map to the adapter's field_map, or a POS file with no units sold.
+  A stored-but-ignored file is never an outcome.
 - **API**: `curl -X POST -F "file=@new_scrape.json" <host>/api/upload`, or copy files into
   `/data` and call `POST /api/reload`.
 - **Files** (durable on Vercel): commit the file into `/data` and redeploy.
@@ -156,7 +160,7 @@ found. Segments with too little data show an honest empty slate rather than fake
 No sales file is attached yet, so the engine runs market-only **and says so** (the
 "Your own sales (POS)" signal shows "—" with instructions, and `/api/meta` lists
 `pos_sales` under missing roles). To activate it, drop **any CSV or JSON whose filename
-contains `sales` or `pos`** into `/data` (or use the upload button) — a column template is
+contains `sales`, `sell` or `pos`** into `/data` (or use the upload button) — a column template is
 in `data/buyer_sales_template.csv.example`. Minimum useful columns: a style **name**
 (bucketed by the same silhouette keywords) and **units_sold**; optional: returns, ASP, MRP,
 category/sub-category. The `buyer_pos` adapter ships with fallback key lists

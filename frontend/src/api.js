@@ -1,7 +1,20 @@
 // Thin API client. EVERYTHING the UI shows comes from these endpoints —
 // no trend names, scores, labels or segment lists live in the frontend.
-const j = (r) => {
-  if (!r.ok) throw new Error(`API ${r.status}`)
+const j = async (r) => {
+  if (!r.ok) {
+    // surface the backend's structured rejection (reason + how_to_fix) verbatim
+    let msg = `API ${r.status}`
+    try {
+      const d = (await r.json()).detail
+      if (typeof d === 'string') msg = d
+      else if (d?.reason) {
+        msg = d.reason + (d.how_to_fix ? ` — ${d.how_to_fix}` : '')
+        if (d.known_patterns) msg += ` Accepted filename patterns: ${
+          Object.entries(d.known_patterns).map(([k, g]) => `${k}: ${[].concat(g).join(' | ')}`).join(' · ')}`
+      }
+    } catch { /* keep generic message */ }
+    throw new Error(msg)
+  }
   return r.json()
 }
 

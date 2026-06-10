@@ -71,6 +71,17 @@ a { color: inherit; text-decoration: none; }
 .upload-btn:hover { opacity: .88; }
 .upload-btn:active { transform: scale(.97); }
 .upload-btn:disabled { opacity: .45; cursor: wait; }
+.upload-notice {
+  flex: 1 1 100%; display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; border-radius: 12px; font-size: 12.5px; line-height: 1.5;
+}
+.upload-notice.ok  { background: var(--green-tint); color: var(--green); }
+.upload-notice.err { background: var(--red-tint); color: #8c0010; }
+.upload-notice .dismiss {
+  margin-left: auto; background: none; border: none; cursor: pointer;
+  color: inherit; font-size: 12px; padding: 0 2px; opacity: .6;
+}
+.upload-notice .dismiss:hover { opacity: 1; }
 
 /* ── page header ─────────────────────────────────────────────────────────── */
 .header h1 {
