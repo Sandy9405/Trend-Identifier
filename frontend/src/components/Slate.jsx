@@ -12,10 +12,10 @@ export default function Slate({ slate, meta, onOpen }) {
           {meta?.segment && ` — ${meta.segment.category} / ${meta.segment.sub_category}`}
         </h1>
         <div className="sub">
-          Decision support under uncertainty: you commit inventory <em>before</em> demand is
-          obvious. Each trend below is scored from the raw scrapes in <code>/data</code>, with
-          every distortion shown, never hidden. The blue bar is what the signals claim; the
-          second bar is what survives the honesty checks. Bet the second bar.
+          Decision support under uncertainty: you commit inventory <em>before</em> demand
+          is obvious. Every trend below is scored from the data files, every distortion
+          shown rather than hidden. The grey bar is what the signals claim — the colored
+          bar is what survives the honesty checks. <em>Bet the second bar.</em>
         </div>
       </div>
 
@@ -35,7 +35,12 @@ export default function Slate({ slate, meta, onOpen }) {
               <h3><span className="rank">#{i + 1}</span>{t.display_name}</h3>
               <BetBadge label={t.bet.label} />
             </div>
-            <div><LeadLagTag label={t.lead_lag} /></div>
+            <div>
+              <LeadLagTag label={t.lead_lag} />
+              {t.own_sales != null && t.own_sales >= 50 && (
+                <span className="tag pos">selling in your stores</span>
+              )}
+            </div>
             <div className="why">{t.why}</div>
             <div className="row1">
               <div>

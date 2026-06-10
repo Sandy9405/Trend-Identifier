@@ -81,9 +81,22 @@ disclosed as a limitation — double-counting two snapshots of one platform woul
 every share. A filename matching no adapter is stored but ignored, with an explicit warning
 listing the known globs.
 
+### Different schemas from different sources
+
+The adapter layer is built for schema drift, so a new vendor's export needs a mapping,
+never code:
+
+- **CSV or JSON** files both ingest (CSV via its header row).
+- **Nested JSON**: `root_path: "data.products"` descends to the row array; common
+  single-list wrappers (`{"data": [...]}`) unwrap automatically.
+- **Dot paths** in `field_map` reach nested values: `"price": "pricing.selling_price"`.
+- **Fallback key lists** absorb variants in one entry:
+  `"price": ["sellingPrice", "price", "asp"]` — first non-empty wins. This is how one
+  `buyer_pos` entry already handles most POS export headers.
+
 Step by step for a brand-new source:
 
-1. Drop the new JSON file into `/data` (or POST it to `/api/upload`).
+1. Drop the new JSON/CSV file into `/data` (or POST it to `/api/upload`).
 2. If it comes from a platform already configured, name it so it matches that platform's glob
    (e.g. anything containing `myntra`) — done, nothing else to touch.
 3. If it's a **new platform**, add **one entry** to `backend/adapter_config.py` declaring:
@@ -128,6 +141,30 @@ found. Segments with too little data show an honest empty slate rather than fake
 | `india_demand` | Myntra (`ratingCount`) | Accumulated Indian purchase interest — people bought and bothered to rate | Recency (ratings accumulate over years); full-price appetite |
 | `india_supply` | Myntra + AJIO assortment | What Indian platforms are betting shelf space on, and how fresh that bet is | That anyone wants it — supply is a merchant's opinion |
 | `west_supply` | ASOS new-in feed | What Western fast-fashion just **dropped** | Demand of any kind, anywhere. It is labelled "supply, not demand" everywhere it appears |
+| `pos_sales` | *(none yet — drop a file to activate)* | The buyer's OWN till data: real local purchases and returns, the strongest demand evidence | Anything about styles never stocked — it is silent on what was never bought |
+
+## The buyer's own sales data (`pos_sales`)
+
+No sales file is attached yet, so the engine runs market-only **and says so** (the
+"Your own sales (POS)" signal shows "—" with instructions, and `/api/meta` lists
+`pos_sales` under missing roles). To activate it, drop **any CSV or JSON whose filename
+contains `sales` or `pos`** into `/data` (or use the upload button) — a column template is
+in `data/buyer_sales_template.csv.example`. Minimum useful columns: a style **name**
+(bucketed by the same silhouette keywords) and **units_sold**; optional: returns, ASP, MRP,
+category/sub-category. The `buyer_pos` adapter ships with fallback key lists
+(`units_sold` / `qty_sold` / `quantity_sold`…), so most POS/ERP export headers map without
+touching config.
+
+When present, own sales becomes the **heaviest signal** in base confidence
+(weights: own-sales 0.35, demand 0.30, supply 0.20, agreement 0.15 — renormalized
+automatically when absent), and unlocks new computed reasoning:
+
+- **Local edge**: your stores sell it while market demand is weak → flagged as an
+  advantage the market hasn't priced in.
+- **Execution gap**: market demand high but your sell-through weak → resolver asks for an
+  assortment/placement check before blaming the trend.
+- **Return-rate flag**: returns ≥ 25% of units → "sells but comes back" conflict, and the
+  top-priority resolver becomes a fit/quality audit — gross volume is not net demand.
 
 Auto-detected and disclosed in this dataset (see `/api/meta`):
 

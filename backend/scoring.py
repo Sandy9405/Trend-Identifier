@@ -78,8 +78,14 @@ MIN_PRESENCE_SHARE = 0.02
 # many days of the NEWEST upload seen on the same platform
 FRESH_WINDOW_DAYS = 120
 
-# base_confidence weights (renormalized automatically if a signal is missing)
-W_DEMAND, W_SUPPLY, W_AGREEMENT = 0.45, 0.35, 0.20
+# base_confidence weights (renormalized automatically if a signal is missing).
+# The buyer's OWN till data, when present, is the heaviest signal — real local
+# purchases beat any scraped proxy. With no pos_sales file the remaining
+# weights renormalize to ≈ demand .46 / supply .31 / agreement .23.
+W_OWN_SALES, W_DEMAND, W_SUPPLY, W_AGREEMENT = 0.35, 0.30, 0.20, 0.15
+
+# Own-sales return rate at/above this % = product comes back — fit/quality flag
+RETURN_RATE_HIGH = 25
 
 # supply_conviction blend: assortment share vs freshness
 W_SHARE, W_FRESH = 0.7, 0.3
@@ -139,6 +145,17 @@ AXIS_RULES = {
 # ════════════════════════════════════════════════════════════════════════════
 def _resolver_patterns():
     return [
+        ("high return rate in own sales",
+         lambda m: m.get("own_sales", {}).get("return_rate") is not None
+         and m["own_sales"]["return_rate"] >= RETURN_RATE_HIGH,
+         "Fit/quality audit before scaling — your own tills show it sells but "
+         "comes back. Fix the block (sizing, fabric, finish) or the volume is fake."),
+        ("market demand without own sell-through",
+         lambda m: m.get("own_sales", {}).get("value") is not None
+         and m["own_sales"]["value"] <= 25
+         and (m["demand_strength"]["value"] or 0) >= DEMAND_HIGH,
+         "Market wants it but your stores don't move it — check assortment depth, "
+         "store placement and price position before concluding the trend is wrong."),
         ("high supply + low demand",
          lambda m: m["supply_conviction"]["value"] is not None
          and m["supply_conviction"]["value"] >= SUPPLY_HIGH
@@ -203,6 +220,8 @@ def compute(platforms: list) -> dict:
     demand_platforms = [p for p in platforms if "india_demand" in p.roles]
     india_supply = [p for p in platforms if "india_supply" in p.roles]
     west_supply = [p for p in platforms if "west_supply" in p.roles]
+    pos_platforms = [p for p in platforms if "pos_sales" in p.roles
+                     and any((x.units_sold or 0) > 0 for x in p.products)]
 
     # ---- bucket membership (computed, never predefined) ----------------------
     # buckets[bucket][platform_key] = list[Product]
@@ -280,6 +299,21 @@ def compute(platforms: list) -> dict:
         raw_west[b] = statistics.mean(shares) if shares else None
     west_norm = _minmax(raw_west)
 
+    # ════════════════════════════════════════════════════════════════════════
+    # H. own_sales — the buyer's OWN till data (pos_sales role). Real local
+    #    purchases: the strongest demand evidence available, log-scaled and
+    #    normalized across buckets like A. Also yields a return-rate flag.
+    # ════════════════════════════════════════════════════════════════════════
+    raw_own, own_units, own_returns = {}, {}, {}
+    for b, by_plat in buckets.items():
+        units = sum((x.units_sold or 0)
+                    for p in pos_platforms for x in by_plat.get(p.key, []))
+        rets = sum((x.returns or 0)
+                   for p in pos_platforms for x in by_plat.get(p.key, []))
+        raw_own[b] = math.log1p(units) if pos_platforms else None
+        own_units[b], own_returns[b] = units, rets
+    own_norm = _minmax(raw_own)
+
     # ---- market-wide discount norm (for the relative discount penalty) -------
     all_inr_disc = [pr.true_discount for p in india_supply for pr in p.products
                     if pr.true_discount is not None]
@@ -337,6 +371,26 @@ def compute(platforms: list) -> dict:
                     f"Western new-drop feed ({', '.join(p.key for p in west_supply)}), "
                     f"share normalized across buckets → {wv}. This is SUPPLY (what was "
                     f"dropped), not demand — nobody has proven a Western shopper bought it."}
+
+        # --- H. own_sales (buyer's POS) ----------------------------------------
+        ov = own_norm.get(b)
+        if not pos_platforms:
+            own = {"value": None, "return_rate": None, "derivation":
+                   "No pos_sales source in the data — the buyer's own sell-through is "
+                   "unavailable; scoring runs on market signals only. Drop a sales "
+                   "export (CSV or JSON with style name + units sold) matching the "
+                   "buyer_pos adapter into /data to activate this signal."}
+        else:
+            u, r = own_units.get(b, 0), own_returns.get(b, 0)
+            rr = round(r / u * 100, 1) if u else None
+            own = {"value": ov, "units": u, "return_rate": rr, "derivation":
+                   f"{u:,.0f} units sold ({', '.join(p.key for p in pos_platforms)} — the "
+                   f"buyer's own till data), log-scaled then min-max normalized across "
+                   f"buckets → {ov}."
+                   + (f" Return rate {rr}% ({r:,.0f} returned)"
+                      + (f" — at/above {RETURN_RATE_HIGH}%: sells but comes back."
+                         if rr is not None and rr >= RETURN_RATE_HIGH else ".")
+                      if rr is not None else " No returns column found.")}
 
         # --- D. lead_lag — derived from C vs A (or B as fallback) -------------
         if dv is not None:
@@ -443,6 +497,21 @@ def compute(platforms: list) -> dict:
         if disc["value"] >= 20:
             conflicts.append(f"Median discount {disc['median_discount']}% — any demand "
                              f"reading is partly bought.")
+        if own["value"] is not None and dv is not None:
+            if own["value"] >= 60 and dv <= DEMAND_LOW:
+                agrees.append(f"Your own stores already sell this (own-sales {own['value']}) "
+                              f"despite weak market demand ({dv}) — a local edge the "
+                              f"market hasn't priced in.")
+            elif own["value"] <= 25 and dv >= DEMAND_HIGH:
+                conflicts.append(f"Market demand is high ({dv}) but your own sell-through "
+                                 f"is weak (own-sales {own['value']}) — assortment or "
+                                 f"execution gap, not necessarily a bad trend.")
+            elif own["value"] >= 60 and dv >= DEMAND_HIGH:
+                agrees.append(f"Your tills (own-sales {own['value']}) and market demand "
+                              f"({dv}) confirm each other — the strongest case possible.")
+        if own.get("return_rate") is not None and own["return_rate"] >= RETURN_RATE_HIGH:
+            conflicts.append(f"Own return rate {own['return_rate']}% — units sell but "
+                             f"come back; net demand is weaker than gross.")
         if not agrees and not conflicts:
             agrees.append("Signals sit mid-range with no sharp divergence.")
 
@@ -486,7 +555,7 @@ def compute(platforms: list) -> dict:
         }
 
         metrics = {"demand_strength": demand, "supply_conviction": supply,
-                   "west_signal": west, "lead_lag": lead_lag,
+                   "west_signal": west, "own_sales": own, "lead_lag": lead_lag,
                    "discount_penalty": disc, "supply_without_demand_penalty": swd,
                    "cross_platform_agreement": agreement, "replication": replication}
 
@@ -513,7 +582,7 @@ def compute(platforms: list) -> dict:
             "newest_upload_proxy": str(plat_anchor[p.key]) if plat_anchor[p.key] else None,
             "limitations": p.limitations,
         } for p in platforms],
-        "missing_roles": [r for r in ("india_demand", "india_supply", "west_supply")
+        "missing_roles": [r for r in ("india_demand", "india_supply", "west_supply", "pos_sales")
                           if not any(r in p.roles for p in platforms)],
         "buckets_found": len(buckets),
         "products_total": total_count,
@@ -546,7 +615,8 @@ def _finalize(d: dict, overrides: dict = None):
         repl["derivation"] += f" Buyer overrides applied → {repl['value']}."
 
     # --- base_confidence: weighted average of the positive signals present ----
-    parts = [(m["demand_strength"]["value"], W_DEMAND, "demand"),
+    parts = [(m.get("own_sales", {}).get("value"), W_OWN_SALES, "own-sales"),
+             (m["demand_strength"]["value"], W_DEMAND, "demand"),
              (m["supply_conviction"]["value"], W_SUPPLY, "supply"),
              (m["cross_platform_agreement"]["value"], W_AGREEMENT, "agreement")]
     avail = [(v, w, n) for v, w, n in parts if v is not None]
@@ -617,4 +687,5 @@ def build_slate(computed: dict) -> list:
         "demand": d["metrics"]["demand_strength"]["value"],
         "supply": d["metrics"]["supply_conviction"]["value"],
         "west": d["metrics"]["west_signal"]["value"],
+        "own_sales": d["metrics"]["own_sales"]["value"],
     } for d in rows]

@@ -7,17 +7,31 @@ Drop a new JSON file into /data, add (or edit) one entry below — no logic chan
 
 Each entry declares:
 
-  glob            : case-insensitive filename glob matched against files in /data.
+  glob            : case-insensitive filename glob matched against files in /data
+                    (.json or .csv — CSVs are read via their header row).
   roles           : list of roles this platform plays. One platform can play several.
                       "india_demand"  -> its rating_count is treated as a DEMAND signal
                                          (auto-disabled if rating_count is absent/all-zero)
                       "india_supply"  -> its assortment counts as Indian SUPPLY conviction
                       "west_supply"   -> what Western fast-fashion DROPPED. Supply only,
                                          NEVER demand — labelled as such everywhere.
-  field_map       : canonical field -> raw JSON key, or a LIST of keys tried in order
-                    (first non-empty wins). Canonical fields:
+                      "pos_sales"     -> the BUYER'S OWN till data. The strongest proof of
+                                         local demand; activates own-sales scoring the
+                                         moment a matching file lands in /data.
+  field_map       : canonical field -> raw key. Schema tolerance, so future sources with
+                    different shapes need only a mapping, never code:
+                      - plain key:        "price": "sellingPrice"
+                      - dot path:         "price": "pricing.selling_price"   (nested JSON)
+                      - fallback list:    "price": ["sellingPrice", "price", "asp"]
+                                          (first non-empty wins — one entry absorbs
+                                           several vendor schema variants)
+                    Canonical fields:
                       name, brand, price, mrp, rating, rating_count, in_stock,
-                      image_url, product_url
+                      image_url, product_url, category, sub_category,
+                      units_sold, returns          (the last two for pos_sales files)
+  root_path       : optional dot path to the row array when the JSON is an object
+                    wrapper, e.g. "data.products". Undeclared single-list wrappers
+                    are also unwrapped automatically.
   discount_mode   : "recompute_from_price_mrp" — the only supported mode, on purpose.
                     Scraper-provided discount fields are never trusted (Myntra's
                     `discountPercent` is literally the rupee saving, e.g. 599 "percent").
@@ -90,6 +104,40 @@ PLATFORM_ADAPTERS = {
         "discount_mode": "recompute_from_price_mrp",
         # https://assets.ajio.com/medias/sys_master/root1/20250918/...
         "date_proxy_regex": r"/(?P<y>20\d{2})(?P<m>\d{2})(?P<d>\d{2})/",
+        "currency": "INR",
+    },
+
+    # ── THE BUYER'S OWN SALES DATA ─────────────────────────────────────────
+    # Activates automatically when any file whose name contains "sales" or
+    # "pos" lands in /data (CSV export from the buyer's POS/ERP, or JSON).
+    # No file present → the engine runs market-only and SAYS SO. The fallback
+    # key lists below absorb the usual export-column variants, so most ERP
+    # dumps work without touching this entry. Template with the expected
+    # columns: data/buyer_sales_template.csv.example
+    "buyer_pos": {
+        "glob": "*sales*",
+        "roles": ["pos_sales"],
+        "field_map": {
+            "name": ["style_name", "product_name", "item_name", "description", "name"],
+            "brand": ["brand", "label"],
+            "price": ["asp", "avg_selling_price", "selling_price", "price"],
+            "mrp": ["mrp", "list_price"],
+            "units_sold": ["units_sold", "qty_sold", "quantity_sold", "units", "net_units"],
+            "returns": ["units_returned", "returns", "return_qty"],
+            "rating": None,
+            "rating_count": None,
+            "in_stock": None,
+            "image_url": None,
+            "product_url": None,
+            "category": ["category", "gender", "segment"],
+            "sub_category": ["sub_category", "subcategory", "article_type"],
+        },
+        # POS exports usually carry no gender/sub-category columns; assume the
+        # buyer's own category unless a row says otherwise:
+        "default_category": "women",
+        "default_sub_category": "tops",
+        "discount_mode": "recompute_from_price_mrp",
+        "date_proxy_regex": None,
         "currency": "INR",
     },
 

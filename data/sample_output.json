@@ -196,12 +196,14 @@
         ]
       }
     ],
-    "missing_roles": [],
+    "missing_roles": [
+      "pos_sales"
+    ],
     "buckets_found": 16,
     "products_total": 1242,
     "products_unbucketed": 501,
     "qualification_rule": "bucket needs \u2265 10 products to enter the slate",
-    "computed_at": "2026-06-09",
+    "computed_at": "2026-06-10",
     "note": "Every number above is recomputed from the files in /data at startup. Nothing trend-specific is hardcoded.",
     "segment": {
       "category": "women",
@@ -216,13 +218,13 @@
       "bet": {
         "label": "Deeper Buy",
         "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
-        "rule": "adjusted 72.1 \u2265 65"
+        "rule": "adjusted 69.7 \u2265 65"
       },
       "lead_lag": "Landed",
       "confidence": {
-        "base": 72.1,
-        "adjusted": 72.1,
-        "derivation": "base = demand 96.0\u00d70.45 + supply 82.5\u00d70.35 + agreement 0.0\u00d70.20 = 72.1; adjusted = base 72.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 72.1."
+        "base": 69.7,
+        "adjusted": 69.7,
+        "derivation": "base = demand 96.0\u00d70.46 + supply 82.5\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 69.7; adjusted = base 69.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 69.7."
       },
       "why": "Landed; demand 96.0, Indian supply 82.5",
       "counts": {
@@ -235,7 +237,8 @@
       },
       "demand": 96.0,
       "supply": 82.5,
-      "west": 100.0
+      "west": 100.0,
+      "own_sales": null
     },
     {
       "bucket": "embroidered",
@@ -243,13 +246,13 @@
       "bet": {
         "label": "Deeper Buy",
         "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
-        "rule": "adjusted 67.9 \u2265 65"
+        "rule": "adjusted 67.0 \u2265 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 73.9,
-        "adjusted": 67.9,
-        "derivation": "base = demand 79.8\u00d70.45 + supply 80.0\u00d70.35 + agreement 50.0\u00d70.20 = 73.9; adjusted = base 73.9 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.9."
+        "base": 73.0,
+        "adjusted": 67.0,
+        "derivation": "base = demand 79.8\u00d70.46 + supply 80.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 73.0; adjusted = base 73.0 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.0."
       },
       "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts",
       "counts": {
@@ -262,7 +265,8 @@
       },
       "demand": 79.8,
       "supply": 80.0,
-      "west": 21.8
+      "west": 21.8,
+      "own_sales": null
     },
     {
       "bucket": "puff_balloon",
@@ -270,13 +274,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 62.3 < 65"
+        "rule": "40 \u2264 adjusted 63.0 < 65"
       },
       "lead_lag": "India-led",
       "confidence": {
-        "base": 62.3,
-        "adjusted": 62.3,
-        "derivation": "base = demand 82.8\u00d70.45 + supply 43.0\u00d70.35 + agreement 50.0\u00d70.20 = 62.3; adjusted = base 62.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 62.3."
+        "base": 63.0,
+        "adjusted": 63.0,
+        "derivation": "base = demand 82.8\u00d70.46 + supply 43.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
       },
       "why": "India-led; demand 82.8, Indian supply 43.0",
       "counts": {
@@ -288,34 +292,8 @@
       },
       "demand": 82.8,
       "supply": 43.0,
-      "west": 0.0
-    },
-    {
-      "bucket": "crop",
-      "display_name": "Crop",
-      "bet": {
-        "label": "Small Trial",
-        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.8 < 65"
-      },
-      "lead_lag": "Late-cycle (West moved on)",
-      "confidence": {
-        "base": 62.8,
-        "adjusted": 61.8,
-        "derivation": "base = demand 100.0\u00d70.45 + supply 50.9\u00d70.35 + agreement 0.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
-      },
-      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
-      "counts": {
-        "total": 75,
-        "by_platform": {
-          "myntra": 52,
-          "ajio": 8,
-          "asos": 15
-        }
-      },
-      "demand": 100.0,
-      "supply": 50.9,
-      "west": 14.9
+      "west": 0.0,
+      "own_sales": null
     },
     {
       "bucket": "corset_fitted",
@@ -323,13 +301,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.8 < 65"
+        "rule": "40 \u2264 adjusted 62.2 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 62.8,
-        "adjusted": 61.8,
-        "derivation": "base = demand 80.3\u00d70.45 + supply 47.5\u00d70.35 + agreement 50.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
+        "base": 63.2,
+        "adjusted": 62.2,
+        "derivation": "base = demand 80.3\u00d70.46 + supply 47.5\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.2; adjusted = base 63.2 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 62.2."
       },
       "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts",
       "counts": {
@@ -342,7 +320,8 @@
       },
       "demand": 80.3,
       "supply": 47.5,
-      "west": 18.8
+      "west": 18.8,
+      "own_sales": null
     },
     {
       "bucket": "peplum",
@@ -350,13 +329,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.6 < 65"
+        "rule": "40 \u2264 adjusted 61.4 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 66.6,
-        "adjusted": 61.6,
-        "derivation": "base = demand 78.1\u00d70.45 + supply 61.2\u00d70.35 + agreement 50.0\u00d70.20 = 66.6; adjusted = base 66.6 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.6."
+        "base": 66.4,
+        "adjusted": 61.4,
+        "derivation": "base = demand 78.1\u00d70.46 + supply 61.2\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 66.4; adjusted = base 66.4 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.4."
       },
       "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts",
       "counts": {
@@ -369,7 +348,36 @@
       },
       "demand": 78.1,
       "supply": 61.2,
-      "west": 7.9
+      "west": 7.9,
+      "own_sales": null
+    },
+    {
+      "bucket": "crop",
+      "display_name": "Crop",
+      "bet": {
+        "label": "Small Trial",
+        "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
+        "rule": "40 \u2264 adjusted 60.8 < 65"
+      },
+      "lead_lag": "Late-cycle (West moved on)",
+      "confidence": {
+        "base": 61.8,
+        "adjusted": 60.8,
+        "derivation": "base = demand 100.0\u00d70.46 + supply 50.9\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 61.8; adjusted = base 61.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 60.8."
+      },
+      "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
+      "counts": {
+        "total": 75,
+        "by_platform": {
+          "myntra": 52,
+          "ajio": 8,
+          "asos": 15
+        }
+      },
+      "demand": 100.0,
+      "supply": 50.9,
+      "west": 14.9,
+      "own_sales": null
     },
     {
       "bucket": "shirt",
@@ -377,13 +385,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 54.4 < 65"
+        "rule": "40 \u2264 adjusted 53.3 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 58.4,
-        "adjusted": 54.4,
-        "derivation": "base = demand 89.9\u00d70.45 + supply 51.4\u00d70.35 + agreement 0.0\u00d70.20 = 58.4; adjusted = base 58.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 54.4."
+        "base": 57.3,
+        "adjusted": 53.3,
+        "derivation": "base = demand 89.9\u00d70.46 + supply 51.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 57.3; adjusted = base 57.3 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 53.3."
       },
       "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts",
       "counts": {
@@ -395,7 +403,8 @@
       },
       "demand": 89.9,
       "supply": 51.4,
-      "west": 0.0
+      "west": 0.0,
+      "own_sales": null
     },
     {
       "bucket": "mesh_sheer",
@@ -403,13 +412,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 44.8 < 65"
+        "rule": "40 \u2264 adjusted 44.3 < 65"
       },
       "lead_lag": "Landed",
       "confidence": {
-        "base": 44.8,
-        "adjusted": 44.8,
-        "derivation": "base = demand 74.9\u00d70.45 + supply 31.6\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
+        "base": 44.3,
+        "adjusted": 44.3,
+        "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
       },
       "why": "Landed; demand 74.9, Indian supply 31.6",
       "counts": {
@@ -422,7 +431,8 @@
       },
       "demand": 74.9,
       "supply": 31.6,
-      "west": 66.3
+      "west": 66.3,
+      "own_sales": null
     },
     {
       "bucket": "square_neck",
@@ -430,13 +440,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 43.4 < 65"
+        "rule": "40 \u2264 adjusted 43.2 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "confidence": {
-        "base": 43.4,
-        "adjusted": 43.4,
-        "derivation": "base = demand 77.4\u00d70.45 + supply 24.4\u00d70.35 + agreement 0.0\u00d70.20 = 43.4; adjusted = base 43.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.4."
+        "base": 43.2,
+        "adjusted": 43.2,
+        "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
       },
       "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4",
       "counts": {
@@ -449,7 +459,8 @@
       },
       "demand": 77.4,
       "supply": 24.4,
-      "west": 5.9
+      "west": 5.9,
+      "own_sales": null
     },
     {
       "bucket": "tie_knot",
@@ -457,13 +468,13 @@
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 41.1 < 65"
+        "rule": "40 \u2264 adjusted 40.5 < 65"
       },
       "lead_lag": "India-led",
       "confidence": {
-        "base": 41.1,
-        "adjusted": 41.1,
-        "derivation": "base = demand 65.4\u00d70.45 + supply 33.4\u00d70.35 + agreement 0.0\u00d70.20 = 41.1; adjusted = base 41.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 41.1."
+        "base": 40.5,
+        "adjusted": 40.5,
+        "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
       },
       "why": "India-led; demand 65.4, Indian supply 33.4",
       "counts": {
@@ -476,7 +487,8 @@
       },
       "demand": 65.4,
       "supply": 33.4,
-      "west": 23.8
+      "west": 23.8,
+      "own_sales": null
     },
     {
       "bucket": "ruffle",
@@ -484,13 +496,13 @@
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 37.9 < 40"
+        "rule": "adjusted 38.7 < 40"
       },
       "lead_lag": "Unclear",
       "confidence": {
-        "base": 37.9,
-        "adjusted": 37.9,
-        "derivation": "base = demand 40.4\u00d70.45 + supply 27.7\u00d70.35 + agreement 50.0\u00d70.20 = 37.9; adjusted = base 37.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 37.9."
+        "base": 38.7,
+        "adjusted": 38.7,
+        "derivation": "base = demand 40.4\u00d70.46 + supply 27.7\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 38.7; adjusted = base 38.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 38.7."
       },
       "why": "Unclear; demand 40.4, Indian supply 27.7",
       "counts": {
@@ -503,7 +515,8 @@
       },
       "demand": 40.4,
       "supply": 27.7,
-      "west": 12.9
+      "west": 12.9,
+      "own_sales": null
     },
     {
       "bucket": "wrap",
@@ -511,13 +524,13 @@
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 27.9 < 40"
+        "rule": "adjusted 27.6 < 40"
       },
       "lead_lag": "Unclear",
       "confidence": {
-        "base": 27.9,
-        "adjusted": 27.9,
-        "derivation": "base = demand 46.2\u00d70.45 + supply 20.3\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
+        "base": 27.6,
+        "adjusted": 27.6,
+        "derivation": "base = demand 46.2\u00d70.46 + supply 20.3\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 27.6; adjusted = base 27.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.6."
       },
       "why": "Unclear; demand 46.2, Indian supply 20.3",
       "counts": {
@@ -530,7 +543,8 @@
       },
       "demand": 46.2,
       "supply": 20.3,
-      "west": 3.0
+      "west": 3.0,
+      "own_sales": null
     },
     {
       "bucket": "halter",
@@ -538,13 +552,13 @@
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 24.6 < 40"
+        "rule": "adjusted 25.0 < 40"
       },
       "lead_lag": "Early (West ahead)",
       "confidence": {
-        "base": 35.7,
-        "adjusted": 24.6,
-        "derivation": "base = demand 35.7\u00d70.45 + supply 27.4\u00d70.35 + agreement 50.0\u00d70.20 = 35.7; adjusted = base 35.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.6."
+        "base": 36.4,
+        "adjusted": 25.0,
+        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
       },
       "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%",
       "counts": {
@@ -556,7 +570,8 @@
       },
       "demand": 35.7,
       "supply": 27.4,
-      "west": 82.2
+      "west": 82.2,
+      "own_sales": null
     },
     {
       "bucket": "bandeau_tube",
@@ -564,13 +579,13 @@
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 10.2 < 40"
+        "rule": "adjusted 9.7 < 40"
       },
       "lead_lag": "Unclear",
       "confidence": {
-        "base": 10.2,
-        "adjusted": 10.2,
-        "derivation": "base = demand 10.4\u00d70.45 + supply 15.8\u00d70.35 + agreement 0.0\u00d70.20 = 10.2; adjusted = base 10.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 10.2."
+        "base": 9.7,
+        "adjusted": 9.7,
+        "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
       },
       "why": "Unclear; demand 10.4, Indian supply 15.8",
       "counts": {
@@ -583,7 +598,8 @@
       },
       "demand": 10.4,
       "supply": 15.8,
-      "west": 33.7
+      "west": 33.7,
+      "own_sales": null
     },
     {
       "bucket": "smocked",
@@ -591,13 +607,13 @@
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 4.1 < 40"
+        "rule": "adjusted 3.6 < 40"
       },
       "lead_lag": "Unclear",
       "confidence": {
-        "base": 4.1,
-        "adjusted": 4.1,
-        "derivation": "base = demand 0.0\u00d70.45 + supply 11.6\u00d70.35 + agreement 0.0\u00d70.20 = 4.1; adjusted = base 4.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 4.1."
+        "base": 3.6,
+        "adjusted": 3.6,
+        "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
       },
       "why": "Unclear; demand 0.0, Indian supply 11.6",
       "counts": {
@@ -610,7 +626,8 @@
       },
       "demand": 0.0,
       "supply": 11.6,
-      "west": 20.8
+      "west": 20.8,
+      "own_sales": null
     },
     {
       "bucket": "off_shoulder",
@@ -624,7 +641,7 @@
       "confidence": {
         "base": 1.7,
         "adjusted": 1.7,
-        "derivation": "base = demand 3.7\u00d70.45 + supply 0.0\u00d70.35 + agreement 0.0\u00d70.20 = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
+        "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
       },
       "why": "Unclear; demand 3.7, Indian supply 0.0",
       "counts": {
@@ -637,7 +654,8 @@
       },
       "demand": 3.7,
       "supply": 0.0,
-      "west": 10.9
+      "west": 10.9,
+      "own_sales": null
     }
   ],
   "details": {
@@ -669,6 +687,11 @@
         "west_signal": {
           "value": 14.9,
           "derivation": "15 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 14.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -761,14 +784,14 @@
         }
       },
       "confidence": {
-        "base": 62.8,
-        "adjusted": 61.8,
-        "derivation": "base = demand 100.0\u00d70.45 + supply 50.9\u00d70.35 + agreement 0.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
+        "base": 61.8,
+        "adjusted": 60.8,
+        "derivation": "base = demand 100.0\u00d70.46 + supply 50.9\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 61.8; adjusted = base 61.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 60.8."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.8 < 65"
+        "rule": "40 \u2264 adjusted 60.8 < 65"
       },
       "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts"
     },
@@ -803,6 +826,11 @@
         "west_signal": {
           "value": 100.0,
           "derivation": "101 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Landed",
@@ -896,14 +924,14 @@
         }
       },
       "confidence": {
-        "base": 72.1,
-        "adjusted": 72.1,
-        "derivation": "base = demand 96.0\u00d70.45 + supply 82.5\u00d70.35 + agreement 0.0\u00d70.20 = 72.1; adjusted = base 72.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 72.1."
+        "base": 69.7,
+        "adjusted": 69.7,
+        "derivation": "base = demand 96.0\u00d70.46 + supply 82.5\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 69.7; adjusted = base 69.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 69.7."
       },
       "bet": {
         "label": "Deeper Buy",
         "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
-        "rule": "adjusted 72.1 \u2265 65"
+        "rule": "adjusted 69.7 \u2265 65"
       },
       "why": "Landed; demand 96.0, Indian supply 82.5"
     },
@@ -935,6 +963,11 @@
         "west_signal": {
           "value": 7.9,
           "derivation": "8 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -1027,14 +1060,14 @@
         }
       },
       "confidence": {
-        "base": 66.6,
-        "adjusted": 61.6,
-        "derivation": "base = demand 78.1\u00d70.45 + supply 61.2\u00d70.35 + agreement 50.0\u00d70.20 = 66.6; adjusted = base 66.6 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.6."
+        "base": 66.4,
+        "adjusted": 61.4,
+        "derivation": "base = demand 78.1\u00d70.46 + supply 61.2\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 66.4; adjusted = base 66.4 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.4."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.6 < 65"
+        "rule": "40 \u2264 adjusted 61.4 < 65"
       },
       "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts"
     },
@@ -1069,6 +1102,11 @@
         "west_signal": {
           "value": 21.8,
           "derivation": "22 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 21.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -1161,14 +1199,14 @@
         }
       },
       "confidence": {
-        "base": 73.9,
-        "adjusted": 67.9,
-        "derivation": "base = demand 79.8\u00d70.45 + supply 80.0\u00d70.35 + agreement 50.0\u00d70.20 = 73.9; adjusted = base 73.9 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.9."
+        "base": 73.0,
+        "adjusted": 67.0,
+        "derivation": "base = demand 79.8\u00d70.46 + supply 80.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 73.0; adjusted = base 73.0 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.0."
       },
       "bet": {
         "label": "Deeper Buy",
         "band": "anchor SKUs, ~\u20b98\u201315L open-to-buy",
-        "rule": "adjusted 67.9 \u2265 65"
+        "rule": "adjusted 67.0 \u2265 65"
       },
       "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts"
     },
@@ -1199,6 +1237,11 @@
         "west_signal": {
           "value": 0.0,
           "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -1291,14 +1334,14 @@
         }
       },
       "confidence": {
-        "base": 58.4,
-        "adjusted": 54.4,
-        "derivation": "base = demand 89.9\u00d70.45 + supply 51.4\u00d70.35 + agreement 0.0\u00d70.20 = 58.4; adjusted = base 58.4 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 54.4."
+        "base": 57.3,
+        "adjusted": 53.3,
+        "derivation": "base = demand 89.9\u00d70.46 + supply 51.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 57.3; adjusted = base 57.3 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 53.3."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 54.4 < 65"
+        "rule": "40 \u2264 adjusted 53.3 < 65"
       },
       "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts"
     },
@@ -1331,6 +1374,11 @@
         "west_signal": {
           "value": 5.9,
           "derivation": "6 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -1423,14 +1471,14 @@
         }
       },
       "confidence": {
-        "base": 43.4,
-        "adjusted": 43.4,
-        "derivation": "base = demand 77.4\u00d70.45 + supply 24.4\u00d70.35 + agreement 0.0\u00d70.20 = 43.4; adjusted = base 43.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.4."
+        "base": 43.2,
+        "adjusted": 43.2,
+        "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 43.4 < 65"
+        "rule": "40 \u2264 adjusted 43.2 < 65"
       },
       "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4"
     },
@@ -1466,6 +1514,11 @@
         "west_signal": {
           "value": 66.3,
           "derivation": "67 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 66.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Landed",
@@ -1560,14 +1613,14 @@
         }
       },
       "confidence": {
-        "base": 44.8,
-        "adjusted": 44.8,
-        "derivation": "base = demand 74.9\u00d70.45 + supply 31.6\u00d70.35 + agreement 0.0\u00d70.20 = 44.8; adjusted = base 44.8 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.8."
+        "base": 44.3,
+        "adjusted": 44.3,
+        "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 44.8 < 65"
+        "rule": "40 \u2264 adjusted 44.3 < 65"
       },
       "why": "Landed; demand 74.9, Indian supply 31.6"
     },
@@ -1599,6 +1652,11 @@
         "west_signal": {
           "value": 0.0,
           "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "India-led",
@@ -1691,14 +1749,14 @@
         }
       },
       "confidence": {
-        "base": 62.3,
-        "adjusted": 62.3,
-        "derivation": "base = demand 82.8\u00d70.45 + supply 43.0\u00d70.35 + agreement 50.0\u00d70.20 = 62.3; adjusted = base 62.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 62.3."
+        "base": 63.0,
+        "adjusted": 63.0,
+        "derivation": "base = demand 82.8\u00d70.46 + supply 43.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 62.3 < 65"
+        "rule": "40 \u2264 adjusted 63.0 < 65"
       },
       "why": "India-led; demand 82.8, Indian supply 43.0"
     },
@@ -1731,6 +1789,11 @@
         "west_signal": {
           "value": 23.8,
           "derivation": "24 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 23.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "India-led",
@@ -1823,14 +1886,14 @@
         }
       },
       "confidence": {
-        "base": 41.1,
-        "adjusted": 41.1,
-        "derivation": "base = demand 65.4\u00d70.45 + supply 33.4\u00d70.35 + agreement 0.0\u00d70.20 = 41.1; adjusted = base 41.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 41.1."
+        "base": 40.5,
+        "adjusted": 40.5,
+        "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 41.1 < 65"
+        "rule": "40 \u2264 adjusted 40.5 < 65"
       },
       "why": "India-led; demand 65.4, Indian supply 33.4"
     },
@@ -1865,6 +1928,11 @@
         "west_signal": {
           "value": 18.8,
           "derivation": "19 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -1957,14 +2025,14 @@
         }
       },
       "confidence": {
-        "base": 62.8,
-        "adjusted": 61.8,
-        "derivation": "base = demand 80.3\u00d70.45 + supply 47.5\u00d70.35 + agreement 50.0\u00d70.20 = 62.8; adjusted = base 62.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 61.8."
+        "base": 63.2,
+        "adjusted": 62.2,
+        "derivation": "base = demand 80.3\u00d70.46 + supply 47.5\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.2; adjusted = base 63.2 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 62.2."
       },
       "bet": {
         "label": "Small Trial",
         "band": "3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through",
-        "rule": "40 \u2264 adjusted 61.8 < 65"
+        "rule": "40 \u2264 adjusted 62.2 < 65"
       },
       "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts"
     },
@@ -1996,6 +2064,11 @@
         "west_signal": {
           "value": 3.0,
           "derivation": "3 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 3.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -2088,14 +2161,14 @@
         }
       },
       "confidence": {
-        "base": 27.9,
-        "adjusted": 27.9,
-        "derivation": "base = demand 46.2\u00d70.45 + supply 20.3\u00d70.35 + agreement 0.0\u00d70.20 = 27.9; adjusted = base 27.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.9."
+        "base": 27.6,
+        "adjusted": 27.6,
+        "derivation": "base = demand 46.2\u00d70.46 + supply 20.3\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 27.6; adjusted = base 27.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.6."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 27.9 < 40"
+        "rule": "adjusted 27.6 < 40"
       },
       "why": "Unclear; demand 46.2, Indian supply 20.3"
     },
@@ -2129,6 +2202,11 @@
         "west_signal": {
           "value": 12.9,
           "derivation": "13 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 12.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -2221,14 +2299,14 @@
         }
       },
       "confidence": {
-        "base": 37.9,
-        "adjusted": 37.9,
-        "derivation": "base = demand 40.4\u00d70.45 + supply 27.7\u00d70.35 + agreement 50.0\u00d70.20 = 37.9; adjusted = base 37.9 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 37.9."
+        "base": 38.7,
+        "adjusted": 38.7,
+        "derivation": "base = demand 40.4\u00d70.46 + supply 27.7\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 38.7; adjusted = base 38.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 38.7."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 37.9 < 40"
+        "rule": "adjusted 38.7 < 40"
       },
       "why": "Unclear; demand 40.4, Indian supply 27.7"
     },
@@ -2262,6 +2340,11 @@
         "west_signal": {
           "value": 20.8,
           "derivation": "21 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -2354,14 +2437,14 @@
         }
       },
       "confidence": {
-        "base": 4.1,
-        "adjusted": 4.1,
-        "derivation": "base = demand 0.0\u00d70.45 + supply 11.6\u00d70.35 + agreement 0.0\u00d70.20 = 4.1; adjusted = base 4.1 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 4.1."
+        "base": 3.6,
+        "adjusted": 3.6,
+        "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 4.1 < 40"
+        "rule": "adjusted 3.6 < 40"
       },
       "why": "Unclear; demand 0.0, Indian supply 11.6"
     },
@@ -2393,6 +2476,11 @@
         "west_signal": {
           "value": 82.2,
           "derivation": "83 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.2. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Early (West ahead)",
@@ -2487,14 +2575,14 @@
         }
       },
       "confidence": {
-        "base": 35.7,
-        "adjusted": 24.6,
-        "derivation": "base = demand 35.7\u00d70.45 + supply 27.4\u00d70.35 + agreement 50.0\u00d70.20 = 35.7; adjusted = base 35.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 24.6."
+        "base": 36.4,
+        "adjusted": 25.0,
+        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 24.6 < 40"
+        "rule": "adjusted 25.0 < 40"
       },
       "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%"
     },
@@ -2527,6 +2615,11 @@
         "west_signal": {
           "value": 33.7,
           "derivation": "34 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 33.7. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -2619,14 +2712,14 @@
         }
       },
       "confidence": {
-        "base": 10.2,
-        "adjusted": 10.2,
-        "derivation": "base = demand 10.4\u00d70.45 + supply 15.8\u00d70.35 + agreement 0.0\u00d70.20 = 10.2; adjusted = base 10.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 10.2."
+        "base": 9.7,
+        "adjusted": 9.7,
+        "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
       },
       "bet": {
         "label": "Monitor",
         "band": "no buy \u2014 watch list, recheck next data drop",
-        "rule": "adjusted 10.2 < 40"
+        "rule": "adjusted 9.7 < 40"
       },
       "why": "Unclear; demand 10.4, Indian supply 15.8"
     },
@@ -2660,6 +2753,11 @@
         "west_signal": {
           "value": 10.9,
           "derivation": "11 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+        },
+        "own_sales": {
+          "value": null,
+          "return_rate": null,
+          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -2754,7 +2852,7 @@
       "confidence": {
         "base": 1.7,
         "adjusted": 1.7,
-        "derivation": "base = demand 3.7\u00d70.45 + supply 0.0\u00d70.35 + agreement 0.0\u00d70.20 = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
+        "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
       },
       "bet": {
         "label": "Monitor",

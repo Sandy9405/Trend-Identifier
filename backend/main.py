@@ -121,15 +121,18 @@ async def upload(file: UploadFile):
     """Add or replace a data file, then re-ingest. The filename decides which
     platform adapter it feeds (matched against the adapter globs); an uploaded
     file with the same name as an existing one replaces it."""
-    if not file.filename or not file.filename.lower().endswith(".json"):
-        raise HTTPException(400, "expected a .json file")
+    fname = (file.filename or "").lower()
+    if not (fname.endswith(".json") or fname.endswith(".csv")):
+        raise HTTPException(400, "expected a .json or .csv file")
     body = await file.read()
-    try:
-        parsed = json.loads(body)
-    except json.JSONDecodeError as e:
-        raise HTTPException(400, f"not valid JSON: {e}")
-    if not isinstance(parsed, list) or not parsed:
-        raise HTTPException(400, "expected a non-empty JSON array of product rows")
+    if fname.endswith(".json"):
+        try:
+            parsed = json.loads(body)
+        except json.JSONDecodeError as e:
+            raise HTTPException(400, f"not valid JSON: {e}")
+        rows = len(parsed) if isinstance(parsed, list) else None
+    else:
+        rows = max(body.count(b"\n") - 1, 0)  # approx: header + data lines
 
     matched_adapter = next(
         (key for key, cfg in PLATFORM_ADAPTERS.items()
@@ -143,7 +146,7 @@ async def upload(file: UploadFile):
     persistent = dest_dir == ingest.DATA_DIR
     return {
         "saved_as": dest.name,
-        "rows": len(parsed),
+        "rows": rows,
         "matched_adapter": matched_adapter,
         "warning": None if matched_adapter else (
             "no adapter glob matches this filename — the file is stored but "

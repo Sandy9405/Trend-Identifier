@@ -38,11 +38,12 @@ export default function TrendDetail({ trend, seg, onBack }) {
   }
 
   const positives = [
+    ['Your own sales (POS)', m.own_sales],
     ['Demand strength (India)', m.demand_strength],
     ['Supply conviction (India)', m.supply_conviction],
     ['West signal — supply, not demand', m.west_signal],
     ['Cross-platform agreement', m.cross_platform_agreement],
-  ]
+  ].filter(([, sig]) => sig)
 
   return (
     <>

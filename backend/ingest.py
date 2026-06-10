@@ -18,6 +18,7 @@ Nothing here knows about trends or scoring. It only:
         → "unknown" (never silently discarded; counted and disclosed).
 """
 
+import csv
 import fnmatch
 import json
 import os
@@ -134,6 +135,8 @@ class Product:
     currency: str
     category: str = "unknown"         # women / men / kids / unknown
     sub_category: str = "unknown"     # tops / shirts / jeans / ... / unknown
+    units_sold: Optional[float] = None  # pos_sales rows: the buyer's own till data
+    returns: Optional[float] = None     # pos_sales rows: units returned
 
 
 @dataclass
@@ -151,13 +154,25 @@ class PlatformData:
     has_date_regex: bool = False
 
 
+def _dig(raw: dict, path: str):
+    """Dot-path lookup for nested schemas: 'pricing.mrp' → raw['pricing']['mrp']."""
+    cur = raw
+    for part in path.split("."):
+        if not isinstance(cur, dict):
+            return None
+        cur = cur.get(part)
+    return cur
+
+
 def _get(raw: dict, key):
-    """field_map value can be a key, a list of fallback keys, or None."""
+    """field_map value can be a key, a dot-path into nested objects, a list of
+    fallback keys tried in order (first non-empty wins — lets ONE adapter entry
+    absorb several vendor schema variants), or None."""
     if key is None:
         return None
     keys = key if isinstance(key, list) else [key]
     for k in keys:
-        v = raw.get(k)
+        v = _dig(raw, k) if "." in k else raw.get(k)
         if v not in (None, ""):
             return v
     return None
@@ -210,10 +225,28 @@ def data_files() -> list:
         dirs.append(up)          # later dirs win on name clash
     for d in dirs:
         if d.is_dir():
-            for f in d.glob("*.json"):
-                if f.name != "sample_output.json":
-                    seen[f.name] = f
+            for pattern in ("*.json", "*.csv"):
+                for f in d.glob(pattern):
+                    if f.name != "sample_output.json":
+                        seen[f.name] = f
     return sorted(seen.values(), key=lambda f: f.name)
+
+
+def read_rows(path: Path, cfg: dict) -> list:
+    """Schema-tolerant row reader: JSON array, JSON object with the array nested
+    under cfg['root_path'] (dot path, e.g. 'data.products'), or CSV (header row
+    → dicts). Different sources, one canonical shape downstream."""
+    if path.suffix.lower() == ".csv":
+        with open(path, newline="", encoding="utf-8-sig") as fh:
+            return list(csv.DictReader(fh))
+    raw = json.loads(path.read_text())
+    if cfg.get("root_path"):
+        raw = _dig(raw, cfg["root_path"]) if isinstance(raw, dict) else raw
+    if isinstance(raw, dict):
+        # no root_path declared: take the first list value found (common
+        # {"data": [...]} / {"products": [...]} wrappers)
+        raw = next((v for v in raw.values() if isinstance(v, list)), [])
+    return raw if isinstance(raw, list) else []
 
 
 def load_platforms() -> list:
@@ -242,7 +275,7 @@ def load_platforms() -> list:
 
 
 def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
-    raw_rows = json.loads(path.read_text())
+    raw_rows = read_rows(path, cfg)
     pd = PlatformData(key=key, file=path.name,
                       roles=list(cfg["roles"]), declared_roles=list(cfg["roles"]))
     pd.raw_count = len(raw_rows)
@@ -283,6 +316,8 @@ def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
             currency=cfg.get("currency", "INR"),
             category=category,
             sub_category=sub_category,
+            units_sold=_num(_get(raw, fmap.get("units_sold"))),
+            returns=_num(_get(raw, fmap.get("returns"))),
         ))
         if pd.scraped_at is None and raw.get("scrapedAt"):
             pd.scraped_at = raw["scrapedAt"]
@@ -329,6 +364,10 @@ def apply_signal_checks(pd: PlatformData):
     if "west_supply" in pd.roles:
         pd.limitations.append(
             "Western platform: signals describe what was DROPPED (supply), never what sold (demand)")
+    if "pos_sales" in pd.roles:
+        pd.limitations.append(
+            "buyer's own POS data: the strongest proof of LOCAL demand, but only "
+            "for styles already stocked — silent on styles never bought")
     if not pd.products:
         pd.limitations.append("no products in the selected category/sub-category")
 
