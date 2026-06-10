@@ -9,7 +9,7 @@ const AXIS_LABELS = {
   price_band_fit: 'Price-band fit',
 }
 
-/* DETAIL — four panels mirroring the buyer's reasoning path:
+/* DETAIL, four panels mirroring the buyer's reasoning path:
    1 what looks real · 2 what could mislead · 3 what should the buyer do ·
    4 what improves next time. All content from /api/trend + /api/recompute. */
 export default function TrendDetail({ trend, seg, onBack }) {
@@ -41,7 +41,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
     ['Your own sales (POS)', m.own_sales],
     ['Demand strength (India)', m.demand_strength],
     ['Supply conviction (India)', m.supply_conviction],
-    ['West signal — supply, not demand', m.west_signal],
+    ['West signal, supply, not demand', m.west_signal],
     ['Cross-platform agreement', m.cross_platform_agreement],
   ].filter(([, sig]) => sig)
 
@@ -58,7 +58,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
         <div className="dir-line">
           <span className="glyph">{trend.direction.glyph}</span> {trend.direction.phrase}
           {trend.direction.single_source && (
-            <span className="src-caution"> — single Western source, low confidence</span>
+            <span className="src-caution">, single Western source, low confidence</span>
           )}
         </div>
       )}
@@ -78,7 +78,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
             <div className="sig" key={name}>
               <div className="sig-row">
                 <span className="name">{name}</span>
-                <span className="val">{sig.value ?? '—'}</span>
+                <span className="val">{sig.value ?? 'n/a'}</span>
               </div>
               <Derivation text={sig.derivation} />
             </div>
@@ -132,7 +132,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
             <div className="note">
               {m.discount_penalty.median_discount != null
                 ? `Median true discount ${m.discount_penalty.median_discount}% (market norm ${m.discount_penalty.market_median_discount}%). Traction at this price may be bought, not organic.`
-                : 'No price/MRP pairs — distortion unknown, not absent.'}
+                : 'No price/MRP pairs, distortion unknown, not absent.'}
             </div>
             <Derivation text={m.discount_penalty.derivation} />
           </div>
@@ -168,7 +168,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
           <h4>3 · What should the buyer do</h4>
           <div className="panel-sub">
             Bet size from adjusted confidence. India-fit defaults are inferred from the
-            bucket's keywords — drag to override, the bet recomputes live.
+            bucket's keywords, drag to override, the bet recomputes live.
           </div>
           <div className="bet-line">
             <span className={`badge ${d.verdict?.toLowerCase() || ''}`}>{d.verdict || d.bet.label}</span>
@@ -185,7 +185,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
           )}
           {trend.subtrends?.buy_instruction && (
             <div className="subtrends">
-              <b>Buy instruction:</b> {trend.display_name.toLowerCase()} — {trend.subtrends.buy_instruction}.
+              <b>Buy instruction:</b> {trend.display_name.toLowerCase()}, {trend.subtrends.buy_instruction}.
               <div className="chips">
                 {trend.subtrends.fabrics.map((f) => (
                   <span key={`f-${f.name}`} className="chip fabric">{f.name} {f.share}%</span>
@@ -199,7 +199,7 @@ export default function TrendDetail({ trend, seg, onBack }) {
           )}
           {!m.replication.applies && (
             <div className="note" style={{ marginTop: 8 }}>
-              India-fit gate applies only to “Early” trends — shown here for context;
+              India-fit gate applies only to “Early” trends, shown here for context;
               this trend is {m.lead_lag.label}, so sliders affect the replication score
               but not the bet.
             </div>

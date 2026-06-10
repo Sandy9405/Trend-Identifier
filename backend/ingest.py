@@ -1,5 +1,5 @@
 """
-INGEST — turn whatever JSON files are in /data into canonical product rows.
+INGEST, turn whatever JSON files are in /data into canonical product rows.
 
 Nothing here knows about trends or scoring. It only:
   1. matches files in DATA_DIR against the adapter config globs,
@@ -7,7 +7,7 @@ Nothing here knows about trends or scoring. It only:
   3. recomputes true discount from price/mrp (never trusts scraper discount fields),
   4. extracts a date proxy from image URLs (freshness approximation, labelled as such),
   5. AUTO-DETECTS dead demand signals: a platform declared "india_demand" whose
-     rating_count is absent or all-zero is demoted — it contributes no demand —
+     rating_count is absent or all-zero is demoted, it contributes no demand,
      and the demotion is recorded as a disclosed limitation,
   6. derives a canonical CATEGORY (women/men/kids) and SUB_CATEGORY (tops/shirts/
      jeans/...) for every product so the UI can scope the analysis to any segment
@@ -31,7 +31,7 @@ from typing import Optional
 
 from adapter_config import PLATFORM_ADAPTERS
 
-# Repo data dir (read-only on serverless hosts like Vercel — the JSONs are
+# Repo data dir (read-only on serverless hosts like Vercel, the JSONs are
 # bundled with the deployment). Override with TBW_DATA_DIR.
 DATA_DIR = Path(os.environ.get(
     "TBW_DATA_DIR", Path(__file__).resolve().parent.parent / "data"))
@@ -50,7 +50,7 @@ def _writable(p: Path) -> bool:
 
 def upload_dir() -> Path:
     """Where POST /api/upload saves files. Locally this is /data itself; on a
-    read-only deployment (Vercel) it falls back to a tmp dir — which is
+    read-only deployment (Vercel) it falls back to a tmp dir, which is
     EPHEMERAL per serverless instance. The durable path on such hosts is to
     commit the file to /data and redeploy (disclosed by /api/upload)."""
     env = os.environ.get("TBW_UPLOAD_DIR")
@@ -69,7 +69,7 @@ _MONTHS = {m.lower(): i + 1 for i, m in enumerate(
      "august", "september", "october", "november", "december"])}
 
 # ---------------------------------------------------------------------------
-# Generic segment inference — keyword tables, never per-dataset hardcoding.
+# Generic segment inference, keyword tables, never per-dataset hardcoding.
 # Order matters: first match wins. "women" is checked before "men" and the
 # men-pattern uses a word boundary so it cannot match inside "women".
 # ---------------------------------------------------------------------------
@@ -167,7 +167,7 @@ def _dig(raw: dict, path: str):
 
 def _get(raw: dict, key):
     """field_map value can be a key, a dot-path into nested objects, a list of
-    fallback keys tried in order (first non-empty wins — lets ONE adapter entry
+    fallback keys tried in order (first non-empty wins, lets ONE adapter entry
     absorb several vendor schema variants), or None."""
     if key is None:
         return None
@@ -258,12 +258,12 @@ def glob_match(filename: str, cfg: dict) -> bool:
 
 
 def load_platforms() -> list:
-    """Read EVERY data file that matches an adapter glob — one PlatformData per
+    """Read EVERY data file that matches an adapter glob, one PlatformData per
     file. Multiple files per platform are expected and fine (e.g. a women's-tops
     scrape AND a men's-footwear scrape from Myntra): they usually cover different
     segments, so they COEXIST. Overlap protection happens at segment-scoping
     time, where duplicate products (same platform + product URL) are
-    deduplicated newest-file-first — so a re-uploaded fresh scrape supersedes
+    deduplicated newest-file-first, so a re-uploaded fresh scrape supersedes
     only the rows it actually re-covers, never a whole unrelated dataset.
     Files matching no adapter are ignored (the upload API warns about them)."""
     platforms = []
@@ -340,7 +340,7 @@ def _load_one(key: str, cfg: dict, path: Path) -> PlatformData:
 
 def apply_signal_checks(pd: PlatformData):
     """(Re)derive effective roles and limitations from the CURRENT product set.
-    Called at load time AND again after segment scoping — a platform may have
+    Called at load time AND again after segment scoping, a platform may have
     live rating counts for tops but none for, say, shoes."""
     pd.roles = list(pd.declared_roles)
     pd.limitations = list(pd.static_limitations)
@@ -353,11 +353,11 @@ def apply_signal_checks(pd: PlatformData):
             pd.roles.remove("india_demand")
             pd.limitations.append(
                 "declared india_demand but rating_count is absent/all-zero in this "
-                "slice of the data — contributes NO demand signal (auto-detected)")
+                "slice of the data, contributes NO demand signal (auto-detected)")
 
     if not pd.has_date_regex:
         pd.limitations.append(
-            "no date_proxy_regex — freshness unknown for this platform")
+            "no date_proxy_regex, freshness unknown for this platform")
     elif pd.products:
         missing = sum(1 for p in pd.products if p.date_proxy is None)
         if missing:
@@ -370,13 +370,13 @@ def apply_signal_checks(pd: PlatformData):
     if "pos_sales" in pd.roles:
         pd.limitations.append(
             "buyer's own POS data: the strongest proof of LOCAL demand, but only "
-            "for styles already stocked — silent on styles never bought")
+            "for styles already stocked, silent on styles never bought")
     if not pd.products:
         pd.limitations.append("no products in the selected category/sub-category")
 
 
 # ---------------------------------------------------------------------------
-# Segment scoping — what powers the category / sub-category dropdowns
+# Segment scoping, what powers the category / sub-category dropdowns
 # ---------------------------------------------------------------------------
 def _identity(prod: Product):
     """What makes two rows 'the same product' for dedupe purposes."""
@@ -385,7 +385,7 @@ def _identity(prod: Product):
 
 def list_segments(platforms: list) -> list:
     """Every (category, sub_category) pair present in the data, with counts.
-    Computed, never predefined — new data with men's shoes grows the dropdown.
+    Computed, never predefined, new data with men's shoes grows the dropdown.
     Duplicate products across multiple files of one platform count once."""
     seg, seen = {}, set()
     for p in sorted(platforms, key=lambda p: -p.mtime):   # newest file first
@@ -405,7 +405,7 @@ def list_segments(platforms: list) -> list:
 def scoped_platforms(platforms: list, category: str, sub_category: str) -> list:
     """ONE merged platform per adapter key, holding only products in the
     selected segment. Multiple files of the same platform are merged here:
-    newest file first, duplicate products (same URL) deduplicated — so a
+    newest file first, duplicate products (same URL) deduplicated, so a
     re-uploaded scrape supersedes the rows it re-covers, while files covering
     OTHER segments (men's footwear vs women's tops) never touch each other.
     Roles/limitations are re-derived per slice."""

@@ -5,7 +5,7 @@ import TrendDetail from './components/TrendDetail.jsx'
 
 /* Tiny hash router: #/ = slate, #/trend/<bucket> = detail.
    The selected segment (category / sub-category) scopes every API call;
-   the dropdown options come from /api/segments — detected from the data,
+   the dropdown options come from /api/segments, detected from the data,
    never predefined. */
 export default function App() {
   const [segments, setSegments] = useState(null)
@@ -84,7 +84,7 @@ export default function App() {
 
 /* Category + sub-category dropdowns, populated from the data. Mixed scrapes
    (e.g. a "tops" search that returned sarees and jeans) are scoped, not
-   silently discarded — every row is reachable through some segment. */
+   silently discarded, every row is reachable through some segment. */
 function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
   const categories = useMemo(
     () => [...new Set(segments.map((s) => s.category))], [segments])
@@ -115,12 +115,12 @@ function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
         kind: 'ok',
         text: `Accepted ${resp.saved_as} → ${resp.matched_adapter} (${resp.roles.join(', ')}): `
           + `${resp.products_parsed}/${resp.rows_in_file} rows usable. `
-          + (deltas ? `Segments changed: ${deltas}. ` : 'No segment counts changed — duplicates of existing products. ')
+          + (deltas ? `Segments changed: ${deltas}. ` : 'No segment counts changed, duplicates of existing products. ')
           + resp.persistence,
       })
       onDataChanged(resp)
     } catch (err) {
-      setNotice({ kind: 'err', text: `Upload rejected — nothing was changed. ${err.message || err}` })
+      setNotice({ kind: 'err', text: `Upload rejected, nothing was changed. ${err.message || err}` })
     } finally {
       setUploading(false)
     }
@@ -151,7 +151,7 @@ function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
       </button>
       <input ref={fileRef} type="file" accept=".json,.csv" style={{ display: 'none' }}
         onChange={onFile} />
-      {!notice && <span className="note">segments detected from the data files — not predefined</span>}
+      {!notice && <span className="note">segments detected from the data files, not predefined</span>}
       {notice && (
         <div className={`upload-notice ${notice.kind}`}>
           {notice.text}

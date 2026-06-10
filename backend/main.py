@@ -1,5 +1,5 @@
 """
-Trend Bet Workbench — FastAPI backend.
+Trend Bet Workbench, FastAPI backend.
 
 State is built lazily on first request (serverless-safe: on Vercel there is no
 long-lived "startup") and cached in memory: ingest whatever JSONs are present
@@ -7,13 +7,13 @@ long-lived "startup") and cached in memory: ingest whatever JSONs are present
 and score segments on demand.
 
 Data management API:
-  POST /api/upload  — push a new/replacement JSON data file, state reloads
-  POST /api/reload  — re-ingest from disk (e.g. you copied files in manually)
+  POST /api/upload , push a new/replacement JSON data file, state reloads
+  POST /api/reload , re-ingest from disk (e.g. you copied files in manually)
 On a read-only host (Vercel) uploads land in a tmp dir that is EPHEMERAL per
-serverless instance — the response says so; committing the file to /data and
+serverless instance, the response says so; committing the file to /data and
 redeploying is the durable path there.
 
-All conclusions are computed at runtime — change the data and every segment,
+All conclusions are computed at runtime, change the data and every segment,
 slate, score, label and default recomputes. Nothing trend-specific is hardcoded.
 """
 
@@ -72,17 +72,17 @@ def _ensure_loaded():
     if "platforms" not in STATE:
         _reload_state()
     if not STATE["segments"]:
-        raise HTTPException(503, "no data files matched any adapter — drop JSONs "
+        raise HTTPException(503, "no data files matched any adapter, drop JSONs "
                                  "into /data or POST /api/upload")
 
 
 def _write_frozen_sample():
-    """Frozen sample for reviewers — cached output for the default segment,
+    """Frozen sample for reviewers, cached output for the default segment,
     regenerated from the current data. Skipped silently on read-only hosts."""
     try:
         entry = _compute_segment(**STATE["default_segment"])
         sample = {
-            "_note": "FROZEN SAMPLE — cached output, regenerated from the current "
+            "_note": "FROZEN SAMPLE, cached output, regenerated from the current "
                      "data on reload. Not a source of truth.",
             "segments_detected": STATE["segments"],
             "default_segment": STATE["default_segment"],
@@ -93,7 +93,7 @@ def _write_frozen_sample():
         out = Path(ingest.DATA_DIR) / "sample_output.json"
         out.write_text(json.dumps(sample, indent=2, default=str))
     except OSError:
-        pass  # read-only filesystem (serverless) — sample lives in the repo
+        pass  # read-only filesystem (serverless), sample lives in the repo
 
 
 def _compute_segment(category: str, sub_category: str) -> dict:
@@ -124,7 +124,7 @@ def _segment_or_default(category, sub_category):
 
 @app.post("/api/upload")
 async def upload(file: UploadFile):
-    """Add or replace a data file — VALIDATE BEFORE ACCEPT. An upload either
+    """Add or replace a data file, VALIDATE BEFORE ACCEPT. An upload either
     changes the computation (and the response says exactly what changed) or it
     is rejected with the reason and the fix. A stored-but-ignored file is not
     an acceptable outcome: that is how data silently goes missing."""
@@ -147,7 +147,7 @@ async def upload(file: UploadFile):
         raise HTTPException(422, detail={
             "accepted": False,
             "reason": f"filename '{file.filename}' matches no adapter pattern, so no "
-                      "parser knows how to read it — rejected rather than stored-and-ignored.",
+                      "parser knows how to read it, rejected rather than stored-and-ignored.",
             "how_to_fix": "Rename the file so it matches a pattern below (e.g. a POS "
                           "export → 'buyer_sales.csv'), or add a new adapter entry in "
                           "backend/adapter_config.py.",
@@ -165,7 +165,7 @@ async def upload(file: UploadFile):
             raise HTTPException(422, detail={
                 "accepted": False,
                 "reason": f"matched adapter '{adapter_key}' but 0 of {trial.raw_count} rows "
-                          "yielded a usable product — the column names don't line up with "
+                          "yielded a usable product, the column names don't line up with "
                           "the adapter's field_map.",
                 "how_to_fix": "At minimum a product/style NAME column is required. Either "
                               "rename your columns, or extend the fallback key lists for "
@@ -179,7 +179,7 @@ async def upload(file: UploadFile):
                 raise HTTPException(422, detail={
                     "accepted": False,
                     "reason": f"matched the POS adapter and parsed {trial.filtered_count} "
-                              "rows, but none carries units sold > 0 — the file would "
+                              "rows, but none carries units sold > 0, the file would "
                               "contribute no sales signal.",
                     "how_to_fix": "Make sure a units column exists and is named one of the "
                                   "accepted keys (or extend the list in adapter_config.py).",
@@ -219,7 +219,7 @@ async def upload(file: UploadFile):
         "rows_in_file": trial.raw_count,
         "segment_changes": changes,
         "persistence": (
-            "saved into /data — survives restarts" if persistent else
+            "saved into /data, survives restarts" if persistent else
             "host filesystem is read-only: saved to a TEMPORARY dir, active now "
             "but lost on the next cold start. For a durable update on Vercel, "
             "commit the file to /data and redeploy."),
@@ -230,7 +230,7 @@ async def upload(file: UploadFile):
 
 @app.post("/api/reload")
 def reload_data():
-    """Re-ingest from disk — use after copying files into /data manually."""
+    """Re-ingest from disk, use after copying files into /data manually."""
     _reload_state()
     return {"segments": STATE["segments"], "default": STATE["default_segment"],
             "platforms": [{"key": p.key, "file": p.file, "products": p.filtered_count}
@@ -241,7 +241,7 @@ def reload_data():
 
 @app.get("/api/segments")
 def segments():
-    """Every category/sub-category present in the current data, with counts —
+    """Every category/sub-category present in the current data, with counts,
     powers the UI dropdowns. Recomputed from the data, never predefined."""
     _ensure_loaded()
     return {"segments": STATE["segments"], "default": STATE["default_segment"]}

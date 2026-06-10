@@ -1,4 +1,4 @@
-// Thin API client. EVERYTHING the UI shows comes from these endpoints —
+// Thin API client. EVERYTHING the UI shows comes from these endpoints,
 // no trend names, scores, labels or segment lists live in the frontend.
 const j = async (r) => {
   if (!r.ok) {
@@ -8,7 +8,7 @@ const j = async (r) => {
       const d = (await r.json()).detail
       if (typeof d === 'string') msg = d
       else if (d?.reason) {
-        msg = d.reason + (d.how_to_fix ? ` — ${d.how_to_fix}` : '')
+        msg = d.reason + (d.how_to_fix ? `, ${d.how_to_fix}` : '')
         if (d.known_patterns) msg += ` Accepted filename patterns: ${
           Object.entries(d.known_patterns).map(([k, g]) => `${k}: ${[].concat(g).join(' | ')}`).join(' · ')}`
       }

@@ -13,7 +13,7 @@ export function LeadLagTag({ label }) {
   return <span className={`tag ${cls}`}>{label}</span>
 }
 
-/* Raw vs adjusted — the distortion made visible. Two lanes: what the signals
+/* Raw vs adjusted, the distortion made visible. Two lanes: what the signals
    said before penalties (raw/base) vs what survives honesty checks (adjusted). */
 export function RawVsAdjusted({ base, adjusted, compact }) {
   const delta = Math.round((base - adjusted) * 10) / 10

@@ -1,5 +1,5 @@
 """
-SCORING ENGINE — the reviewer-facing deliverable.
+SCORING ENGINE, the reviewer-facing deliverable.
 =================================================
 
 Everything below is METHOD, not conclusion. No trend name, rank, share, label or
@@ -22,11 +22,11 @@ import statistics
 from datetime import date
 
 # ════════════════════════════════════════════════════════════════════════════
-# 1. SILHOUETTE KEYWORD DICTIONARIES  (extend-friendly — add a line, get a bucket)
+# 1. SILHOUETTE KEYWORD DICTIONARIES  (extend-friendly, add a line, get a bucket)
 #    A product may match multiple buckets. Matching is case-insensitive on name.
 #    The dictionary is CHOSEN PER SUB-CATEGORY: clustering running shoes with a
 #    tops vocabulary would file mesh sneakers under "mesh_sheer" and lace-ups
-#    under "tie_knot" — nonsense. New sub-category vocabularies are one dict
+#    under "tie_knot", nonsense. New sub-category vocabularies are one dict
 #    away; anything unmapped falls back to the apparel dictionary.
 # ════════════════════════════════════════════════════════════════════════════
 APPAREL_SILHOUETTES = {
@@ -128,7 +128,7 @@ SILHOUETTE_KEYWORDS = APPAREL_SILHOUETTES
 # counted in totals so shares stay honest.
 
 # ════════════════════════════════════════════════════════════════════════════
-# 2. NAMED THRESHOLD CONSTANTS  (the tuning surface — change here, not in logic)
+# 2. NAMED THRESHOLD CONSTANTS  (the tuning surface, change here, not in logic)
 # ════════════════════════════════════════════════════════════════════════════
 # Lead-lag classification (all on the 0–100 normalized scales)
 WEST_HIGH = 55          # west_signal at/above this = "the West is pushing it"
@@ -141,7 +141,7 @@ FRESH_HIGH = 50         # freshness% above this = supply is currently being refr
 # Indian value e-commerce discounts EVERYTHING (the market norm in a typical
 # scrape is 50–60% off), so an absolute cutoff would flatten every bucket.
 # Instead the penalty is RELATIVE: it fires on discounting IN EXCESS of the
-# current dataset's own market-wide median — i.e. "this trend is being pushed
+# current dataset's own market-wide median, i.e. "this trend is being pushed
 # harder on price than the market around it", which is the actual distortion.
 # The market norm is computed from the data and disclosed in every derivation.
 DISCOUNT_EXCESS_SPAN = 20   # bucket at market_norm+20pp of discount → full penalty
@@ -160,12 +160,12 @@ MIN_PRESENCE_SHARE = 0.02
 FRESH_WINDOW_DAYS = 120
 
 # base_confidence weights (renormalized automatically if a signal is missing).
-# The buyer's OWN till data, when present, is the heaviest signal — real local
+# The buyer's OWN till data, when present, is the heaviest signal, real local
 # purchases beat any scraped proxy. With no pos_sales file the remaining
 # weights renormalize to ≈ demand .46 / supply .31 / agreement .23.
 W_OWN_SALES, W_DEMAND, W_SUPPLY, W_AGREEMENT = 0.35, 0.30, 0.20, 0.15
 
-# Own-sales return rate at/above this % = product comes back — fit/quality flag
+# Own-sales return rate at/above this % = product comes back, fit/quality flag
 RETURN_RATE_HIGH = 25
 
 # supply_conviction blend: assortment share vs freshness
@@ -199,7 +199,7 @@ VALUE_BAND = (299, 799)
 
 # ════════════════════════════════════════════════════════════════════════════
 # 3. INDIA-FIT AXIS RULE TABLE (replication probability, Early trends only)
-#    Defaults are inferred from BUCKET KEYWORDS — never per-trend hardcoding.
+#    Defaults are inferred from BUCKET KEYWORDS, never per-trend hardcoding.
 #    A brand-new silhouette next month gets sensible, explainable defaults.
 #    Format: first matching rule wins; otherwise the axis BASE applies.
 # ════════════════════════════════════════════════════════════════════════════
@@ -208,7 +208,7 @@ AXIS_RULES = {
         "base": (75, "no heavy-volume/layering cue in bucket keywords"),
         "rules": [
             (["puff", "balloon", "corset", "cinch", "smock", "shirred", "shirring"],
-             45, "keywords imply volume/structure/layering — heat risk in Indian climate"),
+             45, "keywords imply volume/structure/layering, heat risk in Indian climate"),
         ],
     },
     "modesty_fit": {
@@ -216,25 +216,25 @@ AXIS_RULES = {
         "rules": [
             (["mesh", "sheer", "organza", "net", "lace", "bandeau", "tube",
               "off shoulder", "off-shoulder", "bardot", "halter", "halterneck"],
-             45, "keywords imply sheer/bare styling — modesty constraint in mass-market India"),
+             45, "keywords imply sheer/bare styling, modesty constraint in mass-market India"),
         ],
     },
     "occasion_fit": {
         "base": (70, "no strong occasion cue in bucket keywords"),
         "rules": [
             (["mesh", "sheer", "corset", "bandeau", "tube", "organza"],
-             50, "keywords imply party/occasion-only wear — fewer wear occasions, slower turns"),
+             50, "keywords imply party/occasion-only wear, fewer wear occasions, slower turns"),
             (["shirt", "crop", "tank", "vest", "cami", "sleeveless"],
-             85, "keywords imply everyday wear — wide occasion coverage"),
+             85, "keywords imply everyday wear, wide occasion coverage"),
         ],
     },
     # price_band_fit is computed from the bucket's median INR price (see below),
-    # not from keywords — but the rule is still generic, not per-trend.
+    # not from keywords, but the rule is still generic, not per-trend.
 }
 
 # ════════════════════════════════════════════════════════════════════════════
 # 4. RESOLVER PATTERN TABLE (disagreement view). Keyed on the SIGNAL PATTERN,
-#    never the trend name. First matching pattern (priority order) wins —
+#    never the trend name. First matching pattern (priority order) wins,
 #    one conflict summary + ONE resolver, kept decisive.
 # ════════════════════════════════════════════════════════════════════════════
 def _resolver_patterns():
@@ -242,24 +242,24 @@ def _resolver_patterns():
         ("high return rate in own sales",
          lambda m: m.get("own_sales", {}).get("return_rate") is not None
          and m["own_sales"]["return_rate"] >= RETURN_RATE_HIGH,
-         "Fit/quality audit before scaling — your own tills show it sells but "
+         "Fit/quality audit before scaling, your own tills show it sells but "
          "comes back. Fix the block (sizing, fabric, finish) or the volume is fake."),
         ("market demand without own sell-through",
          lambda m: m.get("own_sales", {}).get("value") is not None
          and m["own_sales"]["value"] <= 25
          and (m["demand_strength"]["value"] or 0) >= DEMAND_HIGH,
-         "Market wants it but your stores don't move it — check assortment depth, "
+         "Market wants it but your stores don't move it, check assortment depth, "
          "store placement and price position before concluding the trend is wrong."),
         ("high supply + low demand",
          lambda m: m["supply_conviction"]["value"] is not None
          and m["supply_conviction"]["value"] >= SUPPLY_HIGH
          and (m["demand_strength"]["value"] or 0) <= DEMAND_LOW,
-         "Full-price sell-through & return-rate on the new drop (buyer's own POS data) — "
+         "Full-price sell-through & return-rate on the new drop (buyer's own POS data), "
          "platforms are pushing stock; only till data proves anyone wants it."),
         ("lead-lag Early + low replication",
          lambda m: m["lead_lag"]["label"].startswith("Early")
          and m["replication"]["value"] < REPL_LOW,
-         "Small live trial in 2–3 target stores/regions — the India-fit doubts "
+         "Small live trial in 2–3 target stores/regions, the India-fit doubts "
          "(climate/modesty/occasion/price) can only be answered by real shoppers."),
         ("high discount + high demand",
          lambda m: m["discount_penalty"]["value"] >= 20
@@ -269,7 +269,7 @@ def _resolver_patterns():
         ("india-led + strong demand",
          lambda m: m["lead_lag"]["label"].startswith("India-led")
          and (m["demand_strength"]["value"] or 0) >= DEMAND_HIGH,
-         "Confirm size-curve & repeat-rate before scaling — demand is proven, "
+         "Confirm size-curve & repeat-rate before scaling, demand is proven, "
          "the open risk is buying the wrong depth per size."),
         ("no decisive conflict",
          lambda m: True,
@@ -323,9 +323,9 @@ def _subtrends(prods, vocab, top_n=5):
 # mapping itself is method, not conclusion).
 _DIRECTIONS = [
     ("Early",      "↑", "Early",     "West moving, India hasn't caught up"),
-    ("Landed",     "=", "Landed",    "West and India aligned — buy on India merits"),
-    ("Late-cycle", "↓", "Late",      "West cooling while India is hot — ride it, don't over-commit"),
-    ("India-led",  "◆", "India-led", "India ahead of the West — a local bet on local merits"),
+    ("Landed",     "=", "Landed",    "West and India aligned, buy on India merits"),
+    ("Late-cycle", "↓", "Late",      "West cooling while India is hot, ride it, don't over-commit"),
+    ("India-led",  "◆", "India-led", "India ahead of the West, a local bet on local merits"),
     ("Unclear",    "•", "Unclear",   "Limited or mixed Western signal"),
 ]
 
@@ -345,7 +345,7 @@ def _direction(lead_lag_label, west_sources_present, west_sources_total):
 
 def _merchant_line(d):
     """One or two sentences in a merchant's voice, ASSEMBLED from the computed
-    signal pattern — template by pattern, variables from the numbers, never
+    signal pattern, template by pattern, variables from the numbers, never
     per-trend text."""
     m, name = d["metrics"], d["display_name"]
     ll = m["lead_lag"]["label"]
@@ -361,7 +361,7 @@ def _merchant_line(d):
     weakest = min(axes, key=lambda a: axes[a].get("override", axes[a]["default"]))
 
     if ll.startswith("India-led") and (dv or 0) >= DEMAND_HIGH:
-        return (f"{name} is locally validated — {n} SKUs across platforms with strong Indian "
+        return (f"{name} is locally validated, {n} SKUs across platforms with strong Indian "
                 f"demand, and India is ahead of the West, so this isn't an import bet. "
                 f"Watch-out: {top_distortion}.")
     if ll.startswith("Early"):
@@ -369,13 +369,13 @@ def _merchant_line(d):
                 f"{weakest.replace('_', ' ')} is the biggest fit risk. "
                 f"Test small before committing.")
     if ll.startswith("Landed") and disc["value"] >= 20:
-        return (f"{name} is selling on both sides, but {top_distortion} — verify full-price "
+        return (f"{name} is selling on both sides, but {top_distortion}, verify full-price "
                 f"appetite before going deeper.")
     if ll.startswith("Landed"):
-        return (f"{name} has landed — West and India aligned. Buy on India merits: "
+        return (f"{name} has landed, West and India aligned. Buy on India merits: "
                 f"{d['bet']['band']}.")
     if ll.startswith("Late"):
-        return (f"{name} is past its Western peak but India still wants it — ride the existing "
+        return (f"{name} is past its Western peak but India still wants it, ride the existing "
                 f"demand, keep markdown exit easy, don't over-commit. Watch-out: {top_distortion}.")
     return (f"{name} shows mixed signals. Before changing the bet: "
             f"{d['disagreement']['resolver']['action']}")
@@ -388,7 +388,7 @@ def allocate_budget(slate: list, budget: float) -> dict:
                TRIAL_CAP_EACH of budget, all trials together capped at
                TRIAL_POOL_MAX of budget.
       BUY    → everything left, split PROPORTIONAL TO ADJUSTED CONFIDENCE
-               (the honest number — distortion-adjusted, never raw).
+               (the honest number, distortion-adjusted, never raw).
     If there are no BUY trends, the un-allocated remainder is explicitly held
     back rather than force-spent. Amounts rounded to the nearest ₹1,000."""
     buys = [r for r in slate if r["verdict"] == "BUY"]
@@ -413,7 +413,7 @@ def allocate_budget(slate: list, budget: float) -> dict:
         rows.append({**_alloc_row(r, amt),
                      "rationale": f"TRIAL tier: equal test allocations, capped at "
                                   f"{TRIAL_CAP_EACH * 100:.0f}% each / "
-                                  f"{TRIAL_POOL_MAX * 100:.0f}% combined — read 4-week "
+                                  f"{TRIAL_POOL_MAX * 100:.0f}% combined, read 4-week "
                                   f"sell-through before scaling"})
     for r in watches:
         rows.append({**_alloc_row(r, 0), "rationale": "WATCH: monitoring, no spend"})
@@ -424,7 +424,7 @@ def allocate_budget(slate: list, budget: float) -> dict:
         "allocated": allocated,
         "held_back": max(0, round(budget - allocated)),
         "held_back_note": (None if buys else
-                           "no BUY-grade trend in this slate — the remainder is held back, "
+                           "no BUY-grade trend in this slate, the remainder is held back, "
                            "not force-spent"),
         "rows": rows,
         "method": f"WATCH ₹0; TRIAL equal & capped ({TRIAL_CAP_EACH*100:.0f}% each, "
@@ -488,7 +488,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         return round(fresh / len(dated) * 100, 1)
 
     # ════════════════════════════════════════════════════════════════════════
-    # A. demand_strength — from india_demand rating_count totals.
+    # A. demand_strength, from india_demand rating_count totals.
     #    log-scaled (one 50k-review hero shouldn't drown every other signal),
     #    then min-max across buckets present.
     # ════════════════════════════════════════════════════════════════════════
@@ -504,7 +504,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
     demand_norm = _minmax(raw_demand)
 
     # ════════════════════════════════════════════════════════════════════════
-    # B. supply_conviction — Indian assortment share blended with freshness,
+    # B. supply_conviction, Indian assortment share blended with freshness,
     #    normalized across buckets.
     # ════════════════════════════════════════════════════════════════════════
     raw_share, fresh_by_bucket = {}, {}
@@ -522,7 +522,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
     share_norm = _minmax(raw_share)
 
     # ════════════════════════════════════════════════════════════════════════
-    # C. west_signal — share of west_supply assortment. SUPPLY, NOT DEMAND.
+    # C. west_signal, share of west_supply assortment. SUPPLY, NOT DEMAND.
     # ════════════════════════════════════════════════════════════════════════
     raw_west = {}
     for b, by_plat in buckets.items():
@@ -532,7 +532,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
     west_norm = _minmax(raw_west)
 
     # ════════════════════════════════════════════════════════════════════════
-    # H. own_sales — the buyer's OWN till data (pos_sales role). Real local
+    # H. own_sales, the buyer's OWN till data (pos_sales role). Real local
     #    purchases: the strongest demand evidence available, log-scaled and
     #    normalized across buckets like A. Also yields a return-rate flag.
     # ════════════════════════════════════════════════════════════════════════
@@ -556,7 +556,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
 
     # Segment-wide demand-pace norm: ratings accumulate with age, so recent
     # items ALWAYS show fewer ratings. A bucket's recent/earlier ratio is only
-    # meaningful relative to the whole segment's ratio — compute that norm here.
+    # meaningful relative to the whole segment's ratio, compute that norm here.
     def _cohort_means(prods, plat_key):
         med = plat_median.get(plat_key)
         if not med:
@@ -590,7 +590,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         dv = demand_norm.get(b)
         if not demand_platforms:
             demand = {"value": None, "derivation":
-                      "No india_demand source present in /data — no demand signal "
+                      "No india_demand source present in /data, no demand signal "
                       "available for this dataset."}
         else:
             demand = {"value": dv, "raw_rating_count": demand_detail.get(b, 0),
@@ -607,7 +607,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         else:
             if fr is not None:
                 sval = round(_clamp(W_SHARE * sv_share + W_FRESH * fr), 1)
-                fr_txt = f"freshness {fr}% (share of items image-uploaded within {FRESH_WINDOW_DAYS}d of platform's newest upload — a proxy, not a true listing date)"
+                fr_txt = f"freshness {fr}% (share of items image-uploaded within {FRESH_WINDOW_DAYS}d of platform's newest upload, a proxy, not a true listing date)"
             else:
                 sval, fr_txt = sv_share, "freshness unknown (no date proxy)"
             shares_txt = "; ".join(
@@ -628,10 +628,10 @@ def compute(platforms: list, sub_category: str = None) -> dict:
                     f"{wc} of {sum(plat_total[p.key] for p in west_supply)} items in the "
                     f"Western new-drop feed ({', '.join(p.key for p in west_supply)}), "
                     f"share normalized across buckets → {wv}. This is SUPPLY (what was "
-                    f"dropped), not demand — nobody has proven a Western shopper bought it."}
+                    f"dropped), not demand, nobody has proven a Western shopper bought it."}
 
         # --- west_agreement: do the Western sources AGREE? ---------------------
-        # Generic over N west_supply platforms (ASOS + H&M + any future source —
+        # Generic over N west_supply platforms (ASOS + H&M + any future source,
         # never special-cased). A direction backed by ≥2 sources is high
         # confidence; by 1 source it is explicitly flagged.
         w_present = [p.key for p in west_supply
@@ -651,9 +651,9 @@ def compute(platforms: list, sub_category: str = None) -> dict:
                     f"Present at ≥{MIN_PRESENCE_SHARE*100:.0f}% assortment share on "
                     f"{len(w_present)} of {len(west_supply)} Western sources "
                     f"({', '.join(w_present) or 'none'}). "
-                    + ("Two+ independent Western sources agree — high-confidence direction."
+                    + ("Two+ independent Western sources agree, high-confidence direction."
                        if lvl == "multi-source" else
-                       "Single Western source — direction is low-confidence, do not overstate."
+                       "Single Western source, direction is low-confidence, do not overstate."
                        if lvl == "single-source" else
                        "Not meaningfully present on any Western source."),
             }
@@ -662,7 +662,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         ov = own_norm.get(b)
         if not pos_platforms:
             own = {"value": None, "return_rate": None, "derivation":
-                   "No pos_sales source in the data — the buyer's own sell-through is "
+                   "No pos_sales source in the data, the buyer's own sell-through is "
                    "unavailable; scoring runs on market signals only. Drop a sales "
                    "export (CSV or JSON with style name + units sold) matching the "
                    "buyer_pos adapter into /data to activate this signal."}
@@ -670,19 +670,19 @@ def compute(platforms: list, sub_category: str = None) -> dict:
             u, r = own_units.get(b, 0), own_returns.get(b, 0)
             rr = round(r / u * 100, 1) if u else None
             own = {"value": ov, "units": u, "return_rate": rr, "derivation":
-                   f"{u:,.0f} units sold ({', '.join(p.key for p in pos_platforms)} — the "
+                   f"{u:,.0f} units sold ({', '.join(p.key for p in pos_platforms)}, the "
                    f"buyer's own till data), log-scaled then min-max normalized across "
                    f"buckets → {ov}."
                    + (f" Return rate {rr}% ({r:,.0f} returned)"
-                      + (f" — at/above {RETURN_RATE_HIGH}%: sells but comes back."
+                      + (f", at/above {RETURN_RATE_HIGH}%: sells but comes back."
                          if rr is not None and rr >= RETURN_RATE_HIGH else ".")
                       if rr is not None else " No returns column found.")}
 
-        # --- D. lead_lag — derived from C vs A (or B as fallback) -------------
+        # --- D. lead_lag, derived from C vs A (or B as fallback) -------------
         if dv is not None:
             d_for_lag, d_name = dv, "demand_strength"
         else:
-            d_for_lag, d_name = (sv_share or 0), "supply_conviction (no demand source — weaker basis)"
+            d_for_lag, d_name = (sv_share or 0), "supply_conviction (no demand source, weaker basis)"
         w_for_lag = wv if wv is not None else 0
         fresh_ok = (fr or 0) >= FRESH_HIGH
         if wv is None:
@@ -708,7 +708,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         ll_deriv = f"Comparison: {cmp_txt}."
         if west_agreement.get("level") == "single-source" and label != "Unclear":
             ll_deriv += (" CAUTION: the Western side of this call rests on a single "
-                         "source — low confidence until a second Western source agrees.")
+                         "source, low confidence until a second Western source agrees.")
         lead_lag = {"label": label, "west_agreement": west_agreement.get("level"),
                     "derivation": ll_deriv}
 
@@ -729,7 +729,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
                               f"{d_for_lag} = {gap:.0f} (≥{LAG_GAP_WIDE} → ~2 qtrs, "
                               f"≥{LAG_GAP_MID} → ~1–2 qtrs, else ~1 qtr). Western "
                               f"fast-fashion typically leads Indian value retail by this "
-                              f"order for silhouette trends — a rough buying calendar, "
+                              f"order for silhouette trends, a rough buying calendar, "
                               f"not a forecast.",
             }
         else:
@@ -754,7 +754,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
                     f"traction may be bought, not organic."}
         else:
             disc = {"value": 0, "median_discount": None,
-                    "derivation": "No price/mrp pairs on Indian platforms — penalty 0, "
+                    "derivation": "No price/mrp pairs on Indian platforms, penalty 0, "
                                   "but discount distortion is UNKNOWN, not absent."}
 
         # --- F. supply-without-demand penalty (0–30) --------------------------
@@ -801,30 +801,30 @@ def compute(platforms: list, sub_category: str = None) -> dict:
             elif abs(sv - dv) <= 25:
                 agrees.append(f"Indian supply ({sv}) and demand ({dv}) tell the same story.")
             elif dv - sv > 25:
-                conflicts.append(f"Demand ({dv}) outruns Indian supply ({sv}) — "
+                conflicts.append(f"Demand ({dv}) outruns Indian supply ({sv}), "
                                  f"possible under-assortment / stockout risk.")
         if wv is not None and dv is not None and wv >= WEST_HIGH and dv <= DEMAND_LOW:
             conflicts.append(f"The West is dropping this hard (west_signal {wv}) but Indian "
-                             f"shoppers haven't moved (demand {dv}) — classic lead-or-trap.")
+                             f"shoppers haven't moved (demand {dv}), classic lead-or-trap.")
         if wv is not None and dv is not None and wv >= WEST_HIGH and dv >= DEMAND_HIGH:
-            agrees.append(f"West drops ({wv}) and Indian demand ({dv}) both high — landed.")
+            agrees.append(f"West drops ({wv}) and Indian demand ({dv}) both high, landed.")
         if disc["value"] >= 20:
-            conflicts.append(f"Median discount {disc['median_discount']}% — any demand "
+            conflicts.append(f"Median discount {disc['median_discount']}%, any demand "
                              f"reading is partly bought.")
         if own["value"] is not None and dv is not None:
             if own["value"] >= 60 and dv <= DEMAND_LOW:
                 agrees.append(f"Your own stores already sell this (own-sales {own['value']}) "
-                              f"despite weak market demand ({dv}) — a local edge the "
+                              f"despite weak market demand ({dv}), a local edge the "
                               f"market hasn't priced in.")
             elif own["value"] <= 25 and dv >= DEMAND_HIGH:
                 conflicts.append(f"Market demand is high ({dv}) but your own sell-through "
-                                 f"is weak (own-sales {own['value']}) — assortment or "
+                                 f"is weak (own-sales {own['value']}), assortment or "
                                  f"execution gap, not necessarily a bad trend.")
             elif own["value"] >= 60 and dv >= DEMAND_HIGH:
                 agrees.append(f"Your tills (own-sales {own['value']}) and market demand "
-                              f"({dv}) confirm each other — the strongest case possible.")
+                              f"({dv}) confirm each other, the strongest case possible.")
         if own.get("return_rate") is not None and own["return_rate"] >= RETURN_RATE_HIGH:
-            conflicts.append(f"Own return rate {own['return_rate']}% — units sell but "
+            conflicts.append(f"Own return rate {own['return_rate']}%, units sell but "
                              f"come back; net demand is weaker than gross.")
         if not agrees and not conflicts:
             agrees.append("Signals sit mid-range with no sharp divergence.")
@@ -853,7 +853,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
             else:
                 pscore, pwhy = 40, f"median Indian price ₹{medp:.0f} is far above the value band ₹{lo}–₹{hi}"
         else:
-            pscore, pwhy = 50, "no INR price data — neutral default"
+            pscore, pwhy = 50, "no INR price data, neutral default"
         axes["price_band_fit"] = {"default": pscore, "rationale": pwhy}
 
         repl_val = round(statistics.mean(a["default"] for a in axes.values()), 1)
@@ -887,7 +887,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         dated = earlier_n + recent_n
         if dated < 5:
             trajectory = {"arrow": "·", "label": "unknown",
-                          "derivation": f"Only {dated} dated items (image-upload proxy) — "
+                          "derivation": f"Only {dated} dated items (image-upload proxy), "
                                         "too few to read a trajectory."}
         else:
             rshare = recent_n / dated
@@ -908,12 +908,12 @@ def compute(platforms: list, sub_category: str = None) -> dict:
                     pace = "keeping pace" if (br / be) >= seg_demand_ratio else "flat/lagging"
                     pace_txt = f", demand {pace} vs segment norm"
                     label_combo = {
-                        ("accelerating", "keeping pace"): "Assortment accelerating with demand — window open",
-                        ("accelerating", "flat/lagging"): "Assortment accelerating, demand flat — supply getting ahead of demand, caution",
+                        ("accelerating", "keeping pace"): "Assortment accelerating with demand, window open",
+                        ("accelerating", "flat/lagging"): "Assortment accelerating, demand flat, supply getting ahead of demand, caution",
                         ("steady", "keeping pace"): "Steady supply, demand holding",
                         ("steady", "flat/lagging"): "Steady supply, demand cooling",
-                        ("fading", "keeping pace"): "Assortment fading though demand holds — window narrowing",
-                        ("fading", "flat/lagging"): "Assortment fading, demand flat — the best window may be gone",
+                        ("fading", "keeping pace"): "Assortment fading though demand holds, window narrowing",
+                        ("fading", "flat/lagging"): "Assortment fading, demand flat, the best window may be gone",
                     }[(a_lbl, pace)]
                 else:
                     label_combo = f"Assortment {a_lbl} (no demand cohort readable)"
@@ -988,9 +988,9 @@ def compute(platforms: list, sub_category: str = None) -> dict:
         "west_sources": {
             "count": len(west_supply),
             "names": [p.key for p in west_supply],
-            "note": ("multiple Western sources — cross-source agreement raises "
+            "note": ("multiple Western sources, cross-source agreement raises "
                      "lead-lag confidence" if len(west_supply) >= 2 else
-                     "single Western source — every West-based direction is flagged "
+                     "single Western source, every West-based direction is flagged "
                      "low-confidence" if len(west_supply) == 1 else
                      "no Western source present"),
         },
@@ -1003,7 +1003,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
                 "Nothing trend-specific is hardcoded.",
     }
     if not demand_platforms:
-        meta["missing_roles_note"] = "No demand signal available for this dataset — " \
+        meta["missing_roles_note"] = "No demand signal available for this dataset, " \
             "confidence relies on supply only and says so in every derivation."
     return {"details": details, "meta": meta}
 
@@ -1036,7 +1036,7 @@ def _finalize(d: dict, overrides: dict = None):
         base_txt = " + ".join(f"{n} {v}×{w / wsum:.2f}" for v, w, n in avail)
         missing = [n for v, _, n in parts if v is None]
         if missing:
-            base_txt += f" (weights renormalized — missing: {', '.join(missing)})"
+            base_txt += f" (weights renormalized, missing: {', '.join(missing)})"
     else:
         base, base_txt = 0.0, "no positive signals available"
 
@@ -1064,7 +1064,7 @@ def _finalize(d: dict, overrides: dict = None):
                "rule": f"{BET_TRIAL} ≤ adjusted {adj} < {BET_DEEPER}"}
     else:
         bet = {"label": "Monitor", "verdict": "WATCH",
-               "band": "no buy — watch list, recheck next data drop",
+               "band": "no buy, watch list, recheck next data drop",
                "rule": f"adjusted {adj} < {BET_TRIAL}"}
     d["bet"] = bet
     d["verdict"] = bet["verdict"]
@@ -1095,7 +1095,7 @@ def _finalize(d: dict, overrides: dict = None):
 
 
 def build_slate(computed: dict) -> list:
-    """Qualified buckets ranked by adjusted confidence — the landing payload.
+    """Qualified buckets ranked by adjusted confidence, the landing payload.
     FACE fields (verdict, face_confidence, direction) carry the 3-second read;
     everything else feeds the expanded view. The face number is ALWAYS the
     adjusted (distortion-honest) confidence, never the raw signal."""
@@ -1107,6 +1107,8 @@ def build_slate(computed: dict) -> list:
         "verdict": d["verdict"],
         "face_confidence": round(d["confidence"]["adjusted"]),
         "direction": d["direction"],
+        "merchant_line": d["merchant_line"],
+        "buy_instruction": d["subtrends"]["buy_instruction"],
         # ── expanded view / backward compatibility ──
         "bet": d["bet"], "lead_lag": d["metrics"]["lead_lag"]["label"],
         "west_agreement": d["metrics"]["west_agreement"]["level"],

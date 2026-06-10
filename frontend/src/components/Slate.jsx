@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { allocateBudget } from '../api.js'
 
-/* LANDING — a traffic-light board. Each tile FACE shows only the decision:
+/* LANDING, a traffic-light board. Each tile FACE shows only the decision:
    trend name, ONE verdict (BUY/TRIAL/WATCH), ONE number (adjusted,
-   distortion-honest confidence — never raw), ONE West→India direction.
+   distortion-honest confidence, never raw), ONE West→India direction.
    Everything else lives behind the click. All content from /api/slate. */
 export default function Slate({ slate, meta, seg, onOpen }) {
   const [budget, setBudget] = useState('')
@@ -26,10 +26,10 @@ export default function Slate({ slate, meta, seg, onOpen }) {
       <div className="header">
         <h1>
           Trend Bet Workbench
-          {meta?.segment && ` — ${meta.segment.category} / ${meta.segment.sub_category}`}
+          {meta?.segment && `, ${meta.segment.category} / ${meta.segment.sub_category}`}
         </h1>
         <div className="sub">
-          One verdict, one honest number, one direction per trend — scannable in
+          One verdict, one honest number, one direction per trend, scannable in
           three seconds. Click any tile for the full evidence: raw vs adjusted,
           distortions, India-fit sliders and the resolver.
         </div>
@@ -46,7 +46,7 @@ export default function Slate({ slate, meta, seg, onOpen }) {
         {alloc && (
           <span className="alloc-summary">
             ₹{fmtINR(alloc.allocated)} allocated · ₹{fmtINR(alloc.held_back)} held back
-            {alloc.held_back_note ? ` — ${alloc.held_back_note}` : ''} · {alloc.method}
+            {alloc.held_back_note ? `, ${alloc.held_back_note}` : ''} · {alloc.method}
           </span>
         )}
         {!alloc && <span className="note">enter an open-to-buy amount to turn the slate into a money plan</span>}
@@ -55,7 +55,7 @@ export default function Slate({ slate, meta, seg, onOpen }) {
       {slate.length === 0 && (
         <div className="loading">
           No silhouette bucket in this segment reaches the qualification bar
-          ({meta?.qualification_rule}) — too little data here to call anything a trend.
+          ({meta?.qualification_rule}), too little data here to call anything a trend.
         </div>
       )}
 
@@ -74,9 +74,15 @@ export default function Slate({ slate, meta, seg, onOpen }) {
                 <span className="glyph">{t.direction.glyph}</span> {t.direction.short}
                 {t.direction.caution && <span className="src-caution"> {t.direction.caution}</span>}
               </div>
+              {t.merchant_line && <div className="face-merchant">“{t.merchant_line}”</div>}
+              {t.buy_instruction && (
+                <div className="face-instruction">
+                  {t.display_name.toLowerCase()}, {t.buy_instruction}
+                </div>
+              )}
               {a && (
                 <div className={`face-alloc ${a.amount === 0 ? 'zero' : ''}`}>
-                  {a.amount > 0 ? `₹${fmtINR(a.amount)}` : 'no spend — monitoring'}
+                  {a.amount > 0 ? `₹${fmtINR(a.amount)}` : 'no spend, monitoring'}
                 </div>
               )}
             </div>
@@ -93,7 +99,7 @@ function fmtINR(n) {
   return String(n)
 }
 
-/* Honest data-coverage strip — driven by /api/meta, including auto-detected
+/* Honest data-coverage strip, driven by /api/meta, including auto-detected
    limitations and how many Western sources back the directions. */
 function Coverage({ meta }) {
   if (!meta) return null
@@ -110,14 +116,14 @@ function Coverage({ meta }) {
       ))}
       {meta.west_sources && (
         <span className={meta.west_sources.count < 2 ? 'warn' : ''}>
-          {meta.west_sources.count} Western source{meta.west_sources.count === 1 ? '' : 's'} — {meta.west_sources.note}
+          {meta.west_sources.count} Western source{meta.west_sources.count === 1 ? '' : 's'}, {meta.west_sources.note}
         </span>
       )}
       {meta.missing_roles?.length > 0 && (
         <span className="warn">missing roles: {meta.missing_roles.join(', ')}</span>
       )}
       {meta.products_outside_segment > 0 && (
-        <span>{meta.products_outside_segment} products belong to other segments (use the dropdowns — nothing is discarded)</span>
+        <span>{meta.products_outside_segment} products belong to other segments (use the dropdowns, nothing is discarded)</span>
       )}
     </div>
   )

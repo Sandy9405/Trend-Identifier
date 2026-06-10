@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────────────────
-   Trend Bet Workbench — Apple-style design language.
+   Trend Bet Workbench, Apple-style design language.
    Light, calm, typographic. The hierarchy mirrors the buyer's decision:
    bet badge → adjusted confidence → the distortion (raw vs adjusted) → detail.
    ──────────────────────────────────────────────────────────────────────────── */
@@ -34,11 +34,13 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+  /* Lexend everywhere: Bold (700) for titles & subtitles, Regular (400) for body */
+  font: 400 14px/1.5 "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+h1, h2, h3, h4, h5, h6 { font-family: "Lexend", sans-serif; font-weight: 700; }
 a { color: inherit; text-decoration: none; }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 24px 64px; }
 
@@ -111,7 +113,7 @@ a { color: inherit; text-decoration: none; }
 }
 .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .card .row1 { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.card h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.card h3 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
 .rank { color: var(--muted); font-size: 13px; font-weight: 400; margin-right: 6px; }
 
 .badge {
@@ -143,6 +145,11 @@ a { color: inherit; text-decoration: none; }
   font-variant-numeric: tabular-nums;
 }
 .face-alloc.zero { color: var(--muted); font-weight: 500; font-size: 12px; }
+.face-merchant {
+  margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border);
+  font-size: 12.5px; line-height: 1.55; color: var(--text); font-style: italic;
+}
+.face-instruction { margin-top: 8px; font-size: 12px; font-weight: 500; color: var(--blue); }
 
 /* ── budget bar ──────────────────────────────────────────────────────────── */
 .budgetbar {
@@ -195,7 +202,7 @@ a { color: inherit; text-decoration: none; }
 .conf-num { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .conf-label { font-size: 11.5px; color: var(--muted); margin-top: -2px; }
 
-/* ── raw vs adjusted — the distortion made visible ───────────────────────── */
+/* ── raw vs adjusted, the distortion made visible ───────────────────────── */
 .rvabar { margin-top: 12px; }
 .rvabar .lane {
   position: relative; height: 6px; border-radius: 980px;
@@ -230,7 +237,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow);
 }
 .panel h4 {
-  margin: 0 0 4px; font-size: 13px; font-weight: 600;
+  margin: 0 0 4px; font-size: 13px; font-weight: 700;
   text-transform: uppercase; letter-spacing: .06em;
 }
 .panel .panel-sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }

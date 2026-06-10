@@ -1,5 +1,5 @@
 {
-  "_note": "FROZEN SAMPLE \u2014 cached output, regenerated from the current data on reload. Not a source of truth.",
+  "_note": "FROZEN SAMPLE, cached output, regenerated from the current data on reload. Not a source of truth.",
   "segments_detected": [
     {
       "category": "women",
@@ -155,7 +155,7 @@
         "scraped_at": "2026-06-09T12:03:44.459Z",
         "newest_upload_proxy": "2026-06-02",
         "limitations": [
-          "declared india_demand but rating_count is absent/all-zero in this slice of the data \u2014 contributes NO demand signal (auto-detected)"
+          "declared india_demand but rating_count is absent/all-zero in this slice of the data, contributes NO demand signal (auto-detected)"
         ]
       },
       {
@@ -172,7 +172,7 @@
         "scraped_at": "2026-06-09T18:01:59.279Z",
         "newest_upload_proxy": null,
         "limitations": [
-          "no date_proxy_regex \u2014 freshness unknown for this platform",
+          "no date_proxy_regex, freshness unknown for this platform",
           "Western platform: signals describe what was DROPPED (supply), never what sold (demand)"
         ]
       },
@@ -205,7 +205,7 @@
       "names": [
         "asos"
       ],
-      "note": "single Western source \u2014 every West-based direction is flagged low-confidence"
+      "note": "single Western source, every West-based direction is flagged low-confidence"
     },
     "buckets_found": 16,
     "products_total": 1242,
@@ -228,10 +228,12 @@
       "direction": {
         "glyph": "=",
         "short": "Landed",
-        "phrase": "West and India aligned \u2014 buy on India merits",
+        "phrase": "West and India aligned, buy on India merits",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, ~\u20b98\u201315L open-to-buy.",
+      "buy_instruction": "strongest in knit/cotton, in brown and red",
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
@@ -243,7 +245,7 @@
       "confidence": {
         "base": 69.7,
         "adjusted": 69.7,
-        "derivation": "base = demand 96.0\u00d70.46 + supply 82.5\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 69.7; adjusted = base 69.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 69.7."
+        "derivation": "base = demand 96.0\u00d70.46 + supply 82.5\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 69.7; adjusted = base 69.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 69.7."
       },
       "why": "Landed; demand 96.0, Indian supply 82.5",
       "counts": {
@@ -267,10 +269,12 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Embroidered is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 68.0% mean some demand is bought.",
+      "buy_instruction": "strongest in cotton/denim, in red and purple",
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
@@ -282,7 +286,7 @@
       "confidence": {
         "base": 73.0,
         "adjusted": 67.0,
-        "derivation": "base = demand 79.8\u00d70.46 + supply 80.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 73.0; adjusted = base 73.0 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.0."
+        "derivation": "base = demand 79.8\u00d70.46 + supply 80.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 73.0; adjusted = base 73.0 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.0."
       },
       "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts",
       "counts": {
@@ -306,10 +310,12 @@
       "direction": {
         "glyph": "\u25c6",
         "short": "India-led",
-        "phrase": "India ahead of the West \u2014 a local bet on local merits",
+        "phrase": "India ahead of the West, a local bet on local merits",
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Puff Balloon is locally validated, 39 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
+      "buy_instruction": "strongest in cotton/chiffon, in purple and red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -321,7 +327,7 @@
       "confidence": {
         "base": 63.0,
         "adjusted": 63.0,
-        "derivation": "base = demand 82.8\u00d70.46 + supply 43.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
+        "derivation": "base = demand 82.8\u00d70.46 + supply 43.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
       },
       "why": "India-led; demand 82.8, Indian supply 43.0",
       "counts": {
@@ -344,10 +350,12 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Corset Fitted is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought.",
+      "buy_instruction": "strongest in knit/cotton, in red and black",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -359,7 +367,7 @@
       "confidence": {
         "base": 63.2,
         "adjusted": 62.2,
-        "derivation": "base = demand 80.3\u00d70.46 + supply 47.5\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.2; adjusted = base 63.2 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 62.2."
+        "derivation": "base = demand 80.3\u00d70.46 + supply 47.5\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 63.2; adjusted = base 63.2 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 62.2."
       },
       "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts",
       "counts": {
@@ -383,10 +391,12 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Peplum is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.5% mean some demand is bought.",
+      "buy_instruction": "strongest in cotton/denim, in purple and red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -398,7 +408,7 @@
       "confidence": {
         "base": 66.4,
         "adjusted": 61.4,
-        "derivation": "base = demand 78.1\u00d70.46 + supply 61.2\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 66.4; adjusted = base 66.4 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.4."
+        "derivation": "base = demand 78.1\u00d70.46 + supply 61.2\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 66.4; adjusted = base 66.4 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.4."
       },
       "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts",
       "counts": {
@@ -422,10 +432,12 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Crop is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought.",
+      "buy_instruction": "strongest in cotton/knit, in brown and red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -437,7 +449,7 @@
       "confidence": {
         "base": 61.8,
         "adjusted": 60.8,
-        "derivation": "base = demand 100.0\u00d70.46 + supply 50.9\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 61.8; adjusted = base 61.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 60.8."
+        "derivation": "base = demand 100.0\u00d70.46 + supply 50.9\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 61.8; adjusted = base 61.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 60.8."
       },
       "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
       "counts": {
@@ -461,10 +473,12 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Shirt is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.0% mean some demand is bought.",
+      "buy_instruction": "strongest in cotton/knit, in red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -476,7 +490,7 @@
       "confidence": {
         "base": 57.3,
         "adjusted": 53.3,
-        "derivation": "base = demand 89.9\u00d70.46 + supply 51.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 57.3; adjusted = base 57.3 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 53.3."
+        "derivation": "base = demand 89.9\u00d70.46 + supply 51.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 57.3; adjusted = base 57.3 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 53.3."
       },
       "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts",
       "counts": {
@@ -499,10 +513,12 @@
       "direction": {
         "glyph": "=",
         "short": "Landed",
-        "phrase": "West and India aligned \u2014 buy on India merits",
+        "phrase": "West and India aligned, buy on India merits",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Mesh Sheer has landed, West and India aligned. Buy on India merits: 3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through.",
+      "buy_instruction": "strongest in lace/mesh, in black and red",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -514,7 +530,7 @@
       "confidence": {
         "base": 44.3,
         "adjusted": 44.3,
-        "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
+        "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
       },
       "why": "Landed; demand 74.9, Indian supply 31.6",
       "counts": {
@@ -538,10 +554,12 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Square Neck is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: no major distortion detected.",
+      "buy_instruction": "strongest in knit/lace, in purple and brown",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -553,7 +571,7 @@
       "confidence": {
         "base": 43.2,
         "adjusted": 43.2,
-        "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
+        "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
       },
       "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4",
       "counts": {
@@ -577,10 +595,12 @@
       "direction": {
         "glyph": "\u25c6",
         "short": "India-led",
-        "phrase": "India ahead of the West \u2014 a local bet on local merits",
+        "phrase": "India ahead of the West, a local bet on local merits",
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Tie Knot is locally validated, 50 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
+      "buy_instruction": "strongest in lace/linen, in brown and purple",
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
@@ -592,7 +612,7 @@
       "confidence": {
         "base": 40.5,
         "adjusted": 40.5,
-        "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
+        "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
       },
       "why": "India-led; demand 65.4, Indian supply 33.4",
       "counts": {
@@ -620,10 +640,12 @@
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Ruffle shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in cotton/lace, in red and purple",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 38.7 < 40"
       },
       "lead_lag": "Unclear",
@@ -631,7 +653,7 @@
       "confidence": {
         "base": 38.7,
         "adjusted": 38.7,
-        "derivation": "base = demand 40.4\u00d70.46 + supply 27.7\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 38.7; adjusted = base 38.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 38.7."
+        "derivation": "base = demand 40.4\u00d70.46 + supply 27.7\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 38.7; adjusted = base 38.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 38.7."
       },
       "why": "Unclear; demand 40.4, Indian supply 27.7",
       "counts": {
@@ -659,10 +681,12 @@
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Wrap shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in cotton/chiffon, in brown and grey",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 27.6 < 40"
       },
       "lead_lag": "Unclear",
@@ -670,7 +694,7 @@
       "confidence": {
         "base": 27.6,
         "adjusted": 27.6,
-        "derivation": "base = demand 46.2\u00d70.46 + supply 20.3\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 27.6; adjusted = base 27.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.6."
+        "derivation": "base = demand 46.2\u00d70.46 + supply 20.3\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 27.6; adjusted = base 27.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.6."
       },
       "why": "Unclear; demand 46.2, Indian supply 20.3",
       "counts": {
@@ -698,10 +722,12 @@
         "single_source": true,
         "caution": "(1 source)"
       },
+      "merchant_line": "Halter is rising in the West but unproven in India; modesty fit is the biggest fit risk. Test small before committing.",
+      "buy_instruction": "strongest in cotton/mesh, in red and black",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 25.0 < 40"
       },
       "lead_lag": "Early (West ahead)",
@@ -709,7 +735,7 @@
       "confidence": {
         "base": 36.4,
         "adjusted": 25.0,
-        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
+        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
       },
       "why": "Early (West ahead); demand 35.7, Indian supply 27.4; Early-gate \u00d7 68.8%",
       "counts": {
@@ -736,10 +762,12 @@
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Bandeau Tube shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in cotton/knit, in white and black",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 9.7 < 40"
       },
       "lead_lag": "Unclear",
@@ -747,7 +775,7 @@
       "confidence": {
         "base": 9.7,
         "adjusted": 9.7,
-        "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
+        "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
       },
       "why": "Unclear; demand 10.4, Indian supply 15.8",
       "counts": {
@@ -775,10 +803,12 @@
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Smocked shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in mesh/denim, in red and brown",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 3.6 < 40"
       },
       "lead_lag": "Unclear",
@@ -786,7 +816,7 @@
       "confidence": {
         "base": 3.6,
         "adjusted": 3.6,
-        "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
+        "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
       },
       "why": "Unclear; demand 0.0, Indian supply 11.6",
       "counts": {
@@ -814,10 +844,12 @@
         "single_source": false,
         "caution": null
       },
+      "merchant_line": "Off Shoulder shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "buy_instruction": "strongest in cotton/lace, in black and red",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 1.7 < 40"
       },
       "lead_lag": "Unclear",
@@ -825,7 +857,7 @@
       "confidence": {
         "base": 1.7,
         "adjusted": 1.7,
-        "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
+        "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
       },
       "why": "Unclear; demand 3.7, Indian supply 0.0",
       "counts": {
@@ -866,21 +898,21 @@
         "supply_conviction": {
           "value": 61.2,
           "freshness_pct": 42.2,
-          "derivation": "Indian assortment share [ajio: 15/391 items (3.8% of assortment); myntra: 49/475 items (10.3% of assortment)], normalized across buckets \u2192 69.3; blended 0.7/0.3 with freshness 42.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 61.2."
+          "derivation": "Indian assortment share [ajio: 15/391 items (3.8% of assortment); myntra: 49/475 items (10.3% of assortment)], normalized across buckets \u2192 69.3; blended 0.7/0.3 with freshness 42.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 61.2."
         },
         "west_signal": {
           "value": 7.9,
-          "derivation": "8 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "8 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 7.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
           "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 78.1 \u2265 DEMAND_HIGH(55) but west 7.9 \u2264 WEST_LOW(25) and supply not fresh (42.2%). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: demand_strength 78.1 \u2265 DEMAND_HIGH(55) but west 7.9 \u2264 WEST_LOW(25) and supply not fresh (42.2%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -889,7 +921,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 5.0,
@@ -980,7 +1012,7 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
@@ -1052,7 +1084,7 @@
       "confidence": {
         "base": 66.4,
         "adjusted": 61.4,
-        "derivation": "base = demand 78.1\u00d70.46 + supply 61.2\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 66.4; adjusted = base 66.4 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.4."
+        "derivation": "base = demand 78.1\u00d70.46 + supply 61.2\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 66.4; adjusted = base 66.4 \u2212 discount penalty 5.0 \u2212 supply-without-demand penalty 0 = 61.4."
       },
       "bet": {
         "label": "Small Trial",
@@ -1062,7 +1094,7 @@
       },
       "verdict": "TRIAL",
       "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts",
-      "merchant_line": "Peplum is past its Western peak but India still wants it \u2014 ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.5% mean some demand is bought."
+      "merchant_line": "Peplum is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.5% mean some demand is bought."
     },
     "embroidered": {
       "bucket": "embroidered",
@@ -1090,21 +1122,21 @@
         "supply_conviction": {
           "value": 80.0,
           "freshness_pct": 49.5,
-          "derivation": "Indian assortment share [ajio: 50/391 items (12.8% of assortment); myntra: 28/475 items (5.9% of assortment)], normalized across buckets \u2192 93.1; blended 0.7/0.3 with freshness 49.5% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 80.0."
+          "derivation": "Indian assortment share [ajio: 50/391 items (12.8% of assortment); myntra: 28/475 items (5.9% of assortment)], normalized across buckets \u2192 93.1; blended 0.7/0.3 with freshness 49.5% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 80.0."
         },
         "west_signal": {
           "value": 21.8,
-          "derivation": "22 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 21.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "22 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 21.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
           "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 21.8 \u2264 WEST_LOW(25) and supply not fresh (49.5%). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: demand_strength 79.8 \u2265 DEMAND_HIGH(55) but west 21.8 \u2264 WEST_LOW(25) and supply not fresh (49.5%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -1113,7 +1145,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 6.0,
@@ -1204,7 +1236,7 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
@@ -1271,7 +1303,7 @@
       "confidence": {
         "base": 73.0,
         "adjusted": 67.0,
-        "derivation": "base = demand 79.8\u00d70.46 + supply 80.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 73.0; adjusted = base 73.0 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.0."
+        "derivation": "base = demand 79.8\u00d70.46 + supply 80.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 73.0; adjusted = base 73.0 \u2212 discount penalty 6.0 \u2212 supply-without-demand penalty 0 = 67.0."
       },
       "bet": {
         "label": "Deeper Buy",
@@ -1281,7 +1313,7 @@
       },
       "verdict": "BUY",
       "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts",
-      "merchant_line": "Embroidered is past its Western peak but India still wants it \u2014 ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 68.0% mean some demand is bought."
+      "merchant_line": "Embroidered is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 68.0% mean some demand is bought."
     },
     "corset_fitted": {
       "bucket": "corset_fitted",
@@ -1309,21 +1341,21 @@
         "supply_conviction": {
           "value": 47.5,
           "freshness_pct": 33.2,
-          "derivation": "Indian assortment share [ajio: 23/391 items (5.9% of assortment); myntra: 25/475 items (5.3% of assortment)], normalized across buckets \u2192 53.6; blended 0.7/0.3 with freshness 33.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 47.5."
+          "derivation": "Indian assortment share [ajio: 23/391 items (5.9% of assortment); myntra: 25/475 items (5.3% of assortment)], normalized across buckets \u2192 53.6; blended 0.7/0.3 with freshness 33.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 47.5."
         },
         "west_signal": {
           "value": 18.8,
-          "derivation": "19 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "19 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 18.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
           "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 18.8 \u2264 WEST_LOW(25) and supply not fresh (33.2%). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: demand_strength 80.3 \u2265 DEMAND_HIGH(55) but west 18.8 \u2264 WEST_LOW(25) and supply not fresh (33.2%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -1332,7 +1364,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 1.0,
@@ -1353,7 +1385,7 @@
           "axes": {
             "climate_fit": {
               "default": 45,
-              "rationale": "keywords imply volume/structure/layering \u2014 heat risk in Indian climate (matched keyword(s): corset, cinch)"
+              "rationale": "keywords imply volume/structure/layering, heat risk in Indian climate (matched keyword(s): corset, cinch)"
             },
             "modesty_fit": {
               "default": 75,
@@ -1361,7 +1393,7 @@
             },
             "occasion_fit": {
               "default": 50,
-              "rationale": "keywords imply party/occasion-only wear \u2014 fewer wear occasions, slower turns (matched keyword(s): corset)"
+              "rationale": "keywords imply party/occasion-only wear, fewer wear occasions, slower turns (matched keyword(s): corset)"
             },
             "price_band_fit": {
               "default": 85,
@@ -1413,7 +1445,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (80.3) outruns Indian supply (47.5) \u2014 possible under-assortment / stockout risk."
+          "Demand (80.3) outruns Indian supply (47.5), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1423,7 +1455,7 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
@@ -1495,7 +1527,7 @@
       "confidence": {
         "base": 63.2,
         "adjusted": 62.2,
-        "derivation": "base = demand 80.3\u00d70.46 + supply 47.5\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.2; adjusted = base 63.2 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 62.2."
+        "derivation": "base = demand 80.3\u00d70.46 + supply 47.5\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 63.2; adjusted = base 63.2 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 62.2."
       },
       "bet": {
         "label": "Small Trial",
@@ -1505,7 +1537,7 @@
       },
       "verdict": "TRIAL",
       "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts",
-      "merchant_line": "Corset Fitted is past its Western peak but India still wants it \u2014 ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought."
+      "merchant_line": "Corset Fitted is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought."
     },
     "square_neck": {
       "bucket": "square_neck",
@@ -1531,16 +1563,16 @@
         "supply_conviction": {
           "value": 24.4,
           "freshness_pct": 18.2,
-          "derivation": "Indian assortment share [ajio: 9/391 items (2.3% of assortment); myntra: 18/475 items (3.8% of assortment)], normalized across buckets \u2192 27.1; blended 0.7/0.3 with freshness 18.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 24.4."
+          "derivation": "Indian assortment share [ajio: 9/391 items (2.3% of assortment); myntra: 18/475 items (3.8% of assortment)], normalized across buckets \u2192 27.1; blended 0.7/0.3 with freshness 18.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 24.4."
         },
         "west_signal": {
           "value": 5.9,
-          "derivation": "6 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "6 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 5.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -1633,7 +1665,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (77.4) outruns Indian supply (24.4) \u2014 possible under-assortment / stockout risk."
+          "Demand (77.4) outruns Indian supply (24.4), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -1643,14 +1675,14 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2193",
-        "label": "Assortment fading, demand flat \u2014 the best window may be gone",
+        "label": "Assortment fading, demand flat, the best window may be gone",
         "recent_share": 21.7,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 5/23 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 22% (\u226560% accelerating, \u226440% fading), demand flat/lagging vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -1715,7 +1747,7 @@
       "confidence": {
         "base": 43.2,
         "adjusted": 43.2,
-        "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
+        "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
       },
       "bet": {
         "label": "Small Trial",
@@ -1725,7 +1757,7 @@
       },
       "verdict": "TRIAL",
       "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4",
-      "merchant_line": "Square Neck is past its Western peak but India still wants it \u2014 ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: no major distortion detected."
+      "merchant_line": "Square Neck is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: no major distortion detected."
     },
     "tie_knot": {
       "bucket": "tie_knot",
@@ -1751,21 +1783,21 @@
         "supply_conviction": {
           "value": 33.4,
           "freshness_pct": 51.7,
-          "derivation": "Indian assortment share [ajio: 7/391 items (1.8% of assortment); myntra: 19/475 items (4.0% of assortment)], normalized across buckets \u2192 25.5; blended 0.7/0.3 with freshness 51.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 33.4."
+          "derivation": "Indian assortment share [ajio: 7/391 items (1.8% of assortment); myntra: 19/475 items (4.0% of assortment)], normalized across buckets \u2192 25.5; blended 0.7/0.3 with freshness 51.7% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 33.4."
         },
         "west_signal": {
           "value": 23.8,
-          "derivation": "24 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 23.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "24 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 23.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "India-led",
           "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 65.4 \u2265 DEMAND_HIGH(55), west 23.8 \u2264 WEST_LOW(25), and supply is fresh (51.7% \u2265 FRESH_HIGH(50)). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: demand_strength 65.4 \u2265 DEMAND_HIGH(55), west 23.8 \u2264 WEST_LOW(25), and supply is fresh (51.7% \u2265 FRESH_HIGH(50)). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -1774,7 +1806,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -1855,24 +1887,24 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (65.4) outruns Indian supply (33.4) \u2014 possible under-assortment / stockout risk."
+          "Demand (65.4) outruns Indian supply (33.4), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "india-led + strong demand",
-          "action": "Confirm size-curve & repeat-rate before scaling \u2014 demand is proven, the open risk is buying the wrong depth per size."
+          "action": "Confirm size-curve & repeat-rate before scaling, demand is proven, the open risk is buying the wrong depth per size."
         }
       },
       "direction": {
         "glyph": "\u25c6",
         "short": "India-led",
-        "phrase": "India ahead of the West \u2014 a local bet on local merits",
+        "phrase": "India ahead of the West, a local bet on local merits",
         "single_source": false,
         "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2191",
-        "label": "Assortment accelerating with demand \u2014 window open",
+        "label": "Assortment accelerating with demand, window open",
         "recent_share": 60.0,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 12/20 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 60% (\u226560% accelerating, \u226440% fading), demand keeping pace vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -1937,7 +1969,7 @@
       "confidence": {
         "base": 40.5,
         "adjusted": 40.5,
-        "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
+        "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
       },
       "bet": {
         "label": "Small Trial",
@@ -1947,7 +1979,7 @@
       },
       "verdict": "TRIAL",
       "why": "India-led; demand 65.4, Indian supply 33.4",
-      "merchant_line": "Tie Knot is locally validated \u2014 50 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
+      "merchant_line": "Tie Knot is locally validated, 50 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
     },
     "shirt": {
       "bucket": "shirt",
@@ -1971,16 +2003,16 @@
         "supply_conviction": {
           "value": 51.4,
           "freshness_pct": 43.2,
-          "derivation": "Indian assortment share [ajio: 10/391 items (2.6% of assortment); myntra: 42/475 items (8.8% of assortment)], normalized across buckets \u2192 54.9; blended 0.7/0.3 with freshness 43.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 51.4."
+          "derivation": "Indian assortment share [ajio: 10/391 items (2.6% of assortment); myntra: 42/475 items (8.8% of assortment)], normalized across buckets \u2192 54.9; blended 0.7/0.3 with freshness 43.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 51.4."
         },
         "west_signal": {
           "value": 0.0,
-          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
@@ -2021,7 +2053,7 @@
             },
             "occasion_fit": {
               "default": 85,
-              "rationale": "keywords imply everyday wear \u2014 wide occasion coverage (matched keyword(s): shirt)"
+              "rationale": "keywords imply everyday wear, wide occasion coverage (matched keyword(s): shirt)"
             },
             "price_band_fit": {
               "default": 85,
@@ -2073,7 +2105,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (89.9) outruns Indian supply (51.4) \u2014 possible under-assortment / stockout risk."
+          "Demand (89.9) outruns Indian supply (51.4), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -2083,14 +2115,14 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2191",
-        "label": "Assortment accelerating with demand \u2014 window open",
+        "label": "Assortment accelerating with demand, window open",
         "recent_share": 60.5,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 23/38 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 61% (\u226560% accelerating, \u226440% fading), demand keeping pace vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -2125,7 +2157,7 @@
       "confidence": {
         "base": 57.3,
         "adjusted": 53.3,
-        "derivation": "base = demand 89.9\u00d70.46 + supply 51.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 57.3; adjusted = base 57.3 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 53.3."
+        "derivation": "base = demand 89.9\u00d70.46 + supply 51.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 57.3; adjusted = base 57.3 \u2212 discount penalty 4.0 \u2212 supply-without-demand penalty 0 = 53.3."
       },
       "bet": {
         "label": "Small Trial",
@@ -2135,7 +2167,7 @@
       },
       "verdict": "TRIAL",
       "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts",
-      "merchant_line": "Shirt is past its Western peak but India still wants it \u2014 ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.0% mean some demand is bought."
+      "merchant_line": "Shirt is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.0% mean some demand is bought."
     },
     "sleeveless_tank": {
       "bucket": "sleeveless_tank",
@@ -2163,21 +2195,21 @@
         "supply_conviction": {
           "value": 82.5,
           "freshness_pct": 41.7,
-          "derivation": "Indian assortment share [ajio: 14/391 items (3.6% of assortment); myntra: 78/475 items (16.4% of assortment)], normalized across buckets \u2192 100.0; blended 0.7/0.3 with freshness 41.7% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 82.5."
+          "derivation": "Indian assortment share [ajio: 14/391 items (3.6% of assortment); myntra: 78/475 items (16.4% of assortment)], normalized across buckets \u2192 100.0; blended 0.7/0.3 with freshness 41.7% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 82.5."
         },
         "west_signal": {
           "value": 100.0,
-          "derivation": "101 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "101 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 100.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Landed",
           "west_agreement": "single-source",
-          "derivation": "Comparison: west 100.0 \u2265 WEST_HIGH(55) and demand_strength 96.0 \u2265 DEMAND_HIGH(55). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: west 100.0 \u2265 WEST_HIGH(55) and demand_strength 96.0 \u2265 DEMAND_HIGH(55). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -2186,7 +2218,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -2215,7 +2247,7 @@
             },
             "occasion_fit": {
               "default": 85,
-              "rationale": "keywords imply everyday wear \u2014 wide occasion coverage (matched keyword(s): sleeveless, tank, cami, vest)"
+              "rationale": "keywords imply everyday wear, wide occasion coverage (matched keyword(s): sleeveless, tank, cami, vest)"
             },
             "price_band_fit": {
               "default": 85,
@@ -2267,7 +2299,7 @@
       "disagreement": {
         "agree": [
           "Indian supply (82.5) and demand (96.0) tell the same story.",
-          "West drops (100.0) and Indian demand (96.0) both high \u2014 landed."
+          "West drops (100.0) and Indian demand (96.0) both high, landed."
         ],
         "conflict": [],
         "resolver": {
@@ -2278,7 +2310,7 @@
       "direction": {
         "glyph": "=",
         "short": "Landed",
-        "phrase": "West and India aligned \u2014 buy on India merits",
+        "phrase": "West and India aligned, buy on India merits",
         "single_source": true,
         "caution": "(1 source)"
       },
@@ -2350,7 +2382,7 @@
       "confidence": {
         "base": 69.7,
         "adjusted": 69.7,
-        "derivation": "base = demand 96.0\u00d70.46 + supply 82.5\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 69.7; adjusted = base 69.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 69.7."
+        "derivation": "base = demand 96.0\u00d70.46 + supply 82.5\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 69.7; adjusted = base 69.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 69.7."
       },
       "bet": {
         "label": "Deeper Buy",
@@ -2360,7 +2392,7 @@
       },
       "verdict": "BUY",
       "why": "Landed; demand 96.0, Indian supply 82.5",
-      "merchant_line": "Sleeveless Tank has landed \u2014 West and India aligned. Buy on India merits: anchor SKUs, ~\u20b98\u201315L open-to-buy."
+      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, ~\u20b98\u201315L open-to-buy."
     },
     "crop": {
       "bucket": "crop",
@@ -2385,21 +2417,21 @@
         "supply_conviction": {
           "value": 50.9,
           "freshness_pct": 22.1,
-          "derivation": "Indian assortment share [ajio: 8/391 items (2.0% of assortment); myntra: 52/475 items (10.9% of assortment)], normalized across buckets \u2192 63.2; blended 0.7/0.3 with freshness 22.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 50.9."
+          "derivation": "Indian assortment share [ajio: 8/391 items (2.0% of assortment); myntra: 52/475 items (10.9% of assortment)], normalized across buckets \u2192 63.2; blended 0.7/0.3 with freshness 22.1% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 50.9."
         },
         "west_signal": {
           "value": 14.9,
-          "derivation": "15 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 14.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "15 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 14.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Late-cycle (West moved on)",
           "west_agreement": "single-source",
-          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 14.9 \u2264 WEST_LOW(25) and supply not fresh (22.1%). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: demand_strength 100.0 \u2265 DEMAND_HIGH(55) but west 14.9 \u2264 WEST_LOW(25) and supply not fresh (22.1%). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -2408,7 +2440,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 1.0,
@@ -2437,7 +2469,7 @@
             },
             "occasion_fit": {
               "default": 85,
-              "rationale": "keywords imply everyday wear \u2014 wide occasion coverage (matched keyword(s): crop)"
+              "rationale": "keywords imply everyday wear, wide occasion coverage (matched keyword(s): crop)"
             },
             "price_band_fit": {
               "default": 85,
@@ -2489,7 +2521,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (100.0) outruns Indian supply (50.9) \u2014 possible under-assortment / stockout risk."
+          "Demand (100.0) outruns Indian supply (50.9), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -2499,14 +2531,14 @@
       "direction": {
         "glyph": "\u2193",
         "short": "Late",
-        "phrase": "West cooling while India is hot \u2014 ride it, don't over-commit",
+        "phrase": "West cooling while India is hot, ride it, don't over-commit",
         "single_source": true,
         "caution": "(1 source)"
       },
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2193",
-        "label": "Assortment fading though demand holds \u2014 window narrowing",
+        "label": "Assortment fading though demand holds, window narrowing",
         "recent_share": 36.5,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 19/52 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 37% (\u226560% accelerating, \u226440% fading), demand keeping pace vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -2571,7 +2603,7 @@
       "confidence": {
         "base": 61.8,
         "adjusted": 60.8,
-        "derivation": "base = demand 100.0\u00d70.46 + supply 50.9\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 61.8; adjusted = base 61.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 60.8."
+        "derivation": "base = demand 100.0\u00d70.46 + supply 50.9\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 61.8; adjusted = base 61.8 \u2212 discount penalty 1.0 \u2212 supply-without-demand penalty 0 = 60.8."
       },
       "bet": {
         "label": "Small Trial",
@@ -2581,7 +2613,7 @@
       },
       "verdict": "TRIAL",
       "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
-      "merchant_line": "Crop is past its Western peak but India still wants it \u2014 ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought."
+      "merchant_line": "Crop is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought."
     },
     "mesh_sheer": {
       "bucket": "mesh_sheer",
@@ -2610,21 +2642,21 @@
         "supply_conviction": {
           "value": 31.6,
           "freshness_pct": 22.2,
-          "derivation": "Indian assortment share [ajio: 8/391 items (2.0% of assortment); myntra: 27/475 items (5.7% of assortment)], normalized across buckets \u2192 35.6; blended 0.7/0.3 with freshness 22.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 31.6."
+          "derivation": "Indian assortment share [ajio: 8/391 items (2.0% of assortment); myntra: 27/475 items (5.7% of assortment)], normalized across buckets \u2192 35.6; blended 0.7/0.3 with freshness 22.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 31.6."
         },
         "west_signal": {
           "value": 66.3,
-          "derivation": "67 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 66.3. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "67 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 66.3. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Landed",
           "west_agreement": "single-source",
-          "derivation": "Comparison: west 66.3 \u2265 WEST_HIGH(55) and demand_strength 74.9 \u2265 DEMAND_HIGH(55). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: west 66.3 \u2265 WEST_HIGH(55) and demand_strength 74.9 \u2265 DEMAND_HIGH(55). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -2633,7 +2665,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -2658,11 +2690,11 @@
             },
             "modesty_fit": {
               "default": 45,
-              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): mesh, sheer, lace, organza, net)"
+              "rationale": "keywords imply sheer/bare styling, modesty constraint in mass-market India (matched keyword(s): mesh, sheer, lace, organza, net)"
             },
             "occasion_fit": {
               "default": 50,
-              "rationale": "keywords imply party/occasion-only wear \u2014 fewer wear occasions, slower turns (matched keyword(s): mesh, sheer, organza)"
+              "rationale": "keywords imply party/occasion-only wear, fewer wear occasions, slower turns (matched keyword(s): mesh, sheer, organza)"
             },
             "price_band_fit": {
               "default": 85,
@@ -2713,10 +2745,10 @@
       "qualified": true,
       "disagreement": {
         "agree": [
-          "West drops (66.3) and Indian demand (74.9) both high \u2014 landed."
+          "West drops (66.3) and Indian demand (74.9) both high, landed."
         ],
         "conflict": [
-          "Demand (74.9) outruns Indian supply (31.6) \u2014 possible under-assortment / stockout risk."
+          "Demand (74.9) outruns Indian supply (31.6), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -2726,14 +2758,14 @@
       "direction": {
         "glyph": "=",
         "short": "Landed",
-        "phrase": "West and India aligned \u2014 buy on India merits",
+        "phrase": "West and India aligned, buy on India merits",
         "single_source": true,
         "caution": "(1 source)"
       },
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2193",
-        "label": "Assortment fading, demand flat \u2014 the best window may be gone",
+        "label": "Assortment fading, demand flat, the best window may be gone",
         "recent_share": 33.3,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 11/33 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 33% (\u226560% accelerating, \u226440% fading), demand flat/lagging vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -2798,7 +2830,7 @@
       "confidence": {
         "base": 44.3,
         "adjusted": 44.3,
-        "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
+        "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
       },
       "bet": {
         "label": "Small Trial",
@@ -2808,7 +2840,7 @@
       },
       "verdict": "TRIAL",
       "why": "Landed; demand 74.9, Indian supply 31.6",
-      "merchant_line": "Mesh Sheer has landed \u2014 West and India aligned. Buy on India merits: 3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through."
+      "merchant_line": "Mesh Sheer has landed, West and India aligned. Buy on India merits: 3\u20135 SKUs, ~\u20b92\u20135L, read 4-week sell-through."
     },
     "off_shoulder": {
       "bucket": "off_shoulder",
@@ -2835,16 +2867,16 @@
         "supply_conviction": {
           "value": 0.0,
           "freshness_pct": 0.0,
-          "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 2/475 items (0.4% of assortment)], normalized across buckets \u2192 0.0; blended 0.7/0.3 with freshness 0.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 0.0."
+          "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 2/475 items (0.4% of assortment)], normalized across buckets \u2192 0.0; blended 0.7/0.3 with freshness 0.0% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 0.0."
         },
         "west_signal": {
           "value": 10.9,
-          "derivation": "11 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "11 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 10.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -2858,7 +2890,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -2883,7 +2915,7 @@
             },
             "modesty_fit": {
               "default": 45,
-              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): off shoulder, off-shoulder, bardot)"
+              "rationale": "keywords imply sheer/bare styling, modesty constraint in mass-market India (matched keyword(s): off shoulder, off-shoulder, bardot)"
             },
             "occasion_fit": {
               "default": 70,
@@ -2957,7 +2989,7 @@
       "trajectory": {
         "arrow": "\u00b7",
         "label": "unknown",
-        "derivation": "Only 4 dated items (image-upload proxy) \u2014 too few to read a trajectory."
+        "derivation": "Only 4 dated items (image-upload proxy), too few to read a trajectory."
       },
       "subtrends": {
         "colors": [
@@ -3020,12 +3052,12 @@
       "confidence": {
         "base": 1.7,
         "adjusted": 1.7,
-        "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
+        "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 1.7 < 40"
       },
       "verdict": "WATCH",
@@ -3057,16 +3089,16 @@
         "supply_conviction": {
           "value": 27.7,
           "freshness_pct": 33.4,
-          "derivation": "Indian assortment share [ajio: 6/391 items (1.5% of assortment); myntra: 20/475 items (4.2% of assortment)], normalized across buckets \u2192 25.2; blended 0.7/0.3 with freshness 33.4% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.7."
+          "derivation": "Indian assortment share [ajio: 6/391 items (1.5% of assortment); myntra: 20/475 items (4.2% of assortment)], normalized across buckets \u2192 25.2; blended 0.7/0.3 with freshness 33.4% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 27.7."
         },
         "west_signal": {
           "value": 12.9,
-          "derivation": "13 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 12.9. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "13 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 12.9. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -3080,7 +3112,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -3243,12 +3275,12 @@
       "confidence": {
         "base": 38.7,
         "adjusted": 38.7,
-        "derivation": "base = demand 40.4\u00d70.46 + supply 27.7\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 38.7; adjusted = base 38.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 38.7."
+        "derivation": "base = demand 40.4\u00d70.46 + supply 27.7\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 38.7; adjusted = base 38.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 38.7."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 38.7 < 40"
       },
       "verdict": "WATCH",
@@ -3278,16 +3310,16 @@
         "supply_conviction": {
           "value": 20.3,
           "freshness_pct": 21.1,
-          "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 20/475 items (4.2% of assortment)], normalized across buckets \u2192 19.9; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 20.3."
+          "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 20/475 items (4.2% of assortment)], normalized across buckets \u2192 19.9; blended 0.7/0.3 with freshness 21.1% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 20.3."
         },
         "west_signal": {
           "value": 3.0,
-          "derivation": "3 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 3.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "3 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 3.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -3380,7 +3412,7 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (46.2) outruns Indian supply (20.3) \u2014 possible under-assortment / stockout risk."
+          "Demand (46.2) outruns Indian supply (20.3), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "no decisive conflict",
@@ -3397,7 +3429,7 @@
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2193",
-        "label": "Assortment fading, demand flat \u2014 the best window may be gone",
+        "label": "Assortment fading, demand flat, the best window may be gone",
         "recent_share": 38.1,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 8/21 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 38% (\u226560% accelerating, \u226440% fading), demand flat/lagging vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -3447,12 +3479,12 @@
       "confidence": {
         "base": 27.6,
         "adjusted": 27.6,
-        "derivation": "base = demand 46.2\u00d70.46 + supply 20.3\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 27.6; adjusted = base 27.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.6."
+        "derivation": "base = demand 46.2\u00d70.46 + supply 20.3\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 27.6; adjusted = base 27.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 27.6."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 27.6 < 40"
       },
       "verdict": "WATCH",
@@ -3484,16 +3516,16 @@
         "supply_conviction": {
           "value": 11.6,
           "freshness_pct": 26.6,
-          "derivation": "Indian assortment share [ajio: 5/391 items (1.3% of assortment); myntra: 3/475 items (0.6% of assortment)], normalized across buckets \u2192 5.1; blended 0.7/0.3 with freshness 26.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 11.6."
+          "derivation": "Indian assortment share [ajio: 5/391 items (1.3% of assortment); myntra: 3/475 items (0.6% of assortment)], normalized across buckets \u2192 5.1; blended 0.7/0.3 with freshness 26.6% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 11.6."
         },
         "west_signal": {
           "value": 20.8,
-          "derivation": "21 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.8. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "21 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 20.8. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -3507,7 +3539,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -3528,7 +3560,7 @@
           "axes": {
             "climate_fit": {
               "default": 45,
-              "rationale": "keywords imply volume/structure/layering \u2014 heat risk in Indian climate (matched keyword(s): smock, shirred, shirring)"
+              "rationale": "keywords imply volume/structure/layering, heat risk in Indian climate (matched keyword(s): smock, shirred, shirring)"
             },
             "modesty_fit": {
               "default": 75,
@@ -3660,12 +3692,12 @@
       "confidence": {
         "base": 3.6,
         "adjusted": 3.6,
-        "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
+        "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 3.6 < 40"
       },
       "verdict": "WATCH",
@@ -3695,16 +3727,16 @@
         "supply_conviction": {
           "value": 43.0,
           "freshness_pct": 50.6,
-          "derivation": "Indian assortment share [ajio: 7/391 items (1.8% of assortment); myntra: 32/475 items (6.7% of assortment)], normalized across buckets \u2192 39.8; blended 0.7/0.3 with freshness 50.6% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 43.0."
+          "derivation": "Indian assortment share [ajio: 7/391 items (1.8% of assortment); myntra: 32/475 items (6.7% of assortment)], normalized across buckets \u2192 39.8; blended 0.7/0.3 with freshness 50.6% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 43.0."
         },
         "west_signal": {
           "value": 0.0,
-          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "0 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 0.0. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "India-led",
@@ -3737,7 +3769,7 @@
           "axes": {
             "climate_fit": {
               "default": 45,
-              "rationale": "keywords imply volume/structure/layering \u2014 heat risk in Indian climate (matched keyword(s): puff, balloon)"
+              "rationale": "keywords imply volume/structure/layering, heat risk in Indian climate (matched keyword(s): puff, balloon)"
             },
             "modesty_fit": {
               "default": 75,
@@ -3797,24 +3829,24 @@
       "disagreement": {
         "agree": [],
         "conflict": [
-          "Demand (82.8) outruns Indian supply (43.0) \u2014 possible under-assortment / stockout risk."
+          "Demand (82.8) outruns Indian supply (43.0), possible under-assortment / stockout risk."
         ],
         "resolver": {
           "pattern": "india-led + strong demand",
-          "action": "Confirm size-curve & repeat-rate before scaling \u2014 demand is proven, the open risk is buying the wrong depth per size."
+          "action": "Confirm size-curve & repeat-rate before scaling, demand is proven, the open risk is buying the wrong depth per size."
         }
       },
       "direction": {
         "glyph": "\u25c6",
         "short": "India-led",
-        "phrase": "India ahead of the West \u2014 a local bet on local merits",
+        "phrase": "India ahead of the West, a local bet on local merits",
         "single_source": false,
         "caution": null
       },
       "lag_estimate": null,
       "trajectory": {
         "arrow": "\u2191",
-        "label": "Assortment accelerating with demand \u2014 window open",
+        "label": "Assortment accelerating with demand, window open",
         "recent_share": 71.0,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 22/31 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 71% (\u226560% accelerating, \u226440% fading), demand keeping pace vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -3879,7 +3911,7 @@
       "confidence": {
         "base": 63.0,
         "adjusted": 63.0,
-        "derivation": "base = demand 82.8\u00d70.46 + supply 43.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
+        "derivation": "base = demand 82.8\u00d70.46 + supply 43.0\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 63.0; adjusted = base 63.0 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 63.0."
       },
       "bet": {
         "label": "Small Trial",
@@ -3889,7 +3921,7 @@
       },
       "verdict": "TRIAL",
       "why": "India-led; demand 82.8, Indian supply 43.0",
-      "merchant_line": "Puff Balloon is locally validated \u2014 39 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
+      "merchant_line": "Puff Balloon is locally validated, 39 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
     },
     "bandeau_tube": {
       "bucket": "bandeau_tube",
@@ -3915,16 +3947,16 @@
         "supply_conviction": {
           "value": 15.8,
           "freshness_pct": 45.0,
-          "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 5/475 items (1.1% of assortment)], normalized across buckets \u2192 3.3; blended 0.7/0.3 with freshness 45.0% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 15.8."
+          "derivation": "Indian assortment share [ajio: 2/391 items (0.5% of assortment); myntra: 5/475 items (1.1% of assortment)], normalized across buckets \u2192 3.3; blended 0.7/0.3 with freshness 45.0% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 15.8."
         },
         "west_signal": {
           "value": 33.7,
-          "derivation": "34 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 33.7. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "34 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 33.7. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Unclear",
@@ -3938,7 +3970,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -3963,11 +3995,11 @@
             },
             "modesty_fit": {
               "default": 45,
-              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): bandeau, tube)"
+              "rationale": "keywords imply sheer/bare styling, modesty constraint in mass-market India (matched keyword(s): bandeau, tube)"
             },
             "occasion_fit": {
               "default": 50,
-              "rationale": "keywords imply party/occasion-only wear \u2014 fewer wear occasions, slower turns (matched keyword(s): bandeau, tube)"
+              "rationale": "keywords imply party/occasion-only wear, fewer wear occasions, slower turns (matched keyword(s): bandeau, tube)"
             },
             "price_band_fit": {
               "default": 85,
@@ -4101,12 +4133,12 @@
       "confidence": {
         "base": 9.7,
         "adjusted": 9.7,
-        "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
+        "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 9.7 < 40"
       },
       "verdict": "WATCH",
@@ -4136,21 +4168,21 @@
         "supply_conviction": {
           "value": 27.4,
           "freshness_pct": 69.2,
-          "derivation": "Indian assortment share [ajio: 0/391 items (0.0% of assortment); myntra: 13/475 items (2.7% of assortment)], normalized across buckets \u2192 9.5; blended 0.7/0.3 with freshness 69.2% (share of items image-uploaded within 120d of platform's newest upload \u2014 a proxy, not a true listing date) \u2192 27.4."
+          "derivation": "Indian assortment share [ajio: 0/391 items (0.0% of assortment); myntra: 13/475 items (2.7% of assortment)], normalized across buckets \u2192 9.5; blended 0.7/0.3 with freshness 69.2% (share of items image-uploaded within 120d of platform's newest upload, a proxy, not a true listing date) \u2192 27.4."
         },
         "west_signal": {
           "value": 82.2,
-          "derivation": "83 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.2. This is SUPPLY (what was dropped), not demand \u2014 nobody has proven a Western shopper bought it."
+          "derivation": "83 of 376 items in the Western new-drop feed (asos), share normalized across buckets \u2192 82.2. This is SUPPLY (what was dropped), not demand, nobody has proven a Western shopper bought it."
         },
         "own_sales": {
           "value": null,
           "return_rate": null,
-          "derivation": "No pos_sales source in the data \u2014 the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
+          "derivation": "No pos_sales source in the data, the buyer's own sell-through is unavailable; scoring runs on market signals only. Drop a sales export (CSV or JSON with style name + units sold) matching the buyer_pos adapter into /data to activate this signal."
         },
         "lead_lag": {
           "label": "Early (West ahead)",
           "west_agreement": "single-source",
-          "derivation": "Comparison: west 82.2 \u2265 WEST_HIGH(55) and demand_strength 35.7 < DEMAND_LOW(40). CAUTION: the Western side of this call rests on a single source \u2014 low confidence until a second Western source agrees."
+          "derivation": "Comparison: west 82.2 \u2265 WEST_HIGH(55) and demand_strength 35.7 < DEMAND_LOW(40). CAUTION: the Western side of this call rests on a single source, low confidence until a second Western source agrees."
         },
         "west_agreement": {
           "sources_present": 1,
@@ -4159,7 +4191,7 @@
             "asos"
           ],
           "level": "single-source",
-          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source \u2014 direction is low-confidence, do not overstate."
+          "derivation": "Present at \u22652% assortment share on 1 of 1 Western sources (asos). Single Western source, direction is low-confidence, do not overstate."
         },
         "discount_penalty": {
           "value": 0,
@@ -4184,7 +4216,7 @@
             },
             "modesty_fit": {
               "default": 45,
-              "rationale": "keywords imply sheer/bare styling \u2014 modesty constraint in mass-market India (matched keyword(s): halter, halterneck)"
+              "rationale": "keywords imply sheer/bare styling, modesty constraint in mass-market India (matched keyword(s): halter, halterneck)"
             },
             "occasion_fit": {
               "default": 70,
@@ -4242,11 +4274,11 @@
           "Indian supply (27.4) and demand (35.7) tell the same story."
         ],
         "conflict": [
-          "The West is dropping this hard (west_signal 82.2) but Indian shoppers haven't moved (demand 35.7) \u2014 classic lead-or-trap."
+          "The West is dropping this hard (west_signal 82.2) but Indian shoppers haven't moved (demand 35.7), classic lead-or-trap."
         ],
         "resolver": {
           "pattern": "lead-lag Early + low replication",
-          "action": "Small live trial in 2\u20133 target stores/regions \u2014 the India-fit doubts (climate/modesty/occasion/price) can only be answered by real shoppers."
+          "action": "Small live trial in 2\u20133 target stores/regions, the India-fit doubts (climate/modesty/occasion/price) can only be answered by real shoppers."
         }
       },
       "direction": {
@@ -4258,11 +4290,11 @@
       },
       "lag_estimate": {
         "window": "~1\u20132 quarters",
-        "derivation": "ESTIMATE from the signal gap: west 82.2 \u2212 India 35.7 = 46 (\u226560 \u2192 ~2 qtrs, \u226530 \u2192 ~1\u20132 qtrs, else ~1 qtr). Western fast-fashion typically leads Indian value retail by this order for silhouette trends \u2014 a rough buying calendar, not a forecast."
+        "derivation": "ESTIMATE from the signal gap: west 82.2 \u2212 India 35.7 = 46 (\u226560 \u2192 ~2 qtrs, \u226530 \u2192 ~1\u20132 qtrs, else ~1 qtr). Western fast-fashion typically leads Indian value retail by this order for silhouette trends, a rough buying calendar, not a forecast."
       },
       "trajectory": {
         "arrow": "\u2191",
-        "label": "Assortment accelerating with demand \u2014 window open",
+        "label": "Assortment accelerating with demand, window open",
         "recent_share": 69.2,
         "derivation": "PROXY based on image-upload dates, not true listing dates: 9/13 of this bucket's dated Indian items were uploaded after their platform's median upload date \u2192 recent share 69% (\u226560% accelerating, \u226440% fading), demand keeping pace vs segment norm. Re-shot images and platform image pipelines can distort this."
       },
@@ -4327,12 +4359,12 @@
       "confidence": {
         "base": 36.4,
         "adjusted": 25.0,
-        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized \u2014 missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
+        "derivation": "base = demand 35.7\u00d70.46 + supply 27.4\u00d70.31 + agreement 50.0\u00d70.23 (weights renormalized, missing: own-sales) = 36.4; adjusted = base 36.4 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0, \u00d7 replication 68.8/100 (lead-lag is Early) = 25.0."
       },
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy \u2014 watch list, recheck next data drop",
+        "band": "no buy, watch list, recheck next data drop",
         "rule": "adjusted 25.0 < 40"
       },
       "verdict": "WATCH",
