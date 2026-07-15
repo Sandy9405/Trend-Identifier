@@ -6,10 +6,10 @@
       "sub_category": "tops",
       "count": 1810,
       "platforms": {
-        "hm": 568,
-        "asos": 376,
+        "myntra": 475,
         "ajio": 391,
-        "myntra": 475
+        "asos": 376,
+        "hm": 568
       }
     },
     {
@@ -25,9 +25,9 @@
       "sub_category": "skirts",
       "count": 30,
       "platforms": {
-        "hm": 3,
+        "ajio": 1,
         "asos": 26,
-        "ajio": 1
+        "hm": 3
       }
     },
     {
@@ -43,19 +43,10 @@
       "sub_category": "tshirts",
       "count": 27,
       "platforms": {
-        "hm": 6,
-        "asos": 14,
+        "myntra": 4,
         "ajio": 3,
-        "myntra": 4
-      }
-    },
-    {
-      "category": "women",
-      "sub_category": "shorts",
-      "count": 13,
-      "platforms": {
-        "asos": 12,
-        "ajio": 1
+        "asos": 14,
+        "hm": 6
       }
     },
     {
@@ -68,11 +59,20 @@
     },
     {
       "category": "women",
+      "sub_category": "shorts",
+      "count": 13,
+      "platforms": {
+        "ajio": 1,
+        "asos": 12
+      }
+    },
+    {
+      "category": "women",
       "sub_category": "kurtas",
       "count": 8,
       "platforms": {
-        "ajio": 6,
-        "myntra": 2
+        "myntra": 2,
+        "ajio": 6
       }
     },
     {
@@ -80,9 +80,9 @@
       "sub_category": "shirts",
       "count": 7,
       "platforms": {
-        "hm": 4,
+        "ajio": 1,
         "asos": 2,
-        "ajio": 1
+        "hm": 4
       }
     },
     {
@@ -90,9 +90,9 @@
       "sub_category": "jeans",
       "count": 4,
       "platforms": {
-        "asos": 2,
+        "myntra": 1,
         "ajio": 1,
-        "myntra": 1
+        "asos": 2
       }
     },
     {
@@ -100,8 +100,8 @@
       "sub_category": "nightwear",
       "count": 3,
       "platforms": {
-        "asos": 2,
-        "ajio": 1
+        "ajio": 1,
+        "asos": 2
       }
     },
     {
@@ -109,8 +109,8 @@
       "sub_category": "dresses",
       "count": 2,
       "platforms": {
-        "asos": 1,
-        "myntra": 1
+        "myntra": 1,
+        "asos": 1
       }
     },
     {
@@ -122,19 +122,19 @@
       }
     },
     {
-      "category": "kids",
-      "sub_category": "tops",
-      "count": 1,
-      "platforms": {
-        "asos": 1
-      }
-    },
-    {
       "category": "men",
       "sub_category": "trousers",
       "count": 1,
       "platforms": {
         "ajio": 1
+      }
+    },
+    {
+      "category": "kids",
+      "sub_category": "tops",
+      "count": 1,
+      "platforms": {
+        "asos": 1
       }
     }
   ],
@@ -234,7 +234,7 @@
     "products_total": 1810,
     "products_unbucketed": 735,
     "qualification_rule": "bucket needs \u2265 10 products to enter the slate",
-    "computed_at": "2026-06-10",
+    "computed_at": "2026-07-15",
     "note": "Every number above is recomputed from the files in /data at startup. Nothing trend-specific is hardcoded.",
     "segment": {
       "category": "women",
@@ -255,12 +255,13 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, size the spend with the budget allocator.",
+      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: Anchor SKUs now. Use the budget allocator to size the spend against your open-to-buy.",
       "buy_instruction": "strongest in knit/cotton, in brown and red",
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, size the spend with the budget allocator",
+        "band": "Anchor SKUs now. Use the budget allocator to size the spend against your open-to-buy.",
+        "caption": "strong enough to commit real budget to",
         "rule": "adjusted 69.7 \u2265 65"
       },
       "lead_lag": "Landed",
@@ -302,7 +303,8 @@
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, size the spend with the budget allocator",
+        "band": "Anchor SKUs now. Use the budget allocator to size the spend against your open-to-buy.",
+        "caption": "strong enough to commit real budget to",
         "rule": "adjusted 67.0 \u2265 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
@@ -344,8 +346,9 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 63.0 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 63.0 < 65"
       },
       "lead_lag": "India-led",
       "west_agreement": "absent",
@@ -385,8 +388,9 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 62.2 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 62.2 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "west_agreement": "single-source",
@@ -427,8 +431,9 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 61.4 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 61.4 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "west_agreement": "multi-source",
@@ -469,8 +474,9 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 60.8 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 60.8 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "west_agreement": "multi-source",
@@ -511,8 +517,9 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 53.3 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 53.3 < 65"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "west_agreement": "absent",
@@ -537,7 +544,7 @@
     {
       "bucket": "mesh_sheer",
       "display_name": "Mesh Sheer",
-      "verdict": "TRIAL",
+      "verdict": "WATCH",
       "face_confidence": 44,
       "direction": {
         "glyph": "\u2022",
@@ -546,13 +553,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Mesh Sheer shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Mesh Sheer shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in lace/mesh, in brown and black",
       "bet": {
-        "label": "Small Trial",
-        "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 44.3 < 65"
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 44.3 < 45"
       },
       "lead_lag": "Unclear",
       "west_agreement": "multi-source",
@@ -579,7 +587,7 @@
     {
       "bucket": "square_neck",
       "display_name": "Square Neck",
-      "verdict": "TRIAL",
+      "verdict": "WATCH",
       "face_confidence": 43,
       "direction": {
         "glyph": "\u2193",
@@ -591,10 +599,11 @@
       "merchant_line": "Square Neck is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: no major distortion detected.",
       "buy_instruction": "strongest in knit/lace, in brown and purple",
       "bet": {
-        "label": "Small Trial",
-        "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 43.2 < 65"
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 43.2 < 45"
       },
       "lead_lag": "Late-cycle (West moved on)",
       "west_agreement": "absent",
@@ -621,7 +630,7 @@
     {
       "bucket": "tie_knot",
       "display_name": "Tie Knot",
-      "verdict": "TRIAL",
+      "verdict": "WATCH",
       "face_confidence": 40,
       "direction": {
         "glyph": "\u25c6",
@@ -633,10 +642,11 @@
       "merchant_line": "Tie Knot is locally validated, 71 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected.",
       "buy_instruction": "strongest in linen/knit, in brown and red",
       "bet": {
-        "label": "Small Trial",
-        "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 40.5 < 65"
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 40.5 < 45"
       },
       "lead_lag": "India-led",
       "west_agreement": "multi-source",
@@ -672,13 +682,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Ruffle shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Ruffle shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in cotton/lace, in brown and red",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 38.7 < 40"
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 38.7 < 45"
       },
       "lead_lag": "Unclear",
       "west_agreement": "single-source",
@@ -714,13 +725,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Halter shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Halter shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in cotton/mesh, in red and brown",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 36.4 < 40"
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 36.4 < 45"
       },
       "lead_lag": "Unclear",
       "west_agreement": "multi-source",
@@ -755,13 +767,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Wrap shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Wrap shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in viscose/cotton, in brown and grey",
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 27.6 < 40"
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 27.6 < 45"
       },
       "lead_lag": "Unclear",
       "west_agreement": "single-source",
@@ -788,7 +801,7 @@
     {
       "bucket": "bandeau_tube",
       "display_name": "Bandeau Tube",
-      "verdict": "WATCH",
+      "verdict": "SKIP",
       "face_confidence": 10,
       "direction": {
         "glyph": "\u2022",
@@ -797,13 +810,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Bandeau Tube shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Bandeau Tube shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in cotton/knit, in white and red",
       "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 9.7 < 40"
+        "label": "Pass",
+        "verdict": "SKIP",
+        "band": "Pass this cycle. Revisit only if new data changes the picture.",
+        "caption": "signals conflict or are nearly empty, pass for now",
+        "rule": "adjusted 9.7 < 20"
       },
       "lead_lag": "Unclear",
       "west_agreement": "multi-source",
@@ -830,7 +844,7 @@
     {
       "bucket": "smocked",
       "display_name": "Smocked",
-      "verdict": "WATCH",
+      "verdict": "SKIP",
       "face_confidence": 4,
       "direction": {
         "glyph": "\u2022",
@@ -839,13 +853,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Smocked shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Smocked shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in mesh/denim, in red and brown",
       "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 3.6 < 40"
+        "label": "Pass",
+        "verdict": "SKIP",
+        "band": "Pass this cycle. Revisit only if new data changes the picture.",
+        "caption": "signals conflict or are nearly empty, pass for now",
+        "rule": "adjusted 3.6 < 20"
       },
       "lead_lag": "Unclear",
       "west_agreement": "multi-source",
@@ -872,7 +887,7 @@
     {
       "bucket": "off_shoulder",
       "display_name": "Off Shoulder",
-      "verdict": "WATCH",
+      "verdict": "SKIP",
       "face_confidence": 2,
       "direction": {
         "glyph": "\u2022",
@@ -881,13 +896,14 @@
         "single_source": false,
         "caution": null
       },
-      "merchant_line": "Off Shoulder shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Off Shoulder shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "buy_instruction": "strongest in cotton/lace, in black and red",
       "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 1.7 < 40"
+        "label": "Pass",
+        "verdict": "SKIP",
+        "band": "Pass this cycle. Revisit only if new data changes the picture.",
+        "caption": "signals conflict or are nearly empty, pass for now",
+        "rule": "adjusted 1.7 < 20"
       },
       "lead_lag": "Unclear",
       "west_agreement": "single-source",
@@ -1045,7 +1061,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -1128,11 +1144,19 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 61.4 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 61.4 < 65"
       },
       "verdict": "TRIAL",
+      "watchouts": [
+        {
+          "label": "Discount distortion",
+          "note": "Median true discount 67.5% vs a 65.0% category norm: this trend is pushed harder on price than the market around it, so some of this demand may be bought, not organic."
+        }
+      ],
       "why": "Late-cycle (West moved on); demand 78.1, Indian supply 61.2; distortions cost 5.0 pts",
+      "confidence_note": "Indian supply (61.2) and demand (78.1) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "merchant_line": "Peplum is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.5% mean some demand is bought."
     },
     "embroidered": {
@@ -1271,7 +1295,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -1354,11 +1378,19 @@
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, size the spend with the budget allocator",
+        "band": "Anchor SKUs now. Use the budget allocator to size the spend against your open-to-buy.",
+        "caption": "strong enough to commit real budget to",
         "rule": "adjusted 67.0 \u2265 65"
       },
       "verdict": "BUY",
+      "watchouts": [
+        {
+          "label": "Discount distortion",
+          "note": "Median true discount 68.0% vs a 65.0% category norm: this trend is pushed harder on price than the market around it, so some of this demand may be bought, not organic."
+        }
+      ],
       "why": "Late-cycle (West moved on); demand 79.8, Indian supply 80.0; distortions cost 6.0 pts",
+      "confidence_note": "Indian supply (80.0) and demand (79.8) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "merchant_line": "Embroidered is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 68.0% mean some demand is bought."
     },
     "corset_fitted": {
@@ -1496,7 +1528,7 @@
         ],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -1579,11 +1611,23 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 62.2 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 62.2 < 65"
       },
       "verdict": "TRIAL",
+      "watchouts": [
+        {
+          "label": "Discount distortion",
+          "note": "Median true discount 65.5% vs a 65.0% category norm: this trend is pushed harder on price than the market around it, so some of this demand may be bought, not organic."
+        },
+        {
+          "label": "Single-source read",
+          "note": "Only one Western source backs this trajectory. Corroborate before increasing spend."
+        }
+      ],
       "why": "Late-cycle (West moved on); demand 80.3, Indian supply 47.5; distortions cost 1.0 pts",
+      "confidence_note": "Demand (80.3) outruns Indian supply (47.5), possible under-assortment / stockout risk. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "merchant_line": "Corset Fitted is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought."
     },
     "square_neck": {
@@ -1717,7 +1761,7 @@
         ],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -1798,13 +1842,25 @@
         "derivation": "base = demand 77.4\u00d70.46 + supply 24.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 43.2; adjusted = base 43.2 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 43.2."
       },
       "bet": {
-        "label": "Small Trial",
-        "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 43.2 < 65"
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 43.2 < 45"
       },
-      "verdict": "TRIAL",
+      "verdict": "WATCH",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 65% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "Thin sample",
+          "note": "Only 40 SKUs back this reading. Validate with a small order before scaling."
+        }
+      ],
       "why": "Late-cycle (West moved on); demand 77.4, Indian supply 24.4",
+      "confidence_note": "Demand (77.4) outruns Indian supply (24.4), possible under-assortment / stockout risk. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "merchant_line": "Square Neck is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: no major distortion detected."
     },
     "tie_knot": {
@@ -2022,13 +2078,21 @@
         "derivation": "base = demand 65.4\u00d70.46 + supply 33.4\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 40.5; adjusted = base 40.5 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 40.5."
       },
       "bet": {
-        "label": "Small Trial",
-        "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 40.5 < 65"
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 40.5 < 45"
       },
-      "verdict": "TRIAL",
+      "verdict": "WATCH",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 62.0% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        }
+      ],
       "why": "India-led; demand 65.4, Indian supply 33.4",
+      "confidence_note": "Demand (65.4) outruns Indian supply (33.4), possible under-assortment / stockout risk. Confirm size-curve & repeat-rate before scaling, demand is proven, the open risk is buying the wrong depth per size.",
       "merchant_line": "Tie Knot is locally validated, 71 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
     },
     "shirt": {
@@ -2159,7 +2223,7 @@
         ],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -2212,11 +2276,19 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 53.3 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 53.3 < 65"
       },
       "verdict": "TRIAL",
+      "watchouts": [
+        {
+          "label": "Discount distortion",
+          "note": "Median true discount 67.0% vs a 65.0% category norm: this trend is pushed harder on price than the market around it, so some of this demand may be bought, not organic."
+        }
+      ],
       "why": "Late-cycle (West moved on); demand 89.9, Indian supply 51.4; distortions cost 4.0 pts",
+      "confidence_note": "Demand (89.9) outruns Indian supply (51.4), possible under-assortment / stockout risk. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "merchant_line": "Shirt is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 67.0% mean some demand is bought."
     },
     "sleeveless_tank": {
@@ -2356,7 +2428,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -2439,12 +2511,24 @@
       "bet": {
         "label": "Deeper Buy",
         "verdict": "BUY",
-        "band": "anchor SKUs, size the spend with the budget allocator",
+        "band": "Anchor SKUs now. Use the budget allocator to size the spend against your open-to-buy.",
+        "caption": "strong enough to commit real budget to",
         "rule": "adjusted 69.7 \u2265 65"
       },
       "verdict": "BUY",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 64.0% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "West signal is supply-only",
+          "note": "The Western number counts what got dropped into new-in feeds, not proof anyone in the West bought it."
+        }
+      ],
       "why": "Landed; demand 96.0, Indian supply 82.5",
-      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: anchor SKUs, size the spend with the budget allocator."
+      "confidence_note": "Indian supply (82.5) and demand (96.0) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Sleeveless Tank has landed, West and India aligned. Buy on India merits: Anchor SKUs now. Use the budget allocator to size the spend against your open-to-buy."
     },
     "crop": {
       "bucket": "crop",
@@ -2579,7 +2663,7 @@
         ],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -2662,11 +2746,19 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 60.8 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 60.8 < 65"
       },
       "verdict": "TRIAL",
+      "watchouts": [
+        {
+          "label": "Discount distortion",
+          "note": "Median true discount 65.5% vs a 65.0% category norm: this trend is pushed harder on price than the market around it, so some of this demand may be bought, not organic."
+        }
+      ],
       "why": "Late-cycle (West moved on); demand 100.0, Indian supply 50.9; distortions cost 1.0 pts",
+      "confidence_note": "Demand (100.0) outruns Indian supply (50.9), possible under-assortment / stockout risk. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
       "merchant_line": "Crop is past its Western peak but India still wants it, ride the existing demand, keep markdown exit easy, don't over-commit. Watch-out: median discounts of 65.5% mean some demand is bought."
     },
     "mesh_sheer": {
@@ -2806,7 +2898,7 @@
         ],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -2887,14 +2979,22 @@
         "derivation": "base = demand 74.9\u00d70.46 + supply 31.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 44.3; adjusted = base 44.3 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 44.3."
       },
       "bet": {
-        "label": "Small Trial",
-        "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 44.3 < 65"
+        "label": "Monitor",
+        "verdict": "WATCH",
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 44.3 < 45"
       },
-      "verdict": "TRIAL",
+      "verdict": "WATCH",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 65% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        }
+      ],
       "why": "Unclear; demand 74.9, Indian supply 31.6",
-      "merchant_line": "Mesh Sheer shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Demand (74.9) outruns Indian supply (31.6), possible under-assortment / stockout risk. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Mesh Sheer shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "off_shoulder": {
       "bucket": "off_shoulder",
@@ -3029,7 +3129,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -3109,14 +3209,30 @@
         "derivation": "base = demand 3.7\u00d70.46 + supply 0.0\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 1.7; adjusted = base 1.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 1.7."
       },
       "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 1.7 < 40"
+        "label": "Pass",
+        "verdict": "SKIP",
+        "band": "Pass this cycle. Revisit only if new data changes the picture.",
+        "caption": "signals conflict or are nearly empty, pass for now",
+        "rule": "adjusted 1.7 < 20"
       },
-      "verdict": "WATCH",
+      "verdict": "SKIP",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 60.0% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "Single-source read",
+          "note": "Only one Western source backs this trajectory. Corroborate before increasing spend."
+        },
+        {
+          "label": "Thin sample",
+          "note": "Only 15 SKUs back this reading. Validate with a small order before scaling."
+        }
+      ],
       "why": "Unclear; demand 3.7, Indian supply 0.0",
-      "merchant_line": "Off Shoulder shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Indian supply (0.0) and demand (3.7) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Off Shoulder shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "ruffle": {
       "bucket": "ruffle",
@@ -3252,7 +3368,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -3335,12 +3451,28 @@
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 38.7 < 40"
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 38.7 < 45"
       },
       "verdict": "WATCH",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 60.0% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "Single-source read",
+          "note": "Only one Western source backs this trajectory. Corroborate before increasing spend."
+        },
+        {
+          "label": "Thin sample",
+          "note": "Only 49 SKUs back this reading. Validate with a small order before scaling."
+        }
+      ],
       "why": "Unclear; demand 40.4, Indian supply 27.7",
-      "merchant_line": "Ruffle shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Indian supply (27.7) and demand (40.4) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Ruffle shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "wrap": {
       "bucket": "wrap",
@@ -3474,7 +3606,7 @@
         ],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -3547,12 +3679,28 @@
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 27.6 < 40"
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 27.6 < 45"
       },
       "verdict": "WATCH",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 64.0% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "Single-source read",
+          "note": "Only one Western source backs this trajectory. Corroborate before increasing spend."
+        },
+        {
+          "label": "Thin sample",
+          "note": "Only 39 SKUs back this reading. Validate with a small order before scaling."
+        }
+      ],
       "why": "Unclear; demand 46.2, Indian supply 20.3",
-      "merchant_line": "Wrap shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Demand (46.2) outruns Indian supply (20.3), possible under-assortment / stockout risk. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Wrap shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "smocked": {
       "bucket": "smocked",
@@ -3689,7 +3837,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -3770,14 +3918,26 @@
         "derivation": "base = demand 0.0\u00d70.46 + supply 11.6\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 3.6; adjusted = base 3.6 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 3.6."
       },
       "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 3.6 < 40"
+        "label": "Pass",
+        "verdict": "SKIP",
+        "band": "Pass this cycle. Revisit only if new data changes the picture.",
+        "caption": "signals conflict or are nearly empty, pass for now",
+        "rule": "adjusted 3.6 < 20"
       },
-      "verdict": "WATCH",
+      "verdict": "SKIP",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 49.0% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "Thin sample",
+          "note": "Only 48 SKUs back this reading. Validate with a small order before scaling."
+        }
+      ],
       "why": "Unclear; demand 0.0, Indian supply 11.6",
-      "merchant_line": "Smocked shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Indian supply (11.6) and demand (0.0) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Smocked shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "puff_balloon": {
       "bucket": "puff_balloon",
@@ -3992,11 +4152,23 @@
       "bet": {
         "label": "Small Trial",
         "verdict": "TRIAL",
-        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling",
-        "rule": "40 \u2264 adjusted 63.0 < 65"
+        "band": "3\u20135 test SKUs, read 4-week sell-through before scaling.",
+        "caption": "worth a small trial order, not a full bet",
+        "rule": "45 \u2264 adjusted 63.0 < 65"
       },
       "verdict": "TRIAL",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 62% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        },
+        {
+          "label": "Thin sample",
+          "note": "Only 40 SKUs back this reading. Validate with a small order before scaling."
+        }
+      ],
       "why": "India-led; demand 82.8, Indian supply 43.0",
+      "confidence_note": "Demand (82.8) outruns Indian supply (43.0), possible under-assortment / stockout risk. Confirm size-curve & repeat-rate before scaling, demand is proven, the open risk is buying the wrong depth per size.",
       "merchant_line": "Puff Balloon is locally validated, 40 SKUs across platforms with strong Indian demand, and India is ahead of the West, so this isn't an import bet. Watch-out: no major distortion detected."
     },
     "bandeau_tube": {
@@ -4133,7 +4305,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -4214,14 +4386,22 @@
         "derivation": "base = demand 10.4\u00d70.46 + supply 15.8\u00d70.31 + agreement 0.0\u00d70.23 (weights renormalized, missing: own-sales) = 9.7; adjusted = base 9.7 \u2212 discount penalty 0 \u2212 supply-without-demand penalty 0 = 9.7."
       },
       "bet": {
-        "label": "Monitor",
-        "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 9.7 < 40"
+        "label": "Pass",
+        "verdict": "SKIP",
+        "band": "Pass this cycle. Revisit only if new data changes the picture.",
+        "caption": "signals conflict or are nearly empty, pass for now",
+        "rule": "adjusted 9.7 < 20"
       },
-      "verdict": "WATCH",
+      "verdict": "SKIP",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 55% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        }
+      ],
       "why": "Unclear; demand 10.4, Indian supply 15.8",
-      "merchant_line": "Bandeau Tube shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Indian supply (15.8) and demand (10.4) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Bandeau Tube shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     },
     "halter": {
       "bucket": "halter",
@@ -4356,7 +4536,7 @@
         "conflict": [],
         "resolver": {
           "pattern": "no decisive conflict",
-          "action": "Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+          "action": "Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
         }
       },
       "direction": {
@@ -4439,12 +4619,20 @@
       "bet": {
         "label": "Monitor",
         "verdict": "WATCH",
-        "band": "no buy, watch list, recheck next data drop",
-        "rule": "adjusted 36.4 < 40"
+        "band": "No buy. Watch list, recheck at the next data drop.",
+        "caption": "too thin to size a bet, keep watching",
+        "rule": "20 \u2264 adjusted 36.4 < 45"
       },
       "verdict": "WATCH",
+      "watchouts": [
+        {
+          "label": "Discounting at the category norm",
+          "note": "Median true discount 64% vs a 65.0% norm: traction here reads as organic rather than markdown-bought."
+        }
+      ],
       "why": "Unclear; demand 35.7, Indian supply 27.4",
-      "merchant_line": "Halter shows mixed signals. Before changing the bet: Watch rating_count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
+      "confidence_note": "Indian supply (27.4) and demand (35.7) tell the same story. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet.",
+      "merchant_line": "Halter shows mixed signals. Watch review-count velocity on the demand authority over the next 2 scrape cycles before changing the bet."
     }
   }
 }

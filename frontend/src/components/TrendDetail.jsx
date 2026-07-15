@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { recompute } from '../api.js'
-import { LeadLagTag, RawVsAdjusted, Derivation } from './shared.jsx'
 
+const TIER_LABEL = { BUY: 'Buy', TRIAL: 'Trial', WATCH: 'Watch', SKIP: 'Skip' }
 const AXIS_LABELS = {
   climate_fit: 'Climate fit',
   modesty_fit: 'Modesty fit',
@@ -9,17 +9,22 @@ const AXIS_LABELS = {
   price_band_fit: 'Price-band fit',
 }
 
-/* DETAIL, four panels mirroring the buyer's reasoning path:
-   1 what looks real · 2 what could mislead · 3 what should the buyer do ·
-   4 what improves next time. All content from /api/trend + /api/recompute. */
+/* DETAIL VIEW, per the design handoff.
+   Rich tier (Buy/Trial): evidence + watch-outs two-column, then "Your move"
+   with fabric/colour mix and India-fit sliders (live recompute against the
+   real backend). Sparse tier (Watch/Skip): a single "Evidence so far" note.
+   Both end with "Confidence & feedback" (single-select toggle). */
 export default function TrendDetail({ trend, seg, onBack }) {
-  // `live` holds the recomputed payload after slider overrides; null = baseline
-  const [live, setLive] = useState(null)
+  const [live, setLive] = useState(null)          // recomputed payload after overrides
   const [overrides, setOverrides] = useState({})
-  const [feedback, setFeedback] = useState({})
+  const [feedback, setFeedback] = useState(null)  // single-select per design
   const d = live || trend
   const m = d.metrics
-  const axes = m.replication.axes
+  const tier = (d.verdict || 'WATCH').toLowerCase()
+  const rich = d.verdict === 'BUY' || d.verdict === 'TRIAL'
+  const score = Math.round(d.confidence.adjusted)
+  const dirLine = trend.direction.short
+    + (trend.direction.single_source ? ' · 1 source' : '')
 
   const debouncedRecompute = useMemo(() => {
     let t
@@ -37,215 +42,150 @@ export default function TrendDetail({ trend, seg, onBack }) {
     debouncedRecompute(next)
   }
 
-  const positives = [
-    ['Your own sales (POS)', m.own_sales],
-    ['Demand strength (India)', m.demand_strength],
-    ['Supply conviction (India)', m.supply_conviction],
-    ['West signal, supply, not demand', m.west_signal],
-    ['Cross-platform agreement', m.cross_platform_agreement],
-  ].filter(([, sig]) => sig)
+  const evidence = [
+    ['Your own sales (POS)', m.own_sales?.value],
+    ['Demand strength (India)', m.demand_strength.value],
+    ['Supply conviction (India)', m.supply_conviction.value],
+    ['West signal (supply only)', m.west_signal.value],
+    ['Cross-platform agreement', m.cross_platform_agreement.value],
+  ].filter(([, v]) => v !== null && v !== undefined)
+
+  const derivations = [
+    m.demand_strength, m.supply_conviction, m.west_signal,
+    m.cross_platform_agreement, m.lead_lag, m.discount_penalty,
+    m.replication, d.confidence,
+  ].map((x) => x?.derivation).filter(Boolean)
 
   return (
-    <>
-      <span className="back" onClick={onBack}>← back to slate</span>
-      <div className="detail-head">
-        <h2>{trend.display_name}</h2>
-        <span className={`badge ${d.verdict?.toLowerCase() || ''}`}>{d.verdict || d.bet.label}</span>
-        <LeadLagTag label={m.lead_lag.label} />
-        <span className="note">{trend.counts.total} products · keywords: {trend.keywords.join(', ')}</span>
+    <div>
+      <span className="back" onClick={onBack}>← All trends</span>
+
+      {/* header card */}
+      <div className="dcard head">
+        <div className="dhead-row">
+          <div className="dtitle">{trend.display_name}</div>
+          <span className={`pill ${tier}`}>{TIER_LABEL[d.verdict]}</span>
+          <span className="dhead-dir">{dirLine}</span>
+          {live && <span className="live-note">recomputed with your overrides</span>}
+        </div>
+        <div className="score-row" style={{ marginTop: 18 }}>
+          <span className={`score lg ${tier}`}>{score}</span>
+          <span className="score-cap" style={{ fontSize: 13 }}>/100, {d.bet.caption}</span>
+        </div>
+        <div className="bar lg"><div className={tier} style={{ width: `${score}%` }} /></div>
+        <p className={`dquote ${tier}`}>{d.merchant_line}</p>
       </div>
-      {trend.direction && (
-        <div className="dir-line">
-          <span className="glyph">{trend.direction.glyph}</span> {trend.direction.phrase}
-          {trend.direction.single_source && (
-            <span className="src-caution">, single Western source, low confidence</span>
-          )}
+
+      {rich ? (
+        <>
+          <div className="two-col">
+            <div className="dcard" style={{ margin: 0 }}>
+              <div className="sec-label">What looks real</div>
+              {evidence.map(([label, value]) => (
+                <div className="ev-row" key={label}>
+                  <span className="lbl">{label}</span>
+                  <span className="val">{Number(value).toFixed(1)}</span>
+                </div>
+              ))}
+              {trend.trajectory && (
+                <div className="ev-row">
+                  <span className="lbl">Trajectory (listing-date proxy)</span>
+                  <span className="val">{trend.trajectory.arrow}</span>
+                </div>
+              )}
+              <details className="deriv">
+                <summary>How these numbers were computed</summary>
+                {derivations.map((t, i) => <p key={i}>{t}</p>)}
+              </details>
+            </div>
+            <div className="dcard" style={{ margin: 0 }}>
+              <div className="sec-label warn">What could mislead</div>
+              {d.watchouts.map((w) => (
+                <div className="watchout" key={w.label}>
+                  <div className="lbl">{w.label}</div>
+                  <div className="note">{w.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="dcard">
+            <div className="sec-label">Your move</div>
+            <div className="move-action">
+              {d.bet.band}
+              {trend.lag_estimate && ` Western lead of ${trend.lag_estimate.window} for this silhouette (estimate).`}
+            </div>
+            {trend.subtrends?.buy_instruction && (
+              <div className="move-keywords">
+                {cap(trend.subtrends.buy_instruction)}.
+              </div>
+            )}
+
+            {(trend.subtrends?.fabrics?.length > 0 || trend.subtrends?.colors?.length > 0) && (
+              <div className="mix-grid">
+                <MixColumn title="Fabric mix" rows={trend.subtrends.fabrics} cls="fabric" />
+                <MixColumn title="Colour mix" rows={trend.subtrends.colors} cls="color" />
+              </div>
+            )}
+
+            <div className="sec-label" style={{ marginBottom: 12 }}>India-fit overrides</div>
+            {Object.entries(m.replication.axes).map(([axis, a]) => {
+              const val = overrides[axis] ?? a.override ?? a.default
+              return (
+                <div className="slider-row" key={axis}>
+                  <div className="slider-head">
+                    <span>{AXIS_LABELS[axis] || axis}</span>
+                    <span className="val">{val}</span>
+                  </div>
+                  <input type="range" min="0" max="100" value={val}
+                    onChange={(e) => onSlide(axis, e.target.value)} />
+                  <div className="slider-note">{a.rationale}</div>
+                </div>
+              )
+            })}
+          </div>
+        </>
+      ) : (
+        <div className="dcard">
+          <div className="sec-label">Evidence so far</div>
+          <div className="sparse-note">
+            {d.why}. {d.disagreement.conflict[0] || d.disagreement.agree[0] || ''}{' '}
+            {d.bet.band}
+          </div>
         </div>
       )}
-      {d.merchant_line && <div className="merchant">“{d.merchant_line}”</div>}
-      <div className="why">{d.why}</div>
-      <div className="bigbar">
-        <RawVsAdjusted base={d.confidence.base} adjusted={d.confidence.adjusted} />
-        <Derivation text={d.confidence.derivation} />
-      </div>
 
-      <div className="panels">
-        {/* ── 1. WHAT LOOKS REAL ─────────────────────────────────────────── */}
-        <div className="panel real">
-          <h4>1 · What looks real</h4>
-          <div className="panel-sub">Validated signals, each with its derivation.</div>
-          {positives.map(([name, sig]) => (
-            <div className="sig" key={name}>
-              <div className="sig-row">
-                <span className="name">{name}</span>
-                <span className="val">{sig.value ?? 'n/a'}</span>
-              </div>
-              <Derivation text={sig.derivation} />
-            </div>
+      <div className="dcard">
+        <div className="sec-label">Confidence &amp; feedback</div>
+        <div className="conf-note">{d.confidence_note}</div>
+        <div className="fb-row">
+          {['Agree', 'Disagree', 'Would buy'].map((label) => (
+            <button key={label}
+              className={`fb-btn ${feedback === label ? `active ${tier}` : ''}`}
+              onClick={() => setFeedback(feedback === label ? null : label)}>
+              {label}
+            </button>
           ))}
-          <div className="sig">
-            <div className="sig-row">
-              <span className="name">Lead-lag position</span>
-              <span className="val">{m.lead_lag.label}</span>
-            </div>
-            <Derivation text={m.lead_lag.derivation} />
-          </div>
-          {m.west_agreement && m.west_agreement.level !== 'none' && (
-            <div className="sig">
-              <div className="sig-row">
-                <span className="name">Western source agreement</span>
-                <span className="val">{m.west_agreement.sources_present}/{m.west_agreement.sources_total}</span>
-              </div>
-              <div className="note">{m.west_agreement.level}</div>
-              <Derivation text={m.west_agreement.derivation} />
-            </div>
-          )}
-          {trend.trajectory && (
-            <div className="sig">
-              <div className="sig-row">
-                <span className="name">Trajectory (listing-date proxy)</span>
-                <span className="val">{trend.trajectory.arrow}</span>
-              </div>
-              <div className="note">{trend.trajectory.label}</div>
-              <Derivation text={trend.trajectory.derivation} />
-            </div>
-          )}
-          <ul className="examples">
-            {trend.examples.map((e) => (
-              <li key={e.url || e.name}>
-                <a href={e.url} target="_blank" rel="noreferrer">{e.name}</a>
-                {' '}({e.platform}{e.price ? `, ${e.currency === 'GBP' ? '£' : '₹'}${e.price}` : ''})
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ── 2. WHAT COULD MISLEAD ──────────────────────────────────────── */}
-        <div className="panel mislead">
-          <h4>2 · What could mislead</h4>
-          <div className="panel-sub">Each distortion, its penalty, and the plain caution.</div>
-          <div className="sig">
-            <div className="sig-row">
-              <span className="name">Discount distortion</span>
-              <span className="val pen">−{m.discount_penalty.value}</span>
-            </div>
-            <div className="note">
-              {m.discount_penalty.median_discount != null
-                ? `Median true discount ${m.discount_penalty.median_discount}% (market norm ${m.discount_penalty.market_median_discount}%). Traction at this price may be bought, not organic.`
-                : 'No price/MRP pairs, distortion unknown, not absent.'}
-            </div>
-            <Derivation text={m.discount_penalty.derivation} />
-          </div>
-          <div className="sig">
-            <div className="sig-row">
-              <span className="name">Supply without demand</span>
-              <span className="val pen">−{m.supply_without_demand_penalty.value}</span>
-            </div>
-            <div className="note">Platforms can push stock nobody asked for; shelf space is not proof of appetite.</div>
-            <Derivation text={m.supply_without_demand_penalty.derivation} />
-          </div>
-          <div className="sig">
-            <div className="sig-row">
-              <span className="name">West signal is supply-only</span>
-              <span className="val">caveat</span>
-            </div>
-            <div className="note">{m.west_signal.derivation}</div>
-          </div>
-          {m.replication.applies && (
-            <div className="sig">
-              <div className="sig-row">
-                <span className="name">Early-stage replication gate</span>
-                <span className="val pen">× {m.replication.value}%</span>
-              </div>
-              <div className="note">Lead-lag is Early: the West moved, India hasn't. Confidence is multiplied by India-fit probability.</div>
-              <Derivation text={m.replication.derivation} />
-            </div>
-          )}
-        </div>
-
-        {/* ── 3. WHAT SHOULD THE BUYER DO ────────────────────────────────── */}
-        <div className="panel action">
-          <h4>3 · What should the buyer do</h4>
-          <div className="panel-sub">
-            Bet size from adjusted confidence. India-fit defaults are inferred from the
-            bucket's keywords, drag to override, the bet recomputes live.
-          </div>
-          <div className="bet-line">
-            <span className={`badge ${d.verdict?.toLowerCase() || ''}`}>{d.verdict || d.bet.label}</span>
-            <span className="band">{d.bet.band}</span>
-            {live && <span className="live">● recomputed with your overrides</span>}
-          </div>
-          <div className="note">{d.bet.rule}</div>
-          {trend.lag_estimate && (
-            <div className="lagbox">
-              <b>Buying calendar:</b> Western lead of {trend.lag_estimate.window} for this
-              silhouette (estimate).
-              <Derivation text={trend.lag_estimate.derivation} />
-            </div>
-          )}
-          {trend.subtrends?.buy_instruction && (
-            <div className="subtrends">
-              <b>Buy instruction:</b> {trend.display_name.toLowerCase()}, {trend.subtrends.buy_instruction}.
-              <div className="chips">
-                {trend.subtrends.fabrics.map((f) => (
-                  <span key={`f-${f.name}`} className="chip fabric">{f.name} {f.share}%</span>
-                ))}
-                {trend.subtrends.colors.map((c) => (
-                  <span key={`c-${c.name}`} className="chip color">{c.name} {c.share}%</span>
-                ))}
-              </div>
-              <div className="note">{trend.subtrends.note}</div>
-            </div>
-          )}
-          {!m.replication.applies && (
-            <div className="note" style={{ marginTop: 8 }}>
-              India-fit gate applies only to “Early” trends, shown here for context;
-              this trend is {m.lead_lag.label}, so sliders affect the replication score
-              but not the bet.
-            </div>
-          )}
-          {Object.entries(axes).map(([axis, a]) => {
-            const val = overrides[axis] ?? a.override ?? a.default
-            return (
-              <div className="axis" key={axis}>
-                <div className="axis-row">
-                  <span>
-                    {AXIS_LABELS[axis] || axis}{' '}
-                    {overrides[axis] != null && <span className="overridden">(override)</span>}
-                  </span>
-                  <span className="val">{val}</span>
-                </div>
-                <input type="range" min="0" max="100" value={val}
-                  onChange={(e) => onSlide(axis, e.target.value)} />
-                <div className="rationale">engine default {a.default}: {a.rationale}</div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* ── 4. WHAT IMPROVES NEXT TIME ─────────────────────────────────── */}
-        <div className="panel improve">
-          <h4>4 · What improves next time</h4>
-          <div className="panel-sub">Where the sources agree vs conflict, and the one thing that would resolve it.</div>
-          {d.disagreement.agree.map((a) => <div className="agree" key={a}>✓ {a}</div>)}
-          {d.disagreement.conflict.map((c) => <div className="conflict" key={c}>✗ {c}</div>)}
-          <div className="resolver">
-            <div className="pat">resolver · pattern: {d.disagreement.resolver.pattern}</div>
-            <div>{d.disagreement.resolver.action}</div>
-          </div>
-          <div className="note" style={{ marginTop: 12 }}>
-            Buyer feedback (captured locally; would feed the next scoring run):
-          </div>
-          <div className="fb">
-            {['agree', 'disagree', 'would buy'].map((f) => (
-              <button key={f} className={feedback[f] ? 'sel' : ''}
-                onClick={() => setFeedback({ ...feedback, [f]: !feedback[f] })}>
-                {f}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
+
+function MixColumn({ title, rows, cls }) {
+  if (!rows?.length) return null
+  return (
+    <div>
+      <div className="mix-title">{title}</div>
+      {rows.map((r) => (
+        <div className="mix-row" key={r.name}>
+          <span className="lbl">{cap(r.name)}</span>
+          <div className="track"><div className={cls} style={{ width: `${r.share}%` }} /></div>
+          <span className="pct">{r.share}%</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)

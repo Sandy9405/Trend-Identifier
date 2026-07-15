@@ -3,10 +3,10 @@ import { getSegments, getSlate, getTrend, uploadDataFile } from './api.js'
 import Slate from './components/Slate.jsx'
 import TrendDetail from './components/TrendDetail.jsx'
 
-/* Tiny hash router: #/ = slate, #/trend/<bucket> = detail.
-   The selected segment (category / sub-category) scopes every API call;
-   the dropdown options come from /api/segments, detected from the data,
-   never predefined. */
+/* Single page, two view states: grid (default) and detail, per the design
+   handoff. Hash routing keeps the states linkable (#/ and #/trend/<bucket>).
+   Everything rendered comes from the scoring backend; the header's segment
+   selects and upload button are fully wired. */
 export default function App() {
   const [segments, setSegments] = useState(null)
   const [seg, setSeg] = useState(null)
@@ -24,13 +24,13 @@ export default function App() {
   useEffect(() => {
     getSegments()
       .then((d) => { setSegments(d.segments); setSeg(d.default) })
-      .catch((e) => setError(String(e)))
+      .catch((e) => setError(String(e.message || e)))
   }, [])
 
   useEffect(() => {
     if (!seg) return
     setSlateData(null)
-    getSlate(seg).then(setSlateData).catch((e) => setError(String(e)))
+    getSlate(seg).then(setSlateData).catch((e) => setError(String(e.message || e)))
   }, [seg])
 
   const bucket = route.startsWith('#/trend/') ? route.slice('#/trend/'.length) : null
@@ -38,16 +38,14 @@ export default function App() {
   useEffect(() => {
     if (!bucket || !seg) { setTrend(null); return }
     setTrend(null)
-    getTrend(bucket, seg).then(setTrend).catch((e) => setError(String(e)))
+    getTrend(bucket, seg).then(setTrend).catch(() => { window.location.hash = '#/' })
   }, [bucket, seg])
 
   const changeSegment = (next) => {
-    window.location.hash = '#/'   // a bucket may not exist in the new segment
+    window.location.hash = '#/'
     setSeg(next)
   }
 
-  // After an upload the backend has re-ingested: adopt the fresh segment list
-  // and default, drop any open detail page, and let the slate refetch.
   const onDataChanged = (resp) => {
     window.location.hash = '#/'
     setSegments(resp.segments)
@@ -55,46 +53,58 @@ export default function App() {
     setSlateData(null)
   }
 
-  if (error) return (
-    <div className="container error">
-      Backend API not responding ({error}). Locally: is uvicorn running on :8000?
-      On Vercel: check the function logs for /api/index and that the project's
-      Root Directory is the repo root.
-    </div>
-  )
-  if (!segments || !seg) return <div className="container loading">Detecting segments in /data…</div>
-
   return (
-    <div className="container">
-      <SegmentPicker segments={segments} seg={seg} onChange={changeSegment}
+    <div className="page">
+      <Header segments={segments} seg={seg} onChange={changeSegment}
         onDataChanged={onDataChanged} />
-      {bucket
-        ? (trend
-            ? <TrendDetail key={`${seg.category}/${seg.sub_category}/${bucket}`}
-                trend={trend} seg={seg}
-                onBack={() => { window.location.hash = '#/' }} />
-            : <div className="loading">Loading {bucket}…</div>)
-        : (slateData
-            ? <Slate slate={slateData.slate} meta={slateData.meta} seg={seg}
-                onOpen={(b) => { window.location.hash = `#/trend/${b}` }} />
-            : <div className="loading">Computing slate for {seg.category} / {seg.sub_category}…</div>)}
+      {error ? (
+        <div className="error-card">
+          <b>Scoring run unavailable.</b><br />
+          {error}. Locally, check uvicorn is running on :8000; on Vercel, check
+          the function logs for /api/index.
+        </div>
+      ) : bucket ? (
+        trend
+          ? <TrendDetail key={`${seg?.category}/${seg?.sub_category}/${bucket}`}
+              trend={trend} seg={seg}
+              onBack={() => { window.location.hash = '#/' }} />
+          : <GridSkeleton n={3} />
+      ) : slateData ? (
+        <Slate slate={slateData.slate} meta={slateData.meta} seg={seg}
+          onOpen={(b) => { window.location.hash = `#/trend/${b}` }} />
+      ) : (
+        <GridSkeleton n={6} />
+      )}
     </div>
   )
 }
 
-/* Category + sub-category dropdowns, populated from the data. Mixed scrapes
-   (e.g. a "tops" search that returned sarees and jeans) are scoped, not
-   silently discarded, every row is reachable through some segment. */
-function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
-  const categories = useMemo(
-    () => [...new Set(segments.map((s) => s.category))], [segments])
-  const subs = segments.filter((s) => s.category === seg.category)
+/* Loading skeleton for the grid (per handoff: no unmodeled loading states). */
+function GridSkeleton({ n }) {
+  return (
+    <div className="grid">
+      {Array.from({ length: n }, (_, i) => (
+        <div key={i} className="skel-card">
+          <div className="skel-line w60" />
+          <div className="skel-num" />
+          <div className="skel-line w80" />
+          <div className="skel-line w40" />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Header({ segments, seg, onChange, onDataChanged }) {
   const fileRef = useRef(null)
   const [uploading, setUploading] = useState(false)
   const [notice, setNotice] = useState(null)
 
+  const categories = useMemo(
+    () => (segments ? [...new Set(segments.map((s) => s.category))] : []), [segments])
+  const subs = segments && seg ? segments.filter((s) => s.category === seg.category) : []
+
   const onCat = (category) => {
-    // keep sub-category if it exists under the new category, else take the largest
     const under = segments.filter((s) => s.category === category)
     const keep = under.find((s) => s.sub_category === seg.sub_category) || under[0]
     onChange({ category, sub_category: keep.sub_category })
@@ -109,14 +119,14 @@ function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
     try {
       const resp = await uploadDataFile(file)
       const deltas = (resp.segment_changes || [])
+        .filter((c) => c.products_delta !== undefined)
         .map((c) => `${c.category}/${c.sub_category} ${c.products_delta > 0 ? '+' : ''}${c.products_delta}`)
         .join(', ')
       setNotice({
         kind: 'ok',
-        text: `Accepted ${resp.saved_as} → ${resp.matched_adapter} (${resp.roles.join(', ')}): `
+        text: `Accepted ${resp.saved_as} (${resp.matched_adapter}): `
           + `${resp.products_parsed}/${resp.rows_in_file} rows usable. `
-          + (deltas ? `Segments changed: ${deltas}. ` : 'No segment counts changed, duplicates of existing products. ')
-          + resp.persistence,
+          + (deltas ? `Changed: ${deltas}. ` : '') + resp.persistence,
       })
       onDataChanged(resp)
     } catch (err) {
@@ -127,37 +137,47 @@ function SegmentPicker({ segments, seg, onChange, onDataChanged }) {
   }
 
   return (
-    <div className="segbar">
-      <label>
-        category{' '}
-        <select value={seg.category} onChange={(e) => onCat(e.target.value)}>
-          {categories.map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </label>
-      <label>
-        sub-category{' '}
-        <select value={seg.sub_category}
-          onChange={(e) => onChange({ ...seg, sub_category: e.target.value })}>
-          {subs.map((s) => (
-            <option key={s.sub_category} value={s.sub_category}>
-              {s.sub_category} ({s.count})
-            </option>
-          ))}
-        </select>
-      </label>
-      <button className="upload-btn" disabled={uploading}
-        onClick={() => fileRef.current?.click()}>
-        {uploading ? 'validating…' : 'upload data file'}
-      </button>
-      <input ref={fileRef} type="file" accept=".json,.csv" style={{ display: 'none' }}
-        onChange={onFile} />
-      {!notice && <span className="note">segments detected from the data files, not predefined</span>}
+    <>
+      <div className="header">
+        <div>
+          <div className="wordmark">Trend Bet Workbench</div>
+          <div className="tagline">
+            One verdict, one honest number, one direction per trend, so a buyer
+            can size a bet in seconds, not spreadsheets.
+          </div>
+        </div>
+        <div className="controls">
+          {seg && (
+            <>
+              <select value={seg.category} onChange={(e) => onCat(e.target.value)}>
+                {categories.map((c) => <option key={c} value={c}>{cap(c)}</option>)}
+              </select>
+              <select value={seg.sub_category}
+                onChange={(e) => onChange({ ...seg, sub_category: e.target.value })}>
+                {subs.map((s) => (
+                  <option key={s.sub_category} value={s.sub_category}>
+                    {cap(s.sub_category)} · {s.count.toLocaleString('en-IN')} items
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
+          <button className="btn-dark" disabled={uploading}
+            onClick={() => fileRef.current?.click()}>
+            {uploading ? 'Validating…' : 'Upload data file'}
+          </button>
+          <input ref={fileRef} type="file" accept=".json,.csv"
+            style={{ display: 'none' }} onChange={onFile} />
+        </div>
+      </div>
       {notice && (
         <div className={`upload-notice ${notice.kind}`}>
           {notice.text}
           <button className="dismiss" onClick={() => setNotice(null)}>✕</button>
         </div>
       )}
-    </div>
+    </>
   )
 }
+
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)

@@ -299,7 +299,8 @@ def allocate(body: AllocateBody, category: str | None = Query(None),
                 continue
             row["confidence"]["adjusted"] = adj
             row["verdict"] = ("BUY" if adj >= scoring.BET_DEEPER else
-                              "TRIAL" if adj >= scoring.BET_TRIAL else "WATCH")
+                              "TRIAL" if adj >= scoring.BET_TRIAL else
+                              "WATCH" if adj >= scoring.BET_WATCH else "SKIP")
         slate.sort(key=lambda r: -r["confidence"]["adjusted"])
     return scoring.allocate_budget(slate, body.budget)
 

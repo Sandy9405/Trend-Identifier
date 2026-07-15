@@ -174,9 +174,14 @@ W_SHARE, W_FRESH = 0.7, 0.3
 # Replication probability below this counts as "low" (resolver pattern table)
 REPL_LOW = 70
 
-# Bet-size thresholds on ADJUSTED confidence
-BET_DEEPER = 65         # ≥ 65 → Deeper Buy
-BET_TRIAL = 40          # 40–64 → Small Trial; < 40 → Monitor
+# Bet-size thresholds on ADJUSTED confidence (four tiers, per the redesign):
+#   >= BET_DEEPER  BUY    strong enough to commit real budget to
+#   >= BET_TRIAL   TRIAL  worth a small trial order, not a full bet
+#   >= BET_WATCH   WATCH  too thin to size a bet, keep watching
+#   below          SKIP   signals conflict or are nearly empty, pass for now
+BET_DEEPER = 65
+BET_TRIAL = 45
+BET_WATCH = 20
 
 # Slate qualification: buckets with fewer total products are noise, not trends
 MIN_BUCKET_PRODUCTS = 10
@@ -273,7 +278,7 @@ def _resolver_patterns():
          "the open risk is buying the wrong depth per size."),
         ("no decisive conflict",
          lambda m: True,
-         "Watch rating_count velocity on the demand authority over the next 2 "
+         "Watch review-count velocity on the demand authority over the next 2 "
          "scrape cycles before changing the bet."),
     ]
 
@@ -373,12 +378,11 @@ def _merchant_line(d):
                 f"appetite before going deeper.")
     if ll.startswith("Landed"):
         return (f"{name} has landed, West and India aligned. Buy on India merits: "
-                f"{d['bet']['band']}.")
+                f"{d['bet']['band'].rstrip('.')}.")
     if ll.startswith("Late"):
         return (f"{name} is past its Western peak but India still wants it, ride the existing "
                 f"demand, keep markdown exit easy, don't over-commit. Watch-out: {top_distortion}.")
-    return (f"{name} shows mixed signals. Before changing the bet: "
-            f"{d['disagreement']['resolver']['action']}")
+    return f"{name} shows mixed signals. {d['disagreement']['resolver']['action']}"
 
 
 def allocate_budget(slate: list, budget: float) -> dict:
@@ -417,6 +421,8 @@ def allocate_budget(slate: list, budget: float) -> dict:
                                   f"sell-through before scaling"})
     for r in watches:
         rows.append({**_alloc_row(r, 0), "rationale": "WATCH: monitoring, no spend"})
+    for r in [x for x in slate if x["verdict"] == "SKIP"]:
+        rows.append({**_alloc_row(r, 0), "rationale": "SKIP: pass this cycle"})
 
     allocated = sum(x["amount"] for x in rows)
     return {
@@ -1053,21 +1059,73 @@ def _finalize(d: dict, overrides: dict = None):
                        "derivation": f"base = {base_txt} = {base}; adjusted = {adj_txt} = {adj}."}
 
     # --- bet size from named thresholds ---------------------------------------
-    # verdict = the buyer-facing word on the tile face (BUY / TRIAL / WATCH)
+    # verdict = the buyer-facing word on the tile (BUY / TRIAL / WATCH / SKIP)
     if adj >= BET_DEEPER:
         bet = {"label": "Deeper Buy", "verdict": "BUY",
-               "band": "anchor SKUs, size the spend with the budget allocator",
+               "band": "Anchor SKUs now. Use the budget allocator to size the spend "
+                       "against your open-to-buy.",
+               "caption": "strong enough to commit real budget to",
                "rule": f"adjusted {adj} ≥ {BET_DEEPER}"}
     elif adj >= BET_TRIAL:
         bet = {"label": "Small Trial", "verdict": "TRIAL",
-               "band": "3–5 test SKUs, read 4-week sell-through before scaling",
+               "band": "3–5 test SKUs, read 4-week sell-through before scaling.",
+               "caption": "worth a small trial order, not a full bet",
                "rule": f"{BET_TRIAL} ≤ adjusted {adj} < {BET_DEEPER}"}
-    else:
+    elif adj >= BET_WATCH:
         bet = {"label": "Monitor", "verdict": "WATCH",
-               "band": "no buy, watch list, recheck next data drop",
-               "rule": f"adjusted {adj} < {BET_TRIAL}"}
+               "band": "No buy. Watch list, recheck at the next data drop.",
+               "caption": "too thin to size a bet, keep watching",
+               "rule": f"{BET_WATCH} ≤ adjusted {adj} < {BET_TRIAL}"}
+    else:
+        bet = {"label": "Pass", "verdict": "SKIP",
+               "band": "Pass this cycle. Revisit only if new data changes the picture.",
+               "caption": "signals conflict or are nearly empty, pass for now",
+               "rule": f"adjusted {adj} < {BET_WATCH}"}
     d["bet"] = bet
     d["verdict"] = bet["verdict"]
+
+    # --- computed WATCHOUTS: the design's "what could mislead" rows ------------
+    watchouts = []
+    if m["discount_penalty"]["median_discount"] is not None:
+        med = m["discount_penalty"]["median_discount"]
+        norm = m["discount_penalty"].get("market_median_discount")
+        if m["discount_penalty"]["value"] > 0:
+            watchouts.append({
+                "label": "Discount distortion",
+                "note": f"Median true discount {med}% vs a {norm}% category norm: this "
+                        f"trend is pushed harder on price than the market around it, so "
+                        f"some of this demand may be bought, not organic."})
+        else:
+            watchouts.append({
+                "label": "Discounting at the category norm",
+                "note": f"Median true discount {med}% vs a {norm}% norm: traction here "
+                        f"reads as organic rather than markdown-bought."})
+    if m["supply_without_demand_penalty"]["value"] > 0:
+        watchouts.append({"label": "Supply without demand",
+                          "note": m["supply_without_demand_penalty"]["derivation"]})
+    if (m["west_signal"]["value"] or 0) >= WEST_HIGH:
+        watchouts.append({
+            "label": "West signal is supply-only",
+            "note": "The Western number counts what got dropped into new-in feeds, "
+                    "not proof anyone in the West bought it."})
+    if m["west_agreement"].get("level") == "single-source":
+        watchouts.append({
+            "label": "Single-source read",
+            "note": "Only one Western source backs this trajectory. Corroborate "
+                    "before increasing spend."})
+    if d["counts"]["total"] < 50:
+        watchouts.append({
+            "label": "Thin sample",
+            "note": f"Only {d['counts']['total']} SKUs back this reading. Validate "
+                    f"with a small order before scaling."})
+    if m["own_sales"].get("return_rate") is not None \
+            and m["own_sales"]["return_rate"] >= RETURN_RATE_HIGH:
+        watchouts.append({
+            "label": "High return rate in your own sales",
+            "note": f"Return rate {m['own_sales']['return_rate']}%: it sells but comes "
+                    f"back, so net demand is weaker than gross."})
+    d["watchouts"] = watchouts
+
 
     # --- one computed "why" line ----------------------------------------------
     ll = m["lead_lag"]["label"]
@@ -1087,6 +1145,11 @@ def _finalize(d: dict, overrides: dict = None):
         if test(m):
             d["disagreement"]["resolver"] = {"pattern": pattern, "action": action}
             break
+
+    # --- confidence note: agreement/conflict summary + the resolver ------------
+    bits = d["disagreement"]["agree"][:1] + d["disagreement"]["conflict"][:1]
+    bits.append(d["disagreement"]["resolver"]["action"])
+    d["confidence_note"] = " ".join(bits).strip()
 
     # --- merchant-voice line: assembled from the pattern, recomputes with
     #     overrides since verdict/axes may have changed ------------------------
