@@ -385,57 +385,103 @@ def _merchant_line(d):
     return f"{name} shows mixed signals. {d['disagreement']['resolver']['action']}"
 
 
-def allocate_budget(slate: list, budget: float) -> dict:
-    """Turn the slate into a money plan. Method (all constants named above):
-      WATCH  → ₹0 (monitoring is free).
-      TRIAL  → small test allocations: equal-sized, each capped at
-               TRIAL_CAP_EACH of budget, all trials together capped at
-               TRIAL_POOL_MAX of budget.
-      BUY    → everything left, split PROPORTIONAL TO ADJUSTED CONFIDENCE
-               (the honest number, distortion-adjusted, never raw).
-    If there are no BUY trends, the un-allocated remainder is explicitly held
-    back rather than force-spent. Amounts rounded to the nearest ₹1,000."""
-    buys = [r for r in slate if r["verdict"] == "BUY"]
-    trials = [r for r in slate if r["verdict"] == "TRIAL"]
-    watches = [r for r in slate if r["verdict"] == "WATCH"]
+def allocate_budget(slate: list, budget: float, pins: dict = None) -> dict:
+    """Turn the slate into a money plan the buyer can DRAG.
 
-    rows = []
+    Engine method (all constants named above):
+      WATCH/SKIP → ₹0 (monitoring is free; skipping is free).
+      TRIAL      → equal test allocations, each capped at TRIAL_CAP_EACH of
+                   budget, all trials together capped at TRIAL_POOL_MAX.
+      BUY        → everything left, split PROPORTIONAL TO ADJUSTED CONFIDENCE
+                   (the honest number, distortion-adjusted, never raw).
+
+    `pins` = {bucket: amount} are amounts the BUYER has dragged and locked.
+    Money is conserved: pinned amounts are respected verbatim (scaled down
+    proportionally only if the pins alone exceed the budget, and disclosed),
+    and the engine re-solves the REMAINDER across unpinned trends by the same
+    tier rules. Every row also reports `engine_amount`, the no-pins
+    recommendation, so the UI can show ghost ticks and the buyer's total
+    deviation, which is logged rather than hidden. Amounts rounded to ₹1,000."""
+    engine = _solve_allocation(slate, budget, {})
+    plan = _solve_allocation(slate, budget, pins or {}) if pins else engine
+    engine_by = {r["bucket"]: r["amount"] for r in engine["rows"]}
+    for r in plan["rows"]:
+        r["engine_amount"] = engine_by.get(r["bucket"], 0)
+    plan["moved_from_engine"] = round(
+        sum(abs(r["amount"] - r["engine_amount"]) for r in plan["rows"]) / 2)
+    return plan
+
+
+def _solve_allocation(slate: list, budget: float, pins: dict) -> dict:
+    """One deterministic solve: honor pins, spread the remainder by tier rules."""
+    valid_pins = {r["bucket"]: max(0.0, float(pins[r["bucket"]]))
+                  for r in slate if r["bucket"] in pins and pins[r["bucket"]] is not None}
+    pin_note = None
+    pinned_total = sum(valid_pins.values())
+    if pinned_total > budget > 0:
+        f = budget / pinned_total
+        valid_pins = {k: v * f for k, v in valid_pins.items()}
+        pinned_total = budget
+        pin_note = "pinned amounts exceeded the budget and were scaled down proportionally"
+    remaining = max(0.0, budget - pinned_total)
+
+    unpinned = [r for r in slate if r["bucket"] not in valid_pins]
+    buys = [r for r in unpinned if r["verdict"] == "BUY"]
+    trials = [r for r in unpinned if r["verdict"] == "TRIAL"]
+
     trial_each = min(TRIAL_CAP_EACH * budget,
                      (TRIAL_POOL_MAX * budget) / len(trials)) if trials else 0
+    if trials and trial_each * len(trials) > remaining:
+        trial_each = remaining / len(trials)
     trial_total = trial_each * len(trials)
-    buy_pool = budget - trial_total if buys else 0
+    buy_pool = (remaining - trial_total) if buys else 0
     conf_sum = sum(r["confidence"]["adjusted"] for r in buys) or 1
 
-    for r in buys:
-        amt = round(buy_pool * r["confidence"]["adjusted"] / conf_sum / 1000) * 1000
-        rows.append({**_alloc_row(r, amt),
-                     "rationale": f"BUY tier: {r['confidence']['adjusted']:.0f}/"
-                                  f"{conf_sum:.0f} of tier confidence → "
-                                  f"{amt / budget * 100:.0f}% of budget"})
-    for r in trials:
-        amt = round(trial_each / 1000) * 1000
-        rows.append({**_alloc_row(r, amt),
-                     "rationale": f"TRIAL tier: equal test allocations, capped at "
-                                  f"{TRIAL_CAP_EACH * 100:.0f}% each / "
-                                  f"{TRIAL_POOL_MAX * 100:.0f}% combined, read 4-week "
-                                  f"sell-through before scaling"})
-    for r in watches:
-        rows.append({**_alloc_row(r, 0), "rationale": "WATCH: monitoring, no spend"})
-    for r in [x for x in slate if x["verdict"] == "SKIP"]:
-        rows.append({**_alloc_row(r, 0), "rationale": "SKIP: pass this cycle"})
+    rows = []
+    for r in slate:                       # keep slate (confidence) order
+        b = r["bucket"]
+        if b in valid_pins:
+            amt = round(valid_pins[b] / 1000) * 1000
+            note = "pinned by buyer"
+            if r["verdict"] in ("WATCH", "SKIP") and amt > 0:
+                note += " (engine recommends no spend here; override logged)"
+            elif r["verdict"] == "TRIAL" and amt > TRIAL_CAP_EACH * budget:
+                note += (f" (above the {TRIAL_CAP_EACH*100:.0f}% trial cap; "
+                         f"override logged)")
+            rows.append({**_alloc_row(r, amt), "pinned": True, "rationale": note})
+        elif r["verdict"] == "BUY":
+            amt = round(buy_pool * r["confidence"]["adjusted"] / conf_sum / 1000) * 1000
+            rows.append({**_alloc_row(r, amt), "pinned": False,
+                         "rationale": f"BUY tier: {r['confidence']['adjusted']:.0f}/"
+                                      f"{conf_sum:.0f} of tier confidence → "
+                                      f"{amt / budget * 100:.0f}% of budget"})
+        elif r["verdict"] == "TRIAL":
+            amt = round(trial_each / 1000) * 1000
+            rows.append({**_alloc_row(r, amt), "pinned": False,
+                         "rationale": f"TRIAL tier: equal test allocations, capped at "
+                                      f"{TRIAL_CAP_EACH * 100:.0f}% each / "
+                                      f"{TRIAL_POOL_MAX * 100:.0f}% combined, read 4-week "
+                                      f"sell-through before scaling"})
+        elif r["verdict"] == "WATCH":
+            rows.append({**_alloc_row(r, 0), "pinned": False,
+                         "rationale": "WATCH: monitoring, no spend"})
+        else:
+            rows.append({**_alloc_row(r, 0), "pinned": False,
+                         "rationale": "SKIP: pass this cycle"})
 
     allocated = sum(x["amount"] for x in rows)
     return {
         "budget": budget,
         "allocated": allocated,
         "held_back": max(0, round(budget - allocated)),
-        "held_back_note": (None if buys else
+        "held_back_note": (pin_note if pin_note else None if buys or valid_pins else
                            "no BUY-grade trend in this slate, the remainder is held back, "
                            "not force-spent"),
         "rows": rows,
-        "method": f"WATCH ₹0; TRIAL equal & capped ({TRIAL_CAP_EACH*100:.0f}% each, "
+        "method": f"WATCH/SKIP ₹0; TRIAL equal & capped ({TRIAL_CAP_EACH*100:.0f}% each, "
                   f"{TRIAL_POOL_MAX*100:.0f}% pool); BUY splits the rest proportional "
-                  f"to adjusted (distortion-honest) confidence.",
+                  f"to adjusted (distortion-honest) confidence. Buyer pins are honored "
+                  f"and the remainder re-solved around them.",
     }
 
 
@@ -859,8 +905,10 @@ def compute(platforms: list, sub_category: str = None) -> dict:
             else:
                 pscore, pwhy = 40, f"median Indian price ₹{medp:.0f} is far above the value band ₹{lo}–₹{hi}"
         else:
+            medp = None
             pscore, pwhy = 50, "no INR price data, neutral default"
         axes["price_band_fit"] = {"default": pscore, "rationale": pwhy}
+        median_price_inr = round(medp) if medp else None
 
         repl_val = round(statistics.mean(a["default"] for a in axes.values()), 1)
         replication = {
@@ -962,6 +1010,7 @@ def compute(platforms: list, sub_category: str = None) -> dict:
             "display_name": b.replace("_", " ").title(),
             "keywords": kws,
             "counts": {"total": n_total, "by_platform": counts},
+            "median_price_inr": median_price_inr,
             "metrics": metrics,
             "examples": [{"name": pr.name, "platform": pr.platform,
                           "price": pr.price, "currency": pr.currency,
@@ -1181,4 +1230,5 @@ def build_slate(computed: dict) -> list:
         "supply": d["metrics"]["supply_conviction"]["value"],
         "west": d["metrics"]["west_signal"]["value"],
         "own_sales": d["metrics"]["own_sales"]["value"],
+        "median_price_inr": d["median_price_inr"],
     } for d in rows]

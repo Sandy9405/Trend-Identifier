@@ -275,6 +275,20 @@ at the top of `scoring.py`, extend-friendly; unmatched words ignored). Each tren
 top colors and fabrics with shares, collapsed into a buy instruction, e.g. "puff balloon,
 strongest in cotton, in white and pink", so the output is an order spec, not just a flag.
 
+### Draggable money plan (pins) and the order sheet
+
+The allocation is interactive: the engine proposes the split, and the buyer can **drag any
+card's allocation bar** to disagree. A dragged amount becomes a **pin** the backend honors
+verbatim while re-solving the remainder around it (`pins` in `POST /api/allocate`), so money
+is always conserved, never invented. Ghost ticks on every bar keep the engine's
+recommendation visible; going against it (spend on a Watch/Skip trend, or above the trial
+cap) turns the bar striped amber/red and is stated in the rationale, never blocked. The Money
+Bar at the top shows the whole budget as one stacked bar including held-back money, plus the
+buyer's total deviation from the engine plan ("you moved ₹4.3L, logged"). **Lock plan**
+produces a printable order sheet: trend, verdict, amount, an approximate SKU count (amount ÷
+median Indian price × ~50 units per SKU, assumption stated), the color/fabric buy
+instruction, and whether each line came from the engine or a buyer pin.
+
 ### Budget allocation
 
 Enter an open-to-buy amount on the slate → `POST /api/allocate` turns the slate into a money

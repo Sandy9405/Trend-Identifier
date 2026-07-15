@@ -48,6 +48,9 @@ class AllocateBody(BaseModel):
     # optional: live-adjusted confidences from India-fit overrides in the UI,
     # so an override that flips a verdict reshapes the allocation immediately
     adjustments: dict[str, float] | None = None
+    # optional: amounts the buyer has dragged and locked, {bucket: rupees};
+    # the engine re-solves the remainder around them (money conserved)
+    pins: dict[str, float] | None = None
 
 
 def _reload_state():
@@ -302,7 +305,7 @@ def allocate(body: AllocateBody, category: str | None = Query(None),
                               "TRIAL" if adj >= scoring.BET_TRIAL else
                               "WATCH" if adj >= scoring.BET_WATCH else "SKIP")
         slate.sort(key=lambda r: -r["confidence"]["adjusted"])
-    return scoring.allocate_budget(slate, body.budget)
+    return scoring.allocate_budget(slate, body.budget, body.pins)
 
 
 @app.get("/api/meta")

@@ -32,12 +32,14 @@ export const recompute = (bucket, seg, overrides) =>
     body: JSON.stringify(overrides),
   }).then(j)
 
-// Budget allocation: open-to-buy ₹ → per-trend money plan for the segment
-export const allocateBudget = (seg, budget, adjustments) =>
+// Budget allocation: open-to-buy ₹ → per-trend money plan for the segment.
+// `pins` = {bucket: rupees} the buyer dragged and locked; the engine re-solves
+// the remainder around them (money conserved, deviation reported).
+export const allocateBudget = (seg, budget, pins, adjustments) =>
   fetch(`/api/allocate${qs(seg)}`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ budget, adjustments }),
+    body: JSON.stringify({ budget, pins, adjustments }),
   }).then(j)
 
 // Data management: push a new/replacement scrape file → backend re-ingests
